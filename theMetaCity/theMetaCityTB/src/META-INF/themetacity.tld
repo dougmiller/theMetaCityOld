@@ -1,0 +1,72 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <tlib-version>0.6</tlib-version>
+    <short-name>tmc</short-name>
+    <uri>http://com.themetacity</uri>
+
+
+    <!-- News tag -->
+    <tag>
+        <name>news</name>
+        <tag-class>com.themetacity.tags.News</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>newsArticle</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.beans.NewsArticleBean</type>
+        </attribute>
+
+    </tag>
+
+     <!--  Archive tag -->
+    <tag>
+        <name>archive</name>
+        <tag-class>com.themetacity.tags.Archive</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>title</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>picID</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>date</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>view</name>
+        <tag-class>com.themetacity.tags.View</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>picID</name>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <name>imgSrc</name>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <name>altTag</name>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <name>maxId</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+    
+</taglib>
