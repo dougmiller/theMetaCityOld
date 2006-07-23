@@ -1,0 +1,26 @@
+<!-- The end of the main div -->
+</div>
+<!-- This is the footer consistant across all pages -->
+<div class="footer">
+<p>
+    <a class="xhtmlw3cbox" href="http://validator.w3.org/check?uri=referer">
+        <img class="noBorder" src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1!" />
+    </a>
+
+    <a class="cssw3cbox" href="http://jigsaw.w3.org/css-validator/">
+        <img class="noBorder" src="http://www.w3.org/Icons/valid-css" alt="Valid CSS" />
+    </a>
+</p>
+        
+<p>This site is powered by Sun Java with jsp, jstl and java servlets.<br />
+    Running on Tomcat 5.5.9<br />
+    All code is Open and Free, without representation.<br />
+    Get source When i get around to packaging it.
+</p>
+
+<!--End of footer-->
+</div>
+<!--End of body-->
+</body>
+<!--End of page-->
+</html>

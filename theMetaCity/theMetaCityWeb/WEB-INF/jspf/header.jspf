@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link href="styles/layout.css" rel="stylesheet" type="text/css">
+    <link href="styles/look.css" rel="stylesheet" type="text/css">
+    <title>theMetaCity.com - Where people come to descibe information about themselves</title>
+</head>
+
+<body>
+
+	<div class="bannerDiv">
+		<span class="bannerTitle">The MetaCity.com</span>
+		<span class="bannerSubTitle">Home of Douglas Miller</span>
+	</div>
+
+	<!-- The left nav div -->
+	<div class="leftDiv">
+	<ul>
+		<li class="menu"><a href="#">Link1</a></li>
+		<li class="menu"><a href="#">Link2</a></li>
+		<li class="menu"><a href="#">Link3</a></li>
+		<li class="menu"><a href="http://www.themetacity.com">Home</a></li>
+	</ul>
+	</div>
+
+	<!--The right column-->
+	<div class="rightDiv">
+	    <img src="/images/banners/rightplaceholder.png" alt="banner" />
+	</div>
+
+	<!-- The main content div -->
+	<div class="mainDiv">

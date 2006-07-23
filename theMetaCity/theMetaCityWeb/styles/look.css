@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+/* This style sheet defines the colours and fonts etc of the site */
+
+.errorNumber {
+    font-size: 36px;
+}
+
+.xhtmlw3cbox {
+    margin-right: 15px;
+}
+
+.cssw3cbox {
+    margin-left: 15px;
+}
+
+.noBorder {
+border-width: 0;
+}
