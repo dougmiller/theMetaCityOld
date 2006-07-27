@@ -14,7 +14,7 @@ public class Archive extends TagSupport {
     /* The writer gives access to the page context so its possible to write output */
     JspWriter out = pageContext.getOut();
 
-    public int doStartTag() {
+    public int doStartTag() {  //comment
         return SKIP_BODY;
     }
 

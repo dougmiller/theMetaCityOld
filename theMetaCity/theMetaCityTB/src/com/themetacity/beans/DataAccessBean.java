@@ -25,7 +25,7 @@ public class DataAccessBean {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        List result = new ArrayList();
+        List <NewsArticleBean>result = new ArrayList<NewsArticleBean>();
 
         try {
             String sql = "SELECT * FROM News, users WHERE News.user = users.username";
