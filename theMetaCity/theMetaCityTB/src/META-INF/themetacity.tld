@@ -18,7 +18,7 @@
             <name>newsArticle</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.beans.NewsArticleBean</type>
+            <type>com.themetacity.typebeans.NewsArticleBean</type>
         </attribute>
 
     </tag>

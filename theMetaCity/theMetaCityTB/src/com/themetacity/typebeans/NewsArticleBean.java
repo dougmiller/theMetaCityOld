@@ -1,4 +1,4 @@
-package com.themetacity.beans;
+package com.themetacity.typebeans;
 
 import java.sql.Time;
 import java.util.Date;
@@ -14,8 +14,6 @@ public class NewsArticleBean implements java.io.Serializable {
     private Time time = null;
 
     public NewsArticleBean() {
-
-
     }
 
     public String getPictureURL() {

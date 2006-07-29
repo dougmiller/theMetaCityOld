@@ -4,7 +4,7 @@ package com.themetacity.tags;
  * @Author: Douglas Miller
  */
 
-import com.themetacity.beans.NewsArticleBean;
+import com.themetacity.typebeans.NewsArticleBean;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
