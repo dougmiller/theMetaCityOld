@@ -23,12 +23,27 @@
 
     </tag>
 
+    <!-- Profile tag -->
+    <tag>
+        <name>profile</name>
+        <tag-class>com.themetacity.tags.Profile</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>profile</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.ProfileBean</type>
+        </attribute>
+
+    </tag>
+
     <!-- Search tag
     <tag>
         <name>search</name>
         <tag-class>com.themetacity.tags.Search</tag-class>
         <body-content>scriptless</body-content>
-    </tag>  -->
+    </tag>-->
 
     <!--  Archive tag -->
     <tag>
@@ -75,5 +90,5 @@
             <required>true</required>
         </attribute>
     </tag>
-    
+
 </taglib>

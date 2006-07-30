@@ -16,9 +16,8 @@ public class NewsProcessBean {
     public NewsProcessBean() {
     }
 
-    public ResultSet result; // The returned ResultSet from the executed SQL statement.
-    public LinkedList<NewsArticleBean> listOfBeans; // The list of populated beans.
-
+    ResultSet result; // The returned ResultSet from the executed SQL statement.
+    LinkedList<NewsArticleBean> listOfBeans; // The list of populated beans.
 
     /**
      * Process the results of a database connection that retuns a ResultSet of a query into beans that are passed to
@@ -28,6 +27,7 @@ public class NewsProcessBean {
      */
     public LinkedList ProcessNews() {
         DatabaseAccessBean dbaBean = new DatabaseAccessBean();
+
 
         try {
             result = dbaBean.getNewsResults("Select * FROM NEWS;");
