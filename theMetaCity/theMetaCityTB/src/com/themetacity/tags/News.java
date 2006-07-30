@@ -33,7 +33,8 @@ public class News extends TagSupport {
             }
 
             out.print("<span class=\"newstitle\">" + newsArticle.getTitle() + "</span><br />" +
-                    "<span class=\"newsauthor\"><a href=\"mailto:" + newsArticle.getEmail() + "/>" + newsArticle.getAuthor() + "</a></span><br />"
+                    "<span class=\"newsauthor\"><a href=\"mailto:" + newsArticle.getEmail() + "/>"
+                    + newsArticle.getAuthor() + "</a></span><br />"
                     + newsArticle.getNews()
                     + "<hr />"
                     + "<span class=\"font10\">date: " + newsArticle.getDate().toString()

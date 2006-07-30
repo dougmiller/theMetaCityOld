@@ -23,7 +23,14 @@
 
     </tag>
 
-     <!--  Archive tag -->
+    <!-- Search tag
+    <tag>
+        <name>search</name>
+        <tag-class>com.themetacity.tags.Search</tag-class>
+        <body-content>scriptless</body-content>
+    </tag>  -->
+
+    <!--  Archive tag -->
     <tag>
         <name>archive</name>
         <tag-class>com.themetacity.tags.Archive</tag-class>

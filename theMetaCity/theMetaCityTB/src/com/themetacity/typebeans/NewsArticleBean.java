@@ -5,15 +5,22 @@ import java.util.Date;
 
 public class NewsArticleBean implements java.io.Serializable {
 
-    private String pictureURL = null;
-    private String title = null;
-    private String news = null;
-    private String author = null;
-    private String email = null;
-    private Date date = null;
-    private Time time = null;
+    private String pictureURL;
+    private String title;
+    private String news;
+    private String author;
+    private String email;
+    private Date date;
+    private Time time;
 
-    public NewsArticleBean() {
+    public NewsArticleBean() {  // Use the contructor to initialise the variables to a default value.
+        pictureURL = "default.png";
+        title = "At the edge of the universe...";
+        news = "No news is good news.";
+        author = "Flux";
+        email = "flux@theMetaCity.com";
+        date = new Date(0);
+        time = new Time(0);
     }
 
     public String getPictureURL() {
