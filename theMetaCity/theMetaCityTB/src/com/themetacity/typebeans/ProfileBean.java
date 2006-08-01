@@ -13,10 +13,11 @@ public class ProfileBean {
 
     // Default Constructor
     public ProfileBean() {
-        username = "";
-        email = "";
-        picURL = "";
-        about = "";
+        username = "Flux Cap";
+        email = "flux@themetacity.com";
+        picURL = "flux";
+        about = "Flux keeps the world working. Things would be different without him." +
+                "Anyone fancy a ride in his Delorian?";
     }
 
     public String getUsername() {

@@ -1,7 +1,5 @@
 package com.themetacity.beans;
 
-//import com.themetacity.typebeans.NewsArticleBean;
-
 import com.themetacity.typebeans.NewsArticleBean;
 
 import javax.naming.NamingException;
@@ -13,21 +11,25 @@ import java.util.LinkedList;
  *
  */
 public class NewsProcessBean {
-    public NewsProcessBean() {
-    }
 
     ResultSet result; // The returned ResultSet from the executed SQL statement.
     LinkedList<NewsArticleBean> listOfBeans; // The list of populated beans.
 
+    public NewsProcessBean() {
+    }
+
     /**
-     * Process the results of a database connection that retuns a ResultSet of a query into beans that are passed to
-     * custom tag for output.
+     * Process the results of a database connection that retuns a ResultSet of a statement into news beans that are
+     * passed to a custom tag for output.
      *
-     * @return A list of NewsArticelBeans
+     * The statment selects news article(s) and returns them to this method as a ResultSet. The results set is then
+     * iterated over and each record is used to populate a NewsArticleBean. Once populated the NewsArticleBean is added
+     * to a LinkedList and once all records have been processed the list is returned.
+     *
+     * @return A linked list of NewsArticelBeans
      */
     public LinkedList ProcessNews() {
         DatabaseAccessBean dbaBean = new DatabaseAccessBean();
-
 
         try {
             result = dbaBean.getNewsResults("Select * FROM NEWS;");
@@ -38,9 +40,9 @@ public class NewsProcessBean {
 
         try {
             while (result.next()) {  //For every row that is returned from the database query populate a bean and add
-                //  it to a linked list so that the JSTL can iterate over it.
+                // it to a linked list so that the JSTL can iterate over it.
                 NewsArticleBean newsBean = new NewsArticleBean(); //Make a new NewsArticleBean that represents one
-                //  article
+                // article
 
                 //Set the properties of the bean
                 newsBean.setAuthor(result.getString("Author"));

@@ -13,6 +13,9 @@ public class NewsArticleBean implements java.io.Serializable {
     private Date date;
     private Time time;
 
+    /**
+     * This is the 
+     */
     public NewsArticleBean() {  // Use the contructor to initialise the variables to a default value.
         pictureURL = "default.png";
         title = "At the edge of the universe...";
