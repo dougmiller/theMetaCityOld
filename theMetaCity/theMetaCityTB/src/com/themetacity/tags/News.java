@@ -13,8 +13,6 @@ public class News extends TagSupport {
 
     /* Variables */
     NewsArticleBean newsArticle = new NewsArticleBean();
-            //getNewsArticle()
-            //new NewsArticleBean()
 
     /* The writer gives access to the page context so its possible to write output */
     JspWriter out = pageContext.getOut();
