@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ page isErrorPage="true" %>
 
 <jsp:include page="/WEB-INF/jspf/header.jspf" />
 
@@ -27,5 +28,7 @@
     </c:otherwise>
 
 </c:choose>
+
+<c:out value="${Exception}" />
 
 <jsp:include page="/WEB-INF/jspf/footer.jspf" />
