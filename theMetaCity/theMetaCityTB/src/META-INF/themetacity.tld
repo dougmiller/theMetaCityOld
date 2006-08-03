@@ -3,10 +3,11 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
         version="2.0">
 
+    <!-- This is the custom tag library configuration file for theMeataCity -->
+
     <tlib-version>0.6</tlib-version>
     <short-name>tmc</short-name>
     <uri>http://com.themetacity</uri>
-
 
     <!-- News tag -->
     <tag>
@@ -38,13 +39,6 @@
 
     </tag>
 
-    <!-- Search tag
-    <tag>
-        <name>search</name>
-        <tag-class>com.themetacity.tags.Search</tag-class>
-        <body-content>scriptless</body-content>
-    </tag>-->
-
     <!--  Archive tag -->
     <tag>
         <name>archive</name>
@@ -65,6 +59,7 @@
         </attribute>
     </tag>
 
+    <!-- View tag -->
     <tag>
         <name>view</name>
         <tag-class>com.themetacity.tags.View</tag-class>
@@ -90,5 +85,12 @@
             <required>true</required>
         </attribute>
     </tag>
+
+    <!-- Search tag
+    <tag>
+        <name>search</name>
+        <tag-class>com.themetacity.tags.Search</tag-class>
+        <body-content>scriptless</body-content>
+    </tag>-->
 
 </taglib>

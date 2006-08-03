@@ -9,6 +9,9 @@ import com.themetacity.typebeans.NewsArticleBean;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
+/**
+ * This is the custom tag that formats a NewsArticleBean into readable format. It is called in a JSP page.
+ */
 public class News extends TagSupport {
 
     /* Variables */
@@ -21,15 +24,9 @@ public class News extends TagSupport {
     public int doStartTag() {
         try {
             out.println("<div class=\"searchnews\">");
-
-            if (newsArticle.getPictureURL() == (null)) {
-                out.print("<img src=\"images\\default.png\" class=\"newsimage\" alt=\"User picture\"/>");
-            } else {
-                out.print("<img src=\"images\\"
-                        + newsArticle.getPictureURL()
-                        + " class=\"newsimage\" alt=\"News Avatar\" />");
-            }
-
+            out.print("<img src=\"images\\"
+                    + newsArticle.getPictureURL()
+                    + " class=\"newsimage\" alt=\"News Avatar\" />");
             out.print("<span class=\"newstitle\">" + newsArticle.getTitle() + "</span><br />" +
                     "<span class=\"newsauthor\"><a href=\"mailto:" + newsArticle.getEmail() + "/>"
                     + newsArticle.getAuthor() + "</a></span><br />"
@@ -49,13 +46,5 @@ public class News extends TagSupport {
     /* Free the Article used */
     public void release() {
         newsArticle = null;
-    }
-
-    public NewsArticleBean getNewsArticle() {
-        return newsArticle;
-    }
-
-    public void setNewsArticle(NewsArticleBean newsArticle) {
-        this.newsArticle = newsArticle;
     }
 }

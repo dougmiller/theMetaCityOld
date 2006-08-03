@@ -17,7 +17,7 @@ public class NewsArticleBean implements java.io.Serializable {
      * This is the 
      */
     public NewsArticleBean() {  // Use the contructor to initialise the variables to a default value.
-        pictureURL = "default.png";
+        pictureURL = "flux.png";
         title = "At the edge of the universe...";
         news = "No news is good news.";
         author = "Flux";

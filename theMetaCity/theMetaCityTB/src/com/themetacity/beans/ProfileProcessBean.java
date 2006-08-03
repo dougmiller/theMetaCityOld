@@ -8,8 +8,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 /**
- * User: doug
- * com.themetacity.beans
+ *  
  */
 public class ProfileProcessBean {
 
