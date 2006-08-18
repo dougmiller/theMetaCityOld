@@ -15,21 +15,16 @@ public class Quote extends SimpleTagSupport {
     private String quoteAuthor = null;
 
     public void doTag() throws JspException, IOException {
-        //todo figure out whats going on here with the context
         JspContext jspContext = getJspContext();
 
-        // Get the page context so output can be written to it.
         JspWriter out = jspContext.getOut();
 
         // Begin outputting content
         out.println("<div class=\"quote\">");
         out.println("<span class=\"quotetext\">");
-        //todo get the body and insert it here
-        //jspContext.
-        //out.println(quoteText);
+        getJspBody().invoke(null);
         out.println("<hr />");
         out.println("<div class=\"authorposition\">");
-        //todo is this the right way to do this?
         out.println("<span class=\"quoteauthor\">" + quoteAuthor + "</span>");
         out.println("</div>");
         out.println("</div>");

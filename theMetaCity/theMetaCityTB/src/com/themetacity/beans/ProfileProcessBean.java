@@ -28,7 +28,7 @@ public class ProfileProcessBean {
      *
      * @return A linked list of ProfileBeans
      */
-    public LinkedList ProfileProcess(String user) {
+    public LinkedList getProfileProcess(String user) {
         DatabaseAccessBean dbaBean = new DatabaseAccessBean();
 
         try {

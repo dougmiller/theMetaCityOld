@@ -27,7 +27,7 @@ public class NewsProcessBean {
      *
      * @return A linked list of NewsArticelBeans
      */
-    public LinkedList ProcessNews() {
+    public LinkedList getProcessNews() {
         DatabaseAccessBean dbaBean = new DatabaseAccessBean();
 
         try {
