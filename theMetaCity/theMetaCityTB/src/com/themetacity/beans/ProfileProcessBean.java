@@ -28,11 +28,18 @@ public class ProfileProcessBean {
      *
      * @return A linked list of ProfileBeans
      */
-    public LinkedList ProfileProcess() {
+    public LinkedList ProfileProcess(String user) {
         DatabaseAccessBean dbaBean = new DatabaseAccessBean();
 
         try {
-            result = dbaBean.getNewsResults("Select * FROM users;");
+            // Check if a username is passed as "user" and if it is amend the stament
+            if (user != null) {
+                result = dbaBean.executeQuery("Select * FROM profile WHERE username =" + user + ";");
+            } else {
+                // Otherwise use the statment that returns them all.
+                result = dbaBean.executeQuery("Select * FROM profile;");
+            }
+
         } catch (NamingException nameEx) {
             System.out.println("You had a naming exception");
             System.out.println(nameEx);
@@ -44,7 +51,8 @@ public class ProfileProcessBean {
 
                 profileBean.setUsername(result.getString("username"));
                 profileBean.setEmail(result.getString("email"));
-                profileBean.setPicURL(result.getString("picurl"));
+                profileBean.setPicURL(result.getString("profilepic"));
+                profileBean.setPicURL(result.getString("profilealt"));
                 profileBean.setAbout(result.getString("about"));
                 listOfBeans.add(profileBean);
             }

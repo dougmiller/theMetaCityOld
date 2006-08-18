@@ -8,9 +8,10 @@ import com.themetacity.typebeans.NewsArticleBean;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
+import java.io.IOException;
 
 /**
- * This is the custom tag that formats a NewsArticleBean into readable format. It is called in a JSP page.
+ * This is the custom tag that formats a NewsArticleBean into readable format. It is called in JSP pages.
  */
 public class News extends TagSupport {
 
@@ -21,7 +22,7 @@ public class News extends TagSupport {
     JspWriter out = pageContext.getOut();
 
     /* Start processing */
-    public int doStartTag() {
+    public void doTag() {
         try {
             out.println("<div class=\"searchnews\">");
             out.print("<img src=\"images\\"
@@ -35,12 +36,10 @@ public class News extends TagSupport {
                     + "<span class=\"font10\">date: " + newsArticle.getDate().toString()
                     + " time: " + newsArticle.getTime().toString() + "</span>"
                     + "</div> <br />");
-        } catch (Exception e) {
+        } catch (IOException IOEx) {
             System.out.print("There was an Error");
-            System.out.print(e);
+            System.out.print(IOEx);
         }
-        /* Nothing else needs to be done or evaluated to skip to the end of the tag */
-        return SKIP_BODY;
     }
 
     /* Free the Article used */

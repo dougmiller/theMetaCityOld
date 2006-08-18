@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Contains a collection of database access related functions.
+ */
 public class DatabaseAccessBean {
 
     public DatabaseAccessBean() {
@@ -20,11 +23,11 @@ public class DatabaseAccessBean {
      * @param SQLStatementToExecute The SQL statement to execute as a string.
      * @return A ResultsSet of the result of the executed SQL query.
      */
-    public ResultSet getNewsResults(String SQLStatementToExecute) throws NamingException {
+    public ResultSet executeQuery(String SQLStatementToExecute) throws NamingException {
 
         // NOTE *The following three lines are used to acces a connection defined in the deployment descriptor
         // Either use these or the fourth line, but not both.*
-        Context initContext = new InitialContext();
+        InitialContext initContext = new InitialContext();
         Context envContext = (Context) initContext.lookup("java:/comp/env");
         DataSource ds = (DataSource) envContext.lookup("jdbc/theMetaCity");
 
@@ -47,6 +50,14 @@ public class DatabaseAccessBean {
             System.out.println(SQLEx);
         }
         return rs;
+    }
+
+    /**
+     * Constructs a statement out of each part of the query into valid SQL.
+     * @return The a constructed statment.
+     */
+    public String constructStatment(){
+        return "";
     }
 }
 

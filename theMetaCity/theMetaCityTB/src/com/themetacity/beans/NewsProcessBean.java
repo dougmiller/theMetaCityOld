@@ -19,8 +19,7 @@ public class NewsProcessBean {
     }
 
     /**
-     * Process the results of a database connection that retuns a ResultSet of a statement into news beans that are
-     * passed to a custom tag for output.
+     * Process the results of an executed SQL statment into news beans that are placed into a LinkedList.
      *
      * The statment selects news article(s) and returns them to this method as a ResultSet. The results set is then
      * iterated over and each record is used to populate a NewsArticleBean. Once populated the NewsArticleBean is added
@@ -32,7 +31,7 @@ public class NewsProcessBean {
         DatabaseAccessBean dbaBean = new DatabaseAccessBean();
 
         try {
-            result = dbaBean.getNewsResults("Select * FROM NEWS;");
+            result = dbaBean.executeQuery("Select * FROM NEWS;");
         } catch (NamingException nameEx) {
             System.out.println("You had a naming exception");
             System.out.println(nameEx);
@@ -60,5 +59,21 @@ public class NewsProcessBean {
             System.out.println(SQLEx);
         }
         return listOfBeans;
+    }
+
+    public ResultSet getResult() {
+        return result;
+    }
+
+    public void setResult(ResultSet result) {
+        this.result = result;
+    }
+
+    public LinkedList<NewsArticleBean> getListOfBeans() {
+        return listOfBeans;
+    }
+
+    public void setListOfBeans(LinkedList<NewsArticleBean> listOfBeans) {
+        this.listOfBeans = listOfBeans;
     }
 }
