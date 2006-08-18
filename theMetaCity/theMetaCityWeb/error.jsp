@@ -5,13 +5,13 @@
 
 <span class="errorNumber"><c:out value="${error}" /></span>
 
-<c:choose>
+<%--<c:choose>
 
     <c:when test="${empty error}">
         <p>You shouldnt see this</p>
     </c:when>
 
-    <c:when test="${error == \"404\"}">
+    <c:when test="${error.equals(\"404\")}">
         <p>File not found</p>
     </c:when>
 
@@ -27,8 +27,8 @@
         <p>An error occured.</p>
     </c:otherwise>
 
-</c:choose>
+</c:choose></>
 
-<c:out value="${Exception}" />
+<c:out value="${Exception}" />  --%>
 
 <jsp:include page="/WEB-INF/jspf/footer.jspf" />

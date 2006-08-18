@@ -1,19 +1,21 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="styles/layout.css" rel="stylesheet" type="text/css">
     <link href="styles/look.css" rel="stylesheet" type="text/css">
-    <title>theMetaCity.com - Where people come to descibe information about themselves</title>
+    <title>theMetaCity.com</title>
 </head>
 
 <body>
 
 	<div class="bannerDiv">
 		<span class="bannerTitle">The MetaCity.com</span>
-		<span class="bannerSubTitle">Home of Douglas Miller</span>
+		<span class="bannerSubTitle">Blegerk Splekerke</span>
 	</div>
 
 	<!-- The left nav div -->
