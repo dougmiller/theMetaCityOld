@@ -5,7 +5,7 @@
 
 <jsp:include page="/WEB-INF/jspf/header.jspf"/>
 
-<c:forEach var="newsItem" items="${NewsProcessBean.ProcessNews}">
+<c:forEach var="newsItem" items="${NewsProcessBean.processNews}}">
     <tmc:news newsArticle="${newsItem}"/>
 </c:forEach>
 
