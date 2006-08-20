@@ -68,12 +68,4 @@ public class NewsProcessBean {
     public void setResult(ResultSet result) {
         this.result = result;
     }
-
-    public LinkedList<NewsArticleBean> getListOfBeans() {
-        return listOfBeans;
-    }
-
-    public void setListOfBeans(LinkedList<NewsArticleBean> listOfBeans) {
-        this.listOfBeans = listOfBeans;
-    }
 }

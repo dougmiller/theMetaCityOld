@@ -7,8 +7,14 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
 /**
- * This tag generates formatted quotes.
- * //@param quoteAuthor The person who made the quote
+ * This tag generates formatted quotes. The output looks like this.<br />
+ * &lt;div&nbsp;class=\&quot;quote\&quot;&gt;<br />
+ * &nbsp;&nbsp;&lt;span&nbsp;class=\&quot;quotetext\&quot;&gt;\&quot;Some&nbsp;guy's&nbsp;quote&nbsp;text&nbsp;here\&quot;&lt;/span&gt;<br />
+ * &nbsp;&nbsp;&lt;hr&nbsp;/&gt;<br />
+ * &nbsp;&nbsp;&lt;div&nbsp;class=\&quot;authorposition\&quot;&gt;<br />
+ * &nbsp;&nbsp;&nbsp;&nbsp;&lt;span&nbsp;class=\&quot;quoteauthor\&quot;&gt;Some&nbsp;guy&nbsp;quoted&lt;/span&gt;<br />
+ * &nbsp;&nbsp;&lt;/div&gt;<br />
+ * &lt;/div&gt;<br />
  */
 public class Quote extends SimpleTagSupport {
 
@@ -21,12 +27,14 @@ public class Quote extends SimpleTagSupport {
 
         // Begin outputting content
         out.println("<div class=\"quote\">");
-        out.println("<span class=\"quotetext\">");
+        out.print("  <span class=\"quotetext\">");
+        // This gets the contents of the body and outputs them. Very important!
         getJspBody().invoke(null);
-        out.println("<hr />");
-        out.println("<div class=\"authorposition\">");
-        out.println("<span class=\"quoteauthor\">" + quoteAuthor + "</span>");
-        out.println("</div>");
+        out.print("</span>");
+        out.println("  <hr />");
+        out.println("  <div class=\"authorposition\">");
+        out.println("    <span class=\"quoteauthor\">" + quoteAuthor + "</span>");
+        out.println("  </div>");
         out.println("</div>");
     }
 

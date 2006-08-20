@@ -46,4 +46,8 @@ public class News extends TagSupport {
     public void release() {
         newsArticle = null;
     }
+
+    public void setNewsArticle(NewsArticleBean newsArticle) {
+        this.newsArticle = newsArticle;
+    }
 }

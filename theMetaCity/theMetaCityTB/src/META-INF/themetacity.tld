@@ -13,7 +13,7 @@
     <tag>
         <name>news</name>
         <tag-class>com.themetacity.tags.News</tag-class>
-        <body-content>scriptless</body-content>
+        <body-content>empty</body-content>
 
         <attribute>
             <name>newsArticle</name>
@@ -21,7 +21,6 @@
             <rtexprvalue>true</rtexprvalue>
             <type>com.themetacity.typebeans.NewsArticleBean</type>
         </attribute>
-
     </tag>
 
     <!-- Profile tag -->
@@ -36,7 +35,6 @@
             <rtexprvalue>true</rtexprvalue>
             <type>com.themetacity.typebeans.ProfileBean</type>
         </attribute>
-
     </tag>
 
     <!--  Archive tag -->
@@ -92,5 +90,17 @@
         <tag-class>com.themetacity.tags.Search</tag-class>
         <body-content>scriptless</body-content>
     </tag>-->
+
+    <!-- Quote Bean -->
+    <tag>
+        <name>quote</name>
+        <tag-class>com.themetacity.tags.Quote</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>quoteAuthor</name>
+            <required>true</required>
+        </attribute>
+    </tag>
 
 </taglib>
