@@ -16,7 +16,7 @@ public class ProfileBean {
         username = "Flux Cap";
         email = "flux@themetacity.com";
         picURL = "flux";
-        about = "Flux keeps the world working. Things would be different without him." +
+        about = "Flux keeps the world working. Things would be different without him. " +
                 "Anyone fancy a ride in his Delorian?";
     }
 
