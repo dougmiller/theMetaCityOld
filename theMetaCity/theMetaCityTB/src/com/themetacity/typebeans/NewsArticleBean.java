@@ -3,6 +3,9 @@ package com.themetacity.typebeans;
 import java.sql.Time;
 import java.util.Date;
 
+/**
+ * This is the bean that represents the news posts.
+ */
 public class NewsArticleBean implements java.io.Serializable {
 
     private String pictureURL;
@@ -14,12 +17,12 @@ public class NewsArticleBean implements java.io.Serializable {
     private Time time;
 
     /**
-     * This is the 
+     * Use this contructor to initialise the variables to a default value.
      */
-    public NewsArticleBean() {  // Use the contructor to initialise the variables to a default value.
+    public NewsArticleBean() {
         this.pictureURL = "flux.png";
         this.title = "At the edge of the universe...";
-        this.news = "No news is good news.";
+        this.news = "...no news is good news.";
         this.author = "Flux";
         this.email = "flux@theMetaCity.com";
         this.date = new Date(0);

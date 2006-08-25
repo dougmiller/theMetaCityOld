@@ -1,8 +1,7 @@
 package com.themetacity.typebeans;
 
 /**
- * User: doug
- * com.themetacity.typebeans
+ * This is the bean that repesents an authors profile
  */
 public class ProfileBean {
 
