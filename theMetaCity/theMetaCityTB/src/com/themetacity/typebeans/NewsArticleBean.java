@@ -26,16 +26,6 @@ public class NewsArticleBean implements java.io.Serializable {
         this.time = new Time(0);
     }
 
-    public NewsArticleBean(String pictureURL, String title, String news, String author, String email, Date date, Time time) {
-        this.pictureURL = pictureURL;
-        this.title = title;
-        this.news = news;
-        this.author = author;
-        this.email = email;
-        this.date = date;
-        this.time = time;
-    }
-
     public String getPictureURL() {
         return pictureURL;
     }
