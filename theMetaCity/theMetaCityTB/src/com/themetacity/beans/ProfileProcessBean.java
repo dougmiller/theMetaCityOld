@@ -6,11 +6,12 @@ import javax.naming.NamingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.io.Serializable;
 
 /**
  *  
  */
-public class ProfileProcessBean {
+public class ProfileProcessBean  implements Serializable {
 
     ResultSet result;
     LinkedList<ProfileBean> listOfBeans;

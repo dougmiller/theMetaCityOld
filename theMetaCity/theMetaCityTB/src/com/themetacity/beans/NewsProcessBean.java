@@ -6,11 +6,12 @@ import javax.naming.NamingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.io.Serializable;
 
 /**
  *
  */
-public class NewsProcessBean {
+public class NewsProcessBean implements Serializable {
 
     ResultSet result; // The returned ResultSet from the executed SQL statement.
     LinkedList<NewsArticleBean> listOfBeans; // The list of populated beans.
@@ -68,7 +69,7 @@ public class NewsProcessBean {
             // for the mean time Just populate a bean with this as a dirty hack.
             //todo fix the no results returned error
 
-            // Make a new NewsArticleBean that represents one article and populate using the constructor
+            // Make a new NewsArticleBean that represents one article and populate using the default constructor
             NewsArticleBean newsBean = new NewsArticleBean();
 
             // Add the new bean to the previously empty list, thus avoiding the null pointer situation

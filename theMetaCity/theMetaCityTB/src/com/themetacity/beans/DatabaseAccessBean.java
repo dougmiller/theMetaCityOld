@@ -8,11 +8,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.io.Serializable;
 
 /**
  * Contains a collection of database access related functions.
  */
-public class DatabaseAccessBean {
+public class DatabaseAccessBean  implements Serializable {
 
     public DatabaseAccessBean() {
     }
