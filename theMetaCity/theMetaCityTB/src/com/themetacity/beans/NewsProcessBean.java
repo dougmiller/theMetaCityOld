@@ -38,6 +38,9 @@ public class NewsProcessBean implements Serializable {
         } catch (NamingException nameEx) {
             System.out.println("You had a naming exception");
             System.out.println(nameEx);
+        } catch (SQLException SQLEx) {
+            System.out.println("You had an error with your SQL");
+            System.out.println(SQLEx);
         }
 
         try {

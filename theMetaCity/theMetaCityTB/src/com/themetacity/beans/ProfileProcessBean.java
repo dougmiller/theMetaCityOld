@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  *  
  */
-public class ProfileProcessBean  implements Serializable {
+public class ProfileProcessBean implements Serializable {
 
     ResultSet result;
     LinkedList<ProfileBean> listOfBeans;
@@ -44,6 +44,9 @@ public class ProfileProcessBean  implements Serializable {
         } catch (NamingException nameEx) {
             System.out.println("You had a naming exception");
             System.out.println(nameEx);
+        } catch (SQLException SQLEx) {
+            System.out.println("You had an error with your SQL");
+            System.out.println(SQLEx);
         }
 
         try {

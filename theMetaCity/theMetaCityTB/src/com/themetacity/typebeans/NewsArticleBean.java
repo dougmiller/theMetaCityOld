@@ -20,13 +20,13 @@ public class NewsArticleBean implements java.io.Serializable {
      * Use this contructor to initialise the variables to a default value.
      */
     public NewsArticleBean() {
-        this.pictureURL = "flux.png";
-        this.title = "At the edge of the universe...";
-        this.news = "...no news is good news.";
-        this.author = "Flux";
-        this.email = "flux@theMetaCity.com";
-        this.date = new Date(0);
-        this.time = new Time(0);
+        pictureURL = "flux.png";
+        title = "At the edge of the universe...";
+        news = "...no news is good news.";
+        author = "Flux";
+        email = "flux@theMetaCity.com";
+        date = new Date(0);
+        time = new Time(0);
     }
 
     public String getPictureURL() {
