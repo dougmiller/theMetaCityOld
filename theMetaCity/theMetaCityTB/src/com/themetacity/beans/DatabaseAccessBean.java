@@ -4,8 +4,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.*;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Contains a collection of database access related functions.
@@ -45,9 +48,9 @@ public class DatabaseAccessBean implements Serializable {
 
         // Now try to execute the SQL statement
         conn = ds.getConnection();                                  // Get a connection to the database
-        // Does this work as an abstation for all cases??
-        prepStmt = conn.prepareStatement(SQLStatementToExecute);    // Build a prepared stement to make things run faster, sometimes
+        prepStmt = conn.prepareStatement(SQLStatementToExecute);    // Build a prepared stement to make things run faster, which can be put into cache
         rs = prepStmt.executeQuery();                               // Execute the statement and put the return into a RS
+        conn.close();                                               // Close the connection so it can be returned to the pool
 
         // Return the result set
         return rs;
@@ -57,8 +60,8 @@ public class DatabaseAccessBean implements Serializable {
      * Constructs a statement out of each part of the query into valid SQL.
      *
      * @return The a constructed statment.
-     *         //todo Make this work. Integrate this into the model, somehow.
      */
+    //todo Make this work. Integrate this into the model, somehow.
     public String constructStatment() {
         return "";
     }

@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.io.Serializable;
 
 /**
- *  
+ * This is the bean that process a profile
  */
 public class ProfileProcessBean implements Serializable {
 
@@ -35,10 +35,10 @@ public class ProfileProcessBean implements Serializable {
         try {
             // Check if a username is passed as "user" and if it is amend the stament
             if (user != null) {
-                result = dbaBean.executeQuery("Select * FROM profile WHERE username =" + user + ";");
+                result = dbaBean.executeQuery("Select * FROM profile WHERE username =" + user + ";"); // Select a specific profile
             } else {
                 // Otherwise use the statment that returns them all.
-                result = dbaBean.executeQuery("Select * FROM profile;");
+                result = dbaBean.executeQuery("Select * FROM profile;");                              // Select all the profiles as no specific profile was given
             }
 
         } catch (NamingException nameEx) {
@@ -51,20 +51,21 @@ public class ProfileProcessBean implements Serializable {
 
         try {
             while (result.next()) {
-                ProfileBean profileBean = new ProfileBean();
+                ProfileBean profileBean = new ProfileBean();            // Make a new bean to be populated
 
                 profileBean.setUsername(result.getString("username"));
                 profileBean.setEmail(result.getString("email"));
                 profileBean.setPicURL(result.getString("profilepic"));
                 profileBean.setPicURL(result.getString("profilealt"));
                 profileBean.setAbout(result.getString("about"));
-                listOfBeans.add(profileBean);
+
+                listOfBeans.add(profileBean);                           // Add the newly populated profile to the list, it could be one or nmany, it doesnt really matter
             }
         }
         catch (SQLException SQLEx) {
             System.out.println("Error in the SQL");
             System.out.println(SQLEx);
         }
-        return listOfBeans;
+        return listOfBeans;                            // Return the list full of populated beans
     }
 }

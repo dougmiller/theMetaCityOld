@@ -9,7 +9,9 @@ import java.util.LinkedList;
 import java.io.Serializable;
 
 /**
- *
+ * This is the bean that process the news.
+ * It sends requests to DatabaseAccessBean and populates NewsBeans with the results.
+ * @see DatabaseAccessBean
  */
 public class NewsProcessBean implements Serializable {
 
@@ -64,21 +66,9 @@ public class NewsProcessBean implements Serializable {
                 listOfBeans.add(newsBean);
             }
         } catch (SQLException SQLEx) {
-            System.out.println("There was a problem in your SQL statement");
+            System.out.println("There was a problem accessing the database");
             System.out.println(SQLEx);
-        } catch (NullPointerException nullPoint) {
-            // this error is thown if there are no rows in the database at all
-            // So you must return a message telling people this fact.
-            // for the mean time Just populate a bean with this as a dirty hack.
-            //todo fix the no results returned error
-
-            // Make a new NewsArticleBean that represents one article and populate using the default constructor
-            NewsArticleBean newsBean = new NewsArticleBean();
-
-            // Add the new bean to the previously empty list, thus avoiding the null pointer situation
-            listOfBeans.add(newsBean);
-        }
-
+        } 
         // Return the list of populated newsBeans
         return listOfBeans;
     }

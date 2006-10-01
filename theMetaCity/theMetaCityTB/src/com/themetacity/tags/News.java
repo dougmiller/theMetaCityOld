@@ -15,13 +15,13 @@ import java.io.IOException;
  */
 public class News extends TagSupport {
 
-    /* Variables */
-    NewsArticleBean newsArticle = new NewsArticleBean();
+    // Variables
+    private NewsArticleBean newsArticle = new NewsArticleBean();
 
-    /* The writer gives access to the page context so its possible to write output */
+    // The writer gives access to the page context so its possible to write output
     JspWriter out = pageContext.getOut();
 
-    /* Start processing */
+    // Start processing
     public void doTag() {
         try {
             out.println("<div class=\"searchnews\">");
@@ -42,12 +42,16 @@ public class News extends TagSupport {
         }
     }
 
-    /* Free the Article used */
+    // Free the Article used
     public void release() {
         newsArticle = null;
     }
 
     public void setNewsArticle(NewsArticleBean newsArticle) {
         this.newsArticle = newsArticle;
+    }
+
+    public NewsArticleBean getNewsArticle() {
+        return newsArticle;
     }
 }
