@@ -39,61 +39,6 @@
         </attribute>
     </tag>
 
-    <!--  Archive tag -->
-    <tag>
-        <name>archive</name>
-        <tag-class>com.themetacity.tags.Archive</tag-class>
-        <body-content>scriptless</body-content>
-
-        <attribute>
-            <name>title</name>
-            <required>true</required>
-        </attribute>
-        <attribute>
-            <name>picID</name>
-            <required>true</required>
-        </attribute>
-        <attribute>
-            <name>date</name>
-            <required>true</required>
-        </attribute>
-    </tag>
-
-    <!-- View tag -->
-    <tag>
-        <name>view</name>
-        <tag-class>com.themetacity.tags.View</tag-class>
-        <body-content>scriptless</body-content>
-
-        <attribute>
-            <name>picID</name>
-            <required>true</required>
-        </attribute>
-
-        <attribute>
-            <name>imgSrc</name>
-            <required>true</required>
-        </attribute>
-
-        <attribute>
-            <name>altTag</name>
-            <required>true</required>
-        </attribute>
-
-        <attribute>
-            <name>maxId</name>
-            <required>true</required>
-        </attribute>
-    </tag>
-
-    <!-- Search tag
-    <tag>
-        <name>search</name>
-        <tag-class>com.themetacity.tags.Search</tag-class>
-        <body-content>scriptless</body-content>
-    </tag>-->
-
-    <!-- Quote Bean -->
     <tag>
         <name>quote</name>
         <tag-class>com.themetacity.tags.Quote</tag-class>
