@@ -7,15 +7,15 @@ import java.util.Date;
  */
 public class CommentBean {
 
-    String name;
-    String contact;
-    Date date;
-    String comment;
+    private String name;
+    private String contact;
+    private Date date;
+    private String comment;
 
     public CommentBean() {
         name = "Farraday";
         contact = "far@ra.day";
-        date = new Date(0);
+        date = new Date();
         comment = "I luv Flux!";
     }
 
