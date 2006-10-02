@@ -5,21 +5,22 @@
 
     <!-- This is the custom tag library configuration file for theMeataCity -->
 
-    <tlib-version>0.6</tlib-version>
+    <tlib-version>0.7</tlib-version>
     <short-name>tmc</short-name>
     <uri>http://com.themetacity</uri>
 
-    <!-- News tag -->
+    <!-- Article tag -->
     <tag>
-        <name>news</name>
-        <tag-class>com.themetacity.tags.News</tag-class>
+        <name>article</name>
+        <tag-class>com.themetacity.tags.Article</tag-class>
         <body-content>empty</body-content>
 
+        <!-- The article tag requires an article type bean -->
         <attribute>
-            <name>newsArticle</name>
+            <name>article</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.NewsArticleBean</type>
+            <type>com.themetacity.typebeans.ArticleBean</type>
         </attribute>
     </tag>
 
@@ -29,6 +30,7 @@
         <tag-class>com.themetacity.tags.Profile</tag-class>
         <body-content>scriptless</body-content>
 
+        <!-- The profile tag requires a profile type bean -->
         <attribute>
             <name>profile</name>
             <required>true</required>

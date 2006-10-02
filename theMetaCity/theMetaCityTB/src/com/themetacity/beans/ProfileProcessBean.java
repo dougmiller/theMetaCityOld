@@ -30,7 +30,7 @@ public class ProfileProcessBean implements Serializable {
      * @return A linked list of ProfileBeans
      */
     public LinkedList getProfileProcess(String user) {
-        DatabaseAccessBean dbaBean = new DatabaseAccessBean();
+        DatabaseBean dbaBean = new DatabaseBean();
 
         try {
             // Check if a username is passed as "user" and if it is amend the stament

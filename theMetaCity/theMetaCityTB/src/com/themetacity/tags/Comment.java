@@ -1,7 +1,6 @@
 package com.themetacity.tags;
 /**
- * @version 1.0
- * @Author: Douglas Miller
+ *
  */
 
 import com.themetacity.typebeans.CommentBean;
@@ -11,7 +10,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 /**
- * This is the custom tag that formats a NewsArticleBean into readable format. It is called in JSP pages.
+ * This is the custom tag that formats a CommentBean into readable format. It is called in JSP pages.
  */
 public class Comment extends TagSupport {
 

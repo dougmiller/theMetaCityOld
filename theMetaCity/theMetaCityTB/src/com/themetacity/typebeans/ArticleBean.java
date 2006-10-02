@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * This is the bean that represents the news posts.
  */
-public class NewsArticleBean implements java.io.Serializable {
+public class ArticleBean implements java.io.Serializable {
 
     private String pictureURL;
     private String title;
@@ -19,7 +19,7 @@ public class NewsArticleBean implements java.io.Serializable {
     /**
      * Use this contructor to initialise the variables to a default value.
      */
-    public NewsArticleBean() {
+    public ArticleBean() {
         pictureURL = "flux.png";
         title = "At the edge of the universe...";
         news = "...no news is good news.";
