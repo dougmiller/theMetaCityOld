@@ -18,7 +18,6 @@ public class ArticleProcessBean implements Serializable {
 
     ResultSet result; // The returned ResultSet from the executed SQL statement.
     LinkedList<ArticleBean> listOfBeans; // The list of populated beans.
-    String condition = "";
 
     public ArticleProcessBean() {
     }
@@ -44,19 +43,19 @@ public class ArticleProcessBean implements Serializable {
             while (result.next()) {
 
                 // Make a new ArticleBean that represents one article
-                ArticleBean newsBean = new ArticleBean();
+                ArticleBean articleBean = new ArticleBean();
 
                 // Set the properties of the bean
-                newsBean.setAuthor(result.getString("Author"));
-                newsBean.setEmail(result.getString("Email"));
-                newsBean.setTitle(result.getString("Title"));
-                newsBean.setPictureURL(result.getString("pictureURL"));
-                newsBean.setNews(result.getString("Article"));
-                newsBean.setDate(result.getDate("Date"));
-                newsBean.setTime(result.getTime("Time"));
+                articleBean.setAuthor(result.getString("Author"));
+                articleBean.setEmail(result.getString("Email"));
+                articleBean.setTitle(result.getString("Title"));
+                articleBean.setPictureURL(result.getString("pictureURL"));
+                articleBean.setNews(result.getString("Article"));
+                articleBean.setDate(result.getDate("Date"));
+                articleBean.setTime(result.getTime("Time"));
 
-                //Add the now populated bean to the list
-                listOfBeans.add(newsBean);
+
+                listOfBeans.add(articleBean);               //Add the now populated bean to the list to be returned for display
             }
         } catch (NamingException nameEx) {
             System.out.println("You had a naming exception");

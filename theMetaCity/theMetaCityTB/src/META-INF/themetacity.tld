@@ -24,6 +24,21 @@
         </attribute>
     </tag>
 
+    <!-- Comment tag -->
+    <tag>
+        <name>comment</name>
+        <tag-class>com.themetacity.tags.Comment</tag-class>
+        <body-content>empty</body-content>
+
+        <!-- The comment tag requires a comment type bean -->
+        <attribute>
+            <name>comment</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.CommentBean</type>
+        </attribute>
+    </tag>
+
     <!-- Profile tag -->
     <tag>
         <name>profile</name>
@@ -39,6 +54,7 @@
         </attribute>
     </tag>
 
+    <!-- Quote tag -->
     <tag>
         <name>quote</name>
         <tag-class>com.themetacity.tags.Quote</tag-class>
