@@ -47,11 +47,13 @@ public class Article extends TagSupport {
         newsArticle = null;
     }
 
+    public ArticleBean getNewsArticle() {
+        return newsArticle;
+    }
+
     public void setNewsArticle(ArticleBean newsArticle) {
         this.newsArticle = newsArticle;
     }
 
-    public ArticleBean getNewsArticle() {
-        return newsArticle;
-    }
+
 }

@@ -10,20 +10,20 @@ import java.io.Serializable;
 
 /**
  * This is the bean that process the news.
- * It sends requests to DatabaseBean and populates NewsBeans with the results.
+ * It sends requests to DatabaseBean and populates ArticleBeans with the results.
  *
  * @see DatabaseBean
  */
 public class ArticleProcessBean implements Serializable {
 
-    ResultSet result; // The returned ResultSet from the executed SQL statement.
-    LinkedList<ArticleBean> listOfBeans; // The list of populated beans.
+    ResultSet result;                       // The returned ResultSet from the executed SQL statement.
+    LinkedList<ArticleBean> listOfBeans;    // The list of populated beans.
 
     public ArticleProcessBean() {
     }
 
     /**
-     * Process the results of an executed SQL statment into news beans that are placed into a LinkedList.
+     * Process the results of an executed SQL statment into article beans that are placed into a LinkedList.
      * <p/>
      * The statment selects news article(s) and returns them to this method as a ResultSet. The results set is then
      * iterated over and each record is used to populate a ArticleBean. Once populated the ArticleBean is added
@@ -46,6 +46,7 @@ public class ArticleProcessBean implements Serializable {
                 ArticleBean articleBean = new ArticleBean();
 
                 // Set the properties of the bean
+
                 articleBean.setAuthor(result.getString("Author"));
                 articleBean.setEmail(result.getString("Email"));
                 articleBean.setTitle(result.getString("Title"));
@@ -53,7 +54,7 @@ public class ArticleProcessBean implements Serializable {
                 articleBean.setNews(result.getString("Article"));
                 articleBean.setDate(result.getDate("Date"));
                 articleBean.setTime(result.getTime("Time"));
-
+                
 
                 listOfBeans.add(articleBean);               //Add the now populated bean to the list to be returned for display
             }

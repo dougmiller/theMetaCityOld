@@ -17,7 +17,7 @@
 
         <!-- The article tag requires an article type bean -->
         <attribute>
-            <name>article</name>
+            <name>newsArticle</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>com.themetacity.typebeans.ArticleBean</type>
@@ -47,7 +47,7 @@
 
         <!-- The profile tag requires a profile type bean -->
         <attribute>
-            <name>profile</name>
+            <name>userProfile</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>com.themetacity.typebeans.ProfileBean</type>

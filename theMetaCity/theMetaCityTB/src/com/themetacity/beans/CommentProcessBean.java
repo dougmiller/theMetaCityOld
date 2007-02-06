@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 /**
  * This bean process the result of a database call to find beans into a
- * linked list that can be passed to the JSTL for formatting.
+ * linked list that can be passed to the Comment custom tag for formatting.
  */
 public class CommentProcessBean implements Serializable {
 
@@ -35,7 +35,7 @@ public class CommentProcessBean implements Serializable {
             while (result.next()) {
                 CommentBean comment = new CommentBean();    // Make a new comment bean to populate
 
-                //Now populate the bean with the reult fro mthe row of the database call
+                // Now populate the bean with the reult from the row of the database call
                 comment.setName(result.getString("author"));
                 comment.setContact(result.getString("contact"));
                 comment.setDate(result.getDate("date"));

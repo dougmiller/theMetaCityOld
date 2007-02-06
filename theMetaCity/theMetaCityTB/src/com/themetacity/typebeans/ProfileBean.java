@@ -5,26 +5,26 @@ package com.themetacity.typebeans;
  */
 public class ProfileBean {
 
-    private String username;
+    private String pseudonym;
     private String email;
     private String picURL;
     private String about;
 
     // Default Constructor
     public ProfileBean() {
-        username = "Flux Cap";
+        pseudonym = "Flux Cap";
         email = "flux@themetacity.com";
         picURL = "flux";
         about = "Flux keeps the world working. Things would be different without him. " +
                 "Anyone fancy a ride in his Delorian?";
     }
 
-    public String getUsername() {
-        return username;
+    public String getPseudonym() {
+        return pseudonym;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPseudonym(String pseudonym) {
+        this.pseudonym = pseudonym;
     }
 
     public String getEmail() {

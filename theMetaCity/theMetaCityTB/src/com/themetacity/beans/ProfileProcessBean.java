@@ -9,12 +9,17 @@ import java.util.LinkedList;
 import java.io.Serializable;
 
 /**
- * This is the bean that process a profile
+ * This is the bean that process a profile.
+ * It makes a call to the database and populates profileBeans wit hthe results.
+ *
+ * @see DatabaseBean
  */
 public class ProfileProcessBean implements Serializable {
 
-    ResultSet result;
-    LinkedList<ProfileBean> listOfBeans;
+    ResultSet result;                       // The results fo the database call
+    LinkedList<ProfileBean> listOfBeans;    // The list of beans
+
+    String user;    // The username that can be passed in as an optional argument
 
     public ProfileProcessBean() {
     }
@@ -29,34 +34,24 @@ public class ProfileProcessBean implements Serializable {
      *
      * @return A linked list of ProfileBeans
      */
-    public LinkedList getProfileProcess(String user) {
+    public LinkedList getProfiles() {
         DatabaseBean dbaBean = new DatabaseBean();
 
         try {
             // Check if a username is passed as "user" and if it is amend the stament
             if (user != null) {
-                result = dbaBean.executeQuery("Select * FROM profile WHERE username =" + user + ";"); // Select a specific profile
+                result = dbaBean.executeQuery("Select * FROM authors WHERE username = " + user + ";"); // Select a specific profile
             } else {
                 // Otherwise use the statment that returns them all.
-                result = dbaBean.executeQuery("Select * FROM profile;");                              // Select all the profiles as no specific profile was given
+                result = dbaBean.executeQuery("Select * FROM authors;");                             // Select all the profiles as no specific profile was given
             }
 
-        } catch (NamingException nameEx) {
-            System.out.println("You had a naming exception");
-            System.out.println(nameEx);
-        } catch (SQLException SQLEx) {
-            System.out.println("You had an error with your SQL");
-            System.out.println(SQLEx);
-        }
-
-        try {
             while (result.next()) {
                 ProfileBean profileBean = new ProfileBean();            // Make a new bean to be populated
 
-                profileBean.setUsername(result.getString("username"));
+                profileBean.setPseudonym(result.getString("user"));
                 profileBean.setEmail(result.getString("email"));
-                profileBean.setPicURL(result.getString("profilepic"));
-                profileBean.setPicURL(result.getString("profilealt"));
+                //profileBean.setPicURL(result.getString("picURL"));     // not in test DB, next interation perhapse
                 profileBean.setAbout(result.getString("about"));
 
                 listOfBeans.add(profileBean);                           // Add the newly populated profile to the list, it could be one or nmany, it doesnt really matter
@@ -65,7 +60,11 @@ public class ProfileProcessBean implements Serializable {
         catch (SQLException SQLEx) {
             System.out.println("Error in the SQL");
             System.out.println(SQLEx);
+        } catch (NamingException nameEx) {
+            System.out.println("You had a naming exception");
+            System.out.println(nameEx);
+
         }
-        return listOfBeans;                            // Return the list full of populated beans
+        return listOfBeans; // Return the list full of populated beans
     }
 }
