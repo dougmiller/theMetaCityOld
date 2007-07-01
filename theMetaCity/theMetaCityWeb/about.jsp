@@ -5,7 +5,7 @@
 
 <jsp:include page="/WEB-INF/jspf/header.jspf" />
 
-<%-- --%>
+<%-- Check that its is not empty --%>
 <c:if test="${ProfileProcessBean.profiles == null}"></c:if>
     <c:forEach var="profileList" items="${ProfileProcessBean.profiles}">
         <tmc:profile userProfile="${profileList}"/>
