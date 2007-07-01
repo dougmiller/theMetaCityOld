@@ -27,7 +27,7 @@ public class Profile extends TagSupport {
             out.println("<div>");
             out.println(userProfile.getPseudonym() + " ");
             out.println(userProfile.getEmail() + " ");
-            out.println(userProfile.getPicURL() + " ");
+            //out.println(userProfile.getPicURL() + " ");
             out.println(userProfile.getAbout() + " ");
             out.println("</div>");
 

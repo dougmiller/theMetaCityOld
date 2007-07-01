@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * This is the bean that process a profile.
- * It makes a call to the database and populates profileBeans wit hthe results.
+ * It makes a call to the database and populates profileBeans with the results.
  *
  * @see DatabaseBean
  */
@@ -27,7 +27,7 @@ public class ProfileProcessBean implements Serializable {
     /**
      * Process the results of a database connection that retuns a ResultSet of a statement into profile beans that are
      * passed to a custom tag for output.
-     * <p/>
+     * 
      * The statment selects a profile(s) and returns them to this method as a ResultSet. The results set is then
      * iterated over and each record is used to populate a ProfileBean. Once populated the ProfileBean is added to a
      * LinkedList and once all records have been processed the list is returned.
@@ -40,10 +40,10 @@ public class ProfileProcessBean implements Serializable {
         try {
             // Check if a username is passed as "user" and if it is amend the stament
             if (user != null) {
-                result = dbaBean.executeQuery("Select * FROM authors WHERE username = " + user + ";"); // Select a specific profile
+                result = dbaBean.executeQuery("Select * FROM \'users\' WHERE username = " + user + ";"); // Select a specific profile
             } else {
                 // Otherwise use the statment that returns them all.
-                result = dbaBean.executeQuery("Select * FROM authors;");                             // Select all the profiles as no specific profile was given
+                result = dbaBean.executeQuery("SELECT * FROM \'users\';");                             // Select all the profiles as no specific profile was given
             }
 
             while (result.next()) {

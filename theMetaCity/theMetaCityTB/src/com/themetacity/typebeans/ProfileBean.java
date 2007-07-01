@@ -9,6 +9,7 @@ public class ProfileBean {
     private String email;
     private String picURL;
     private String about;
+    private String[] tags;
 
     // Default Constructor
     public ProfileBean() {
@@ -17,6 +18,7 @@ public class ProfileBean {
         picURL = "flux";
         about = "Flux keeps the world working. Things would be different without him. " +
                 "Anyone fancy a ride in his Delorian?";
+        tags = new String[] {"Time Travel","Science", "Cars"};
     }
 
     public String getPseudonym() {
@@ -49,5 +51,13 @@ public class ProfileBean {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
     }
 }

@@ -10,12 +10,12 @@ import java.io.Serializable;
 
 /**
  * This is the bean that process the news.
- * It sends requests to DatabaseBean and populates ArticleBeans with the results.
  *
  * @see DatabaseBean
  */
 public class ArticleProcessBean implements Serializable {
 
+    String query;                           // The SQL query to be be run
     ResultSet result;                       // The returned ResultSet from the executed SQL statement.
     LinkedList<ArticleBean> listOfBeans;    // The list of populated beans.
 
@@ -24,8 +24,8 @@ public class ArticleProcessBean implements Serializable {
 
     /**
      * Process the results of an executed SQL statment into article beans that are placed into a LinkedList.
-     * <p/>
-     * The statment selects news article(s) and returns them to this method as a ResultSet. The results set is then
+     * <br />
+     * The statement selects news article(s) and returns them to this method as a ResultSet. The results set is then
      * iterated over and each record is used to populate a ArticleBean. Once populated the ArticleBean is added
      * to a LinkedList and once all records have been processed the list is returned.
      *
@@ -35,8 +35,11 @@ public class ArticleProcessBean implements Serializable {
         DatabaseBean dbBean = new DatabaseBean();
 
         try {
+            // Build the SQL query string
+            query = "Select * FROM NEWS;";
+
             // Execute the actual query and put the resusult into a ResultSet
-            result = dbBean.executeQuery("Select * FROM NEWS;");
+            result = dbBean.executeQuery(query);
 
             // For every row that is returned from the database query populate a bean and add
             // it to a linked list so that the JSTL can iterate over it.
@@ -54,7 +57,7 @@ public class ArticleProcessBean implements Serializable {
                 articleBean.setNews(result.getString("Article"));
                 articleBean.setDate(result.getDate("Date"));
                 articleBean.setTime(result.getTime("Time"));
-                
+
 
                 listOfBeans.add(articleBean);               //Add the now populated bean to the list to be returned for display
             }

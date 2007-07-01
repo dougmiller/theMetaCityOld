@@ -17,7 +17,7 @@ public class ArticleBean implements java.io.Serializable {
     private Time time;
 
     /**
-     * Use this contructor to initialise the variables to a default value.
+     * Initialise the variables to a default value.
      */
     public ArticleBean() {
         pictureURL = "flux.png";

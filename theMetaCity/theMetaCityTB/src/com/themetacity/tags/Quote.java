@@ -8,11 +8,12 @@ import java.io.IOException;
 
 /**
  * This tag generates formatted quotes. The output looks like this.<br />
- * &lt;div&nbsp;class=\&quot;quote\&quot;&gt;<br />
- * &nbsp;&nbsp;&lt;span&nbsp;class=\&quot;quotetext\&quot;&gt;\&quot;Some&nbsp;guy's&nbsp;quote&nbsp;text&nbsp;here\&quot;&lt;/span&gt;<br />
+ * <br />
+ * &lt;div&nbsp;class=&quot;quote&quot;&gt;<br />
+ * &nbsp;&nbsp;&lt;span&nbsp;class=&quot;quotetext&quot;&gt;&quot;Some&nbsp;guy's&nbsp;quote&nbsp;text&nbsp;here&quot;&lt;/span&gt;<br />
  * &nbsp;&nbsp;&lt;hr&nbsp;/&gt;<br />
- * &nbsp;&nbsp;&lt;div&nbsp;class=\&quot;authorposition\&quot;&gt;<br />
- * &nbsp;&nbsp;&nbsp;&nbsp;&lt;span&nbsp;class=\&quot;quoteauthor\&quot;&gt;Some&nbsp;guy&nbsp;quoted&lt;/span&gt;<br />
+ * &nbsp;&nbsp;&lt;div&nbsp;class=&quot;authorposition&quot;&gt;<br />
+ * &nbsp;&nbsp;&nbsp;&nbsp;&lt;span&nbsp;class=&quot;quoteauthor&quot;&gt;Some&nbsp;guy&nbsp;quoted&lt;/span&gt;<br />
  * &nbsp;&nbsp;&lt;/div&gt;<br />
  * &lt;/div&gt;<br />
  */
