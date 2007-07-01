@@ -6,8 +6,10 @@
 <jsp:include page="/WEB-INF/jspf/header.jspf" />
 
 <%-- --%>
-<c:forEach var="profileList" items="${ProfileProcessBean.profiles}">
-   <tmc:profile userProfile="${profileList}"/>
-</c:forEach>
+<c:if test="${ProfileProcessBean.profiles == null}"></c:if>
+    <c:forEach var="profileList" items="${ProfileProcessBean.profiles}">
+        <tmc:profile userProfile="${profileList}"/>
+    </c:forEach>
+</c:if>
 
 <jsp:include page="/WEB-INF/jspf/footer.jspf" />
