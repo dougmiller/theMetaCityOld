@@ -19,10 +19,13 @@ public class Article extends TagSupport {
     private ArticleBean newsArticle = new ArticleBean();
 
     // The writer gives access to the page context so its possible to write output
-    JspWriter out = pageContext.getOut();
+    JspWriter out;
 
     // Start processing
     public void doTag() {
+        // Initialise the context here as will not have been initialised in the container previously.
+        out = pageContext.getOut();
+
         try {
             out.println("<div class=\"searchnews\">");
             out.print("<img src=\"images\\"

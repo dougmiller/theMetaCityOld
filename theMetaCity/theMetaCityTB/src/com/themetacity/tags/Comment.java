@@ -18,10 +18,12 @@ public class Comment extends TagSupport {
     private CommentBean commentStub = new CommentBean();
 
     // The writer gives access to the page context so its possible to write output
-    JspWriter out = pageContext.getOut();
+    JspWriter out;
 
     // Start processing
     public void doTag() {
+        // Must initialse this here as the context will not be available before this time.
+        out = pageContext.getOut();
         try {
             out.println(commentStub.getName());
             out.println(commentStub.getContact());

@@ -9,13 +9,15 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class Error extends TagSupport {
     int errorNum = 0;
-    int [] errorList = {403, 404};
+    int[] errorList = {403, 404};
 
 
     /* The writer gives access to the page context so its possible to write output */
-    JspWriter out = pageContext.getOut();
+    JspWriter out;
 
     public int doEndTag() {
+        // Must initialse this here as the context will not be available before this time.
+        out = pageContext.getOut();
         try {
             System.out.println("<div class=\"errortitle\">" + errorNum + "</span><br />");
 

@@ -14,7 +14,7 @@ public class Profile extends TagSupport {
     private ProfileBean userProfile = new ProfileBean();
 
     /* The writer gives access to the page context so its possible to write output */
-    JspWriter out = pageContext.getOut();
+    JspWriter out;
 
     /**
      * Formats the result of a profile bean into output for the page.
@@ -22,7 +22,8 @@ public class Profile extends TagSupport {
      * @return SKIP_BODY
      */
     public int doStartTag() {
-
+        // Must initialse this here as the context will not be available before this time.
+        out = pageContext.getOut();
         try {
             out.println("<div>");
             out.println(userProfile.getPseudonym() + " ");
