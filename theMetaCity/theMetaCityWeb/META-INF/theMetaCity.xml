@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/theMetaCity" docBase="themetacity" reloadable="true" debug="5">
+
+    <Resource name="jdbc/theMetaCity" auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://broken.our-lan.com:3306/themetacitycom"
+              username="themetacity"
+              password="pineapple"/>
+</Context>
+
