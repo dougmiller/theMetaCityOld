@@ -3,10 +3,10 @@ package com.themetacity.beans;
 import com.themetacity.typebeans.ArticleBean;
 
 import javax.naming.NamingException;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.io.Serializable;
 
 /**
  * This is the bean that process the news.
@@ -53,7 +53,7 @@ public class ArticleProcessBean implements Serializable {
                 articleBean.setAuthor(result.getString("Author"));
                 articleBean.setEmail(result.getString("Email"));
                 articleBean.setTitle(result.getString("Title"));
-                articleBean.setPictureURL(result.getString("pictureURL"));
+                //articleBean.setPictureURL(result.getString("pictureURL"));
                 articleBean.setNews(result.getString("Article"));
                 articleBean.setDate(result.getDate("Date"));
                 articleBean.setTime(result.getTime("Time"));

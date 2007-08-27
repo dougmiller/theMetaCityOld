@@ -41,7 +41,7 @@ public class ProfileProcessBean implements Serializable {
         try {
             // Check if a username is passed as "user" and if it is amend the stament
             if (user != null) {
-                result = dbaBean.executeQuery("Select * FROM \'users\' WHERE username = " + user + ";"); // Select a specific profile
+                result = dbaBean.executeQuery("SELECT * FROM \'users\' WHERE username = " + user + ";"); // Select a specific profile
             } else {
                 // Otherwise use the statment that returns them all.
                 result = dbaBean.executeQuery("SELECT * FROM \'users\';");                             // Select all the profiles as no specific profile was given
@@ -57,6 +57,8 @@ public class ProfileProcessBean implements Serializable {
                 //profileBean.setPicURL(result.getString("picURL"));     // not in test DB, next interation perhapse
                 profileBean.setAbout(result.getString("about"));
                 System.out.println("adding bean to list");
+
+
                 listOfBeans.add(profileBean);                           // Add the newly populated profile to the list, it could be one or nmany, it doesnt really matter
             }
         }
