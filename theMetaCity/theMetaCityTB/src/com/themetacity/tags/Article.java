@@ -6,30 +6,30 @@ package com.themetacity.tags;
 
 import com.themetacity.typebeans.ArticleBean;
 
+import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
 /**
  * This is the custom tag that formats a ArticleBean into readable format. It is called in JSP pages.
  */
-public class Article extends TagSupport {
+public class Article extends SimpleTagSupport {
 
     // Variables
     private ArticleBean newsArticle = new ArticleBean();
 
-    // The writer gives access to the page context so its possible to write output
-    JspWriter out;
-
     // Start processing
     public void doTag() {
-        // Initialise the context here as will not have been initialised in the container previously.
-        out = pageContext.getOut();
+        // * Initialise the context here as will not be valid in the container previously. *
+        // The writer gives access to the page context so its possible to write output
+        JspContext jspContext = getJspContext();
+        JspWriter out = jspContext.getOut();
 
         try {
             out.println("<div class=\"searchnews\">");
             out.print("<img src=\"images\\"
-                    + newsArticle.getPictureURL()
+                    //+ newsArticle.getPictureURL()
                     + " class=\"newsimage\" alt=\"News Avatar\" />");
             out.print("<span class=\"newstitle\">" + newsArticle.getTitle() + "</span><br />" +
                     "<span class=\"newsauthor\"><a href=\"mailto:" + newsArticle.getEmail() + "/>"

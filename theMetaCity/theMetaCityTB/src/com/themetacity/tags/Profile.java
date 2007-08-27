@@ -25,11 +25,11 @@ public class Profile extends TagSupport {
         // Must initialse this here as the context will not be available before this time.
         out = pageContext.getOut();
         try {
-            out.println("<div>");
-            out.println(userProfile.getPseudonym() + " ");
-            out.println(userProfile.getEmail() + " ");
-            //out.println(userProfile.getPicURL() + " ");
-            out.println(userProfile.getAbout() + " ");
+            out.println("<div class=\"profile\">");
+            //out.println("<img src=\"" + userProfile.getPicURL() + "\" alt=\"User profile picture\"");
+            out.println("<span class=\"pseudonym\">" + userProfile.getPseudonym() + "</span><br />");
+            out.println("blah" + userProfile.getEmail() + "sometttting<br />");
+            out.println(userProfile.getAbout() + "<br />");
             out.println("</div>");
 
         } catch (IOException IOex) {

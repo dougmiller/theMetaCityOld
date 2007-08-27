@@ -7,14 +7,15 @@ import java.util.Date;
  */
 public class CommentBean {
 
-    private String name;
-    private String contact;
-    private Date date;
-    private String comment;
+    private String name;            // The name of the author
+    private String contact;         // How to contact the author, either email or webpage
+    private Date date;              // The date the comment was posted
+    private String comment;         // The actual comment
 
+    // Default constructor
     public CommentBean() {
-        name = "Farraday";
-        contact = "far@ra.day";
+        name = "Michael Faraday";
+        contact = "m.fa@ra.day";
         date = new Date();
         comment = "I luv Flux!";
     }

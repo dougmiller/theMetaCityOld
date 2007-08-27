@@ -1,7 +1,7 @@
 package com.themetacity.typebeans;
 
 /**
- * This is the bean that repesents an authors profile
+ * This is the bean that repesents an authors profile for display in the about page.
  */
 public class ProfileBean {
 
@@ -18,7 +18,7 @@ public class ProfileBean {
         picURL = "flux";
         about = "Flux keeps the world working. Things would be different without him. " +
                 "Anyone fancy a ride in his Delorian?";
-        tags = new String[] {"Time Travel","Science", "Cars"};
+        tags = new String[]{"Time Travel", "Science", "Cars"};
     }
 
     public String getPseudonym() {

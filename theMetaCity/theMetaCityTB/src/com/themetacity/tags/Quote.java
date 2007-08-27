@@ -19,9 +19,14 @@ import java.io.IOException;
  */
 public class Quote extends SimpleTagSupport {
 
+    // Only need to set the quote author in a variable as the actual quote is captures as a jsp
+    // fragment and handles by the tag class
     private String quoteAuthor = null;
 
     public void doTag() throws JspException, IOException {
+
+        // * Initialise the context here as will not be valid in the container previously. *
+        // The writer gives access to the page context so its possible to write output
         JspContext jspContext = getJspContext();
 
         JspWriter out = jspContext.getOut();

@@ -4,37 +4,25 @@ import java.sql.Time;
 import java.util.Date;
 
 /**
- * This is the bean that represents the news posts.
+ * This is the bean that represents the an article.
  */
-public class ArticleBean implements java.io.Serializable {
+public class ArticleBean {
 
-    private String pictureURL;
-    private String title;
-    private String news;
-    private String author;
-    private String email;
-    private Date date;
-    private Time time;
+    private String title;       // The title of the article
+    private String news;        // The actual meat of the article
+    private String author;      // Who wrote the article
+    private String email;       // Contacting the author
+    private Date date;          // The date the artcle was pubished
+    private Time time;          // The time the article was published
 
-    /**
-     * Initialise the variables to a default value.
-     */
+    // Default constructor
     public ArticleBean() {
-        pictureURL = "flux.png";
         title = "At the edge of the universe...";
         news = "...no news is good news.";
-        author = "Flux";
+        author = "Flux Cap";
         email = "flux@theMetaCity.com";
         date = new Date(0);
         time = new Time(0);
-    }
-
-    public String getPictureURL() {
-        return pictureURL;
-    }
-
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
     }
 
     public String getTitle() {
