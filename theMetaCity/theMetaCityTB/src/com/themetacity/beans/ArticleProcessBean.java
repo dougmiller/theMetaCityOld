@@ -17,7 +17,7 @@ public class ArticleProcessBean implements Serializable {
 
     String query;                           // The SQL query to be be run
     ResultSet result;                       // The returned ResultSet from the executed SQL statement.
-    LinkedList<ArticleBean> listOfBeans;    // The list of populated beans.
+    LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();    // The list of populated beans.
 
     public ArticleProcessBean() {
     }

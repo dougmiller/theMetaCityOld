@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class CommentProcessBean implements Serializable {
 
     ResultSet result;                       // The return of the call to the database
-    LinkedList<CommentBean> listOfBeans;    // The list containing commentBeans
+    LinkedList<CommentBean> listOfBeans = new LinkedList<CommentBean>();    // The list containing commentBeans
 
     private int article = 0;                    // The article to fetch comments for
 
