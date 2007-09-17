@@ -2,8 +2,6 @@ package com.themetacity.beans;
 
 import com.themetacity.typebeans.ProfileBean;
 
-import javax.naming.NamingException;
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -14,9 +12,9 @@ import java.util.LinkedList;
  *
  * @see DatabaseBean
  */
-public class ProfileProcessBean implements Serializable {
+public class ProfileProcessBean {
 
-    ResultSet result;                       // The results fo the database call
+    ResultSet result = null;                       // The results fo the database call
     LinkedList<ProfileBean> listOfBeans = new LinkedList<ProfileBean>();    // The list of beans
 
     private String author;    // The username that can be passed in as an optional argument
@@ -35,33 +33,37 @@ public class ProfileProcessBean implements Serializable {
      * @return A linked list of ProfileBeans
      */
     public LinkedList getProfiles() {
+        System.out.println("making new db bean");
         DatabaseBean dbaBean = new DatabaseBean();
         try {
             // Use a statment that returns them all the users.
-            if (author == null) {
-                result = dbaBean.executeQuery("SELECT * FROM users;");
-            } else {
-                // Check if a pseudonym is passed as "author" and if it is amend the stament
-                result = dbaBean.executeQuery("SELECT * FROM users WHERE pseudonym = " + getAuthor() + ";"); // Select a specific profile");                             // Select all the profiles as no specific profile was given
-            }
+            // Arguments have not been implimented yet
+            result = dbaBean.executeQuery("SELECT * FROM users;");
+            System.out.println("executed query");
 
-            while (result.next()) {
-                ProfileBean profileBean = new ProfileBean();            // Make a new bean to be populated
+            // Check to see if something was returned from the database
+            if (result == null) {
+                System.out.println("Nothing returned");
+            } else
 
-                // Now set all the properties
-                profileBean.setPseudonym(result.getString("pseudonym"));
-                //profileBean.setPicURL(result.getString("picURL"));     //todo not in test DB, next interation perhapse
-                profileBean.setAbout(result.getString("about"));
+                while (result.next()) {
+                    System.out.println("trying for new profilebean");
+                    ProfileBean profileBean = new ProfileBean();            // Make a new bean to be populated
 
-                listOfBeans.add(profileBean);                           // Add the newly populated profile to the list, it could be one or many, it doesnt really matter
-            }
+                    // Now set all the properties
+                    profileBean.setPseudonym(result.getString("pseudonym"));
+                    //profileBean.setPicURL(result.getString("picURL"));     
+                    profileBean.setAbout(result.getString("about"));
+
+                    listOfBeans.add(profileBean);                           // Add the newly populated profile to the list, it could be one or many, it doesnt really matter
+                }
+            // Close the open databse connections
+            result.close();
+            dbaBean.close();
         }
         catch (SQLException SQLEx) {
-            System.out.println("Error in the SQL");
+            System.out.println("There is an error with the database layer.");
             System.out.println(SQLEx);
-        } catch (NamingException nameEx) {
-            System.out.println("You had a naming exception");
-            System.out.println(nameEx);
         }
         return listOfBeans; // Return the list full of populated beans
     }
