@@ -12,7 +12,6 @@
         <welcome-file>/index.html</welcome-file>
     </welcome-file-list>
 
-
     <resource-ref>
         <description>Resource ref to the datasource configured in the context xml</description>
         <res-ref-name>jdbc/theMetaCity</res-ref-name>
