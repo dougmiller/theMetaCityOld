@@ -1,9 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isErrorPage="true" %>
 
-<jsp:include page="/WEB-INF/jspf/header.jspf" />
+<jsp:include page="/WEB-INF/jspf/header.jspf"/>
 
-<span class="errorNumber"><c:out value="${error}" /></span>
+<span class="errorNumber"><c:out value="${param.error}"/></span>
 
 <%--<c:choose>
 
@@ -31,4 +31,4 @@
 
 <c:out value="${Exception}" />  --%>
 
-<jsp:include page="/WEB-INF/jspf/footer.jspf" />
+<jsp:include page="/WEB-INF/jspf/footer.jspf"/>

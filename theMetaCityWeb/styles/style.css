@@ -1,0 +1,70 @@
+body {
+    background-color: #000000;
+    color: white;
+    font-size: 10pt; /*background-image: url('bigblack.jpg');*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+a {
+    color: orange;
+    text-decoration: none;
+}
+
+#container {
+    width: 720px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header related classes */
+#header {
+    width: 100%;
+    margin: 50px 0px;
+    height: 100px;
+}
+
+/* Main content related classes */
+#maincontent {
+    margin-right: 310px;
+}
+
+/* Sidebar classes */
+#sidebar {
+    float: right;
+    width: 300px;
+}
+
+/* Select the direct div decendants of the sidebar, that is every section on the sidebar */
+#sidebar > div {
+    border: 1px black solid;
+    margin-bottom: 10px;
+}
+
+/* Select the first child of the section div, the title <h2>*/
+#sidebar > div :first-child {
+    border-bottom: 3px black double;
+}
+
+/* The unorded lists used for link boxes */
+#sidebar ul {
+    list-style: none;
+}
+
+/* Footer related classes */
+#footer {
+    border-top: 1px black dotted;
+    padding-top: 3px;
+    text-align: center;
+    clear: both;
+}
+
+#footer img {
+    border: none;
+}
+
+.copyright {
+    font-size: 10pt;
+}

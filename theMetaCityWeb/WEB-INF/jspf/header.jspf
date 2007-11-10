@@ -1,28 +1,54 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="styles/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <title>theMetaCity.com</title>
 </head>
 
 <body>
-<div id="container">
-    <div id="header">
-        <span class="bannerTitle">The MetaCity.com</span><br/>
-        <span class="bannerSubTitle">musings on life, culture and the world around us</span>
-    </div>
 
+<div id="header">
+    <span class="bannerTitle">The MetaCity.com</span><br/>
+    <span class="bannerSubTitle">musings on life, culture and the world around us</span>
+</div>
+<div id="container">
     <!-- The right nav div -->
     <div id="sidebar">
-        <ul>
-            <li class="menu"><a href="#">Link1</a></li>
-            <li class="menu"><a href="#">Link2</a></li>
-            <li class="menu"><a href="#">Link3</a></li>
-            <li class="menu"><a href="http://www.themetacity.com">Home</a></li>
-        </ul>
+
+        <!-- About box -->
+        <div>
+            <h2>About</h2>
+
+            <p>This is the about me box. Who I am, what I do and what I am about. Let me do things for you for
+                money.</p>
+        </div>
+
+        <!-- The projects div -->
+        <div>
+            <h2>Projects</h2>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+        <!-- The Cool Links (tm) div -->
+        <div>
+            <h2>Cool Links</h2>
+            <ul>
+                <li><a href="#">Cool link 1</a></li>
+                <li><a href="#">A Second Cool link</a></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+        <!-- End of the sidebar -->
     </div>
 
     <!-- The main content div -->
