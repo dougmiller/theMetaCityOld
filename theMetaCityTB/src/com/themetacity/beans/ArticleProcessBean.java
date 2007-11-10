@@ -2,7 +2,6 @@ package com.themetacity.beans;
 
 import com.themetacity.typebeans.ArticleBean;
 
-import javax.naming.NamingException;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +35,7 @@ public class ArticleProcessBean implements Serializable {
 
         try {
             // Build the SQL query string
-            query = "Select * FROM NEWS;";
+            query = "Select * FROM articles;";
 
             // Execute the actual query and put the resusult into a ResultSet
             result = dbBean.executeQuery(query);
@@ -50,20 +49,17 @@ public class ArticleProcessBean implements Serializable {
 
                 // Set the properties of the bean
 
-                articleBean.setAuthor(result.getString("Author"));
-                articleBean.setEmail(result.getString("Email"));
-                articleBean.setTitle(result.getString("Title"));
+                articleBean.setAuthor(result.getString("author"));
+                //articleBean.setContact(result.getString("Email"));
+                articleBean.setTitle(result.getString("title"));
                 //articleBean.setPictureURL(result.getString("pictureURL"));
-                articleBean.setNews(result.getString("Article"));
-                articleBean.setDate(result.getDate("Date"));
-                articleBean.setTime(result.getTime("Time"));
+                articleBean.setNews(result.getString("articletext"));
+                articleBean.setDate(result.getDate("datetime"));
+                //articleBean.setTime(result.getTime("Time"));
 
 
                 listOfBeans.add(articleBean);               //Add the now populated bean to the list to be returned for display
             }
-        } catch (NamingException nameEx) {
-            System.out.println("You had a naming exception");
-            System.out.println(nameEx);
         } catch (SQLException SQLEx) {
             System.out.println("You had an error with your SQL");
             System.out.println(SQLEx);

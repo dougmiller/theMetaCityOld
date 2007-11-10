@@ -2,7 +2,6 @@ package com.themetacity.beans;
 
 import com.themetacity.typebeans.CommentBean;
 
-import javax.naming.NamingException;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,9 +44,7 @@ public class CommentProcessBean implements Serializable {
 
             }
 
-        } catch (NamingException NEx) {
-            System.out.println("You had a Naming exeption");
-            System.out.println(NEx);
+
         } catch (SQLException SQLEx) {
             System.out.println("You had an SQL exception");
             System.out.println(SQLEx);

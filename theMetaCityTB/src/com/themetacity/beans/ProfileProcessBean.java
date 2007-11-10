@@ -20,6 +20,7 @@ public class ProfileProcessBean {
     private String author;    // The username that can be passed in as an optional argument
 
     public ProfileProcessBean() {
+        author = "";
     }
 
     /**
@@ -32,31 +33,33 @@ public class ProfileProcessBean {
      *
      * @return A linked list of ProfileBeans
      */
-    public LinkedList getProfiles() {
+    public LinkedList<ProfileBean> getProfiles() {
         System.out.println("making new db bean");
         DatabaseBean dbaBean = new DatabaseBean();
         try {
             // Use a statment that returns them all the users.
             // Arguments have not been implimented yet
-            result = dbaBean.executeQuery("SELECT * FROM users;");
+            result = dbaBean.executeQuery(buildProfileQuery());
             System.out.println("executed query");
 
-            // Check to see if something was returned from the database
-            if (result == null) {
-                System.out.println("Nothing returned");
-            } else
+            while (result.next()) {
+                System.out.println("trying for new profilebean");
+                ProfileBean profileBean = new ProfileBean();              // Make a new bean to be populated
 
-                while (result.next()) {
-                    System.out.println("trying for new profilebean");
-                    ProfileBean profileBean = new ProfileBean();            // Make a new bean to be populated
+                // Now set all the properties
+                //profileBean.setUserName(result.getString("username"));
+                profileBean.setPseudonym(result.getString("pseudonym"));
+                //profileBean.setContact(result.getString("contact"));
+                profileBean.setAbout(result.getString("about"));
 
-                    // Now set all the properties
-                    profileBean.setPseudonym(result.getString("pseudonym"));
-                    //profileBean.setPicURL(result.getString("picURL"));     
-                    profileBean.setAbout(result.getString("about"));
+                // Process this users tags
+                TagProcessBean tagProcessBean = new TagProcessBean();
+                tagProcessBean.setUser(result.getString("username"));     // Set the user in the TagProcessBean
 
-                    listOfBeans.add(profileBean);                           // Add the newly populated profile to the list, it could be one or many, it doesnt really matter
-                }
+                profileBean.setTags(tagProcessBean.getTags());            // Assign the results to the bean
+
+                listOfBeans.add(profileBean);                             // Add the newly populated profile to the list, it could be one or many, it doesnt really matter
+            }
             // Close the open databse connections
             result.close();
             dbaBean.close();
@@ -66,6 +69,22 @@ public class ProfileProcessBean {
             System.out.println(SQLEx);
         }
         return listOfBeans; // Return the list full of populated beans
+    }
+
+    /**
+     * Builds the database query for profiles
+     *
+     * @return String of the statment ready to execute
+     */
+    public String buildProfileQuery() {
+        String query;
+        if (author.equals("")) {
+            query = "SELECT * FROM users;";
+        } else {
+            query = "SELECT * FROM users WHERE username = '" + author + "';";
+        }
+
+        return query;
     }
 
     public String getAuthor() {

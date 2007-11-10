@@ -1,6 +1,7 @@
 package com.themetacity.tags;
 
 import com.themetacity.typebeans.ProfileBean;
+import com.themetacity.typebeans.TagBean;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -26,10 +27,21 @@ public class Profile extends TagSupport {
         out = pageContext.getOut();
         try {
             out.println("<div class=\"profile\">");
-            //out.println("<img src=\"" + userProfile.getPicURL() + "\" alt=\"User profile picture\"");
-            out.println("<span class=\"pseudonym\">" + userProfile.getPseudonym() + "</span><br />");
-            out.println("blah" + userProfile.getEmail() + "sometttting<br />");
-            out.println(userProfile.getAbout() + "<br />");
+            out.println("    <div class=\"profileheader\">");
+            out.println("        <div class=\"profilepiccontainer\">");
+            //out.println("            <img src=\"images/profileicons/" + userProfile.g + ".png\" alt=\"User profile picture\" />");
+            out.println("        </div>");
+            out.println("        <div class=\"profileinfo\">");
+            out.println("            <span class=\"pseudonym\">" + userProfile.getPseudonym() + "</span><br />");
+            out.println("            <span class=\"contact\">" + userProfile.getContact() + "</span><br />");
+            out.println("        </div>");
+            out.println("    </div>");
+            out.println("    <div>" + userProfile.getAbout() + "</div>");
+            out.println("    <div class=\"tags\">");
+            for (TagBean tag : userProfile.getTags()) {
+                out.print("" + tag.getTag() + "(" + tag.getNumTimesTagUsed() + ")");
+            }
+            out.println("    </div>");
             out.println("</div>");
 
         } catch (IOException IOex) {

@@ -27,20 +27,15 @@ public class Article extends SimpleTagSupport {
         JspWriter out = jspContext.getOut();
 
         try {
-            out.println("<div class=\"searchnews\">");
-            out.print("<img src=\"images\\"
-                    //+ newsArticle.getPictureURL()
-                    + " class=\"newsimage\" alt=\"News Avatar\" />");
-            out.print("<span class=\"newstitle\">" + newsArticle.getTitle() + "</span><br />" +
-                    "<span class=\"newsauthor\"><a href=\"mailto:" + newsArticle.getEmail() + "/>"
-                    + newsArticle.getAuthor() + "</a></span><br />"
-                    + newsArticle.getNews()
-                    + "<hr />"
-                    + "<span class=\"font10\">date: " + newsArticle.getDate().toString()
-                    + " time: " + newsArticle.getTime().toString() + "</span>"
-                    + "</div> <br />");
+            out.println("    <div class=\"newsarticle\">");
+            out.println("        <h2><a href=\"\">" + newsArticle.getTitle() + "</a></h2>");
+            out.println("        " + newsArticle.getNews());
+            out.println("        <span>" + newsArticle.getDate() + "</span>");
+            out.println("    </div>");
+
+
         } catch (IOException IOEx) {
-            System.out.print("There was an Error");
+            System.out.print("There was an error with the article rendering");
             System.out.print(IOEx);
         }
     }
