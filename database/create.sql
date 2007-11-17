@@ -1,5 +1,4 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
 -- 
 -- Database: `theMetaCity`
 -- 
@@ -15,10 +14,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE `articles` (
   `articleid` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
-  `title` varchar(50) NOT NULL COMMENT 'The title of this article',
+  `author` varchar(30) NOT NULL COMMENT 'The author who posed this article. References users.username',
+  `title` varchar(100) NOT NULL COMMENT 'The title of this article',
+  `articletext` varchar(5000) NOT NULL COMMENT 'The actual content of the article.',
   `datetime` date NOT NULL COMMENT 'The date this article was published',
-  `author` varchar(15) NOT NULL COMMENT 'The author who posed this article. References users.username',
-  'text' varchar(5000) NOT NULL COMMENT 'The actual content of the article.',
   PRIMARY KEY  (`articleid`),
   KEY `author` (`author`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Article information. Autoincrement articleid.' AUTO_INCREMENT=1 ;
@@ -31,14 +30,14 @@ CREATE TABLE `articletags` (
   `articleid` smallint(6) NOT NULL COMMENT 'References an article by articleid',
   `tag` varchar(20) NOT NULL COMMENT 'The text tag',
   PRIMARY KEY  (`articleid`,`tag`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='The tags describing the article';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='The tags describing the articles';
 
 -- 
 -- Table structure for table `users`
 -- 
 
 CREATE TABLE `users` (
-  `username` varchar(15) NOT NULL COMMENT 'The users username, used for loggining in etc and for references',
+  `username` varchar(30) NOT NULL COMMENT 'The users username, used for loggining in etc and for references',
   `password` varchar(64) NOT NULL COMMENT 'The users password. Stored and an SHA-512 hash.',
   `pseudonym` varchar(25) NOT NULL COMMENT 'The users pseudonym that is displayed instead of the username',
   `contact` varchar(40) NOT NULL COMMENT 'The email/website users wish to be contacted at.',
