@@ -1,7 +1,10 @@
 package com.themetacity.typebeans;
 
 /**
+ * The bean that represents a metadata tag (eg articles about computers or python).
  *
+ * @Author Douglas Miller
+ * @Date 11 Nov 2007
  */
 public class TagBean {
 
@@ -14,7 +17,6 @@ public class TagBean {
     public TagBean() {
         tag = "Space";
         numTimesTagUsed = 2;
-
     }
 
     public String getTag() {
@@ -24,7 +26,6 @@ public class TagBean {
     public void setTag(String tag) {
         this.tag = tag;
     }
-
 
     public int getNumTimesTagUsed() {
         return numTimesTagUsed;

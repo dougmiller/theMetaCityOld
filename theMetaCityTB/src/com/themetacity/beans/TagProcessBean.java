@@ -15,12 +15,12 @@ import java.util.LinkedList;
 public class TagProcessBean {
 
 
-    // The user this list represents
+    // The possible inputs used to construct the database call
     String user;
+    int articleID;
 
     // Zero argment constructor
     public TagProcessBean() {
-
     }
 
     /**
@@ -34,7 +34,16 @@ public class TagProcessBean {
 
         DatabaseBean dbaBean = new DatabaseBean();
 
-        ResultSet result = dbaBean.executeQuery(constructUserTagQuery());
+        String query = null;
+
+        /* Check the input to determine how to construct the query tag */
+        if (user != null) {                              // If the input is a username
+            query = constructUserTagQuery();
+        } else if (articleID != 0) {                    // If the input is an article id num
+            query = constructArticleTagQuery();
+        }
+
+        ResultSet result = dbaBean.executeQuery(query);
 
         try {
             while (result.next()) {
@@ -66,11 +75,27 @@ public class TagProcessBean {
                 "GROUP BY tag;";
     }
 
+    public String constructArticleTagQuery() {
+        return "SELECT tag, count(tag) as timesused " +
+                "FROM articles, articletags " +
+                "WHERE articles.articleid = " + articleID + " " +
+                "AND articles.articleid = articletags.articleid " +
+                "GROUP BY tag;";
+    }
+
     public String getUser() {
         return user;
     }
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public int getArticleID() {
+        return articleID;
+    }
+
+    public void setArticleID(int articleID) {
+        this.articleID = articleID;
     }
 }

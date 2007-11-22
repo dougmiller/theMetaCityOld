@@ -17,7 +17,7 @@
 
         <!-- The article tag requires an article type bean -->
         <attribute>
-            <name>newsArticle</name>
+            <name>article</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>com.themetacity.typebeans.ArticleBean</type>

@@ -1,6 +1,5 @@
 package com.themetacity.tags;
 
-import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -22,25 +21,21 @@ public class Quote extends SimpleTagSupport {
     // Only need to set the quote author in a variable as the actual quote is captures as a jsp
     // fragment and handles by the tag class
     private String quoteAuthor = null;
+    JspWriter out;
 
     public void doTag() throws JspException, IOException {
 
         // * Initialise the context here as will not be valid in the container previously. *
         // The writer gives access to the page context so its possible to write output
-        JspContext jspContext = getJspContext();
-
-        JspWriter out = jspContext.getOut();
+        out = getJspContext().getOut();
 
         // Begin outputting content
         out.println("<div class=\"quote\">");
-        out.println("  <span class=\"quotetext\">");
+        out.println("    <span class=\"quotetext\">");
         // This gets the contents of the body and outputs it. Very important!
         getJspBody().invoke(null);
-        out.println("  </span>");
-        out.println("  <hr />");
-        out.println("  <div class=\"authorposition\">");
+        out.println("    </span>");
         out.println("    <span class=\"quoteauthor\">" + quoteAuthor + "</span>");
-        out.println("  </div>");
         out.println("</div>");
     }
 

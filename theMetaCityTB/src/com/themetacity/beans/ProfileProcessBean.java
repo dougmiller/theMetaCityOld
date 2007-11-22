@@ -34,22 +34,18 @@ public class ProfileProcessBean {
      * @return A linked list of ProfileBeans
      */
     public LinkedList<ProfileBean> getProfiles() {
-        System.out.println("making new db bean");
         DatabaseBean dbaBean = new DatabaseBean();
         try {
             // Use a statment that returns them all the users.
             // Arguments have not been implimented yet
             result = dbaBean.executeQuery(buildProfileQuery());
-            System.out.println("executed query");
 
             while (result.next()) {
-                System.out.println("trying for new profilebean");
                 ProfileBean profileBean = new ProfileBean();              // Make a new bean to be populated
 
                 // Now set all the properties
-                //profileBean.setUserName(result.getString("username"));
                 profileBean.setPseudonym(result.getString("pseudonym"));
-                //profileBean.setContact(result.getString("contact"));
+                profileBean.setContact(result.getString("contact"));
                 profileBean.setAbout(result.getString("about"));
 
                 // Process this users tags
@@ -76,7 +72,7 @@ public class ProfileProcessBean {
      *
      * @return String of the statment ready to execute
      */
-    public String buildProfileQuery() {
+    private String buildProfileQuery() {
         String query;
         if (author.equals("")) {
             query = "SELECT * FROM users;";

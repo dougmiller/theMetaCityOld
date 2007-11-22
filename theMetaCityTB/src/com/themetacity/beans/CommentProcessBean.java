@@ -2,7 +2,6 @@ package com.themetacity.beans;
 
 import com.themetacity.typebeans.CommentBean;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -11,7 +10,7 @@ import java.util.LinkedList;
  * This bean process the result of a database call to find beans into a
  * linked list that can be passed to the Comment custom tag for formatting.
  */
-public class CommentProcessBean implements Serializable {
+public class CommentProcessBean {
 
     ResultSet result;                       // The return of the call to the database
     LinkedList<CommentBean> listOfBeans = new LinkedList<CommentBean>();    // The list containing commentBeans
@@ -37,7 +36,7 @@ public class CommentProcessBean implements Serializable {
                 // Now populate the bean with the reult from the row of the database call
                 comment.setName(result.getString("author"));
                 comment.setContact(result.getString("contact"));
-                comment.setDate(result.getDate("date"));
+                comment.setDateTime(result.getDate("date"));
                 comment.setComment(result.getString("comment"));
 
                 listOfBeans.add(comment);                   // Add the now populated bean to the list

@@ -5,11 +5,13 @@ package com.themetacity.tags;
  */
 
 import com.themetacity.typebeans.ArticleBean;
+import com.themetacity.typebeans.TagBean;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
+import java.util.LinkedList;
 
 /**
  * This is the custom tag that formats a ArticleBean into readable format. It is called in JSP pages.
@@ -17,7 +19,7 @@ import java.io.IOException;
 public class Article extends SimpleTagSupport {
 
     // Variables
-    private ArticleBean newsArticle = new ArticleBean();
+    private ArticleBean article = new ArticleBean();
 
     // Start processing
     public void doTag() {
@@ -28,11 +30,11 @@ public class Article extends SimpleTagSupport {
 
         try {
             out.println("    <div class=\"newsarticle\">");
-            out.println("        <h2><a href=\"\">" + newsArticle.getTitle() + "</a></h2>");
-            out.println("        " + newsArticle.getNews());
-            out.println("        <span>" + newsArticle.getDate() + "</span>");
+            out.println("        <h2><a href=\"\">" + article.getTitle() + "</a></h2>");
+            out.println("        " + article.getArticleText());
+            out.println("        <span>Posted on: " + article.getDateTime() + "</span><br />");
+            out.println("        <span class=\"tagsspan\">Posted under: " + formatTags(article.getTags()) + "</span>");
             out.println("    </div>");
-
 
         } catch (IOException IOEx) {
             System.out.print("There was an error with the article rendering");
@@ -42,16 +44,29 @@ public class Article extends SimpleTagSupport {
 
     // Free the Article used
     public void release() {
-        newsArticle = null;
+        article = null;
     }
 
-    public ArticleBean getNewsArticle() {
-        return newsArticle;
+    private String formatTags(LinkedList<TagBean> tagList) {
+        StringBuilder outputString = new StringBuilder();
+
+        for (TagBean tag : tagList) {
+            outputString.append(tag.getTag()).append(" ");
+        }
+
+        // There are not tags for this article
+        if (outputString.length() == 0) {
+            outputString.append("This article has no tags associated with it");
+        }
+
+        return outputString.toString().trim();
     }
 
-    public void setNewsArticle(ArticleBean newsArticle) {
-        this.newsArticle = newsArticle;
+    public ArticleBean getArticle() {
+        return article;
     }
 
-
+    public void setArticle(ArticleBean article) {
+        this.article = article;
+    }
 }

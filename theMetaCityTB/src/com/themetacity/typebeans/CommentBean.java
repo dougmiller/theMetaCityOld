@@ -9,14 +9,14 @@ public class CommentBean {
 
     private String name;            // The name of the author
     private String contact;         // How to contact the author, either email or webpage
-    private Date date;              // The date the comment was posted
+    private String dateTime;        // The dateTime the comment was posted
     private String comment;         // The actual comment
 
     // Default constructor
     public CommentBean() {
         name = "Michael Faraday";
         contact = "m.fa@ra.day";
-        date = new Date();
+        dateTime = new Date().toString();
         comment = "I luv Flux!";
     }
 
@@ -36,12 +36,12 @@ public class CommentBean {
         this.contact = contact;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime.toString();
     }
 
     public String getComment() {

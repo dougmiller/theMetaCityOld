@@ -3,52 +3,36 @@ package com.themetacity.tags;
 import com.themetacity.typebeans.ProfileBean;
 import com.themetacity.typebeans.TagBean;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
+import java.util.LinkedList;
 
 /**
  * This is the custom tag that formats a ProfileBean into readable format. It is called in a JSP page.
  */
-public class Profile extends TagSupport {
+public class Profile extends SimpleTagSupport {
 
     private ProfileBean userProfile = new ProfileBean();
 
-    /* The writer gives access to the page context so its possible to write output */
-    JspWriter out;
-
     /**
      * Formats the result of a profile bean into output for the page.
-     *
-     * @return SKIP_BODY
      */
-    public int doStartTag() {
+    public void doTag() throws JspException, IOException {
         // Must initialse this here as the context will not be available before this time.
-        out = pageContext.getOut();
+        JspWriter out = getJspContext().getOut();
         try {
             out.println("<div class=\"profile\">");
-            out.println("    <div class=\"profileheader\">");
-            out.println("        <div class=\"profilepiccontainer\">");
-            //out.println("            <img src=\"images/profileicons/" + userProfile.g + ".png\" alt=\"User profile picture\" />");
-            out.println("        </div>");
-            out.println("        <div class=\"profileinfo\">");
-            out.println("            <span class=\"pseudonym\">" + userProfile.getPseudonym() + "</span><br />");
-            out.println("            <span class=\"contact\">" + userProfile.getContact() + "</span><br />");
-            out.println("        </div>");
-            out.println("    </div>");
-            out.println("    <div>" + userProfile.getAbout() + "</div>");
-            out.println("    <div class=\"tags\">");
-            for (TagBean tag : userProfile.getTags()) {
-                out.print("" + tag.getTag() + "(" + tag.getNumTimesTagUsed() + ")");
-            }
-            out.println("    </div>");
+            out.println("    <h2>" + userProfile.getPseudonym() + "</h2>");
+            out.println("    <h2>" + userProfile.getContact() + "</h2>");
+            out.println("    " + userProfile.getAbout());
+            out.println("        <span class=\"tagsspan\">" + formatTags(userProfile.getTags()) + "</span>");
             out.println("</div>");
 
         } catch (IOException IOex) {
             System.out.println("There was an error.");
         }
-
-        return SKIP_BODY;
     }
 
     /**
@@ -56,6 +40,22 @@ public class Profile extends TagSupport {
      */
     public void release() {
         userProfile = null;
+    }
+
+    private String formatTags(LinkedList<TagBean> tagList) {
+        StringBuilder outputString = new StringBuilder();
+
+
+        for (TagBean tag : tagList) {
+            outputString.append(tag.getTag()).append("(").append(tag.getNumTimesTagUsed()).append(")").append(" ");
+        }
+
+        // There are not tagss for this user
+        if (outputString.length() == 0) {
+            outputString.append("This user has not posted any tags.");
+        }
+
+        return outputString.toString().trim();
     }
 
     public ProfileBean getUserProfile() {

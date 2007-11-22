@@ -10,7 +10,7 @@
 
     <!-- This must be set to the diectory that jsp-api.jar is in.
          Usually this is ${tomcat.home}/common/lib -->
-    <property name="lib.dir" value="/usr/local/tomcat/common/lib"/>
+    <property name="lib.dir" value="/usr/local/tomcat/lib"/>
 
     <!-- Cleanup old builds -->
     <target name="clean" description="Clean the compilation directory.">

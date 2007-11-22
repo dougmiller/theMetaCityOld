@@ -1,28 +1,28 @@
 package com.themetacity.typebeans;
 
-import java.sql.Time;
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * This is the bean that represents the an article.
  */
 public class ArticleBean {
 
-    private String title;       // The title of the article
-    private String news;        // The actual meat of the article
-    private String author;      // Who wrote the article
-    private String email;       // Contacting the author
-    private Date date;          // The date the artcle was pubished
-    private Time time;          // The time the article was published
+    private String title;                // The title of the article
+    private String articleText;          // The actual meat of the article
+    private String author;               // Who wrote the article
+    private String email;                // Contacting the author
+    private String dateTime;             // The dateTime/time the artcle was pubished
+    private LinkedList<TagBean> tags;    // A list of the tags that this article was published under
 
     // Default constructor
     public ArticleBean() {
         title = "At the edge of the universe...";
-        news = "...no news is good news.";
+        articleText = "...no articleText is good articleText.";
         author = "Flux Cap";
         email = "flux@theMetaCity.com";
-        date = new Date(0);
-        time = new Time(0);
+        dateTime = new Date().toString();
+        tags = new LinkedList<TagBean>();
     }
 
     public String getTitle() {
@@ -33,12 +33,12 @@ public class ArticleBean {
         this.title = title;
     }
 
-    public String getNews() {
-        return news;
+    public String getArticleText() {
+        return articleText;
     }
 
-    public void setNews(String news) {
-        this.news = news;
+    public void setArticleText(String articleText) {
+        this.articleText = articleText;
     }
 
     public String getAuthor() {
@@ -57,19 +57,19 @@ public class ArticleBean {
         this.email = email;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime.toString();
     }
 
-    public Time getTime() {
-        return time;
+    public LinkedList<TagBean> getTags() {
+        return tags;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setTags(LinkedList<TagBean> tags) {
+        this.tags = tags;
     }
 }
