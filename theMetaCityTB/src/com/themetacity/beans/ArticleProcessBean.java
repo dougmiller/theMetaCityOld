@@ -5,6 +5,7 @@ import com.themetacity.typebeans.ArticleBean;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.regex.Pattern;
 
 /**
  * This is the bean that process the articles from the
@@ -44,7 +45,7 @@ public class ArticleProcessBean {
         try {
             // Build the SQL query string
             // Execute the actual query and put the resusult into a ResultSet
-            ResultSet result = dbBean.executeQuery(validateAndBuildArticleQuery(year, month, day));
+            ResultSet result = dbBean.executeQuery(constructQuery(year, month, day, title));
 
             // For every row that is returned from the database query populate a bean and add
             // it to a linked list so that the JSTL can iterate over it.
@@ -66,6 +67,10 @@ public class ArticleProcessBean {
 
                 listOfBeans.add(articleBean);      //Add the now populated bean to the list to be returned for display
             }
+            // Close the Result Set
+            result.close();
+            // Close the database connection
+            dbBean.close();
         } catch (SQLException SQLEx) {
             System.out.println("You had an error with your SQL");
             System.out.println(SQLEx);
@@ -75,26 +80,31 @@ public class ArticleProcessBean {
     }
 
     /**
-     * This is the article validator and query builder. It takes input for selecting
-     * a particular date that an article might appear on and build a string to retrieve
-     * that information. If year is an empty string then the string is returned to
-     * select every entry from teh front page. ir the welcome page.
-     * If year is not empty but month is then the string is constructed for selecting all the
-     * articles from that year
-     * Simililarly if the month is not empty then the string will be for the month of that year
-     * Same for the day -> month -> year combination.
+     * Construct a query to select articles, given the inputs for year, month, day and/or title.
      * <p/>
-     * If the input is not a number then the input is reflectd to the next highest value.
-     * For example if the date input is not a number (eg: "/2007/11/Cow") then the input is disregarded
-     * and the query is constructed around the month (eg: "/2007/22/")
+     * Valid input combinations:
+     * /(No values given)
+     * /Year
+     * /Year/Title
+     * /Year/Month
+     * /Year/Month/Title
+     * /Year/Month/Day
+     * /Year/Month/Day/Title
+     * <p/>
+     * Any combination not in the list above will revert to the highest valid entry and disregard the remaining dates
+     * but keeping the title
+     * <p/>
+     * eg / will retuen a query to retuen every article
+     * eg /year/day will return a query constructed for /year
+     * eg /month/title will retuen a query for /title
      *
-     * @param year  that people are searching for.
-     * @param month that people are searching for, provided that year is not empty
-     * @param day   that people are searching for, providing month is not empty.
-     * @return the search query, constructed with the validated input to give the most chronologically
-     *         focused of entry results.
+     * @param year  is the year that the article was posted as a string
+     * @param month is the month that the article was posted as a string
+     * @param day   is the day that the article was posted as a string
+     * @param title is the title of the article
+     * @return a constructed query string for the particular article(s) given the inputs
      */
-    private String validateAndBuildArticleQuery(String year, String month, String day) {
+    public String constructQuery(String year, String month, String day, String title) {
         // Sanitize inputs;
         // First is the year
         try {
@@ -110,29 +120,60 @@ public class ArticleProcessBean {
             month = "";
         }
 
-        // Now check the day
+        // Sanitize the parameter input
         try {
             Integer.parseInt(day);
         } catch (NumberFormatException numFormatEx) {
             day = "";
         }
 
-        // If the year has been supplied but not the month or the day then retuen the articles of that year.
-        if (!year.equals("") && month.equals("")) {             // If year has been set, but not the month
+        // Check for year
+        if (!year.equals("")) {
+            // Check for month
+            if (!month.equals("")) {
+                // Cehck for day
+                if (!day.equals("")) {
+                    // Check if the title is set or not
+                    if (!title.equals("")) {
+                        return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " AND DAY(datetime) = " + day + " AND title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;";
+                    }
+                    // Year, month and day set
+                    return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " AND DAY(datetime) = " + day + " ORDER BY articleid DESC;";
+                }
+                // Check for title                
+                if (!title.equals("")) {
+                    return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " AND title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;";
+                }
+
+                // Year and month was set
+                return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " ORDER BY articleid DESC;";
+            }
+            // Check for title
+            if (!title.equals("")) {
+                return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;";
+            }
+            // Only year was set
             return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " ORDER BY articleid DESC;";
         }
-        // If the year and month have been supplied then return articles for only that year/month
-        else if (!year.equals("") && !month.equals("") && day.equals("")) {       // If year and month have been set
-            return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " ORDER BY articleid DESC;";
+        // Check for title
+        if (!title.equals("")) {
+            System.out.println("SELECT * FROM articles WHERE title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;");
+            return "SELECT * FROM articles WHERE title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;";
         }
-        // If all the arguments must have been set and so return the articles for a year/month/day
-        else
-        if (!year.equals("") && !month.equals("") && !day.equals("")) {      // If all three argument have been supplied
-            return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " AND DAY(datetime) = " + day + " ORDER BY articleid DESC;";
-        }
-        // Otherwise no date argument have been supplied return the latest articles
+        // Nothing set so return everything
         return "SELECT * FROM articles ORDER BY articleid DESC;";
+    }
 
+    /**
+     * @param inputString is the title from the parameters.
+     * @return a string that has the "-" removed and ready for searching.
+     */
+    public String extactTitle(String inputString) {
+        return inputString.replace("-", " ");
+    }
+
+    public Boolean titleRegex(String inputString) {
+        return Pattern.matches("((-?[\\w*])*)", inputString);
     }
 
     public String getYear() {

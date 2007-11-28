@@ -14,7 +14,6 @@ import java.util.LinkedList;
  */
 public class ProfileProcessBean {
 
-    ResultSet result = null;                       // The results fo the database call
     LinkedList<ProfileBean> listOfBeans = new LinkedList<ProfileBean>();    // The list of beans
 
     private String author;    // The username that can be passed in as an optional argument
@@ -38,7 +37,7 @@ public class ProfileProcessBean {
         try {
             // Use a statment that returns them all the users.
             // Arguments have not been implimented yet
-            result = dbaBean.executeQuery(buildProfileQuery());
+            ResultSet result = dbaBean.executeQuery(buildProfileQuery());
 
             while (result.next()) {
                 ProfileBean profileBean = new ProfileBean();              // Make a new bean to be populated
@@ -56,7 +55,7 @@ public class ProfileProcessBean {
 
                 listOfBeans.add(profileBean);                             // Add the newly populated profile to the list, it could be one or many, it doesnt really matter
             }
-            // Close the open databse connections
+            // Close the open database connections, returning it to the pool
             result.close();
             dbaBean.close();
         }
