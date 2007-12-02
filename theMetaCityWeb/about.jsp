@@ -16,7 +16,7 @@
         </c:forEach>
     </c:when>
     <c:otherwise>
-        <p>There is no user matching your query.</p>
+        <p>There is nobody here matching your query.</p>
     </c:otherwise>
 </c:choose>
 

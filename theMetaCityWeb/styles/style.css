@@ -1,14 +1,20 @@
 body {
-    background-color: #000000;
-    color: white;
-    font-size: 10pt; /*background-image: url('bigblack.jpg');*/
+    background-color: #468966;
+    color: #FFF0A5;
+    font-size: 10pt;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    margin: 0;
 }
 
 a {
-    color: orange;
+    color: #FFB03B;
+    text-decoration: none;
+}
+
+a :hover {
+    color: #8E2800;
     text-decoration: none;
 }
 
@@ -21,36 +27,68 @@ a {
 
 /* Header related classes */
 #header {
-    width: 100%;
-    margin: 50px 0px;
+    margin: 50px 0;
+    background-color: #B64926;
     height: 100px;
+}
+
+#header > div {
+    max-width: 720px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#header .headerleft {
+    margin-right: 90px;
+    padding: 10px;
+}
+
+#header .headerright {
+    float: right;
+    width: 80px;
+    border-left: dashed 1px #468966;
+    padding-left: 10px;
+}
+
+#header .headerright ul {
+    list-style: none;
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+.bannerTitle {
+    font-size: 24pt;
+}
+
+.bannerSubTitle {
+    font-size: 18pt;
 }
 
 /* Main content related classes */
 #maincontent {
-    margin-right: 310px;
+    margin-right: 260px;
 }
 
 /* Sidebar classes */
 #sidebar {
     float: right;
-    width: 300px;
+    width: 240px;
 }
 
 /* Select the direct div decendants of the sidebar, that is every section on the sidebar */
 #sidebar > div {
-    border: 1px black solid;
     margin-bottom: 10px;
 }
 
-/* Select the first child of the section div, the title <h2>*/
-#sidebar > div :first-child {
-    border-bottom: 3px black double;
+/* Select the title <h2>*/
+#sidebar > div h2 {
 }
 
 /* The unorded lists used for link boxes */
 #sidebar ul {
     list-style: none;
+    padding-left: 1em;
+    text-indent: -1em;
 }
 
 /* Footer related classes */

@@ -5,6 +5,7 @@
     <jsp:setProperty name="ArticleProcessBean" property="year" value="${param.year}"/>
     <jsp:setProperty name="ArticleProcessBean" property="month" value="${param.month}"/>
     <jsp:setProperty name="ArticleProcessBean" property="day" value="${param.day}"/>
+    <jsp:setProperty name="ArticleProcessBean" property="title" value="${param.title}"/>
 </jsp:useBean>
 <jsp:include page="/WEB-INF/jspf/header.jspf"/>
 

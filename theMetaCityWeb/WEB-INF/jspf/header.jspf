@@ -4,38 +4,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="styles/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="http://localhost/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <title>theMetaCity.com</title>
 </head>
 
 <body>
 
 <div id="header">
-    <span class="bannerTitle">The MetaCity.com</span><br/>
-    <span class="bannerSubTitle">musings on life, culture and the world around us</span>
+    <div>
+        <div class="headerright">
+            <ul>
+                <li>Usability</li>
+                <li>HTML/CSS</li>
+                <li>Java</li>
+                <li>Python</li>
+                <li>Joomla</li>
+            </ul>
+        </div>
+        <div class="headerleft">
+            <span class="bannerTitle"><a href="/">The MetaCity.com</a></span><br/>
+            <span class="bannerSubTitle">portfolio of Douglas Miller, Interaction Designer</span>
+        </div>
+    </div>
 </div>
 <div id="container">
     <!-- The right nav div -->
     <div id="sidebar">
-
         <!-- About box -->
         <div>
-            <h2>About</h2>
+            <h2><a href="">About</a></h2>
 
-            <p>This is the about me box. Who I am, what I do and what I am about. Let me do things for you for
-                money.</p>
+            <p>I am an Interaction Designer from Brisbane, Australia.</p>
         </div>
 
         <!-- The projects div -->
         <div>
             <h2>Projects</h2>
             <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li><a href="#">pyMarshmellow Dual</a></li>
+                <li><a href="#">MSN Announcer</a></li>
             </ul>
         </div>
+
 
         <!-- The Cool Links (tm) div -->
         <div>
@@ -43,11 +53,18 @@
             <ul>
                 <li><a href="#">Cool link 1</a></li>
                 <li><a href="#">A Second Cool link</a></li>
-                <li></li>
-                <li></li>
             </ul>
         </div>
 
+        <!-- Site navigation etc -->
+        <div>
+            <h2>Site</h2>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.jsp">About</a></li>
+                <li><a href="/tags.jsp">Tags</a></li>
+            </ul>
+        </div>
         <!-- End of the sidebar -->
     </div>
 

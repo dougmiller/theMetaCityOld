@@ -5,7 +5,7 @@
         "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
 
 <urlrewrite>
-
+    <!-- About page rules -->
     <rule match-type="wildcard">
         <from>/about/*</from>
         <to>/about.jsp?author=$1</to>
@@ -14,6 +14,44 @@
     <rule match-type="wildcard">
         <from>/about</from>
         <to>/about.jsp</to>
+    </rule>
+
+    <!-- Index page/FP articles filter-->
+    <!-- Date criteia -->
+    <rule match-type="regex">
+        <from>^/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})$</from>
+        <to>/index.jsp?year=$1&amp;month=$2&amp;day=$3</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/([0-9]{4})/([0-9]{1,2})$</from>
+        <to>/index.jsp?year=$1&amp;month=$2</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/([0-9]{4})$</from>
+        <to>/index.jsp?year=$1</to>
+    </rule>
+
+    <!-- Date/Title criteia -->
+    <rule match-type="regex">
+        <from>^/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/((-?[\w*])*)$</from>
+        <to>/index.jsp?year=$1&amp;month=$2&amp;day=$3&amp;title=$4</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/([0-9]{4})/([0-9]{1,2})/((-?[\w*])*)$</from>
+        <to>/index.jsp?year=$1&amp;month=$2&amp;title=$3</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/([0-9]{4})/((-?[\w*])*)$</from>
+        <to>/index.jsp?year=$1&amp;title=$2</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/((-?[\w*])*)$</from>
+        <to>/index.jsp?&amp;title=$1</to>
+    </rule>
+
+    <rule match-type="regex">
+        <from>^/$</from>
+        <to>/index.jsp</to>
     </rule>
 
 </urlrewrite>
