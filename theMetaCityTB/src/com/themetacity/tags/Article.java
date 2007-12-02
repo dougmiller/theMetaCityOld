@@ -30,13 +30,14 @@ public class Article extends SimpleTagSupport {
 
         try {
             out.println("    <div class=\"newsarticle\">");
-            out.println("        <h2><a href=\"\">" + article.getTitle() + "</a></h2>");
+            out.println("        <h2><a href=\"/" + formatTitle(article.getTitle()) + "\">" + article.getTitle() + "</a></h2>");
             out.println("        " + article.getArticleText());
             out.println("        <span>Posted on: " + article.getDateTime() + "</span><br />");
             out.println("        <span class=\"tagsspan\">Posted under: " + formatTags(article.getTags()) + "</span>");
             out.println("    </div>");
 
         } catch (IOException IOEx) {
+            System.out.println("xcv");
             System.out.print("There was an error with the article rendering");
             System.out.print(IOEx);
         }
@@ -51,7 +52,9 @@ public class Article extends SimpleTagSupport {
         StringBuilder outputString = new StringBuilder();
 
         for (TagBean tag : tagList) {
-            outputString.append(tag.getTag()).append(" ");
+            outputString.append("<a href=\"/tags/").append(tag.getTag()).append("\">");
+            outputString.append(tag.getTag());
+            outputString.append("</a> ");
         }
 
         // There are not tags for this article
@@ -60,6 +63,10 @@ public class Article extends SimpleTagSupport {
         }
 
         return outputString.toString().trim();
+    }
+
+    private String formatTitle(String title) {
+        return title.replace(" ", "-");
     }
 
     public ArticleBean getArticle() {

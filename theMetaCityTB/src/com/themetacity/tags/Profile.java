@@ -45,11 +45,9 @@ public class Profile extends SimpleTagSupport {
     private String formatTags(LinkedList<TagBean> tagList) {
         StringBuilder outputString = new StringBuilder();
 
-
         for (TagBean tag : tagList) {
             outputString.append(tag.getTag()).append("(").append(tag.getNumTimesTagUsed()).append(")").append(" ");
         }
-
         // There are not tagss for this user
         if (outputString.length() == 0) {
             outputString.append("This user has not posted any tags.");

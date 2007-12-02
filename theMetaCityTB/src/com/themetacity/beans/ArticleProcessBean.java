@@ -24,6 +24,8 @@ public class ArticleProcessBean {
     private String title;
 
     public ArticleProcessBean() {
+        // Set these explicitly to "" so that the string comparisons below used to construct
+        // SQL queries will work
         year = "";
         month = "";
         day = "";
@@ -46,25 +48,20 @@ public class ArticleProcessBean {
             // Build the SQL query string
             // Execute the actual query and put the resusult into a ResultSet
             ResultSet result = dbBean.executeQuery(constructQuery(year, month, day, title));
-
             // For every row that is returned from the database query populate a bean and add
             // it to a linked list so that the JSTL can iterate over it.
             while (result.next()) {
-
                 // Make a new ArticleBean that represents one article
                 ArticleBean articleBean = new ArticleBean();
-
                 // Set the properties of the bean
                 articleBean.setAuthor(result.getString("author"));
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setArticleText(result.getString("articletext"));
                 articleBean.setDateTime(result.getDate("datetime"));
-
                 // Process this articles tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setArticleID(result.getInt("articleID"));     // Set the user in the TagProcessBean
-                articleBean.setTags(tagProcessBean.getTags());               // Assign the results to the bean
-
+                tagProcessBean.setArticleID("" + result.getInt("articleID"));     // Set the user in the TagProcessBean *cast to String*
+                articleBean.setTags(tagProcessBean.getTags());                    // Assign the results to the bean
                 listOfBeans.add(articleBean);      //Add the now populated bean to the list to be returned for display
             }
             // Close the Result Set
@@ -105,7 +102,7 @@ public class ArticleProcessBean {
      * @return a constructed query string for the particular article(s) given the inputs
      */
     public String constructQuery(String year, String month, String day, String title) {
-        // Sanitize inputs;
+        // Sanitize inputs; Probably a better way to do this and ot doesnt offerer complete coverage
         // First is the year
         try {
             Integer.parseInt(year);
@@ -157,7 +154,6 @@ public class ArticleProcessBean {
         }
         // Check for title
         if (!title.equals("")) {
-            System.out.println("SELECT * FROM articles WHERE title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;");
             return "SELECT * FROM articles WHERE title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;";
         }
         // Nothing set so return everything

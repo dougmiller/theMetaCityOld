@@ -37,7 +37,7 @@ public class ProfileProcessBean {
         try {
             // Use a statment that returns them all the users.
             // Arguments have not been implimented yet
-            ResultSet result = dbaBean.executeQuery(buildProfileQuery());
+            ResultSet result = dbaBean.executeQuery(buildProfileQuery(author));
 
             while (result.next()) {
                 ProfileBean profileBean = new ProfileBean();              // Make a new bean to be populated
@@ -69,17 +69,17 @@ public class ProfileProcessBean {
     /**
      * Builds the database query for profiles
      *
+     * @param author is the user to select from.
      * @return String of the statment ready to execute
      */
-    private String buildProfileQuery() {
-        String query;
+    public String buildProfileQuery(String author) {
+        // If the author is set then return a query string for selecting only that author
         if (author.equals("")) {
-            query = "SELECT * FROM users;";
-        } else {
-            query = "SELECT * FROM users WHERE username = '" + author + "';";
+            return "SELECT * FROM users;";
         }
 
-        return query;
+        // Otherwise select everyone
+        return "SELECT * FROM users WHERE username = '" + author + "';";
     }
 
     public String getAuthor() {

@@ -17,10 +17,14 @@ public class TagProcessBean {
 
     // The possible inputs used to construct the database call
     String user;
-    int articleID;
+    String articleID;
 
     // Zero argment constructor
     public TagProcessBean() {
+        // Set these explicitly to "" so that the string comparisons below used to construct
+        // SQL queries will work
+        user = "";
+        articleID = "";
     }
 
     /**
@@ -31,20 +35,8 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-
         DatabaseBean dbaBean = new DatabaseBean();
-
-        String query = null;
-
-        /* Check the input to determine how to construct the query tag */
-        if (user != null) {                              // If the input is a username
-            query = constructUserTagQuery();
-        } else if (articleID != 0) {                    // If the input is an article id num
-            query = constructArticleTagQuery();
-        }
-
-        ResultSet result = dbaBean.executeQuery(query);
-
+        ResultSet result = dbaBean.executeQuery(constructTagQuery(user, articleID));
         try {
             while (result.next()) {
                 TagBean tagBean = new TagBean();
@@ -54,10 +46,14 @@ public class TagProcessBean {
 
                 listOfTags.add(tagBean);
             }
+            // Close the result
+            result.close();
+            // Close the database connection and return it to the pool
+            dbaBean.close();
+
         } catch (SQLException SQLEx) {
             System.out.println("some problem with the SQL");
         }
-        dbaBean.close();
 
         return listOfTags;
     }
@@ -65,20 +61,24 @@ public class TagProcessBean {
     /**
      * Constructs the query used to find the tags used by a user for their profile page
      *
+     * @param user    is the username to sort tag for.
+     * @param article is the article id to sort tags for
      * @return SQL query string, the fully built string.
      */
-    public String constructUserTagQuery() {
+
+    public String constructTagQuery(String user, String article) {
+        // If the article is set then build and retun a query for them
+        if (!article.equals("")) {
+            return "SELECT tag, count(tag) as timesused " +
+                    "FROM articles, articletags " +
+                    "WHERE articles.articleid = '" + article + "' " +
+                    "AND articles.articleid = articletags.articleid " +
+                    "GROUP BY tag;";
+        }
+        // Otherwise build and return a query for the user argument
         return "SELECT tag, count(tag) as timesused " +
                 "FROM articles, articletags " +
                 "WHERE articles.author = '" + user + "' " +
-                "AND articles.articleid = articletags.articleid " +
-                "GROUP BY tag;";
-    }
-
-    public String constructArticleTagQuery() {
-        return "SELECT tag, count(tag) as timesused " +
-                "FROM articles, articletags " +
-                "WHERE articles.articleid = " + articleID + " " +
                 "AND articles.articleid = articletags.articleid " +
                 "GROUP BY tag;";
     }
@@ -91,11 +91,11 @@ public class TagProcessBean {
         this.user = user;
     }
 
-    public int getArticleID() {
+    public String getArticleID() {
         return articleID;
     }
 
-    public void setArticleID(int articleID) {
+    public void setArticleID(String articleID) {
         this.articleID = articleID;
     }
 }
