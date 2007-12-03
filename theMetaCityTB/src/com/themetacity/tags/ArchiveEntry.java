@@ -23,9 +23,9 @@ public class ArchiveEntry extends SimpleTagSupport {
             out.println("<div class=\"\">");
             out.println("<a href=\"" + buildTitleLink(archiveEntry.getTitle()) + "\" />" + archiveEntry.getTitle() + "</a>");
             out.println("</div>");
-        } catch (IOException IOEx) {
+        } catch (IOException IObEx) {
             System.out.print("There was an error with the article rendering");
-            System.out.print(IOEx);
+            System.out.print(IObEx);
         }
     }
 
