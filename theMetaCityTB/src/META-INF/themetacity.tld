@@ -39,6 +39,20 @@
         </attribute>
     </tag>
 
+    <!-- Archive tag -->
+    <tag>
+        <name>archive</name>
+        <tag-class>com.themetacity.tags.ArchiveEntry</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>archiveEntry</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.ArchiveEntryBean</type>
+        </attribute>
+    </tag>
+
     <!-- Profile tag -->
     <tag>
         <name>profile</name>

@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
  */
 public class ArticleProcessBean {
 
-    private LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();    // The list of populated beans.
 
     // Selectors for the the article
     private String year;
@@ -43,6 +42,7 @@ public class ArticleProcessBean {
      */
     public LinkedList getArticles() {
         DatabaseBean dbBean = new DatabaseBean();
+        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();       // The list of populated beans.
 
         try {
             // Build the SQL query string
@@ -169,7 +169,7 @@ public class ArticleProcessBean {
     }
 
     public Boolean titleRegex(String inputString) {
-        return Pattern.matches("((-?[\\w*])*)", inputString);
+        return Pattern.matches("([\\w*](-?[\\w*])*)", inputString);
     }
 
     public String getYear() {

@@ -37,7 +37,6 @@ public class Article extends SimpleTagSupport {
             out.println("    </div>");
 
         } catch (IOException IOEx) {
-            System.out.println("xcv");
             System.out.print("There was an error with the article rendering");
             System.out.print(IOEx);
         }
