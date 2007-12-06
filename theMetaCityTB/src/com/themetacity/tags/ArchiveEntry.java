@@ -20,12 +20,10 @@ public class ArchiveEntry extends SimpleTagSupport {
         JspWriter out = jspContext.getOut();
 
         try {
-            out.println("<div class=\"\">");
-            out.println("<a href=\"" + buildTitleLink(archiveEntry.getTitle()) + "\" />" + archiveEntry.getTitle() + "</a>");
-            out.println("</div>");
-        } catch (IOException IObEx) {
+            out.println("<div class=\"archiveEntry\">" + buildTtitle(archiveEntry.getTitle()) + " <span>" + buildDateLink(archiveEntry.getDateTime()) + "</span></div>");
+        } catch (IOException IOEx) {
             System.out.print("There was an error with the article rendering");
-            System.out.print(IObEx);
+            System.out.print(IOEx);
         }
     }
 
@@ -34,8 +32,36 @@ public class ArchiveEntry extends SimpleTagSupport {
         archiveEntry = null;
     }
 
-    public String buildTitleLink(String toBuild){
-        return toBuild.replace(" ", "-");
+    /**
+     * Build the article title A and associated href
+     * @param title is the unformatted tatle, straight from the database
+     * @return an A string in href
+     */
+    public String buildTtitle(String title){
+        return "<a href=\"/" + buildTitleLink(title) + "\">" + title + "</a>";
+    }
+
+    /**
+     * This function will take a database encoded title and turn it into a hyphen/web encoded title
+     *
+     * @param titleToBuild is the string to encode with hypens
+     * @return a hypen encoded string
+     */
+    public String buildTitleLink(String titleToBuild) {
+        return titleToBuild.replace(" ", "-");
+    }
+
+    /**
+     * @param dateToBuild is the date string to convert and do operations on.
+     * @return a string with the dates seperated out
+     */
+    public String buildDateLink(String dateToBuild) {
+        StringBuilder outpuString = new StringBuilder();
+
+        String[] dateSplit = dateToBuild.split("-");
+                         // |-- Start year                                                         end year --|                       |-- Start month                                                                                     end of month --|                       |-- Start day                                                                                                                             end day --|
+        outpuString.append("<a href=\"").append(dateSplit[0]).append("\" />").append(dateSplit[0]).append("</a>").append("-").append("<a href=\"").append(dateSplit[0]).append("/").append(dateSplit[1]).append("\" />").append(dateSplit[1]).append("</a>").append("-").append("<a href=\"").append(dateSplit[0]).append("/").append(dateSplit[1]).append("/").append(dateSplit[2]).append("\" />").append(dateSplit[2]).append("</a>");
+        return outpuString.toString();
     }
 
     public ArchiveEntryBean getArchiveEntry() {

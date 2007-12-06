@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
  */
 public class ArticleProcessBean {
 
-
     // Selectors for the the article
     private String year;
     private String month;
@@ -24,7 +23,7 @@ public class ArticleProcessBean {
 
     public ArticleProcessBean() {
         // Set these explicitly to "" so that the string comparisons below used to construct
-        // SQL queries will work
+        // the SQL queries will work
         year = "";
         month = "";
         day = "";
@@ -40,7 +39,7 @@ public class ArticleProcessBean {
      *
      * @return A linked list of populated NewsArticelBeans
      */
-    public LinkedList getArticles() {
+    public LinkedList<ArticleBean> getArticles() {
         DatabaseBean dbBean = new DatabaseBean();
         LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();       // The list of populated beans.
 

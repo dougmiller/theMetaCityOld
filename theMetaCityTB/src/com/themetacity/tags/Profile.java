@@ -46,7 +46,7 @@ public class Profile extends SimpleTagSupport {
         StringBuilder outputString = new StringBuilder();
 
         for (TagBean tag : tagList) {
-            outputString.append(tag.getTag()).append("(").append(tag.getNumTimesTagUsed()).append(")").append(" ");
+            outputString.append("<a href=\"/tags.jsp?tag=").append(tag.getTag()).append("\">").append(tag.getTag()).append("(").append(tag.getNumTimesTagUsed()).append(")").append("</a> ");
         }
         // There are not tagss for this user
         if (outputString.length() == 0) {

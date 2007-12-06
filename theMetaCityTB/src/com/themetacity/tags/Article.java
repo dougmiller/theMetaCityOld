@@ -25,8 +25,7 @@ public class Article extends SimpleTagSupport {
     public void doTag() {
         // * Initialise the context here as will not be valid in the container previously. *
         // The writer gives access to the page context so its possible to write output
-        JspContext jspContext = getJspContext();
-        JspWriter out = jspContext.getOut();
+        JspWriter out = getJspContext().getOut();
 
         try {
             out.println("    <div class=\"newsarticle\">");
@@ -51,7 +50,7 @@ public class Article extends SimpleTagSupport {
         StringBuilder outputString = new StringBuilder();
 
         for (TagBean tag : tagList) {
-            outputString.append("<a href=\"/tags/").append(tag.getTag()).append("\">");
+            outputString.append("<a href=\"/tags.jsp?tag=").append(tag.getTag()).append("\">");
             outputString.append(tag.getTag());
             outputString.append("</a> ");
         }

@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 /**
- * This class processes tags
- * It makes requests to the database and returns a linkedlist of the results
+ * This class processes tags for articles and profiles. It is not the search.
+ * It makes requests to the database and returns a linkedlist of the results.
  *
+ * @see TagSearchProcessBean for more infor on search.
  * @see DatabaseBean
  */
 public class TagProcessBean {
@@ -63,7 +64,7 @@ public class TagProcessBean {
      *
      * @param user    is the username to sort tag for.
      * @param article is the article id to sort tags for
-     * @return SQL query string, the fully built string.
+     * @return SQL query string, the fully built string. Default is for every tag if no paramater is set
      */
 
     public String constructTagQuery(String user, String article) {
@@ -75,11 +76,17 @@ public class TagProcessBean {
                     "AND articles.articleid = articletags.articleid " +
                     "GROUP BY tag;";
         }
-        // Otherwise build and return a query for the user argument
+        if (!user.equals("")) {
+            return "SELECT tag, count(tag) as timesused " +
+                    "FROM articles, articletags " +
+                    "WHERE articles.author = '" + user + "' " +
+                    "AND articles.articleid = articletags.articleid " +
+                    "GROUP BY tag;";
+        }
+        // Otherwise retuen every tag if not paramter has been set
         return "SELECT tag, count(tag) as timesused " +
                 "FROM articles, articletags " +
-                "WHERE articles.author = '" + user + "' " +
-                "AND articles.articleid = articletags.articleid " +
+                "WHERE articles.articleid = articletags.articleid " +
                 "GROUP BY tag;";
     }
 

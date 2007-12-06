@@ -68,6 +68,34 @@
         </attribute>
     </tag>
 
+    <!-- Important Notice tag -->
+    <tag>
+        <name>notice</name>
+        <tag-class>com.themetacity.tags.ImportantNotice</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>importantNotice</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.ImportantNoticeBean</type>
+        </attribute>
+    </tag>
+
+    <!-- the AllTags tag -->
+    <tag>
+        <name>allTags</name>
+        <tag-class>com.themetacity.tags.AllTags</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>tagsList</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.LinkedList</type>
+        </attribute>
+    </tag>
+
     <!-- Quote tag -->
     <tag>
         <name>quote</name>
