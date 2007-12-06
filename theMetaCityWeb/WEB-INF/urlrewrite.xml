@@ -6,15 +6,65 @@
 
 <urlrewrite>
     <!-- About page rules -->
-    <rule match-type="wildcard">
-        <from>/about/*</from>
+    <rule match-type="regex">
+        <from>/about/([\w*](-?[\w*])*)</from>
         <to>/about.jsp?author=$1</to>
     </rule>
 
-    <rule match-type="wildcard">
-        <from>/about</from>
+    <rule match-type="regex">
+        <from>^/about$</from>
         <to>/about.jsp</to>
     </rule>
+
+    <!-- Tag rules -->
+    <rule match-type="regex">
+        <from>^/tags/([\w*](-?[\w*])*)$</from>
+        <to>/tags.jsp?tag=$1</to>
+    </rule>
+
+    <rule match-type="regex">
+        <from>^/tags$</from>
+        <to>/tags.jsp</to>
+    </rule>
+
+    <!-- Archive rules-->
+    <!-- Date criteia -->
+    <rule match-type="regex">
+        <from>^/archive/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})$</from>
+        <to>/archive.jsp?year=$1&amp;month=$2&amp;day=$3</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/archive/([0-9]{4})/([0-9]{1,2})$</from>
+        <to>/archive.jsp?year=$1&amp;month=$2</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/archive/([0-9]{4})$</from>
+        <to>/archive.jsp?year=$1</to>
+    </rule>
+
+    <!-- Date/Title criteia -->
+    <rule match-type="regex">
+        <from>^/archive/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([\w*](-?[\w*])*)$</from>
+        <to>/archive.jsp?year=$1&amp;month=$2&amp;day=$3&amp;title=$4</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/archive/([0-9]{4})/([0-9]{1,2})/([\w*](-?[\w*])*)$</from>
+        <to>/archive.jsp?year=$1&amp;month=$2&amp;title=$3</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/archive/([0-9]{4})/([\w*](-?[\w*])*)$</from>
+        <to>/archive.jsp?year=$1&amp;title=$2</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/archive/([\w*](-?[\w*])*)$</from>
+        <to>/archive.jsp?&amp;title=$1</to>
+    </rule>
+
+    <rule match-type="regex">
+        <from>^/archive$</from>
+        <to>/archive.jsp</to>
+    </rule>
+
 
     <!-- Index page/FP articles filter-->
     <!-- Date criteia -->
@@ -33,19 +83,19 @@
 
     <!-- Date/Title criteia -->
     <rule match-type="regex">
-        <from>^/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/((-?[\w*])*)$</from>
+        <from>^/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([\w*](-?[\w*])*)$</from>
         <to>/index.jsp?year=$1&amp;month=$2&amp;day=$3&amp;title=$4</to>
     </rule>
     <rule match-type="regex">
-        <from>^/([0-9]{4})/([0-9]{1,2})/((-?[\w*])*)$</from>
+        <from>^/([0-9]{4})/([0-9]{1,2})/([\w*](-?[\w*])*)$</from>
         <to>/index.jsp?year=$1&amp;month=$2&amp;title=$3</to>
     </rule>
     <rule match-type="regex">
-        <from>^/([0-9]{4})/((-?[\w*])*)$</from>
+        <from>^/([0-9]{4})/([\w*](-?[\w*])*)$</from>
         <to>/index.jsp?year=$1&amp;title=$2</to>
     </rule>
     <rule match-type="regex">
-        <from>^/((-?[\w*])*)$</from>
+        <from>^/([\w*](-?[\w*])*)$</from>
         <to>/index.jsp?&amp;title=$1</to>
     </rule>
 
@@ -53,5 +103,104 @@
         <from>^/$</from>
         <to>/index.jsp</to>
     </rule>
+
+    <!-- Outbound rules -->
+    <!-- About -->
+    <outbound-rule>
+        <from>^about.jsp?author=([\w]*)$</from>
+        <to>about/$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^about.jsp$</from>
+        <to>about</to>
+    </outbound-rule>
+
+    <!-- Tag rules -->
+    <outbound-rule>
+        <from>^tags.jsp?tag=([\w]*)$</from>
+        <to>tags/$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^tags.jsp$</from>
+        <to>tags</to>
+    </outbound-rule>
+
+    <!-- Archive rules -->
+    <!-- Date only -->
+    <outbound-rule>
+        <from>^archive.jsp?year=([0-9]{4})&amp;month=([0-9]{1,2})&amp;day=([0-9]{1,2})$</from>
+        <to>archive/$1/$2/$3</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^archive.jsp?year=([0-9]{4})&amp;month=([0-9]{1,2})$</from>
+        <to>archive/$1/$2</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^archive.jsp?year=([0-9]{4})$</from>
+        <to>archive/$1</to>
+    </outbound-rule>
+
+    <!-- Date and title -->
+    <outbound-rule>
+        <from>^archive.jsp?year=([0-9]{4})&amp;month=([0-9]{1,2})&amp;day=([0-9]{1,2})&amp;title=([\w*](-?[\w*])*)$
+        </from>
+        <to>archive/$1/$2/$3/$4</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^archive.jsp?year=([0-9]{4})&amp;month=([0-9]{1,2})&amp;title=([\w*](-?[\w*])*)$</from>
+        <to>archive/$1/$2/$3</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^archive.jsp?year=([0-9]{4})title=([\w*](-?[\w*])*)$</from>
+        <to>archive/$1/$2</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^archive.jsp?title=([\w*](-?[\w*])*)$</from>
+        <to>archive/$1</to>
+    </outbound-rule>
+
+    <outbound-rule>
+        <from>^archive.jsp$</from>
+        <to>archive</to>
+    </outbound-rule>
+
+    <!-- Index rules -->
+    <!-- Date only -->
+    <outbound-rule>
+        <from>^index.jsp?year=([0-9]{4})&amp;month=([0-9]{1,2})&amp;day=([0-9]{1,2})$</from>
+        <to>index/$1/$2/$3</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^index.jsp?year=([0-9]{4})&amp;month=([0-9]{1,2})$</from>
+        <to>index/$1/$2</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^index.jsp?year=([0-9]{4})$</from>
+        <to>index/$1</to>
+    </outbound-rule>
+
+    <!-- Date and title -->
+    <outbound-rule>
+        <from>^index.jsp?year=([0-9]{4})&amp;month=([0-9]{1,2})&amp;day=([0-9]{1,2})&amp;title=([\w*](-?[\w*])*)$
+        </from>
+        <to>index/$1/$2/$3/$4</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^index.jsp?year=([0-9]{4})&amp;month=([0-9]{1,2})&amp;title=([\w*](-?[\w*])*)$</from>
+        <to>index/$1/$2/$3</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^index.jsp?year=([0-9]{4})title=([\w*](-?[\w*])*)$</from>
+        <to>index/$1/$2</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^index.jsp?title=([\w*](-?[\w*])*)$</from>
+        <to>index/$1</to>
+    </outbound-rule>
+
+    <outbound-rule>
+        <from>^index.jsp$</from>
+        <to>/</to>
+    </outbound-rule>
 
 </urlrewrite>

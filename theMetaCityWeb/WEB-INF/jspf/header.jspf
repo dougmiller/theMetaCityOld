@@ -3,8 +3,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="http://localhost/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-1"/>
+    <link href="/theMetaCity/styles/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <title>theMetaCity.com</title>
 </head>
 
@@ -32,8 +32,7 @@
     <div id="sidebar">
         <!-- About box -->
         <div>
-            <h2><a href="">About</a></h2>
-
+            <h2><a href="/about.jsp">About</a></h2>
             <p>I am an Interaction Designer from Brisbane, Australia.</p>
         </div>
 
@@ -41,28 +40,28 @@
         <div>
             <h2>Projects</h2>
             <ul>
-                <li><a href="#">pyMarshmellow Dual</a></li>
-                <li><a href="#">MSN Announcer</a></li>
+                <!--<li><a href="#">pyMarshmellow Dual</a></li>-->
+                <!--<li><a href="#">MSN Announcer</a></li>-->
             </ul>
         </div>
-
 
         <!-- The Cool Links (tm) div -->
         <div>
             <h2>Cool Links</h2>
             <ul>
-                <li><a href="#">Cool link 1</a></li>
-                <li><a href="#">A Second Cool link</a></li>
+                <!--<li><a href="#">Cool link 1</a></li>-->
+                <!--<li><a href="#">A Second Cool link</a></li>-->
             </ul>
         </div>
-
+        
         <!-- Site navigation etc -->
         <div>
             <h2>Site</h2>
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/about.jsp">About</a></li>
-                <li><a href="/tags.jsp">Tags</a></li>
+                <li><a href="/tags.jsp">Tags (New)</a></li>
+                <li><a href="/archive.jsp">Archive</a></li>
             </ul>
         </div>
         <!-- End of the sidebar -->
