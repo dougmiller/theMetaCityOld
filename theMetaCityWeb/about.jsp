@@ -5,7 +5,7 @@
     <jsp:setProperty name="ProfileProcessBean" property="author" value="${param.author}"/>
 </jsp:useBean>
 
-<jsp:include page="/WEB-INF/jspf/header.jspf"/>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
 
 <c:set var="profileList" value="${ProfileProcessBean.profiles}" scope="page"/>
 

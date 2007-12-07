@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isErrorPage="true" %>
 
-<jsp:include page="/WEB-INF/jspf/header.jspf"/>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
 
 <span class="errorNumber"><c:out value="${param.error}"/></span>
 

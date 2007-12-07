@@ -5,7 +5,7 @@
     <jsp:setProperty name="TagSearchProcessBean" property="tag" value="${param.tag}"/>
 </jsp:useBean>
 
-<jsp:include page="/WEB-INF/jspf/header.jspf"/>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
 <!-- Display all the tags used on the site -->
 
 <c:set var="resultList" value="${TagSearchProcessBean.articles}" scope="page"/>
@@ -13,6 +13,7 @@
 <c:choose>
     <%-- Check if a tag argument was given --%>
     <c:when test="${not empty resultList}">
+        <p>These are the articles posted under the tag: ${param.tag}</p>
         <c:forEach var="finalTagList" items="${resultList}">
             <tmc:archive archiveEntry="${finalTagList}"/>
         </c:forEach>

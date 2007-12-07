@@ -19,6 +19,7 @@
                 <li>Java</li>
                 <li>Python</li>
                 <li>Joomla</li>
+                <li>PHP support</li>
             </ul>
         </div>
         <div class="headerleft">
@@ -32,7 +33,7 @@
     <div id="sidebar">
         <!-- About box -->
         <div>
-            <h2><a href="/about.jsp">About</a></h2>
+            <h2><a href="/<c:url value="about.jsp"/>">About</a></h2>
             <p>I am an Interaction Designer from Brisbane, Australia.</p>
         </div>
 
@@ -59,9 +60,9 @@
             <h2>Site</h2>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/about.jsp">About</a></li>
-                <li><a href="/tags.jsp">Tags (New)</a></li>
-                <li><a href="/archive.jsp">Archive</a></li>
+                <li><a href="/<c:url value="about.jsp"/>">About</a></li>
+                <li><a href="/<c:url value="tags.jsp"/>">Tags (New)</a></li>
+                <li><a href="/<c:url value="archive.jsp"/>">Archive</a></li>
             </ul>
         </div>
         <!-- End of the sidebar -->

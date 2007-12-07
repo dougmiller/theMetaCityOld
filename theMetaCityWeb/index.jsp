@@ -12,10 +12,13 @@
 
 <c:set var="articleResultList" value="${ArticleProcessBean.articles}"/>
 
-<jsp:include page="/WEB-INF/jspf/header.jspf"/>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
+
 <c:forEach var="noticeBean" items="${ImportantNoticeBean.notices}">
     <tmc:notice importantNotice="${noticeBean}"/>
 </c:forEach>
+
+<tmc:quote quoteAuthor="Douglas Miller">Nullam id justo. Nam ipsum turpis, sodales vel, imperdiet vitae, aliquam at, dui.</tmc:quote>
 
 <c:choose>
     <c:when test="${not empty articleResultList}">
@@ -28,6 +31,5 @@
         <p>Perhaps <a href="/<c:url value="archive.jsp"/>">you could try the archive</a> or <a href="/<c:url value="tags.jsp"/>">search via catagory tags.</a></p>
     </c:otherwise>
 </c:choose>
-
 
 <jsp:include page="/WEB-INF/jspf/footer.jspf"/>

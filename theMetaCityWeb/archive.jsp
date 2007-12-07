@@ -8,7 +8,7 @@
     <jsp:setProperty name="ArchiveProcessBean" property="title" value="${param.title}"/>
 </jsp:useBean>
 
-<jsp:include page="/WEB-INF/jspf/header.jspf"/>
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
 
 <c:forEach var="archiveList" items="${ArchiveProcessBean.archive}">
     <tmc:archive archiveEntry="${archiveList}"/>

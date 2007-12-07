@@ -7,61 +7,61 @@
 <urlrewrite>
     <!-- About page rules -->
     <rule match-type="regex">
-        <from>/about/([\w*](-?[\w*])*)</from>
+        <from>/about/([\w*](-?[\w*])*)/?</from>
         <to>/about.jsp?author=$1</to>
     </rule>
 
     <rule match-type="regex">
-        <from>^/about$</from>
+        <from>^/about/?$</from>
         <to>/about.jsp</to>
     </rule>
 
     <!-- Tag rules -->
     <rule match-type="regex">
-        <from>^/tags/([\w*](-?[\w*])*)$</from>
+        <from>^/tags/([\w*](-?[\w*])*)/?$</from>
         <to>/tags.jsp?tag=$1</to>
     </rule>
 
     <rule match-type="regex">
-        <from>^/tags$</from>
+        <from>^/tags/?$</from>
         <to>/tags.jsp</to>
     </rule>
 
     <!-- Archive rules-->
     <!-- Date criteia -->
     <rule match-type="regex">
-        <from>^/archive/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})$</from>
+        <from>^/archive/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/?$</from>
         <to>/archive.jsp?year=$1&amp;month=$2&amp;day=$3</to>
     </rule>
     <rule match-type="regex">
-        <from>^/archive/([0-9]{4})/([0-9]{1,2})$</from>
+        <from>^/archive/([0-9]{4})/([0-9]{1,2})/?$</from>
         <to>/archive.jsp?year=$1&amp;month=$2</to>
     </rule>
     <rule match-type="regex">
-        <from>^/archive/([0-9]{4})$</from>
+        <from>^/archive/([0-9]{4})/?$</from>
         <to>/archive.jsp?year=$1</to>
     </rule>
 
     <!-- Date/Title criteia -->
     <rule match-type="regex">
-        <from>^/archive/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([\w*](-?[\w*])*)$</from>
+        <from>^/archive/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([\w*](-?[\w*])*)/?$</from>
         <to>/archive.jsp?year=$1&amp;month=$2&amp;day=$3&amp;title=$4</to>
     </rule>
     <rule match-type="regex">
-        <from>^/archive/([0-9]{4})/([0-9]{1,2})/([\w*](-?[\w*])*)$</from>
+        <from>^/archive/([0-9]{4})/([0-9]{1,2})/([\w*](-?[\w*])*)/?$</from>
         <to>/archive.jsp?year=$1&amp;month=$2&amp;title=$3</to>
     </rule>
     <rule match-type="regex">
-        <from>^/archive/([0-9]{4})/([\w*](-?[\w*])*)$</from>
+        <from>^/archive/([0-9]{4})/([\w*](-?[\w*])*)/?$</from>
         <to>/archive.jsp?year=$1&amp;title=$2</to>
     </rule>
     <rule match-type="regex">
-        <from>^/archive/([\w*](-?[\w*])*)$</from>
+        <from>^/archive/([\w*](-?[\w*])*)/?$</from>
         <to>/archive.jsp?&amp;title=$1</to>
     </rule>
 
     <rule match-type="regex">
-        <from>^/archive$</from>
+        <from>^/archive/?$</from>
         <to>/archive.jsp</to>
     </rule>
 
@@ -69,38 +69,38 @@
     <!-- Index page/FP articles filter-->
     <!-- Date criteia -->
     <rule match-type="regex">
-        <from>^/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})$</from>
+        <from>^/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/?$</from>
         <to>/index.jsp?year=$1&amp;month=$2&amp;day=$3</to>
     </rule>
     <rule match-type="regex">
-        <from>^/([0-9]{4})/([0-9]{1,2})$</from>
+        <from>^/([0-9]{4})/([0-9]{1,2})/?$</from>
         <to>/index.jsp?year=$1&amp;month=$2</to>
     </rule>
     <rule match-type="regex">
-        <from>^/([0-9]{4})$</from>
+        <from>^/([0-9]{4})/?$</from>
         <to>/index.jsp?year=$1</to>
     </rule>
 
     <!-- Date/Title criteia -->
     <rule match-type="regex">
-        <from>^/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([\w*](-?[\w*])*)$</from>
+        <from>^/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([\w*](-?[\w*])*)/?$</from>
         <to>/index.jsp?year=$1&amp;month=$2&amp;day=$3&amp;title=$4</to>
     </rule>
     <rule match-type="regex">
-        <from>^/([0-9]{4})/([0-9]{1,2})/([\w*](-?[\w*])*)$</from>
+        <from>^/([0-9]{4})/([0-9]{1,2})/([\w*](-?[\w*])*)/?$</from>
         <to>/index.jsp?year=$1&amp;month=$2&amp;title=$3</to>
     </rule>
     <rule match-type="regex">
-        <from>^/([0-9]{4})/([\w*](-?[\w*])*)$</from>
+        <from>^/([0-9]{4})/([\w*](-?[\w*])*)/?$</from>
         <to>/index.jsp?year=$1&amp;title=$2</to>
     </rule>
     <rule match-type="regex">
-        <from>^/([\w*](-?[\w*])*)$</from>
+        <from>^/([\w*](-?[\w*])*)/?$</from>
         <to>/index.jsp?&amp;title=$1</to>
     </rule>
 
     <rule match-type="regex">
-        <from>^/$</from>
+        <from>^/?$</from>
         <to>/index.jsp</to>
     </rule>
 
