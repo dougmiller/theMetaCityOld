@@ -20,7 +20,7 @@ public class ArchiveEntry extends SimpleTagSupport {
         JspWriter out = jspContext.getOut();
 
         try {
-            out.println("<div class=\"archiveEntry\">" + buildTtitle(archiveEntry.getTitle()) + " <span>" + buildDateLink(archiveEntry.getDateTime()) + "</span></div>");
+            out.println("<div class=\"archiveEntry\"><div class=\"archiveEntryTime\">" + buildDateLink(archiveEntry.getDateTime()) + "</div><div class=\"archiveEntryTitle\">" + buildTtitle(archiveEntry.getTitle()) + "</div></div>");
         } catch (IOException IOEx) {
             System.out.print("There was an error with the article rendering");
             System.out.print(IOEx);

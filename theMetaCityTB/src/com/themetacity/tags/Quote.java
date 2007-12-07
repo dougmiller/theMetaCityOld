@@ -31,11 +31,11 @@ public class Quote extends SimpleTagSupport {
 
         // Begin outputting content
         out.println("<div class=\"quote\">");
-        out.println("    <span class=\"quotetext\">");
+        out.print("    <p>\"");
         // This gets the contents of the body and outputs it. Very important!
         getJspBody().invoke(null);
-        out.println("    </span>");
-        out.println("    <span class=\"quoteauthor\">" + quoteAuthor + "</span>");
+        out.print("\"</p>");
+        out.println("   <span class=\"quoteauthor\">" + quoteAuthor + "</span>");
         out.println("</div>");
     }
 

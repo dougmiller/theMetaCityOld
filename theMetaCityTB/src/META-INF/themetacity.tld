@@ -13,7 +13,7 @@
     <tag>
         <name>article</name>
         <tag-class>com.themetacity.tags.Article</tag-class>
-        <body-content>empty</body-content>
+        <body-content>scriptless</body-content>
 
         <!-- The article tag requires an article type bean -->
         <attribute>
@@ -28,7 +28,7 @@
     <tag>
         <name>comment</name>
         <tag-class>com.themetacity.tags.Comment</tag-class>
-        <body-content>empty</body-content>
+        <body-content>scriptless</body-content>
 
         <!-- The comment tag requires a comment type bean -->
         <attribute>
@@ -43,7 +43,7 @@
     <tag>
         <name>archive</name>
         <tag-class>com.themetacity.tags.ArchiveEntry</tag-class>
-        <body-content>empty</body-content>
+        <body-content>scriptless</body-content>
 
         <attribute>
             <name>archiveEntry</name>
