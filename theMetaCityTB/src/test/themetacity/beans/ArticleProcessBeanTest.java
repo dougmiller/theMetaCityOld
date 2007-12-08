@@ -56,6 +56,8 @@ public class ArticleProcessBeanTest {
         assertEquals("Single word, no hyphen", "Entry", articleProcessBean.extactTitle("Entry"));
         assertEquals("Two hyphen separeted words", "Entry Hyphen", articleProcessBean.extactTitle("Entry-Hyphen"));
         assertEquals("Multiple hyphen separated words", "Entry With Multiple Hyphen", articleProcessBean.extactTitle("Entry-With-Multiple-Hyphen"));
+
+
     }
 
     @Test public void titleRegex() {
@@ -67,5 +69,7 @@ public class ArticleProcessBeanTest {
         // These are broken entries that should fail
         assertFalse("Too many hyphens", articleProcessBean.titleRegex("Entry--Next-----Wednesday"));
         assertFalse("Spaces!!", articleProcessBean.titleRegex("Entry Next Wednesday"));
+        assertFalse("wierd hyphen", articleProcessBean.titleRegex("-Entry-Next-Wednesday"));       
+        assertFalse("only hyphen", articleProcessBean.titleRegex("-------"));           
     }
 }
