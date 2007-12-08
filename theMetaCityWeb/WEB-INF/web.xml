@@ -9,8 +9,21 @@
 
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
-        <!--<welcome-file>/index.html</welcome-file>-->
+        <welcome-file>/index.html</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/jspf/error.jsp?error=403</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jspf/error.jsp?error=404</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/jspf/error.jsp?error=500</location>
+    </error-page>
 
     <resource-ref>
         <description>Resource ref to the datasource configured in the context.xml</description>

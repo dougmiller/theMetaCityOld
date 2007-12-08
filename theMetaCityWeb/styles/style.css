@@ -41,7 +41,7 @@ a :hover {
 
 #header .headerleft {
     margin-right: 110px;
-    padding: 10px;
+    padding: 10px 0;
 }
 
 #header .headerright {

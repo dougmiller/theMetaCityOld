@@ -18,8 +18,6 @@
     <tmc:notice importantNotice="${noticeBean}"/>
 </c:forEach>
 
-<tmc:quote quoteAuthor="Douglas Miller">Nullam id justo. Nam ipsum turpis, sodales vel, imperdiet vitae, aliquam at, dui.</tmc:quote>
-
 <c:choose>
     <c:when test="${not empty articleResultList}">
         <c:forEach var="articleList" items="${articleResultList}">

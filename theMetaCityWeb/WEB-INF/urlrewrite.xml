@@ -27,6 +27,11 @@
         <to>/tags.jsp</to>
     </rule>
 
+    <!-- Internal error page handling -->
+    <rule>
+        <from>^error/([0-9]*)/?$</from>
+        <to>/error.jsp?error=$1</to>
+    </rule>
     <!-- Archive rules-->
     <!-- Date criteia -->
     <rule match-type="regex">
