@@ -20,7 +20,7 @@ a :hover {
 }
 
 #container {
-    width: 720px;
+    width: 850px;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -34,7 +34,7 @@ a :hover {
 }
 
 #header > div {
-    max-width: 720px;
+    max-width: 850px;
     margin-right: auto;
     margin-left: auto;
 }
