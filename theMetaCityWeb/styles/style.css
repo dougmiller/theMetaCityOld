@@ -166,3 +166,18 @@ a :hover {
 .copyright {
     font-size: 10pt;
 }
+
+.picscontainer {
+    clear: both;
+}
+
+.picdiv {
+    float: left;
+    margin: 10px;
+    min-width: 243px;
+}
+
+.picdiv img {
+    margin: 10px;
+    border: 2px black solid;
+}
