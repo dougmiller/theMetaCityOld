@@ -82,7 +82,21 @@
         </attribute>
     </tag>
 
-    <!-- the AllTags tag -->
+    <!-- Links tag -->
+    <tag>
+        <name>link</name>
+        <tag-class>com.themetacity.tags.Links</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>linkBean</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.LinkBean</type>
+        </attribute>
+    </tag>
+
+    <!-- AllTags tag -->
     <tag>
         <name>allTags</name>
         <tag-class>com.themetacity.tags.AllTags</tag-class>

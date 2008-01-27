@@ -35,7 +35,7 @@ public class AllTags extends SimpleTagSupport {
     }
 
     private String buildLink(TagBean tag){
-        return "<a href=\"/tags.jsp?tag=" + tag.getTag() + "\">" + tag.getTag() + "(" + tag.getNumTimesTagUsed()+ ")</a>";
+        return "<a href=\"/tags/" + tag.getTag() + "\">" + tag.getTag() + "(" + tag.getNumTimesTagUsed()+ ")</a>";
     }
 
     public LinkedList<TagBean> getTagsList() {

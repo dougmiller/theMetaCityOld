@@ -8,8 +8,7 @@ import java.util.LinkedList;
 import java.util.regex.Pattern;
 
 /**
- * This is the bean that process the articles from the
- * database into ArticleBeans and then presents them for the tag.
+ * This is the bean that process the articles from the database into ArticleBeans and then presents them for the tag.
  *
  * @see DatabaseBean
  */
@@ -167,6 +166,11 @@ public class ArticleProcessBean {
         return inputString.replace("-", " ");
     }
 
+    /**
+     * * NEVER USED IN CODE * this is the regex used in the URL filter.
+     * @param inputString is the iput string to check against the regex
+     * @return true or false if the regex matches the inputString
+     */
     public Boolean titleRegex(String inputString) {
         return Pattern.matches("([\\w*](-?[\\w*])*)", inputString);
     }

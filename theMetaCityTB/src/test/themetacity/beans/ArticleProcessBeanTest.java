@@ -1,11 +1,10 @@
-package themetacity.beans;
+package test.themetacity.beans;
 
 import com.themetacity.beans.ArticleProcessBean;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
 
 public class ArticleProcessBeanTest {
     ArticleProcessBean articleProcessBean;
@@ -18,6 +17,9 @@ public class ArticleProcessBeanTest {
         articleProcessBean = null;
     }
 
+    /**
+     * This test all the possible inputs for the query that selects articles.
+     */
     @Test public void queryConstructor() {
         // Best case scenario tests
         // Test no argument
@@ -52,6 +54,9 @@ public class ArticleProcessBeanTest {
 
     }
 
+    /**
+     * Tests that article titles are extracted correctly from the hyphen delimited input
+     */
     @Test public void titleExtractor() {
         assertEquals("Single word, no hyphen", "Entry", articleProcessBean.extactTitle("Entry"));
         assertEquals("Two hyphen separeted words", "Entry Hyphen", articleProcessBean.extactTitle("Entry-Hyphen"));
@@ -60,6 +65,9 @@ public class ArticleProcessBeanTest {
 
     }
 
+    /**
+     * Test that the regex used in the URL filter is working correctly
+     */
     @Test public void titleRegex() {
         assertTrue("Check single word", articleProcessBean.titleRegex("Entry"));
         assertTrue("Check two word", articleProcessBean.titleRegex("Entry-Next"));

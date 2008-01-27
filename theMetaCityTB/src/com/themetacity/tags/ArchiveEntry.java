@@ -20,7 +20,7 @@ public class ArchiveEntry extends SimpleTagSupport {
         JspWriter out = jspContext.getOut();
 
         try {
-            out.println("<div class=\"archiveEntry\"><div class=\"archiveEntryTime\">" + buildDateLink(archiveEntry.getDateTime()) + "</div><div class=\"archiveEntryTitle\">" + buildTtitle(archiveEntry.getTitle()) + "</div></div>");
+            out.println("<div class=\"archiveEntry\"><div class=\"archiveEntryTime\">" + buildDateLink(archiveEntry.getDateTime()) + "</div><div class=\"archiveEntryTitle\">" + buildTitleLink(archiveEntry.getTitle()) + "</div></div>");
         } catch (IOException IOEx) {
             System.out.print("There was an error with the article rendering");
             System.out.print(IOEx);
@@ -33,12 +33,12 @@ public class ArchiveEntry extends SimpleTagSupport {
     }
 
     /**
-     * Build the article title A and associated href
+     * Build the article title anchor and associated href
      * @param title is the unformatted tatle, straight from the database
      * @return an A string in href
      */
-    public String buildTtitle(String title){
-        return "<a href=\"/" + buildTitleLink(title) + "\">" + title + "</a>";
+    public String buildTitleLink(String title){
+        return "<a href=\"/" + convertTitleToWeb(title) + "\">" + title + "</a>";
     }
 
     /**
@@ -47,13 +47,16 @@ public class ArchiveEntry extends SimpleTagSupport {
      * @param titleToBuild is the string to encode with hypens
      * @return a hypen encoded string
      */
-    public String buildTitleLink(String titleToBuild) {
+    public String convertTitleToWeb(String titleToBuild) {
         return titleToBuild.replace(" ", "-");
     }
 
     /**
+     * Builds the date link for each article. It shows the year month and day the article was published and then links the respective date to show all the article publised on that date
+     * e.g. 2007 (links to articles in 2007) / 12 (links to articles in 2007/12) / 1 (links to articles on the 2007/12/1)
+     *
      * @param dateToBuild is the date string to convert and do operations on.
-     * @return a string with the dates seperated out
+     * @return a anchor string with the dates seperated out and linked
      */
     public String buildDateLink(String dateToBuild) {
         StringBuilder outpuString = new StringBuilder();
