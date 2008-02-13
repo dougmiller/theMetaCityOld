@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project name="theMetaCity Web Build" default="package" basedir="../theMetaCityWeb">
+
+	<property name="src.dir" value="." />
+	<property name="app.name" value="themetacity" />
+	<property name="deploy.dir" value="../deployed" />
+    <property name="classpath.dir" value="/usr/local/tomcat/lib" />
+    <property name="weblib.dir" value="../theMetaCityWeb/WEB-INF/lib" />
+
+    <target name="clean">
+        <delete dir="${deploy.dir}/${app.name}.war" />
+	</target>
+
+    <!-- Include on the the classes for development -->
+    <target name="package">
+        <jar destfile="${deploy.dir}/${app.name}.jar" basedir="${src.dir}" excludes="**/*.svn"/>
+    </target>
+</project>

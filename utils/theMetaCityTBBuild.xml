@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<project name="theMetaCity TB Build" default="package" basedir="./theMetaCityTB">
+<project name="theMetaCity TB Build" default="package" basedir="../theMetaCityTB">
 
 	<property name="compile.dir" value="classes" />
 	<property name="src.dir" value="./src" />
     <property name="classpath.dir" value="/usr/local/tomcat/lib" />
     <property name="weblib.dir" value="../theMetaCityWeb/WEB-INF/lib" />
+    <property name="app.name" value="theMetaCityTB" />
 
     <target name="init">
         <delete dir="${compile.dir}" />
@@ -19,7 +20,7 @@
     <target name="package" depends="compile">
         <!-- Include the taglib def list so that the jar actually will work, as it does no get compiled -->
         <copy file="${src.dir}/META-INF/themetacity.tld" toFile="${compile.dir}/META-INF/themetacity.tld" />
-        <jar destfile="${weblib.dir}/theMetaCityTB.jar" basedir="${compile.dir}"/>
+        <jar destfile="${weblib.dir}/${app.name}.jar" basedir="${compile.dir}"/>
     </target>
 
     <!-- Generate javadocs -->
