@@ -59,12 +59,21 @@ public class ArchiveEntry extends SimpleTagSupport {
      * @return a anchor string with the dates seperated out and linked
      */
     public String buildDateLink(String dateToBuild) {
-        StringBuilder outpuString = new StringBuilder();
+        StringBuilder outputString = new StringBuilder();
 
         String[] dateSplit = dateToBuild.split("-");
-                         // |-- Start year                                                         end year --|                       |-- Start month                                                                                     end of month --|                       |-- Start day                                                                                                                             end day --|
-        outpuString.append("<a href=\"").append(dateSplit[0]).append("\" />").append(dateSplit[0]).append("</a>").append("-").append("<a href=\"").append(dateSplit[0]).append("/").append(dateSplit[1]).append("\" />").append(dateSplit[1]).append("</a>").append("-").append("<a href=\"").append(dateSplit[0]).append("/").append(dateSplit[1]).append("/").append(dateSplit[2]).append("\" />").append(dateSplit[2]).append("</a>");
-        return outpuString.toString();
+
+        // Year
+        outputString.append("<a href=\"/").append(dateSplit[0]).append("\" />").append(dateSplit[0]).append("</a>");
+        outputString.append("-");
+        // Month
+        outputString.append("<a href=\"/").append(dateSplit[0]).append("/").append(dateSplit[1]).append("\" />").append(dateSplit[1]).append("</a>");      
+        outputString.append("-");
+        // Day
+        outputString.append("<a href=\"/").append(dateSplit[0]).append("/").append(dateSplit[1]).append("/").append(dateSplit[2]).append("\" />").append(dateSplit[2]).append("</a>");
+
+
+        return outputString.toString();
     }
 
     public ArchiveEntryBean getArchiveEntry() {

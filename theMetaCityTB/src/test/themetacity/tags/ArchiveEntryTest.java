@@ -39,7 +39,7 @@ public class ArchiveEntryTest {
      * Tests that the date links are built correctly
      */
     @Test public void buildDateLink() {
-        String goodexpected = "<a href=\"2007\" />2007</a>-<a href=\"2007/11\" />11</a>-<a href=\"2007/11/16\" />16</a>";
+        String goodexpected = "<a href=\"/2007\" />2007</a>-<a href=\"/2007/11\" />11</a>-<a href=\"/2007/11/16\" />16</a>";
         assertEquals("Good regular date", goodexpected, archiveEntry.buildDateLink("2007-11-16"));
     }
 }

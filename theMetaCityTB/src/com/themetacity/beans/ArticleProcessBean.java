@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
+import org.apache.log4j.Logger;
 
 /**
  * This is the bean that process the articles from the database into ArticleBeans and then presents them for the tag.
@@ -19,6 +20,8 @@ public class ArticleProcessBean {
     private String month;
     private String day;
     private String title;
+
+    static Logger logger = Logger.getLogger(ArticleProcessBean.class);
 
     public ArticleProcessBean() {
         // Set these explicitly to "" so that the string comparisons below used to construct
@@ -79,6 +82,7 @@ public class ArticleProcessBean {
      * <p/>
      * Valid input combinations:
      * /(No values given)
+     * /Title
      * /Year
      * /Year/Title
      * /Year/Month
@@ -89,9 +93,12 @@ public class ArticleProcessBean {
      * Any combination not in the list above will revert to the highest valid entry and disregard the remaining dates
      * but keeping the title
      * <p/>
-     * eg / will retuen a query to retuen every article
+     * eg / will retuen a query to return every article
      * eg /year/day will return a query constructed for /year
      * eg /month/title will retuen a query for /title
+     *
+     * N.B. Date range is not taken into account.
+     * If the user wants to select the 54 month of the year 900, then so be it.
      *
      * @param year  is the year that the article was posted as a string
      * @param month is the month that the article was posted as a string
@@ -100,62 +107,41 @@ public class ArticleProcessBean {
      * @return a constructed query string for the particular article(s) given the inputs
      */
     public String constructQuery(String year, String month, String day, String title) {
-        // Sanitize inputs; Probably a better way to do this and ot doesnt offerer complete coverage
-        // First is the year
-        try {
-            Integer.parseInt(year);
-        } catch (NumberFormatException numFormatEx) {
-            year = "";
-        }
+        String conditions = "";
 
-        // Now check the month
-        try {
-            Integer.parseInt(month);
-        } catch (NumberFormatException numFormatEx) {
-            month = "";
-        }
-
-        // Sanitize the parameter input
-        try {
-            Integer.parseInt(day);
-        } catch (NumberFormatException numFormatEx) {
-            day = "";
-        }
-
-        // Check for year
-        if (!year.equals("")) {
-            // Check for month
-            if (!month.equals("")) {
-                // Cehck for day
-                if (!day.equals("")) {
-                    // Check if the title is set or not
-                    if (!title.equals("")) {
-                        return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " AND DAY(datetime) = " + day + " AND title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;";
-                    }
-                    // Year, month and day set
-                    return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " AND DAY(datetime) = " + day + " ORDER BY articleid DESC;";
+        // Date conditions
+        if (isNumber(year)) {
+            conditions += "WHERE YEAR(datetime) = " + year + " ";
+            if (isNumber(month)) {
+                conditions += "AND MONTH(datetime) = " + month + " ";
+                if (isNumber(day)) {
+                    conditions += "AND DAY(datetime) = " + day + " ";
                 }
-                // Check for title                
-                if (!title.equals("")) {
-                    return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " AND title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;";
-                }
+            }
+        }
 
-                // Year and month was set
-                return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND MONTH(datetime) = " + month + " ORDER BY articleid DESC;";
-            }
-            // Check for title
-            if (!title.equals("")) {
-                return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " AND title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;";
-            }
-            // Only year was set
-            return "SELECT * FROM articles WHERE YEAR(datetime) = " + year + " ORDER BY articleid DESC;";
+        // Year conditions
+        if (title.length() > 0) {
+                conditions += ((conditions.length() == 0) ? "WHERE ": "AND ") + "title = \"" + extactTitle(title) + "\" ";
         }
-        // Check for title
-        if (!title.equals("")) {
-            return "SELECT * FROM articles WHERE title = \"" + extactTitle(title) + "\" ORDER BY articleid DESC;";
+
+
+        return "SELECT * FROM articles " + conditions + "ORDER BY articleid DESC;";
+    }
+
+    /**
+     * Checks wether a string input is a number
+     *
+     * @param numToCheck is the number to check
+     * @return true if the input is indeed a number
+     */
+    public boolean isNumber(String numToCheck) {
+        try {
+            Integer.parseInt(numToCheck);
+        } catch (NumberFormatException numformatEx) {
+            return false;
         }
-        // Nothing set so return everything
-        return "SELECT * FROM articles ORDER BY articleid DESC;";
+        return true;
     }
 
     /**
@@ -168,8 +154,9 @@ public class ArticleProcessBean {
 
     /**
      * * NEVER USED IN CODE * this is the regex used in the URL filter.
-     * @param inputString is the iput string to check against the regex
-     * @return true or false if the regex matches the inputString
+     *
+     * @param inputString is the input string to check against the regex
+     * @return true if the regex matches the inputString
      */
     public Boolean titleRegex(String inputString) {
         return Pattern.matches("([\\w*](-?[\\w*])*)", inputString);
