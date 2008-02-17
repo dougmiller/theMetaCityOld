@@ -7,13 +7,13 @@
     <property name="weblib.dir" value="../theMetaCityWeb/WEB-INF/lib" />
     <property name="app.name" value="theMetaCityTB" />
 
-    <target name="init">
+    <target name="clean">
         <delete dir="${compile.dir}" />
         <mkdir dir="${compile.dir}" />
 	</target>
 
-    <target name="compile" depends="init">
-		<javac srcdir="${src.dir}" destdir="${compile.dir}" classpath="${classpath.dir}/jsp-api.jar" />
+    <target name="compile" depends="clean">
+		<javac srcdir="${src.dir}" destdir="${compile.dir}" classpath="${classpath.dir}/log4j-1.2.15.jar; ${classpath.dir}/jsp-api.jar" />
 	</target>
 
     <!-- Include on the the classes for development -->
@@ -24,7 +24,7 @@
     </target>
 
     <!-- Generate javadocs -->
-    <target name="javadoc" depends="init">
+    <target name="javadoc" depends="clean">
         <javadoc sourcepath="${src.dir}" destdir="${compile.dir}/javadoc" classpath="${classpath.dir}/jsp-api.jar"/>
     </target>
 
