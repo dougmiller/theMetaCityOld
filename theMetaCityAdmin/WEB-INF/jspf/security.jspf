@@ -1,0 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+
+<c:set />
+
+<c:if test="${}>
+  <c:redirect url="/login.jsp"/>
+</c:if>
