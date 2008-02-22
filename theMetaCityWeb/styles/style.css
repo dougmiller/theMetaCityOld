@@ -167,8 +167,13 @@ a :hover {
     font-size: 10pt;
 }
 
+.articlemetainfo {
+    width: 100%;
+}
+
+/*
 .picscontainer {
-    clear: both;
+    clear: left;
 }
 
 .picdiv {
@@ -180,4 +185,4 @@ a :hover {
 .picdiv img {
     margin: 10px;
     border: 2px black solid;
-}
+}*/

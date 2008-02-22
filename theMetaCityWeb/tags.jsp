@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://com.themetacity" prefix="tmc" %>
+<%@ taglib uri="http://com.themetacityweb" prefix="tmc" %>
 
-<jsp:useBean id="TagSearchProcessBean" scope="page" class="com.themetacity.beans.TagSearchProcessBean">
+<jsp:useBean id="TagSearchProcessBean" scope="page" class="com.themetacityweb.beans.TagSearchProcessBean">
     <jsp:setProperty name="TagSearchProcessBean" property="tag" value="${param.tag}"/>
 </jsp:useBean>
 
@@ -24,7 +24,7 @@
         <c:if test="${not empty param.tag}">
             <p>Nothing has been posted under that tag. Please choose from the list below.</p>
         </c:if>
-        <jsp:useBean id="ShowAllTagsBean" scope="page" class="com.themetacity.beans.TagProcessBean"/>
+        <jsp:useBean id="ShowAllTagsBean" scope="page" class="com.themetacityweb.beans.TagProcessBean"/>
         <tmc:allTags tagsList="${ShowAllTagsBean.tags}"/>
     </c:otherwise>
 </c:choose>

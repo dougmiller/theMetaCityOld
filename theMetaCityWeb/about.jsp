@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="tmc" uri="http://com.themetacity" %>
+<%@ taglib prefix="tmc" uri="http://com.themetacityweb" %>
 
-<jsp:useBean id="ProfileProcessBean" scope="page" class="com.themetacity.beans.ProfileProcessBean">
+<jsp:useBean id="ProfileProcessBean" scope="page" class="com.themetacityweb.beans.ProfileProcessBean">
     <jsp:setProperty name="ProfileProcessBean" property="author" value="${param.author}"/>
 </jsp:useBean>
 

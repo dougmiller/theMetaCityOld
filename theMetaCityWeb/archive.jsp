@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://com.themetacity" prefix="tmc" %>
+<%@ taglib uri="http://com.themetacityweb" prefix="tmc" %>
 
-<jsp:useBean id="ArchiveProcessBean" scope="page" class="com.themetacity.beans.ArchiveProcessBean">
+<jsp:useBean id="ArchiveProcessBean" scope="page" class="com.themetacityweb.beans.ArchiveProcessBean">
     <jsp:setProperty name="ArchiveProcessBean" property="year" value="${param.year}"/>
     <jsp:setProperty name="ArchiveProcessBean" property="month" value="${param.month}"/>
     <jsp:setProperty name="ArchiveProcessBean" property="day" value="${param.day}"/>
