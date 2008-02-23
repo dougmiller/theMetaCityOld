@@ -1,5 +1,6 @@
-package com.themetacity.tags;
-import com.themetacity.typebeans.ImportantNoticeBean;
+package com.themetacityweb.tags;
+
+import com.themetacityweb.typebeans.ImportantNoticeBean;
 
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import javax.servlet.jsp.JspException;

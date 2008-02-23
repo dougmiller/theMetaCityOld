@@ -1,6 +1,7 @@
-package com.themetacity.beans;
+package com.themetacityweb.beans;
 
-import com.themetacity.typebeans.ArchiveEntryBean;
+import com.themetacitycommon.beans.DatabaseBean;
+import com.themetacityweb.typebeans.ArchiveEntryBean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

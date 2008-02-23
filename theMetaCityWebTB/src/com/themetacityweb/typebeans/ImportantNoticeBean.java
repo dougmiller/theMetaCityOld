@@ -1,4 +1,4 @@
-package com.themetacity.typebeans;
+package com.themetacityweb.typebeans;
 
 /**
  * This is the class that represents important messages.

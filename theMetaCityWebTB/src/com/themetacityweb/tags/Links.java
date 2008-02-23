@@ -1,6 +1,6 @@
-package com.themetacity.tags;
+package com.themetacityweb.tags;
 
-import com.themetacity.typebeans.LinkBean;
+import com.themetacityweb.typebeans.LinkBean;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspWriter;

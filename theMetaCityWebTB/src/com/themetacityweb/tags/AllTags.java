@@ -1,6 +1,6 @@
-package com.themetacity.tags;
+package com.themetacityweb.tags;
 
-import com.themetacity.typebeans.TagBean;
+import com.themetacityweb.typebeans.TagBean;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;

@@ -1,6 +1,6 @@
-package com.themetacity.tags;
+package com.themetacityweb.tags;
 
-import com.themetacity.typebeans.CommentBean;
+import com.themetacityweb.typebeans.CommentBean;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;

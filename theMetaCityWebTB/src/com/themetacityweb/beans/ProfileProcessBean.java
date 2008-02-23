@@ -1,6 +1,7 @@
-package com.themetacity.beans;
+package com.themetacityweb.beans;
 
-import com.themetacity.typebeans.ProfileBean;
+import com.themetacitycommon.beans.DatabaseBean;
+import com.themetacityweb.typebeans.ProfileBean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,8 +10,6 @@ import java.util.LinkedList;
 /**
  * This is the bean that process a profile.
  * It makes a call to the database and populates profileBeans with the results.
- *
- * @see DatabaseBean
  */
 public class ProfileProcessBean {
 

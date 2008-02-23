@@ -1,4 +1,4 @@
-package com.themetacity.typebeans;
+package com.themetacityweb.typebeans;
 
 import java.util.LinkedList;
 import java.util.Date;

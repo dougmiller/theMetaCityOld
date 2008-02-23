@@ -1,6 +1,7 @@
-package com.themetacity.beans;
+package com.themetacityweb.beans;
 
-import com.themetacity.typebeans.TagBean;
+import com.themetacitycommon.beans.DatabaseBean;
+import com.themetacityweb.typebeans.TagBean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,6 @@ import java.util.LinkedList;
  * It makes requests to the database and returns a linkedlist of the results.
  *
  * @see TagSearchProcessBean for more infor on search.
- * @see DatabaseBean
  */
 public class TagProcessBean {
 
@@ -36,8 +36,8 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        DatabaseBean dbaBean = new DatabaseBean();
-        ResultSet result = dbaBean.executeQuery(constructTagQuery(user, articleID));
+        DatabaseBean dbBean = new DatabaseBean();
+        ResultSet result = dbBean.executeQuery(constructTagQuery(user, articleID));
         try {
             while (result.next()) {
                 TagBean tagBean = new TagBean();
@@ -50,7 +50,7 @@ public class TagProcessBean {
             // Close the result
             result.close();
             // Close the database connection and return it to the pool
-            dbaBean.close();
+            dbBean.close();
 
         } catch (SQLException SQLEx) {
             System.out.println("some problem with the SQL");

@@ -1,4 +1,4 @@
-package test.themetacity.beans;
+package test.themetacityweb.beans;
 
 import com.themetacity.beans.ArticleProcessBean;
 import org.junit.After;

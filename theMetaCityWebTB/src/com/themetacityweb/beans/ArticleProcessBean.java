@@ -1,17 +1,16 @@
-package com.themetacity.beans;
+package com.themetacityweb.beans;
 
-import com.themetacity.typebeans.ArticleBean;
+import com.themetacitycommon.beans.DatabaseBean;
+import com.themetacityweb.typebeans.ArticleBean;
+import org.apache.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
-import org.apache.log4j.Logger;
 
 /**
  * This is the bean that process the articles from the database into ArticleBeans and then presents them for the tag.
- *
- * @see DatabaseBean
  */
 public class ArticleProcessBean {
 
@@ -96,7 +95,7 @@ public class ArticleProcessBean {
      * eg / will retuen a query to return every article
      * eg /year/day will return a query constructed for /year
      * eg /month/title will retuen a query for /title
-     *
+     * <p/>
      * N.B. Date range is not taken into account.
      * If the user wants to select the 54 month of the year 900, then so be it.
      *
@@ -122,7 +121,7 @@ public class ArticleProcessBean {
 
         // Year conditions
         if (title.length() > 0) {
-                conditions += ((conditions.length() == 0) ? "WHERE ": "AND ") + "title = \"" + extactTitle(title) + "\" ";
+            conditions += ((conditions.length() == 0) ? "WHERE " : "AND ") + "title = \"" + extactTitle(title) + "\" ";
         }
 
 

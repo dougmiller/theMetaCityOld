@@ -1,11 +1,7 @@
-package com.themetacity.tags;
-/**
- * @version 1.0
- * @Author: Douglas Miller
- */
+package com.themetacityweb.tags;
 
-import com.themetacity.typebeans.ArticleBean;
-import com.themetacity.typebeans.TagBean;
+import com.themetacityweb.typebeans.ArticleBean;
+import com.themetacityweb.typebeans.TagBean;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspWriter;

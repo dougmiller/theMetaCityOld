@@ -1,6 +1,7 @@
-package com.themetacity.beans;
+package com.themetacityweb.beans;
 
-import com.themetacity.typebeans.ArchiveEntryBean;
+import com.themetacitycommon.beans.DatabaseBean;
+import com.themetacityweb.typebeans.ArchiveEntryBean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +36,7 @@ public class TagSearchProcessBean {
                 bean.setTitle(result.getString("title"));
                 bean.setDateTime(result.getDate("datetime"));
 
-               articlesWithTagList.add(bean);
+                articlesWithTagList.add(bean);
             }
             result.close();
             dbaBean.close();

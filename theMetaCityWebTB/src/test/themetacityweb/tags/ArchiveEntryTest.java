@@ -1,4 +1,4 @@
-package test.themetacity.tags;
+package test.themetacityweb.tags;
 
 import com.themetacity.tags.ArchiveEntry;
 import org.junit.After;
