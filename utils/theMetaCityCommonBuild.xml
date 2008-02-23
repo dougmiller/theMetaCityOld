@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<project name="theMetaCity Common TB Build" default="package" basedir="../theMetaCityCommonTB">
+
+	<property name="compile.dir" value="classes" />
+	<property name="src.dir" value="./src" />
+    <property name="classpath.dir" value="/usr/local/tomcat/lib" />
+    <property name="metaCityWebLib.dir" value="../theMetaCityWeb/WEB-INF/lib" />
+    <property name="metaCityAdminLib.dir" value="../theMetaCityAdmin/WEB-INF/lib" />
+    <property name="metaCityWebDeploy.dir" value="../deploy/ROOT/WEB-INF/lib" />
+    <property name="metaCityAdminDeploy.dir" value="../deploy/admin/WEB-INF/lib" />
+    <property name="app.name" value="theMetaCityCommonTB" />
+
+    <target name="clean">
+        <delete dir="${compile.dir}" />
+        <mkdir dir="${compile.dir}" />
+	</target>
+
+    <target name="compile" depends="clean">
+		<javac srcdir="${src.dir}" destdir="${compile.dir}" classpath="${classpath.dir}/log4j-1.2.15.jar; ${classpath.dir}/jsp-api.jar" />
+	</target>
+
+    <!-- Include on the the classes for development -->
+    <target name="package" depends="compile">
+        <jar destfile="${metaCityWebLib.dir}/${app.name}.jar" basedir="${compile.dir}"/>
+        <jar destfile="${metaCityAdminLib.dir}/${app.name}.jar" basedir="${compile.dir}"/>
+    </target>
+
+    <target name="devpackage" depends="package">
+        <copy file="${metaCityWebLib.dir}/${app.name}.jar" toFile="${metaCityWebDeploy.dir}/${app.name}.jar" />
+        <copy file="${metaCityAdminLib.dir}/${app.name}.jar" toFile="${metaCityAdminDeploy.dir}/${app.name}.jar" />
+    </target>
+
+    <!-- Generate javadocs -->
+    <target name="javadoc">
+        <javadoc sourcepath="${src.dir}" destdir="${compile.dir}/javadoc" />
+    </target>
+
+    <!-- Include the source, classes and javadocs in the jar -->
+    <target name="productionpackage" depends="compile, javadoc">
+        <!-- Depends on compile so classes are already here -->
+
+        <!-- Copy the source across -->
+            <copy todir="${compile.dir}">
+                <fileset dir="${src.dir}" excludes="**/*.svn"/>
+            </copy>
+
+        <!-- Copy the javadocs across -->
+        <!-- Depends on javadoc so they are here also -->
+
+        <!-- Now just package it all up -->
+        <jar destfile="../theMetaCityCommonTBProduction.jar" basedir="${compile.dir}"/>
+
+    </target>
+
+</project>

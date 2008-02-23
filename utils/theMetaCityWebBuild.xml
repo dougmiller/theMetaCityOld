@@ -1,19 +1,34 @@
 <?xml version="1.0"?>
 <project name="theMetaCity Web Build" default="package" basedir="../theMetaCityWeb">
 
-	<property name="src.dir" value="." />
-	<property name="app.name" value="ROOT" />
-	<property name="deploy.dir" value="../deploy" />
-    <property name="classpath.dir" value="/usr/local/tomcat/lib" />
-    <property name="weblib.dir" value="../theMetaCityWeb/WEB-INF/lib" />
+    <property name="src.dir" value="."/>
+    <property name="app.name" value="ROOT"/>
+    <property name="productionapp.name" value="theMetaCity"/>
+    <property name="deploy.dir" value="../deploy"/>
+    <property name="classpath.dir" value="/usr/local/tomcat/lib"/>
+    <property name="weblib.dir" value="./WEB-INF/lib"/>
 
     <target name="clean">
-        <delete file="${deploy.dir}/${app.name}.war" />
-        <delete dir="${deploy.dir}/${app.name}" />
+        <delete file="${deploy.dir}/${app.name}.war"/>
+        <delete dir="${deploy.dir}/${app.name}"/>
     </target>
 
     <!-- Include on the the classes for development -->
     <target name="package" depends="clean">
         <jar destfile="${deploy.dir}/${app.name}.war" basedir="${src.dir}" excludes="**/*.svn"/>
+    </target>
+
+    <target name="newjars">
+        <copy file="${weblib.dir}/theMetaCityCommonTB.jar" todir="${deploy.dir}/${app.name}/WEB-INF/lib" />
+        <copy file="${weblib.dir}/theMetaCityWebTB.jar" todir="${deploy.dir}/${app.name}/WEB-INF/lib" />
+    </target>
+
+    <!-- Include on the the classes for development -->
+    <target name="production" depends="clean">
+        <move file="${src.dir}/META-INF/context.xml" tofile="${src.dir}/META-INF/context.xmlbackup"/>
+        <jar destfile="../${productionapp.name}.war" basedir="${src.dir}"
+             excludes="**/*.svn, **/context.xmlbackup"
+             includes="../utils/context.xml"/>
+        <move file="${src.dir}/META-INF/context.xmlbackup" tofile="${src.dir}/META-INF/context.xml"/>
     </target>
 </project>
