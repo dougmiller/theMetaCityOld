@@ -2,11 +2,29 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 
 -- Database: `theMetaCity`
 -- 
-# Uncomment the next two lines if creating from scratch
+# Uncomment the next lines if creating from scratch
 # CREATE DATABASE `themetacity` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 # USE `themetacity`;
 
 -- --------------------------------------------------------
+
+--
+-- Create users with specific privileges.
+-- The create user line is not necessary but is there for completness
+--
+
+-- A pseudoroot for special needs
+-- GRANT is not included in ALL for security reasons.
+CREATE USER tmcRoot;
+GRANT ALL ON theMetaCity.* TO 'tmcRoot'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
+
+-- A user for selecting data only. Extra safety net.
+CREATE USER tmcSelector;
+GRANT SELECT ON theMetaCity.* TO 'tmcSelector'@'%' IDENTIFIED BY 'mypass';
+
+-- A user for undating and inserting records.
+CREATE USER tmcAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON theMetaCity.* TO 'tmcAdmin'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
 
 -- 
 -- Table structure for table `articles`
