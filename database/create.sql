@@ -14,13 +14,16 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 -- A pseudoroot for special needs
--- GRANT is not included in ALL for security reasons.
-CREATE USER tmcRoot;
-GRANT ALL ON theMetaCity.* TO 'tmcRoot'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
+-- GRANT is not included in ALL for security reasons. -> You cant grant yoursef as ROOT
+-- If you do not have permission on the security table then you will need to log in manually to set the password
+
+-- Dont really need him for now
+-- CREATE USER tmcRoot;
+-- GRANT ALL ON theMetaCity.* TO 'tmcRoot'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
 
 -- A user for selecting data only. Extra safety net.
 CREATE USER tmcSelector;
-GRANT SELECT ON theMetaCity.* TO 'tmcSelector'@'%' IDENTIFIED BY 'mypass';
+GRANT SELECT ON themetacitycom.* TO 'tmcSelector'@'%';
 
 -- A user for undating and inserting records.
 CREATE USER tmcAdmin;
@@ -56,7 +59,7 @@ CREATE TABLE `articletags` (
 
 CREATE TABLE `users` (
   `username` varchar(30) NOT NULL COMMENT 'The users username, used for loggining in etc and for references',
-  `password` varchar(64) NOT NULL COMMENT 'The users password. Stored and an SHA-512 hash.',
+  `password` varchar(64) NOT NULL COMMENT 'The users password. Stored as an SHA-512 hash. the salt is the SHA-512 of the username)',
   `pseudonym` varchar(25) NOT NULL COMMENT 'The users pseudonym that is displayed instead of the username',
   `contact` varchar(40) NOT NULL COMMENT 'The email/website users wish to be contacted at.',
   `about` varchar(5000) NOT NULL COMMENT 'The about text of a user.',
