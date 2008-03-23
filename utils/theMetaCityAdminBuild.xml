@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<project name="theMetaCity Web Build" default="package" basedir="../theMetaCityWeb">
+<project name="theMetaCity Admin Build" default="package" basedir="../theMetaCityAdmin">
 
     <property name="src.dir" value="."/>
-    <property name="app.name" value="ROOT"/>
-    <property name="productionapp.name" value="theMetaCity"/>
+    <property name="app.name" value="admin"/>
+    <property name="productionapp.name" value="theMetaCityAdmin"/>
     <property name="deploy.dir" value="../deploy"/>
     <property name="classpath.dir" value="/usr/local/tomcat/lib"/>
     <property name="weblib.dir" value="./WEB-INF/lib"/>
@@ -22,7 +22,7 @@
     Useful for raid development becasue you do not have to deploy the entire webapp -->
     <target name="newjars">
         <copy file="${weblib.dir}/theMetaCityCommonTB.jar" todir="${deploy.dir}/${app.name}/WEB-INF/lib" />
-        <copy file="${weblib.dir}/theMetaCityWebTB.jar" todir="${deploy.dir}/${app.name}/WEB-INF/lib" />
+        <copy file="${weblib.dir}/theMetaCityAdminTB.jar" todir="${deploy.dir}/${app.name}/WEB-INF/lib" />
     </target>
     
     <!-- Include on the the classes for development -->
