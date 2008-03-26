@@ -15,7 +15,8 @@
 
     <!-- Include on the the classes for development -->
     <target name="package" depends="clean">
-        <jar destfile="${deploy.dir}/${app.name}.war" basedir="${src.dir}" excludes="**/*.svn"/>
+        <jar destfile="${deploy.dir}/${app.name}.war" basedir="${src.dir}"
+             excludes="**/*.svn"/>
     </target>
 
     <!-- Make new versions of the jar files.
