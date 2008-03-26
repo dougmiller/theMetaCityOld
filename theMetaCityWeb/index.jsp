@@ -1,9 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://com.themetacityweb" prefix="tmc" %>
+<%@ taglib uri="http://com.themetacity" prefix="tmc" %>
 
-<jsp:useBean id="ImportantNoticeBean" scope="page" class="com.themetacityweb.beans.ImportantNoticeProcessBean"/>
+<jsp:useBean id="ImportantNoticeBean" scope="page" class="com.themetacity.beans.ImportantNoticeProcessBean"/>
 
-<jsp:useBean id="ArticleProcessBean" scope="page" class="com.themetacityweb.beans.ArticleProcessBean">
+<jsp:useBean id="ArticleProcessBean" scope="page" class="com.themetacity.beans.ArticleProcessBean">
     <jsp:setProperty name="ArticleProcessBean" property="year" value="${param.year}"/>
     <jsp:setProperty name="ArticleProcessBean" property="month" value="${param.month}"/>
     <jsp:setProperty name="ArticleProcessBean" property="day" value="${param.day}"/>
@@ -25,8 +25,15 @@
         </c:forEach>
     </c:when>
     <c:otherwise>
-        <p>There are no articles for this criteria.</p>
-        <p>Perhaps <a href="/<c:url value="archive.jsp"/>">you could try the archive</a> or <a href="/<c:url value="tags.jsp"/>">search via catagory tags.</a></p>
+        <c:choose>
+            <c:when test="${not empty param.year or not empty param.title}">
+                <p>There are no articles for this criteria.</p>
+                <p>Perhaps <a href="/<c:url value="archive.jsp"/>">you could try the archive</a> or <a href="/<c:url value="tags.jsp"/>">search via catagory tags.</a></p>
+            </c:when>
+            <c:otherwise>
+                <p>There is nothing in here yet.</p>
+            </c:otherwise>
+        </c:choose>
     </c:otherwise>
 </c:choose>
 

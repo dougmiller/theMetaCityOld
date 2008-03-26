@@ -62,7 +62,7 @@
         </div>
 
         <!-- The Cool Links (tm) div -->
-        <jsp:useBean id="linksBean" scope="page" class="com.themetacityweb.beans.LinkProcessBean"/>
+        <jsp:useBean id="linksBean" scope="page" class="com.themetacity.beans.LinkProcessBean"/>
         <div>
             <h2>Cool Links</h2>
             <ul>
