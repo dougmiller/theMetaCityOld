@@ -4,4 +4,4 @@
 <%@ include file="/WEB-INF/jspf/security.jspf" %>
 
 <c:set var="loggedIn" value="false" scope="session" />
-<c:redirect url="login.jsp" />
+<c:redirect url="index.jsp" />

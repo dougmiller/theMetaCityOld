@@ -11,7 +11,7 @@
 <body>
 
 <c:if test="${param.submit == 'submit'}">
-    <jsp:useBean id="LoginBean" scope="page" class="com.themetacityadmin.beans.LoginBean">
+    <jsp:useBean id="LoginBean" scope="page" class="com.themetacity.beans.LoginBean">
         <jsp:setProperty name="LoginBean" property="username" value="${param.username}"/>
         <jsp:setProperty name="LoginBean" property="password" value="${param.password}"/>
     </jsp:useBean>
@@ -44,13 +44,11 @@
 
         <!-- Submit/reset buttons -->
         <div class="buttonsbox">
-            <button type="submit" name="submit" value="submit" class="submitbutton"><img src="siteimages/tick.png"
-                                                                                         alt="Accept and submit tick."/>Submit!
-            </button>
-            <button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Redo the form arrow"/>Clear!
-            </button>
+            <button type="submit" name="submit" value="submit" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button>
+            <button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Redo the form"/>Clear!</button>
         </div>
     </form>
+    <p>Passphrases are case sensitive.</p>
 </div>
 </body>
 </html>
