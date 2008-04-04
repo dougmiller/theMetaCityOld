@@ -122,4 +122,18 @@
         </attribute>
     </tag>
 
+    <!-- Admin tags -->
+    <tag>
+        <name>adminLinks</name>
+        <tag-class>com.themetacity.admintags.Links</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>linkBean</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.LinkBean</type>
+        </attribute>
+    </tag>
+
 </taglib>

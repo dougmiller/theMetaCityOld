@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  */
 public class LinkBean {
+    private String linkID;
     private String linkURL;
     private String descText;
     private String datePosted;
@@ -37,5 +38,13 @@ public class LinkBean {
 
     public void setDatePosted(String datePosted) {
         this.datePosted = datePosted;
+    }
+
+    public String getLinkID() {
+        return linkID;
+    }
+
+    public void setLinkID(String linkID) {
+        this.linkID = linkID;
     }
 }

@@ -56,8 +56,8 @@ public class ArchiveEntry extends SimpleTagSupport {
     }
 
     /**
-     * Builds the date link for each article. It shows the year month and day the article was published and then links the respective date to show all the article publised on that date
-     * e.g. 2007 (links to articles in 2007) / 12 (links to articles in 2007/12) / 1 (links to articles on the 2007/12/1)
+     * Builds the date link for each article. It shows the year month and day the article was published and then Links the respective date to show all the article publised on that date
+     * e.g. 2007 (Links to articles in 2007) / 12 (Links to articles in 2007/12) / 1 (Links to articles on the 2007/12/1)
      *
      * @param dateToBuild is the date string to convert and do operations on.
      * @return a anchor string with the dates seperated out and linked

@@ -2,6 +2,7 @@ package com.themetacity.beans;
 
 import com.themetacity.typebeans.ProfileBean;
 import com.themetacity.utilities.DatabaseBean;
+import com.themetacity.utilities.SecurityBean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,30 +18,25 @@ public class ProfileProcessBean {
 
     LinkedList<ProfileBean> listOfBeans = new LinkedList<ProfileBean>();    // The list of beans
 
-    private String author;    // The username that can be passed in as an optional argument
+    private String author = "";
+    private String password = "";
+    private String contact = "";
+    private String about = "";
+    private String pseudonym = "";
 
     static Logger logger = Logger.getLogger(ProfileProcessBean.class);
 
+    DatabaseBean dbaBean = new DatabaseBean();
+
+
     public ProfileProcessBean() {
-        author = "";
     }
 
-    /**
-     * Process the results of a database connection that retuns a ResultSet of a statement into profile beans that are
-     * passed to a custom tag for output.
-     * <p/>
-     * The statment selects a profile(s) and returns them to this method as a ResultSet. The results set is then
-     * iterated over and each record is used to populate a ProfileBean. Once populated the ProfileBean is added to a
-     * LinkedList and once all records have been processed the list is returned.
-     *
-     * @return A linked list of ProfileBeans
-     */
-    public LinkedList<ProfileBean> getProfiles() {
-        DatabaseBean dbaBean = new DatabaseBean();
+    private LinkedList<ProfileBean> processQuery() {
         try {
             // Use a statment that returns them all the users.
             // Arguments have not been implimented yet
-            ResultSet result = dbaBean.executeQuery(buildProfileQuery(author));
+            ResultSet result = dbaBean.executeQuery();
 
             while (result.next()) {
                 ProfileBean profileBean = new ProfileBean();              // Make a new bean to be populated
@@ -54,35 +50,101 @@ public class ProfileProcessBean {
                 TagProcessBean tagProcessBean = new TagProcessBean();
                 tagProcessBean.setUser(result.getString("username"));     // Set the user in the TagProcessBean
 
-                profileBean.setTags(tagProcessBean.getTags());            // Assign the results to the bean
+                profileBean.setTags(tagProcessBean.getAuthorTags(tagProcessBean.getUser()));            // Assign the results to the bean
 
                 listOfBeans.add(profileBean);                             // Add the newly populated profile to the list, it could be one or many, it doesnt really matter
             }
-            // Close the open database connections, returning it to the pool
+            // Close the Result Set
             result.close();
+            // Close the database connection
             dbaBean.close();
         }
         catch (SQLException SQLEx) {
             logger.warn("There is an error with the database layer.");
             logger.warn(SQLEx);
         }
+
         return listOfBeans; // Return the list full of populated beans
     }
 
+    private int processUpdate() {
+        return dbaBean.executeUpdate();
+    }
+
     /**
-     * Builds the database query for profiles
+     * Finds all the authors matching the parameters
      *
-     * @param author is the user to select from.
-     * @return String of the statment ready to execute
+     * @return LinkedList of the authors typebean
      */
-    public String buildProfileQuery(String author) {
-        // If the author is set then return a query string for selecting only that author
-        if (author.equals("")) {
-            return "SELECT * FROM users;";
+    public LinkedList<ProfileBean> getProfiles() {
+        try {
+            if (author.equals("")) {
+                dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM users;"));
+            } else {
+                dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM users WHERE username = ?;"));
+                dbaBean.getPrepStmt().setString(1, author);
+            }
+
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+        return processQuery();
+    }
+
+    /**
+     * Queries the database as to weather the uername/password combination is valid.
+     *
+     * @return 0 if the username/password combination does not exist. Return 1 if it does. Becasue usernames are unique there can not be any other value
+     */
+    public Boolean getValidUser() {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?;"));
+            dbaBean.getPrepStmt().setString(1, author);
+            dbaBean.getPrepStmt().setString(2, password);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
         }
 
-        // Otherwise select everyone
-        return "SELECT * FROM users WHERE username = '" + author + "';";
+        LinkedList<ProfileBean> profile = processQuery();
+
+        return profile.size() > 0;
+    }
+
+    /**
+     * Change a users password.
+     *
+     * @return 1 if the password has been changed successfuly. 0 if it has not been changed.
+     */
+    public Boolean getChangePassword() {
+
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE users SET password = ? WHERE username = ?;"));
+            dbaBean.getPrepStmt().setString(1, password);
+            dbaBean.getPrepStmt().setString(2, author);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+
+        return processUpdate() > 0;
+    }
+
+    /**
+     * Updates the users profile
+     *
+     * @return reteun 1 if the user's profile has been updated successfully. 0 Otherwise.
+     */
+    public Boolean getUpdateProfile() {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE users SET contact = ? about = ? pseudonym = ? WHERE username = ?;"));
+            dbaBean.getPrepStmt().setString(1, contact);
+            dbaBean.getPrepStmt().setString(2, about);
+            dbaBean.getPrepStmt().setString(3, pseudonym);
+            dbaBean.getPrepStmt().setString(4, author);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+
+        return processUpdate() > 0;
     }
 
     public String getAuthor() {
@@ -91,5 +153,38 @@ public class ProfileProcessBean {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        SecurityBean security = new SecurityBean();
+        this.password = security.getSHA512OfString(password, author);
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getPseudonym() {
+        return pseudonym;
+    }
+
+    public void setPseudonym(String pseudonym) {
+        this.pseudonym = pseudonym;
     }
 }

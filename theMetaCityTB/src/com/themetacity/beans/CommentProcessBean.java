@@ -14,49 +14,69 @@ import java.util.LinkedList;
  */
 public class CommentProcessBean {
 
-    ResultSet result;                       // The return of the call to the database
-    LinkedList<CommentBean> listOfBeans = new LinkedList<CommentBean>();    // The list containing commentBeans
+    DatabaseBean dbaBean = new DatabaseBean();
 
-    private int article = 0;                    // The article to fetch comments for
+    private int article = 0;
+    private int comment = 0;
 
     static Logger logger = Logger.getLogger(CommentProcessBean.class);
 
     /**
      * @return listOfBeans A LinkedList of populated CommentBeans
      */
-    public LinkedList getComments() {
-        DatabaseBean dbBean = new DatabaseBean();
+    private LinkedList<CommentBean> processQuery() {
 
-
+        LinkedList<CommentBean> listOfBeans = new LinkedList<CommentBean>();
+        ResultSet result = dbaBean.executeQuery();
         try {
-            result = dbBean.executeQuery(constructQuery());
-
 
             while (result.next()) {
-                CommentBean comment = new CommentBean();    // Make a new comment bean to populate
+                CommentBean comment = new CommentBean();
 
-                // Now populate the bean with the reult from the row of the database call
+                // Now populate the bean with the result from the row of the database call
                 comment.setName(result.getString("author"));
                 comment.setContact(result.getString("contact"));
                 comment.setDateTime(result.getDate("date"));
                 comment.setComment(result.getString("comment"));
 
-                listOfBeans.add(comment);                   // Add the now populated bean to the list
+                listOfBeans.add(comment);
 
             }
-
+            // Close the Result Set
+            result.close();
+            // Close the database connection
+            dbaBean.close();
 
         } catch (SQLException SQLEx) {
             logger.warn("You had an SQL exception");
             logger.warn(SQLEx);
         }
 
-        return listOfBeans;     // Reutrn the now populated list
+        return listOfBeans;
     }
 
-    private String constructQuery() {
-        return "SELECT * FROM comments WHERE articleID = " + getArticle() + "ORDER BY commentID ASCENDING;";
+    public LinkedList<CommentBean> getCommentsForArticle() {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM comments WHERE articleID = ?;"));
+            dbaBean.getPrepStmt().setInt(1, article);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+
+        return processQuery();
     }
+
+/*    private LinkedList<CommentBean> getIndividualCommentsForArticle() {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM comments WHERE articleID = ? AND commentID = ?;"));
+            dbaBean.getPrepStmt().setInt(1, article);
+            dbaBean.getPrepStmt().setInt(2, comment);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+
+        return processQuery();
+    }*/
 
     public int getArticle() {
         return article;
@@ -64,5 +84,13 @@ public class CommentProcessBean {
 
     public void setArticle(int article) {
         this.article = article;
+    }
+
+    public int getComment() {
+        return comment;
+    }
+
+    public void setComment(int comment) {
+        this.comment = comment;
     }
 }

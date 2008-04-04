@@ -29,14 +29,14 @@ public class ArchiveEntryTest {
     }
 
     /**
-     * Test that article title links are converted correctly form space delimeted links to hyphen delimted links so the a tags will work
+     * Test that article title Links are converted correctly form space delimeted Links to hyphen delimted Links so the a tags will work
      */
     @Test public void convertTitleToWeb() {
         assertEquals("hyphens to spaces", "This-should-be-the-link", archiveEntry.convertTitleToWeb("This should be the link"));
     }
 
     /**
-     * Tests that the date links are built correctly
+     * Tests that the date Links are built correctly
      */
     @Test public void buildDateLink() {
         String goodexpected = "<a href=\"/2007\" />2007</a>-<a href=\"/2007/11\" />11</a>-<a href=\"/2007/11/16\" />16</a>";

@@ -1,5 +1,7 @@
 package com.themetacity.typebeans;
 
+import java.util.Date;
+
 /**
  * This is the class that represents important messages.
  * They have a date range that they should be shown and
@@ -10,8 +12,8 @@ public class ImportantNoticeBean {
     // Class variables
     private String author;      // As the pseudonym not username
     private String message;
-    /* NB There are date fields in the database but they do not need
-       to be represented here. (Mabey...we will see) */
+    private Date dateTo;
+    private Date dateFrom;
 
     // Default constructor
     public ImportantNoticeBean() {
@@ -34,5 +36,21 @@ public class ImportantNoticeBean {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
     }
 }

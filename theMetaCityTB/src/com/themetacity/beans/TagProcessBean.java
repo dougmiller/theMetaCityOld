@@ -12,19 +12,18 @@ import org.apache.log4j.Logger;
 /**
  * This class processes tags for articles and profiles. It is not the search.
  * It makes requests to the database and returns a linkedlist of the results.
- *
- * @see TagSearchProcessBean for more infor on search.
  */
 public class TagProcessBean {
+    DatabaseBean dbaBean;
 
-    // The possible inputs used to construct the database call haveto be initialised
-    String user = "";
-    String articleID = "";  // Is a string becasue its a request parameter
+    private String user = "";
+    private String articleID = "";
 
-    static Logger logger = Logger.getLogger(TagProcessBean.class);    
+    static Logger logger = Logger.getLogger(TagProcessBean.class);
 
     // Zero argment constructor
     public TagProcessBean() {
+        dbaBean = new DatabaseBean();
     }
 
     /**
@@ -33,10 +32,9 @@ public class TagProcessBean {
      *
      * @return a linked list containing TagBean objects
      */
-    public LinkedList<TagBean> getTags() {
+    private LinkedList<TagBean> processQuery() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        DatabaseBean dbBean = new DatabaseBean();
-        ResultSet result = dbBean.executeQuery(constructTagQuery(user, articleID));
+        ResultSet result = dbaBean.executeQuery();
         try {
             while (result.next()) {
                 TagBean tagBean = new TagBean();
@@ -46,10 +44,10 @@ public class TagProcessBean {
 
                 listOfTags.add(tagBean);
             }
-            // Close the result
+            // Close the Result Set
             result.close();
-            // Close the database connection and return it to the pool
-            dbBean.close();
+            // Close the database connection
+            dbaBean.close();
 
         } catch (SQLException SQLEx) {
             logger.warn("Some problem with the SQL");
@@ -59,30 +57,45 @@ public class TagProcessBean {
         return listOfTags;
     }
 
-    /**
-     * Constructs the query used to find the tags used by a user for their profile page
-     *
-     * @param user    is the username to sort tag for.
-     * @param article is the article id to sort tags for
-     * @return SQL query string, the fully built string. Default is for every tag if no paramater is set
-     */
-
-    public String constructTagQuery(String user, String article) {
-        // If the article is set then build and retun a query for them
-        String query = "SELECT tag, count(tag) as timesused " +
-                "FROM articles, articletags ";
-
-        String conditions = "";
-
-        if (!article.equals("")) {
-            conditions += "WHERE articles.articleid = '" + article + "' ";
-        } else if (!user.equals("")) {
-            conditions += "WHERE articles.author = '" + user + "' ";
+    public LinkedList<TagBean> getAuthorTags(String author) {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("" +
+                    "SELECT tag, count(tag) as timesused " +
+                    "FROM articles, articletags " +
+                    "WHERE articles.author = ? " +
+                    "GROUP BY tag;"));
+            dbaBean.getPrepStmt().setString(1, author);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
         }
-        // Append the final part of the query string
-        query += conditions + ((conditions.length() == 0) ? "WHERE" : "AND") + " articles.articleid = articletags.articleid " +
-                 "GROUP BY tag;";
-        return query;
+        return processQuery();
+    }
+
+    public LinkedList<TagBean> getArticleTags() {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT tag, count(tag) as timesused " +
+                    "FROM articles, articletags " +
+                    "WHERE articles.articleid = ? " +
+                    "AND articles.articleid = articletags.articleid " +
+                    "GROUP BY tag;"));
+            dbaBean.getPrepStmt().setString(1, articleID);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+        return processQuery();
+    }
+
+    public LinkedList<TagBean> getAllTags() {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT tag, count(tag) as timesused " +
+                    "FROM articletags " +
+                    "GROUP BY tag;"));
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+        return processQuery();
     }
 
     public String getUser() {

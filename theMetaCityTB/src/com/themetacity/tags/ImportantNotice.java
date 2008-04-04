@@ -19,8 +19,11 @@ public class ImportantNotice extends SimpleTagSupport {
              JspWriter out = getJspContext().getOut();
         try {
             out.println("<div class=\"importantNotice\">");
-            out.println(importantNotice.getMessage());
-            out.println("<div class=\"noticeAuthor\">- " + importantNotice.getAuthor() + "</div>");
+            out.println("   " + importantNotice.getMessage());
+            out.println("   <div class=\"importantnoticedates\">");
+            out.println("       Posted: " + importantNotice.getDateFrom() + " End: " + importantNotice.getDateTo());
+            out.println("   </div>");
+            out.println("   <div class=\"noticeAuthor\">- " + importantNotice.getAuthor() + "</div>");
             out.println("</div>");
 
         } catch (IOException IOEx) {
