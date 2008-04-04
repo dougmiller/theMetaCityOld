@@ -9,14 +9,21 @@
 
 <c:set var="profileList" value="${ProfileProcessBean.profiles}" scope="page"/>
 
-<c:choose>
+<c:choose>                       
     <c:when test="${not empty profileList}">
         <c:forEach var="filteredProfileList" items="${profileList}">
             <tmc:profile userProfile="${filteredProfileList}"/>
         </c:forEach>
     </c:when>
     <c:otherwise>
-        <p>There is nobody here matching your query.</p>
+        <c:choose>
+            <c:when test="${empty param.author}">
+                <p>There is nobody here yet.</p>
+            </c:when>
+            <c:otherwise>
+                <p>There is nobody here matching your query.</p>
+            </c:otherwise>
+        </c:choose>
     </c:otherwise>
 </c:choose>
 

@@ -10,7 +10,7 @@
 
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
 
-<c:set var="articleResultList" value="${ArticleProcessBean.articles}"/>
+<c:set var="articleResultList" value="${ArticleProcessBean.filteredArticles}"/>
 
 <c:choose>
     <c:when test="${not empty articleResultList}">

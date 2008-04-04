@@ -10,11 +10,17 @@
     <jsp:setProperty name="ArticleProcessBean" property="title" value="${param.title}"/>
 </jsp:useBean>
 
-<c:set var="articleResultList" value="${ArticleProcessBean.articles}"/>
-
+<c:choose>
+    <c:when test="${empty param.year and empty param.title}">
+        <c:set var="articleResultList" value="${ArticleProcessBean.frontpageArticles}"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="articleResultList" value="${ArticleProcessBean.filteredArticles}"/>
+    </c:otherwise>
+</c:choose>
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
 
-<c:forEach var="noticeBean" items="${ImportantNoticeBean.notices}">
+<c:forEach var="noticeBean" items="${ImportantNoticeBean.importantNotices}">
     <tmc:notice importantNotice="${noticeBean}"/>
 </c:forEach>
 
@@ -28,7 +34,9 @@
         <c:choose>
             <c:when test="${not empty param.year or not empty param.title}">
                 <p>There are no articles for this criteria.</p>
-                <p>Perhaps <a href="/<c:url value="archive.jsp"/>">you could try the archive</a> or <a href="/<c:url value="tags.jsp"/>">search via catagory tags.</a></p>
+
+                <p>Perhaps <a href="/<c:url value="archive.jsp"/>">you could try the archive</a> or <a
+                        href="/<c:url value="tags.jsp"/>">search via catagory tags.</a></p>
             </c:when>
             <c:otherwise>
                 <p>There is nothing in here yet.</p>
