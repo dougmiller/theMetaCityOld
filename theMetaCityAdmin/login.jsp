@@ -11,14 +11,15 @@
 <body>
 
 <c:if test="${param.submit == 'submit'}">
-    <jsp:useBean id="LoginBean" scope="page" class="com.themetacity.beans.LoginBean">
-        <jsp:setProperty name="LoginBean" property="username" value="${param.username}"/>
+    <jsp:useBean id="LoginBean" scope="page" class="com.themetacity.beans.ProfileProcessBean">
+        <jsp:setProperty name="LoginBean" property="author" value="${param.username}"/>
         <jsp:setProperty name="LoginBean" property="password" value="${param.password}"/>
     </jsp:useBean>
 
     <c:choose>
         <c:when test="${LoginBean.validUser == true}">
             <c:set var="loggedIn" value="true" scope="session"/>
+            <c:set var="loggedInUser" value="${param.username}" scope="session"/>
             <c:redirect url="index.jsp"/>
         </c:when>
         <c:otherwise>
