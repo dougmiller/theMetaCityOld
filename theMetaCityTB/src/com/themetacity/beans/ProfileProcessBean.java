@@ -131,14 +131,14 @@ public class ProfileProcessBean {
     /**
      * Updates the users profile
      *
-     * @return reteun 1 if the user's profile has been updated successfully. 0 Otherwise.
+     * @return return 1 if the user's profile has been updated successfully. 0 Otherwise.
      */
     public Boolean getUpdateProfile() {
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE users SET contact = ? about = ? pseudonym = ? WHERE username = ?;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE users SET contact = ?, pseudonym = ?, about = ? WHERE username = ?;"));
             dbaBean.getPrepStmt().setString(1, contact);
-            dbaBean.getPrepStmt().setString(2, about);
-            dbaBean.getPrepStmt().setString(3, pseudonym);
+            dbaBean.getPrepStmt().setString(2, pseudonym);
+            dbaBean.getPrepStmt().setString(3, about);
             dbaBean.getPrepStmt().setString(4, author);
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);

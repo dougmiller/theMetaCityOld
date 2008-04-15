@@ -19,7 +19,7 @@ public class ArticleProcessBeanTest {
 
     /**
      * This test all the possible inputs for the query that selects articles.
-     */
+
     @Test public void queryConstructor() {
         // Best case scenario tests
         // Test no argument
@@ -53,7 +53,7 @@ public class ArticleProcessBeanTest {
         assertEquals("Month and title", "SELECT * FROM articles WHERE title = \"First Post\" ORDER BY articleid DESC;", articleProcessBean.constructQuery("", "11", "", "First Post"));
 
     }
-
+   */
     /**
      * Tests that article titles are extracted correctly from the hyphen delimited input
      */

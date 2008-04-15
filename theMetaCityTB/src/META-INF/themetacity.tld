@@ -136,4 +136,18 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>adminProfile</name>
+        <tag-class>com.themetacity.admintags.Profile</tag-class>
+        <body-content>scriptless</body-content>
+
+        <!-- The profile tag requires a profile type bean -->
+        <attribute>
+            <name>userProfile</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.ProfileBean</type>
+        </attribute>
+    </tag>
+
 </taglib>
