@@ -2,9 +2,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 
 -- Database: `theMetaCity`
 -- 
-# Uncomment the next lines if creating from scratch
-# CREATE DATABASE `themetacity` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-# USE `themetacity`;
+-- Uncomment the next lines if creating from scratch
+#CREATE DATABASE `themetacity` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `themetacitycom`;
 
 -- --------------------------------------------------------
 
@@ -22,35 +22,34 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- GRANT ALL ON theMetaCity.* TO 'tmcRoot'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
 
 -- A user for selecting data only. Extra safety net.
-CREATE USER tmcSelector;
-GRANT SELECT ON themetacitycom.* TO 'tmcSelector'@'%';
-
--- A user for undating and inserting records.
-CREATE USER tmcAdmin;
-GRANT SELECT, INSERT, UPDATE, DELETE ON theMetaCity.* TO 'tmcAdmin'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
+-- CREATE USER tmcSelector;
+#GRANT SELECT ON themetacity.* TO 'tmcSelector'@'localhost' IDENTIFIED BY PASSWORD '*9AF6DB6DC277180622AC3BD28DD928DE5B8CBD3F';
+-- A user for updating and inserting records.
+-- CREATE USER tmcAdmin;
+#GRANT SELECT, INSERT, UPDATE, DELETE ON themetacity.* TO 'tmcAdmin'@'localhost' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
 
 -- 
 -- Table structure for table `articles`
 -- 
 
 CREATE TABLE `articles` (
-  `articleid` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
+  `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
   `author` varchar(30) NOT NULL COMMENT 'The author who posed this article. References users.username',
   `title` varchar(100) NOT NULL COMMENT 'The title of this article',
-  `articletext` varchar(5000) NOT NULL COMMENT 'The actual content of the article.',
-  `datetime` date NOT NULL COMMENT 'The date this article was published',
-  PRIMARY KEY  (`articleid`),
+  `article_text` text(50000) NOT NULL COMMENT 'The actual content of the article.',
+  `date_time` datetime NOT NULL COMMENT 'The date this article was published',
+  PRIMARY KEY  (`id`),
   KEY `author` (`author`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Article information. Autoincrement articleid.' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Article information. Autoincrement articleid.' AUTO_INCREMENT=1;
 
 -- 
 -- Table structure for table `articletags`
 -- 
 
 CREATE TABLE `articletags` (
-  `articleid` smallint(6) NOT NULL COMMENT 'References an article by articleid',
+  `id` smallint(6) NOT NULL COMMENT 'References an article by articleid',
   `tag` varchar(20) NOT NULL COMMENT 'The text tag',
-  PRIMARY KEY  (`articleid`,`tag`)
+  PRIMARY KEY  (`id`,`tag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='The tags describing the articles';
 
 -- 
@@ -59,22 +58,50 @@ CREATE TABLE `articletags` (
 
 CREATE TABLE `users` (
   `username` varchar(30) NOT NULL COMMENT 'The users username, used for loggining in etc and for references',
-  `password` varchar(64) NOT NULL COMMENT 'The users password. Stored as an SHA-512 hash. the salt is the SHA-512 of the username)',
+  `password` varchar(128) NOT NULL COMMENT 'The users password. Stored as an SHA-512 hash. the salt is the SHA-512 of the username)',
   `pseudonym` varchar(25) NOT NULL COMMENT 'The users pseudonym that is displayed instead of the username',
   `contact` varchar(40) NOT NULL COMMENT 'The email/website users wish to be contacted at.',
-  `about` varchar(5000) NOT NULL COMMENT 'The about text of a user.',
+  `about` varchar(20000) NOT NULL COMMENT 'The about text of a user.',
   PRIMARY KEY  (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Information about users. Passwords, email etc.';
 
-# These come last to make sure that all tables exist before making references to them.
+-- 
+-- Table structure for table `importantNotices`
+-- 
+
+CREATE TABLE `importantnotices` (
+  `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
+  `username` varchar(30) NOT NULL COMMENT 'The user who this message relates to.',
+  `message` varchar(500) NOT NULL COMMENT 'The actual important message.',
+  `date_from` datetime NOT NULL COMMENT 'The date this notice starts from.',
+  `date_to` datetime NOT NULL COMMENT 'The date this notice finished.',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Important notices' AUTO_INCREMENT=1;
+
+
+CREATE TABLE `links` (
+  `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
+  `URL` varchar(150) NOT NULL COMMENT 'The URL to link to',
+  `desc_text` varchar(150) NOT NULL COMMENT 'Desc text that will show up that user click on',
+  `date_posted` datetime NOT NULL COMMENT 'The date this was posted.',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sidebar Links' AUTO_INCREMENT=1;
+
+-- These come last to make sure that all tables exist before making references to them.
 -- 
 -- Constraints for table `articles`
 -- 
 ALTER TABLE `articles`
-  ADD CONSTRAINT `articles_fk` FOREIGN KEY (`author`) REFERENCES `users` (`username`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `articles_fk` FOREIGN KEY (`author`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- 
--- Constraints for table `articletags`
+-- Constraints for table `articleTags`
 -- 
 ALTER TABLE `articletags`
-  ADD CONSTRAINT `articletags_fk` FOREIGN KEY (`articleid`) REFERENCES `articles` (`articleid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `articletags_fk` FOREIGN KEY (`id`) REFERENCES `articles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `importantNotices`
+--
+ALTER TABLE `importantnotices`
+  ADD CONSTRAINT `users_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
