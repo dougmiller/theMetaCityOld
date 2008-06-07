@@ -51,13 +51,12 @@
     Title: <input type="text" name="descText"/><br/>
     Link: <input type="text" name="linkURL"/><br/>
     <button type="submit" name="submit" value="newlink" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button>
-    <br/>
     <button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear the form"/>Clear!</button>
 </form>
-
+<br />
 <div>
     <c:forEach var="listOfLinks" items="${linkFormAction.allLinks}">
-        <form action="links.jsp" method="GET">
+        <form action="links.jsp" method="post">
             <tmc:adminLinks linkBean="${listOfLinks}"/>
         </form>
     </c:forEach>

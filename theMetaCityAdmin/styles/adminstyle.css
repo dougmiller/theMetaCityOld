@@ -1,60 +1,13 @@
-@charset "utf-8";
-
-body {
-    font-family: Helvetica, Skia, Arial Hebrew, sans-serif;
-}
-
-.wrapper {
-    width: 277px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.formwrapper {
-    position: relative;
-    top: 175px;
-}
-
-.alert {
-    border: 1px solid red;
-    margin-bottom: 3px;
-    padding: 2px;
-}
-
-.formbox {
-    border: 1px solid black;
-    padding: 2px;
-}
-
-.formboxrow {
-}
-
-.formboxrowleft {
-    float: left;
-}
-
-.formboxrowright {
-    padding-left: 100px;
-}
-
-input.text {
+img {
     border: 0;
 }
 
-input.password {
-    border: 0;
-}
-
-/* The markup to style the buttons */
-.buttonsbox {
-    padding-left: 100px;
-}
-
-.buttonsbox button {
+/* Buttons */
+button {
     background-color: #f5f5f5; /* The border is a seperate entity than the background */
     border: 1px solid #dedede; /* Get a drop shadow effect */
     border-top: 1px solid #eee;
-    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
     margin: 2px 5px 0 0;
     vertical-align: middle;
 }
@@ -68,14 +21,14 @@ input.password {
     background-color: #ccffcc;
     border-color: #99bb99;
     border-top-color: #bbeebb;
-    border-left-color: #bbeebb;
+    border-right-color: #bbeebb;
 }
 
 .submitbutton:active {
     background-color: #aaddaa;
     border-color: #779977;
     border-top-color: #99cc99;
-    border-left-color: #99cc99;
+    border-right-color: #99cc99;
 }
 
 /* End of submit button */
@@ -86,19 +39,32 @@ input.password {
     background-color: #ccccff;
     border-color: #9999bb;
     border-top-color: #bbbbee;
-    border-left-color: #bbbbee;
+    border-right-color: #bbbbee;
 }
 
 .reloadbutton:active {
     background-color: #aaaadd;
     border-color: #777799;
     border-top-color: #9999cc;
-    border-left-color: #9999cc;
+    border-right-color: #9999cc;
 }
 
-/* End of buttons markup */
+/* End of reload button */
 
-.info {
-    margin: 5px 0 0 0;
-    font-size: 10pt;
+/* The specifics for the delete button */
+.deletebutton:hover {
+    color: red;
+    background-color: #ffcccc;
+    border-color: #cc9999;
+    border-top-color: #ccbb99;
+    border-right-color: #ccbb99;
 }
+
+.deletebutton:active {
+    background-color: #ddaaaa;
+    border-color: #997777;
+    border-top-color: #cc9999;
+    border-right-color: #cc9999;
+}
+
+/* End of delete button */

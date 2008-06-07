@@ -10,6 +10,7 @@
 <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-1"/>
     <link href="/styles/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="styles/adminstyle.css" rel="stylesheet" type="text/css" media="screen"/>
     <title>theMetaCity.com Administration</title>
 </head>
 

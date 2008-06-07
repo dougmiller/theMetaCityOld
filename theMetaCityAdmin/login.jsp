@@ -28,28 +28,31 @@
     </c:choose>
 </c:if>
 
-<c:if test="${invalidUser == true}">
-    <div>Invalid username/password</div>
-</c:if>
+<div class="wrapper">
+    <div class="formwrapper">
+        <c:if test="${invalidUser == true}">
+            <div class="alert">Invalid username / passphrase</div>
+        </c:if>
+        <div class="formbox">
+            <form class="loginform" method="post" action="login.jsp">
+                <div class="formboxrow">
+                    <div class="formboxrowleft">Username:</div>
+                    <div class="formboxrowright"><input type="text" name="username" value="${param.username}"/></div>
+                </div>
+                <div class="formboxrow">
+                    <div class="formboxrowleft">Password:</div>
+                    <div class="formboxrowright"><input type="password" name="password"/></div>
+                </div>
 
-<div class="formbox">
-    <form class="loginform" method="POST" action="login.jsp">
-        <div class="formboxrow">
-            <div class="formboxrowleft">Username:</div>
-            <div class="formboxrowright"><input type="text" name="username"/></div>
+                <!-- Submit/reset buttons -->
+                <div class="buttonsbox">
+                    <button type="submit" name="submit" value="submit" class="submitbutton"><img src="siteimages/tick.png" alt="Login"/>Login</button>
+                    <button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear"/>Clear</button>
+                </div>
+            </form>
+            <p class="info">Username and passphrase are case sensitive.</p>
         </div>
-        <div class="formboxrow">
-            <div class="formboxrowleft">Password:</div>
-            <div class="formboxrowright"><input type="password" name="password"/></div>
-        </div>
-
-        <!-- Submit/reset buttons -->
-        <div class="buttonsbox">
-            <button type="submit" name="submit" value="submit" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button>
-            <button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Redo the form"/>Clear!</button>
-        </div>
-    </form>
-    <p>Passphrases are case sensitive.</p>
+    </div>
 </div>
 </body>
 </html>
