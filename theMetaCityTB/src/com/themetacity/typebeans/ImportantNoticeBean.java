@@ -9,19 +9,29 @@ import java.util.Date;
  *
  */
 public class ImportantNoticeBean {
-    // Class variables
+    private String messageID;
+    private String username;
     private String author;      // As the pseudonym not username
     private String message;
     private Date dateTo;
     private Date dateFrom;
 
-    // Default constructor
-    public ImportantNoticeBean() {
-        author = "Flux Cap";
-        message = "I am feeling attracted to you but repeled when a look a different way";
+    public String getMessageID() {
+        return messageID;
     }
 
-    // Getters/setters
+    public void setMessageID(String messageID) {
+        this.messageID = messageID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getAuthor() {
         return author;
     }

@@ -15,7 +15,7 @@ public class Comment extends SimpleTagSupport {
 
     private CommentBean commentStub = new CommentBean();
 
-    static Logger logger = Logger.getLogger(Comment.class);
+    private static final Logger logger = Logger.getLogger(Comment.class);
 
 
     // Start processing

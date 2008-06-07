@@ -18,7 +18,7 @@ public class Article extends SimpleTagSupport {
     // Variables
     private ArticleBean article = new ArticleBean();
 
-    static Logger logger = Logger.getLogger(Article.class);
+    private static final Logger logger = Logger.getLogger(Article.class);
 
     // Start processing
     public void doTag() {
@@ -28,10 +28,10 @@ public class Article extends SimpleTagSupport {
 
         try {
             out.println("    <div class=\"newsarticle\">");
-            out.println("        <h2><a href=\"/" + formatTitle(article.getTitle()) + "\">" + article.getTitle() + "</a></h2>");
+            out.println("        <h2><a href=\"/" + article.buildTitle(article.getTitle()) + "\">" + article.getTitle() + "</a></h2>");
             out.println("        " + article.getArticleText());
-            out.println("        <span>Posted on: " + article.getDateTime() + "</span><br />");
-            out.println("        <span class=\"tagsspan\">Posted under: " + formatTags(article.getTags()) + "</span>");
+            out.println("        <p>Posted on: " + article.getDateTime() + "</p>");
+            out.println("        <p class=\"tagsspan\">Posted under: " + formatTags(article.getTags()) + "</p>");
             out.println("    </div>");
 
         } catch (IOException IOEx) {
@@ -60,10 +60,6 @@ public class Article extends SimpleTagSupport {
         }
 
         return outputString.toString().trim();
-    }
-
-    private String formatTitle(String title) {
-        return title.replace(" ", "-");
     }
 
     public ArticleBean getArticle() {

@@ -67,8 +67,11 @@ public class ProfileProcessBean {
         return listOfBeans; // Return the list full of populated beans
     }
 
+    // Perforn the update commands
     private int processUpdate() {
-        return dbaBean.executeUpdate();
+        int result = dbaBean.executeUpdate();
+        dbaBean.close();
+        return result;
     }
 
     /**
@@ -161,7 +164,7 @@ public class ProfileProcessBean {
 
     public void setPassword(String password) {
         SecurityBean security = new SecurityBean();
-        this.password = security.getSHA512OfString(password, author);
+        this.password = security.hashPasswordWithSalt(password, author);
     }
 
     public String getContact() {

@@ -41,5 +41,6 @@ public class ArchiveEntryTest {
     @Test public void buildDateLink() {
         String goodexpected = "<a href=\"/2007\" />2007</a>-<a href=\"/2007/11\" />11</a>-<a href=\"/2007/11/16\" />16</a>";
         assertEquals("Good regular date", goodexpected, archiveEntry.buildDateLink("2007-11-16"));
+        assertEquals("Bad entry with time date", goodexpected, archiveEntry.buildDateLink("2007-11-16 10:43 EST"));
     }
 }

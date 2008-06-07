@@ -57,12 +57,20 @@ public class TagProcessBean {
         return listOfTags;
     }
 
+    // Perforn the update commands
+    private int processUpdate() {
+        int result = dbaBean.executeUpdate();
+        dbaBean.close();
+        return result;
+    }
+
     public LinkedList<TagBean> getAuthorTags(String author) {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("" +
                     "SELECT tag, count(tag) as timesused " +
                     "FROM articles, articletags " +
                     "WHERE articles.author = ? " +
+                    "AND articles.id = articletags.id " +
                     "GROUP BY tag;"));
             dbaBean.getPrepStmt().setString(1, author);
         } catch (SQLException SQLEx) {
@@ -76,8 +84,8 @@ public class TagProcessBean {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT tag, count(tag) as timesused " +
                     "FROM articles, articletags " +
-                    "WHERE articles.articleid = ? " +
-                    "AND articles.articleid = articletags.articleid " +
+                    "WHERE articles.id = ? " +
+                    "AND articles.id = articletags.id " +
                     "GROUP BY tag;"));
             dbaBean.getPrepStmt().setString(1, articleID);
         } catch (SQLException SQLEx) {

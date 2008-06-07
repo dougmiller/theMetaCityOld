@@ -12,14 +12,6 @@ public class CommentBean {
     private String dateTime;        // The dateTime the comment was posted
     private String comment;         // The actual comment
 
-    // Default constructor
-    public CommentBean() {
-        name = "Michael Faraday";
-        contact = "m.fa@ra.day";
-        dateTime = new Date().toString();
-        comment = "I luv Flux!";
-    }
-
     public String getName() {
         return name;
     }

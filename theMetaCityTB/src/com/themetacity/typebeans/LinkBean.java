@@ -1,7 +1,5 @@
 package com.themetacity.typebeans;
 
-import java.util.Date;
-
 /**
  */
 public class LinkBean {
@@ -9,12 +7,6 @@ public class LinkBean {
     private String linkURL;
     private String descText;
     private String datePosted;
-
-    public LinkBean(){
-        linkURL = "http://www.themetacity.com/";
-        descText = "theMetacity.com is great!";
-        datePosted = new Date().toString();
-    }
 
     public String getLinkURL() {
         return linkURL;

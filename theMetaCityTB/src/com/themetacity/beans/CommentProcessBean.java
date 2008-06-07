@@ -57,7 +57,7 @@ public class CommentProcessBean {
 
     public LinkedList<CommentBean> getCommentsForArticle() {
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM comments WHERE articleID = ?;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM comments WHERE id = ?;"));
             dbaBean.getPrepStmt().setInt(1, article);
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
@@ -65,18 +65,6 @@ public class CommentProcessBean {
 
         return processQuery();
     }
-
-/*    private LinkedList<CommentBean> getIndividualCommentsForArticle() {
-        try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM comments WHERE articleID = ? AND commentID = ?;"));
-            dbaBean.getPrepStmt().setInt(1, article);
-            dbaBean.getPrepStmt().setInt(2, comment);
-        } catch (SQLException SQLEx) {
-            logger.fatal(SQLEx);
-        }
-
-        return processQuery();
-    }*/
 
     public int getArticle() {
         return article;

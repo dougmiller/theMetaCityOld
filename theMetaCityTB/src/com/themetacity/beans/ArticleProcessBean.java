@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.regex.Pattern;
 
 /**
  * This is the bean that process the articles from the database into ArticleBeans and then presents them for the tag.
@@ -17,14 +16,19 @@ public class ArticleProcessBean {
     private DatabaseBean dbaBean = new DatabaseBean();
 
     // Selectors for the the article
-    private String year = "";
-    private String month = "";
-    private String day = "";
-    private String title = "";
 
-    private String tag = "";
+    private String articleID = "";
+    private String title = null;
+    private String author = "";
+    private String articleText = "";
+    private String[] articleTags;
+    private String articleOtherTags;
+    private String year = null;
+    private String month = null;
+    private String day = null;
+    private String searchTag = "";
 
-    static Logger logger = Logger.getLogger(ArticleProcessBean.class);
+    private static final Logger logger = Logger.getLogger(ArticleProcessBean.class);
 
     public ArticleProcessBean() {
     }
@@ -49,17 +53,43 @@ public class ArticleProcessBean {
             // For every row that is returned from the database query populate a bean and add
             // it to a linked list so that the JSTL can iterate over it.
             while (result.next()) {
-                // Make a new ArticleBean that represents one article
+                // Make a new ArticleBeanTest that represents one article
                 ArticleBean articleBean = new ArticleBean();
                 // Set the properties of the bean
-                articleBean.setAuthor(result.getString("author"));
-                articleBean.setTitle(result.getString("title"));
-                articleBean.setArticleText(result.getString("articletext"));
-                articleBean.setDateTime(result.getDate("datetime"));
+                try {
+                    articleBean.setArticleID(result.getString("id"));
+                } catch (SQLException SQLEx) {
+                    //munch
+                }
+                try {
+                    articleBean.setAuthor(result.getString("author"));
+                } catch (SQLException SQLEx) {
+                    //munch
+                }
+                try {
+                    articleBean.setTitle(result.getString("title"));
+                } catch (SQLException SQLEx) {
+                    //munch
+                }
+                try {
+                    articleBean.setArticleText(result.getString("article_text"));
+                } catch (SQLException SQLEx) {
+                    //munch
+                }
+                try {
+                    articleBean.setDateTime(result.getTimestamp("date_time"));
+                } catch (SQLException SQLEx) {
+                    //munch
+                }
+
                 // Process this articles tags
-                TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setArticleID("" + result.getInt("articleID"));     // Set the user in the TagProcessBean *cast to String*
-                articleBean.setTags(tagProcessBean.getArticleTags());             // Assign the results to the bean
+                try {
+                    TagProcessBean tagProcessBean = new TagProcessBean();
+                    tagProcessBean.setArticleID("" + result.getInt("id"));     // Set the user in the TagProcessBean *cast to String*
+                    articleBean.setTags(tagProcessBean.getArticleTags());             // Assign the results to the bean
+                } catch (SQLException SQLEx) {
+                    logger.warn(SQLEx);
+                }
 
                 listOfBeans.add(articleBean);                                     //Add the now populated bean to the list to be returned for display
             }
@@ -74,170 +104,316 @@ public class ArticleProcessBean {
         return listOfBeans;
     }
 
+    // Perforn the update commands where you just want things to be closed and finished.
+    // Otherwise call the database manually and do it that way
+    private int processUpdate() {
+        int result = dbaBean.executeUpdate();
+        dbaBean.close();
+        return result;
+    }
+
+    /**
+     * Get the article destined for the front page
+     *
+     * @return a linked list fo the articles
+     */
     public LinkedList<ArticleBean> getFrontpageArticles() {
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles ORDER BY articleid desc LIMIT 5;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT id, title, author, date_time, article_text FROM articles ORDER BY id desc LIMIT 5;"));
         } catch (SQLException SQLEx) {
-
             logger.fatal(SQLEx);
         }
-        logger.debug(dbaBean.getPrepStmt().toString());
         return processQuery();
     }
 
+    /**
+     * Filter the articles according to date or title or both
+     *
+     * @return a linked list of filtered articles
+     */
     public LinkedList<ArticleBean> getFilteredArticles() {
         try {
-            if (!title.equals("")) { // Title is set
-                if (!day.equals("")) {
-                    dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE YEAR(dateTime) = ? AND MONTH(dateTime) = ? AND DAY(dateTime) = ? AND title = ? ORDER BY articleid desc;"));
-                    dbaBean.getPrepStmt().setString(1, year);
-                    dbaBean.getPrepStmt().setString(2, month);
-                    dbaBean.getPrepStmt().setString(3, day);
-                    dbaBean.getPrepStmt().setString(4, extactTitle(title));
-                } else if (!month.equals("")) {
-                    dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE YEAR(dateTime) = ? AND MONTH(dateTime) = ? AND title = ? ORDER BY articleid desc;"));
-                    dbaBean.getPrepStmt().setString(1, year);
-                    dbaBean.getPrepStmt().setString(2, month);
-                    dbaBean.getPrepStmt().setString(3, extactTitle(title));
-                } else if (!year.equals("")) {
-                    dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE YEAR(dateTime) = ? AND title = ? ORDER BY articleid desc;"));
-                    dbaBean.getPrepStmt().setString(1, year);
-                    dbaBean.getPrepStmt().setString(2, extactTitle(title));
-                } else {
-                    dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE title = ? ORDER BY articleid desc;"));
-                    dbaBean.getPrepStmt().setString(1, extactTitle(title));
-                }
-            } else { // No title
-                if (!day.equals("")) {
-                    dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE YEAR(dateTime) = ? AND MONTH(dateTime) = ? AND DAY(dateTime) = ? ORDER BY articleid desc;"));
-                    dbaBean.getPrepStmt().setString(1, year);
-                    dbaBean.getPrepStmt().setString(2, month);
-                    dbaBean.getPrepStmt().setString(3, day);
-                } else if (!month.equals("")) {
-                    dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE YEAR(dateTime) = ? AND MONTH(dateTime) = ?  ORDER BY articleid desc;"));
-                    dbaBean.getPrepStmt().setString(1, year);
-                    dbaBean.getPrepStmt().setString(2, month);
-                } else if (!year.equals("")) {
-                    dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE YEAR(dateTime) = ? ORDER BY articleid desc;"));
-                    dbaBean.getPrepStmt().setString(1, year);
-                } else { // Deault case of nothing being passed as an argument
-                    dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles ORDER BY articleid desc;"));
-                }
-            }
-        } catch (SQLException SQLEx) {
+            ArticleBean articleBean = new ArticleBean();
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE " +
+                    "(YEAR(date_time) = ? OR ? is null) " +
+                    "AND (MONTH(date_time) = ? OR ? is null) AND " +
+                    "(DAY(date_time) = ? OR ? is null) AND " +
+                    "(title = ? OR ? is null) " +
+                    "ORDER BY id desc;"));
+            dbaBean.getPrepStmt().setString(1, year);
+            dbaBean.getPrepStmt().setString(2, year);
+            dbaBean.getPrepStmt().setString(3, month);
+            dbaBean.getPrepStmt().setString(4, month);
+            dbaBean.getPrepStmt().setString(5, day);
+            dbaBean.getPrepStmt().setString(6, day);
+            dbaBean.getPrepStmt().setString(7, articleBean.extractTitle(title));
+            dbaBean.getPrepStmt().setString(8, articleBean.extractTitle(title));
+        } catch (SQLException
+                SQLEx) {
             logger.fatal(SQLEx);
         }
-        logger.debug(dbaBean.getPrepStmt().toString());
         return processQuery();
     }
 
+    /**
+     * Return all the articles posted under the given tag
+     *
+     * @return A linked list of articles
+     */
     public LinkedList<ArticleBean> getArticlesWithTag() {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles, articletags " +
-                    "WHERE articles.articleid = articletags.articleid " +
+                    "WHERE articles.id = articletags.id " +
                     "AND articletags.tag = ? " +
-                    "ORDER BY articletags.articleid desc"));
-            dbaBean.getPrepStmt().setString(1, tag);
+                    "ORDER BY articletags.id desc"));
+            dbaBean.getPrepStmt().setString(1, searchTag);
 
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         }
-
-        logger.debug(dbaBean.getPrepStmt().toString());
         return processQuery();
     }
 
     /**
-     * Checks wether a string input is a number
+     * Get an aricle vy the ID
      *
-     * @param numToCheck is the number to check
-     * @return true if the input is indeed a number
+     * @return a linked list of the articles with the matching id
      */
-    public boolean isNumber
-            (String
-                    numToCheck) {
+    public LinkedList<ArticleBean> getArticlesByID() {
         try {
-            Integer.parseInt(numToCheck);
-        } catch (NumberFormatException numformatEx) {
-            return false;
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT id, title, article_text FROM articles WHERE id = ?;"));
+            dbaBean.getPrepStmt().setString(1, articleID);
+
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
         }
-        return true;
+        return processQuery();
     }
 
     /**
-     * @param inputString is the title from the parameters.
-     * @return a string that has the "-" removed and ready for searching.
-     */
-    public String extactTitle
-            (String
-                    inputString) {
-        return inputString.replace("-", " ");
-    }
-
-    /**
-     * * NEVER USED IN CODE * this is the regex used in the URL filter.
+     * Add an article
      *
-     * @param inputString is the input string to check against the regex
-     * @return true if the regex matches the inputString
+     * @return True from succesfully adding a new article or fasle for not adding it
      */
-    public Boolean titleRegex
-            (String
-                    inputString) {
-        return Pattern.matches("([\\w*](-?[\\w*])*)", inputString);
+    public int getAddArticle() {
+        // add the article
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("INSERT INTO articles (author, title, article_text, date_time) VALUES (?, ?, ?, now());"));
+            dbaBean.getPrepStmt().setString(1, author);
+            dbaBean.getPrepStmt().setString(2, title);
+            dbaBean.getPrepStmt().setString(3, articleText);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+
+        int articleResult = dbaBean.executeUpdate();
+
+        // now add the tags
+        dbaBean = new DatabaseBean();
+
+        // get the id of the article just added
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE title = ?;"));
+            dbaBean.getPrepStmt().setString(1, title);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+
+        LinkedList<ArticleBean> articleWithID = processQuery();
+
+        for (ArticleBean article : articleWithID) {
+            articleID = article.getArticleID();
+        }
+
+        int tagsResult = updateArticleTags();
+
+        if (articleResult > 0 && tagsResult > 0) {
+            return 1;
+        }
+
+        return 0;
     }
 
-    public String getYear
-            () {
+    /**
+     * Add an article
+     *
+     * @return True from succesfully adding a new article or fasle for not adding it
+     */
+    public int getUpdateArticle() {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE articles SET title = ?, article_text = ? WHERE id = ?;"));
+            dbaBean.getPrepStmt().setString(1, title);
+            dbaBean.getPrepStmt().setString(2, articleText);
+            dbaBean.getPrepStmt().setString(3, articleID);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+
+        int articleResult = dbaBean.executeUpdate();
+        int tagsResult = updateArticleTags();
+
+        dbaBean.close();
+
+        if (articleResult > 0 && tagsResult > 0) {
+            return 1;
+        }
+        return 0;
+    }
+
+    private int updateArticleTags() {
+        // transaction
+        // Clear out the old tags
+        DatabaseBean tagDBBean = new DatabaseBean();
+        try {
+            tagDBBean.setPrepStmt(tagDBBean.getConn().prepareStatement("DELETE FROM articletags WHERE id = ?;"));
+            tagDBBean.getPrepStmt().setString(1, articleID);
+            tagDBBean.executeUpdate();
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+            return 0;
+        }
+        tagDBBean.close();
+
+        // Handle textbox input        
+        String[] textBoxToArray = articleOtherTags.split(",");
+        String[] tempTotalTags = new String[textBoxToArray.length + articleTags.length];
+        System.arraycopy(textBoxToArray, 0, tempTotalTags, 0, textBoxToArray.length);
+        System.arraycopy(articleTags, 0, tempTotalTags, textBoxToArray.length, articleTags.length);
+
+        // Put in new check box ones
+        tagDBBean = new DatabaseBean();
+        for (String tag : tempTotalTags) {
+            try {
+                tagDBBean.setPrepStmt(tagDBBean.getConn().prepareStatement("INSERT INTO articletags VALUES (?, ?);"));
+                tagDBBean.getPrepStmt().setString(1, articleID);
+                tagDBBean.getPrepStmt().setString(2, tag.trim());
+                tagDBBean.executeUpdate();
+            } catch (SQLException SQLEx) {
+                logger.fatal(SQLEx);
+                return 0;
+            }
+        }
+        tagDBBean.close();
+
+        // end transation
+
+        return 1;
+    }
+
+    /**
+     * Delete an article by it's id number
+     *
+     * @return and integer shoing the number of rows affected
+     */
+    public int getDeleteArticle() {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("DELETE FROM articles WHERE id = ?;"));
+            dbaBean.getPrepStmt().setString(1, articleID);
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+        return processUpdate();
+    }
+
+    /**
+     * Get all the articles so for the edit/delete list in the admin app
+     *
+     * @return a lined list containg all the articles in ArticleBean format
+     */
+    public LinkedList<ArticleBean> getAllAdminArticles() {
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT id, title, article_text, date_time FROM articles GROUP BY id ASC;"));
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        }
+        return processQuery();
+    }
+
+    public String getYear() {
         return year;
     }
 
-    public void setYear
-            (String
-                    year) {
-        this.year = year;
+    public void setYear(String year) {
+        if (!year.equals("")) {
+            this.year = year;
+        }
     }
 
-    public String getMonth
-            () {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth
-            (String
-                    month) {
-        this.month = month;
+    public void setMonth(String month) {
+        if (!month.equals("")) {
+            this.month = month;
+        }
     }
 
-    public String getDay
-            () {
+    public String getDay() {
         return day;
     }
 
-    public void setDay
-            (String
-                    day) {
-        this.day = day;
+    public void setDay(String day) {
+        if (!day.equals("")) {
+            this.day = day;
+        }
     }
 
-    public String getTitle
-            () {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle
-            (String
-                    title) {
-        this.title = title;
+    public void setTitle(String title) {
+        if (!title.equals("")) {
+            this.title = title.trim();
+        }
     }
 
-    public String getTag
-            () {
-        return tag;
+    public String getSearchTag() {
+        return searchTag;
     }
 
-    public void setTag
-            (String
-                    tag) {
-        this.tag = tag;
+    public void setSearchTag(String searchTag) {
+        this.searchTag = searchTag;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getArticleText() {
+        return articleText;
+    }
+
+    public void setArticleText(String articleText) {
+        this.articleText = articleText;
+    }
+
+    public String getArticleID() {
+        return articleID;
+    }
+
+    public void setArticleID(String articleID) {
+        this.articleID = articleID;
+    }
+
+    public String[] getArticleTags() {
+        return articleTags;
+    }
+
+    public void setArticleTags(String[] articleTags) {
+        this.articleTags = articleTags;
+    }
+
+    public String getArticleOtherTags() {
+        return articleOtherTags;
+    }
+
+    public void setArticleOtherTags(String articleOtherTags) {
+        this.articleOtherTags = articleOtherTags;
     }
 }

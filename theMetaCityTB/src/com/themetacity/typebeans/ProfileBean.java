@@ -4,9 +4,6 @@ import java.util.LinkedList;
 
 /**
  * This is the bean that repesents an authors profile for display in the about page.
- *
- * @Author Douglas Miller
- * @Date 11 Nov 2007
  */
 public class ProfileBean {
 
@@ -14,15 +11,6 @@ public class ProfileBean {
     private String contact;
     private String about;
     private LinkedList<TagBean> tags;
-
-    // Default Constructor
-    public ProfileBean() {
-        pseudonym = "Flux Cap";
-        contact = "flux@themetacity.com";
-        about = "Flux keeps the world working. Things would be different without him. " +
-                "Anyone fancy a ride in his Delorian?";
-        tags = new LinkedList<TagBean>();
-    }
 
     public String getPseudonym() {
         return pseudonym;

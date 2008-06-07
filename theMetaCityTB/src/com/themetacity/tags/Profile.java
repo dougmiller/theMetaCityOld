@@ -31,7 +31,7 @@ public class Profile extends SimpleTagSupport {
             out.println("    <h2>" + userProfile.getPseudonym() + "</h2>");
             out.println("    <h2>" + userProfile.getContact() + "</h2>");
             out.println("    " + userProfile.getAbout());
-            out.println("        <span class=\"tagsspan\">" + formatTags(userProfile.getTags()) + "</span>");
+            out.println("        <p class=\"tagsspan\">" + formatTags(userProfile.getTags()) + "</p>");
             out.println("</div>");
 
         } catch (IOException IOEx) {
@@ -51,7 +51,7 @@ public class Profile extends SimpleTagSupport {
         StringBuilder outputString = new StringBuilder();
 
         for (TagBean tag : tagList) {
-            outputString.append("<a href=\"/tags.jsp?tag=").append(tag.getTag()).append("\">").append(tag.getTag()).append("(").append(tag.getNumTimesTagUsed()).append(")").append("</a> ");
+            outputString.append("<a href=\"/tags/").append(tag.getTag()).append("\">").append(tag.getTag()).append("(").append(tag.getNumTimesTagUsed()).append(")").append("</a> ");
         }
         // There are not tagss for this user
         if (outputString.length() == 0) {

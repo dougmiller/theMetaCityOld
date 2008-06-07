@@ -8,6 +8,7 @@ import java.util.LinkedList;
  */
 public class ArticleBean {
 
+    private String articleID;            // The id of the article
     private String title;                // The title of the article
     private String articleText;          // The actual meat of the article
     private String author;               // Who wrote the article
@@ -15,15 +16,35 @@ public class ArticleBean {
     private String dateTime;             // The dateTime/time the artcle was pubished
     private LinkedList<TagBean> tags;    // A list of the tags that this article was published under
 
-    // Default constructor
-    public ArticleBean() {
-        title = "At the edge of the universe...";
-        articleText = "...no articleText is good articleText.";
-        author = "Flux Cap";
-        email = "flux@theMetaCity.com";
-        dateTime = new Date().toString();
-        tags = new LinkedList<TagBean>();
+    /**
+     * @param inputString is the title from the parameters.
+     * @return a string that has the "-" removed and ready for searching.
+     */
+    public String extractTitle(String inputString) {
+        try {
+            return inputString.replace("-", " ");
+        } catch (NullPointerException nullPoint) {
+            return null;
+        }
     }
+
+    /**
+     * Build a hypehn delimeted string
+     *
+     * @param toBuild String to build into the delimeed title
+     * @return a String with the spaced replaced by hyphens
+     */
+    public String buildTitle(String toBuild) {
+        return toBuild.replace(" ", "-");
+    }
+
+    public String getArticleID() {
+        return articleID;
+    }
+
+    public void setArticleID(String articleID) {
+        this.articleID = articleID;
+    }                                                   
 
     public String getTitle() {
         return title;
@@ -62,7 +83,8 @@ public class ArticleBean {
     }
 
     public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime.toString();
+        java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm z");
+        this.dateTime = formatter.format(dateTime);
     }
 
     public LinkedList<TagBean> getTags() {

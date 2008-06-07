@@ -18,7 +18,7 @@ public class SecurityBean {
      * @param salt     is a security helping function to make it harder to guess passwords using rainbow tables
      * @return an SHA-512 hash of the salt+toEncode
      */
-    public String getSHA512OfString(String toHash, String salt) {
+    public String hashPasswordWithSalt(String toHash, String salt) {
         // Take the hash and salt it and then hash the reulting concatination.
         // The salt will almost always be the username. This is to make rainbow attacks unfeasable.
         // Salt the hash to make it long and random enough to be a massive pain to decode

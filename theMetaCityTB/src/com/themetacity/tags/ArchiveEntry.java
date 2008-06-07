@@ -14,7 +14,7 @@ public class ArchiveEntry extends SimpleTagSupport {
     // Variables
     private ArticleBean articleBean = new ArticleBean();
 
-    static Logger logger = Logger.getLogger(ArchiveEntry.class);
+    private static final Logger logger = Logger.getLogger(ArchiveEntry.class);
 
     // Start processing
     public void doTag() {
@@ -29,11 +29,6 @@ public class ArchiveEntry extends SimpleTagSupport {
             logger.warn("There was an error with the article rendering");
             logger.warn(IOEx);
         }
-    }
-
-    // Free the Article used
-    public void release() {
-        articleBean = null;
     }
 
     /**
@@ -74,7 +69,8 @@ public class ArchiveEntry extends SimpleTagSupport {
         outputString.append("<a href=\"/").append(dateSplit[0]).append("/").append(dateSplit[1]).append("\" />").append(dateSplit[1]).append("</a>");      
         outputString.append("-");
         // Day
-        outputString.append("<a href=\"/").append(dateSplit[0]).append("/").append(dateSplit[1]).append("/").append(dateSplit[2]).append("\" />").append(dateSplit[2]).append("</a>");
+        String[] dateCleanForEnd = dateSplit[2].split(" ");
+        outputString.append("<a href=\"/").append(dateSplit[0]).append("/").append(dateSplit[1]).append("/").append(dateCleanForEnd[0]).append("\" />").append(dateCleanForEnd[0]).append("</a>");
 
 
         return outputString.toString();

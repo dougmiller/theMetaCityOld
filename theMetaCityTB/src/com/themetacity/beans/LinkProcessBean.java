@@ -16,18 +16,13 @@ public class LinkProcessBean {
 
     static Logger logger = Logger.getLogger(LinkProcessBean.class);
 
-    private DatabaseBean dbaBean;
+    private DatabaseBean dbaBean = new DatabaseBean();
 
-    String linkID;
-    String linkURL;
-    String descText;
+    String linkID = "";
+    String linkURL = "";
+    String descText = "";
 
     public LinkProcessBean() {
-        dbaBean = new DatabaseBean();
-
-        linkID = "";
-        linkURL = "";
-        descText = "";
     }
 
     // Perform the queries
@@ -41,10 +36,10 @@ public class LinkProcessBean {
             while (result.next()) {
                 LinkBean linkBean = new LinkBean();
 
-                linkBean.setLinkID("" + result.getInt("linkID"));
-                linkBean.setLinkURL(result.getString("linkURL"));
-                linkBean.setDescText(result.getString("descText"));
-                linkBean.setDatePosted(result.getString("datePosted"));
+                linkBean.setLinkID("" + result.getInt("id"));
+                linkBean.setLinkURL(result.getString("URL"));
+                linkBean.setDescText(result.getString("desc_text"));
+                linkBean.setDatePosted(result.getString("date_posted"));
 
                 noticeList.add(linkBean);
             }
@@ -62,7 +57,9 @@ public class LinkProcessBean {
 
     // Perforn the update commands
     private int processUpdate() {
-        return dbaBean.executeUpdate();
+        int result = dbaBean.executeUpdate();
+        dbaBean.close();
+        return result;
     }
 
     /**
@@ -74,7 +71,7 @@ public class LinkProcessBean {
     public LinkedList<LinkBean> getFrontPageLinks() {
 
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM links ORDER BY linkid desc LIMIT 5;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT URL, desc_text, id, date_posted FROM links ORDER BY id desc LIMIT 5;"));
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         }
@@ -87,7 +84,7 @@ public class LinkProcessBean {
      */
     public LinkedList<LinkBean> getAllLinks() {
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM links ORDER BY linkid desc;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM links ORDER BY id desc;"));
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         }
@@ -103,7 +100,7 @@ public class LinkProcessBean {
      */
     public int getDeleteLink() {
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("DELETE FROM links WHERE linkid = ?;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("DELETE FROM links WHERE id = ?;"));
             dbaBean.getPrepStmt().setInt(1, Integer.parseInt(linkID));
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
@@ -120,7 +117,7 @@ public class LinkProcessBean {
     public int getAddLink() {
 
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("INSERT INTO links (linkURL, descText, datePosted) VALUES (?, ?, ?);"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("INSERT INTO links (URL, desc_text, date_posted) VALUES (?, ?, ?);"));
             dbaBean.getPrepStmt().setString(1, linkURL);
             dbaBean.getPrepStmt().setString(2, descText);
             dbaBean.getPrepStmt().setDate(3, new java.sql.Date(System.currentTimeMillis()));
@@ -139,7 +136,7 @@ public class LinkProcessBean {
     public int getUpdateLink() {
 
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE links SET linkURL = ?, descText = ? WHERE linkID = ?;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE links SET URL = ?, desc_text = ? WHERE id = ?;"));
             dbaBean.getPrepStmt().setString(1, linkURL);
             dbaBean.getPrepStmt().setString(2, descText);
             dbaBean.getPrepStmt().setString(3, linkID);

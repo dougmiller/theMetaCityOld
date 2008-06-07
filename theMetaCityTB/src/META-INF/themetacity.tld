@@ -5,7 +5,7 @@
 
     <!-- This is the custom tag library configuration file for theMeataCity -->
 
-    <tlib-version>0.7</tlib-version>
+    <tlib-version>0.75</tlib-version>
     <short-name>tmc</short-name>
     <uri>http://com.themetacity</uri>
 
@@ -147,6 +147,52 @@
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>com.themetacity.typebeans.ProfileBean</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>adminArticles</name>
+        <tag-class>com.themetacity.admintags.Articles</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>articleBean</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.ArticleBean</type>
+        </attribute>
+    </tag>
+
+        <tag>
+        <name>adminNotices</name>
+        <tag-class>com.themetacity.admintags.ImportantNotice</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>noticeBean</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.ImportantNoticeBean</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>adminTags</name>
+        <tag-class>com.themetacity.admintags.ArticleTags</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>tagsList</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.LinkedList</type>
+        </attribute>
+
+        <attribute>
+            <name>usedTagsList</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.LinkedList</type>
         </attribute>
     </tag>
 

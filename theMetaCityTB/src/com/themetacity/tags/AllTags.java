@@ -17,9 +17,9 @@ public class AllTags extends SimpleTagSupport {
 
     // This tag takes a list of tag beans rather then an individual tag.
     // This makes formatting much easier.
-    LinkedList<TagBean> tagsList = new LinkedList<TagBean>();
+    private LinkedList<TagBean> tagsList;
 
-    static Logger logger = Logger.getLogger(AllTags.class);
+    private static final Logger logger = Logger.getLogger(AllTags.class);
 
     public void doTag() throws JspException, IOException {
         JspWriter out = getJspContext().getOut();
@@ -33,10 +33,6 @@ public class AllTags extends SimpleTagSupport {
             logger.warn("There was an error in the AllTag bean.");
             logger.warn(IOEx);
         }
-    }
-
-    public void release() {
-        tagsList = null;
     }
 
     private String buildLink(TagBean tag){

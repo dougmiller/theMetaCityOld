@@ -25,11 +25,12 @@ public class Links extends SimpleTagSupport {
 
         try {
             out.println("<div>" +
+                    "<a href=\"" + linkBean.getLinkURL() + "\"><img src=\"siteimages/link_go.png\" alt=\"Visit Link\"/></a>" +
                     "<input type=\"text\" name=\"descText\" value=\"" + linkBean.getDescText() + "\"/>" +
                     "<input type=\"text\" name=\"linkURL\" value=\"" + linkBean.getLinkURL() + "\"/>" +
                     "<input type=\"hidden\" name=\"linkID\" value=\"" + linkBean.getLinkID() + "\"/>" +
-                    "<button type=\"submit\" class=\"reloadbutton\" name=\"submit\" value=\"update\"><img src=\"siteimages/tick.png\" alt=\"Update\"/>Update</button>" +
-                    "<button type=\"submit\" class=\"reloadbutton\" name=\"submit\" value=\"delete\"><img src=\"siteimages/tick.png\" alt=\"Delete\"/>Delete</button>" +
+                    "<button type=\"submit\" class=\"submitbutton\" name=\"submit\" value=\"update\"><img src=\"siteimages/tick.png\" alt=\"Update\"/>Update</button>" +
+                    "<button type=\"submit\" class=\"deletebutton\" name=\"submit\" value=\"delete\"><img src=\"siteimages/delete.png\" alt=\"Delete\"/>Delete</button>" +
                     "</div>");
         } catch (IOException IOEx) {
             logger.warn("There was an error with the article rendering");
