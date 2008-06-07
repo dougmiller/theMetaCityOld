@@ -9,22 +9,21 @@
 <c:choose>
     <c:when test="${not empty param.tag}">
         <jsp:useBean id="ArticleProcessBean" scope="page" class="com.themetacity.beans.ArticleProcessBean">
-            <jsp:setProperty name="ArticleProcessBean" property="tag" value="${param.tag}"/>
+            <jsp:setProperty name="ArticleProcessBean" property="searchTag" value="${param.tag}"/>
         </jsp:useBean>
 
-        <c:set var="resultList" value="${ArticleProcessBean.articlesWithTag}" scope="page"/>
+        <c:set var="resultList" value="${ArticleProcessBean.articlesWithTag}"/>
         <p>These are the articles posted under the tag: ${param.tag}</p>
 
         <c:choose>
             <c:when test="${not empty resultList}">
-
                 <c:forEach var="articleList" items="${resultList}">
                     <tmc:archive articleBean="${articleList}"/>
                 </c:forEach>
             </c:when>
             <c:otherwise>
                 <p>Nothing has been posted under that tag. Please choose from the list below:</p>
-                <c:set var="allTagsList" value="${TagProcessBean.allTags}" scope="page"/>
+                <c:set var="allTagsList" value="${TagProcessBean.allTags}"/>
                 <c:choose>
                     <c:when test="${empty allTagsList}">
                         <p>There are no tags currently posted.</p>
@@ -38,7 +37,7 @@
     </c:when>
     <c:otherwise>
 
-        <c:set var="allTagsList" value="${TagProcessBean.allTags}" scope="page"/>
+        <c:set var="allTagsList" value="${TagProcessBean.allTags}"/>
         <c:choose>
             <c:when test="${empty allTagsList}">
                 <p>There are no tags currently posted.</p>

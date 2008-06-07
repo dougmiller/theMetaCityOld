@@ -101,6 +101,14 @@ a :hover {
 .quoteauthor {
 }
 
+    /* Code sample */
+code {
+    padding: 6px;
+    border: 3px dashed green;
+    background: black;
+    color: green;
+}
+
     /* Archive entry */
 .archiveEntry .archiveEntryTitle {
     margin-right: 100px;
@@ -170,19 +178,3 @@ a :hover {
 .articlemetainfo {
     width: 100%;
 }
-
-/*
-.picscontainer {
-    clear: left;
-}
-
-.picdiv {
-    float: left;
-    margin: 10px;
-    min-width: 243px;
-}
-
-.picdiv img {
-    margin: 10px;
-    border: 2px black solid;
-}*/

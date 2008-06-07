@@ -13,17 +13,20 @@
 <c:choose>
     <c:when test="${empty param.year and empty param.title}">
         <c:set var="articleResultList" value="${ArticleProcessBean.frontpageArticles}"/>
+        <c:set var="showNotices" value="true"/>
     </c:when>
     <c:otherwise>
         <c:set var="articleResultList" value="${ArticleProcessBean.filteredArticles}"/>
     </c:otherwise>
 </c:choose>
+
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
 
-<c:forEach var="noticeBean" items="${ImportantNoticeBean.importantNotices}">
-    <tmc:notice importantNotice="${noticeBean}"/>
-</c:forEach>
-
+<c:if test="${showNotices == true}">
+    <c:forEach var="noticeBean" items="${ImportantNoticeBean.importantNotices}">
+        <tmc:notice importantNotice="${noticeBean}"/>
+    </c:forEach>
+</c:if>
 <c:choose>
     <c:when test="${not empty articleResultList}">
         <c:forEach var="articleList" items="${articleResultList}">

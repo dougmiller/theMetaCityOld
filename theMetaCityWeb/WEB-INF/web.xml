@@ -5,7 +5,7 @@
          version="2.4">
 
     <display-name>theMetaCity</display-name>
-    <description>portfolio for Douglas Miller</description>
+    <description>Home of Douglas Miller</description>
 
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
