@@ -3,7 +3,6 @@
 
 
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
-<!-- Display all the tags used on the site -->
 <jsp:useBean id="TagProcessBean" scope="page" class="com.themetacity.beans.TagProcessBean"/>
 
 <c:choose>
@@ -36,7 +35,7 @@
         </c:choose>
     </c:when>
     <c:otherwise>
-
+        <!-- Display all the tags used on the site -->        
         <c:set var="allTagsList" value="${TagProcessBean.allTags}"/>
         <c:choose>
             <c:when test="${empty allTagsList}">

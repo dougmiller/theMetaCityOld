@@ -47,7 +47,7 @@
 
 <p>Add new link:</p>
 
-<form action="links.jsp" method="GET">
+<form action="links.jsp" method="post">
     Title: <input type="text" name="descText"/><br/>
     Link: <input type="text" name="linkURL"/><br/>
     <button type="submit" name="submit" value="newlink" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button>

@@ -51,19 +51,19 @@
     <!-- Date/Title criteia -->
     <rule match-type="regex">
         <from>^/archive/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([\w*](-?[\w*])*)/?$</from>
-        <to>/archive.jsp?year=$1&amp;month=$2&amp;day=$3&amp;title=$4</to>
+        <to>/archive.jsp?year=$1&amp;month=$2&amp;day=$3&amp;url=$4</to>
     </rule>
     <rule match-type="regex">
         <from>^/archive/([0-9]{4})/([0-9]{1,2})/([\w*](-?[\w*])*)/?$</from>
-        <to>/archive.jsp?year=$1&amp;month=$2&amp;title=$3</to>
+        <to>/archive.jsp?year=$1&amp;month=$2&amp;url=$3</to>
     </rule>
     <rule match-type="regex">
         <from>^/archive/([0-9]{4})/([\w*](-?[\w*])*)/?$</from>
-        <to>/archive.jsp?year=$1&amp;title=$2</to>
+        <to>/archive.jsp?year=$1&amp;url=$2</to>
     </rule>
     <rule match-type="regex">
         <from>^/archive/([\w*](-?[\w*])*)/?$</from>
-        <to>/archive.jsp?&amp;title=$1</to>
+        <to>/archive.jsp?&amp;url=$1</to>
     </rule>
 
     <rule match-type="regex">
@@ -89,19 +89,19 @@
     <!-- Date/Title criteia -->
     <rule match-type="regex">
         <from>^/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([\w*](-?[\w*])*)/?$</from>
-        <to>/index.jsp?year=$1&amp;month=$2&amp;day=$3&amp;title=$4</to>
+        <to>/index.jsp?year=$1&amp;month=$2&amp;day=$3&amp;url=$4</to>
     </rule>
     <rule match-type="regex">
         <from>^/([0-9]{4})/([0-9]{1,2})/([\w*](-?[\w*])*)/?$</from>
-        <to>/index.jsp?year=$1&amp;month=$2&amp;title=$3</to>
+        <to>/index.jsp?year=$1&amp;month=$2&amp;url=$3</to>
     </rule>
     <rule match-type="regex">
         <from>^/([0-9]{4})/([\w*](-?[\w*])*)/?$</from>
-        <to>/index.jsp?year=$1&amp;title=$2</to>
+        <to>/index.jsp?year=$1&amp;url=$2</to>
     </rule>
     <rule match-type="regex">
         <from>^/((\w)+(-?\w)*)/?$</from>
-        <to>/index.jsp?&amp;title=$1</to>
+        <to>/index.jsp?&amp;url=$1</to>
     </rule>
 
     <rule match-type="regex">

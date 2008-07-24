@@ -3,7 +3,7 @@
 
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
 
-<a href="links.jsp">Links managment</a><br />
+<a href="links.jsp">Links managment</a> <br />
 <a href="articles.jsp">Articles managment</a><br />
 <a href="users.jsp">User Profile</a><br />
 <a href="importantnotices.jsp">Notices managment</a><br />

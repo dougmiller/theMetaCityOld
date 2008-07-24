@@ -1,5 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<%@ include file="/WEB-INF/jspf/headertop.jspf" %>
+<script type="text/javascript" src="/js/jquery-1.2.5.min.js"></script>
+<script type="text/javascript" src="/js/admin_articles.js"></script>
+<%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 <%@ taglib uri="http://com.themetacity" prefix="tmc" %>
 
 <jsp:useBean id="articleFormAction" class="com.themetacity.beans.ArticleProcessBean">
@@ -53,15 +56,18 @@
         <p>Add new article:</p>
 
         <form action="articles.jsp" method="post">
-            Title: <input type="text" size="50" name="title"/><br/>
-            <textarea name="articleText" cols="65" rows="50"></textarea>
+            <p>Title: <input type="text" size="50" name="title" id="titleinput"/></p>
+
+            <div id="titlecheckbox"><a href="#">sss</a></div>
+            <div><textarea name="articleText" cols="65" rows="50"></textarea></div>
             <tmc:adminTags tagsList="${listOfAllTags}"/>
             <p>Other tags:</p>
-            <input type="text" name="articleOtherTags"/>
+            <div><input type="text" name="articleOtherTags"/></div>
+
             <p class="smallnote">Enter a comma delimited list.</p>
-            <input type="hidden" name="author" value="${sessionScope.loggedInUser}"/>
-            <button type="submit" name="submit" value="newarticle" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button>
-            <button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear the form"/>Clear!</button>
+            <div><input type="hidden" name="author" value="${sessionScope.loggedInUser}"/></div>
+            <div><button type="submit" name="submit" value="newarticle" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button></div>
+            <div><button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear the form"/>Clear!</button></div>
         </form>
     </c:when>
     <c:otherwise>
@@ -72,15 +78,18 @@
             <p>Edit article: ${listOfArticles.title}</p>
 
             <form action="articles.jsp" method="post">
-                Title: <input type="text" name="title" size="50" value="${listOfArticles.title}"/><br/>
-                <textarea name="articleText" cols="65" rows="50">${listOfArticles.articleText}</textarea>
+                <p>Title: <input type="text" name="title" size="50" value="${listOfArticles.title}" id="titleinput"/></p>
+
+                <div id="titlecheckbox"></div>
+                <div><textarea name="articleText" cols="65" rows="50">${listOfArticles.articleText}</textarea></div>
                 <tmc:adminTags tagsList="${listOfAllTags}" usedTagsList="${tagProcessBeanForEdit.articleTags}"/>
                 <p>Other tags:</p>
-                <input type="text" name="articleOtherTags"/>
+                <div><input type="text" name="articleOtherTags"/></div>
+
                 <p class="smallnote">Enter a comma delimited list.</p>
-                <input type="hidden" name="articleID" value="${listOfArticles.articleID}"/>
-                <button type="submit" name="submit" value="update" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button>
-                <button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear the form"/>Clear!</button>
+                <div><input type="hidden" name="articleID" value="${listOfArticles.articleID}"/></div>
+                <div><button type="submit" name="submit" value="update" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button></div>
+                <div><button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear the form"/>Clear!</button></div>
             </form>
         </c:forEach>
     </c:otherwise>
@@ -89,11 +98,15 @@
 
 <div>
     <jsp:useBean id="articleAll" class="com.themetacity.beans.ArticleProcessBean"/>
+
+
     <c:forEach var="listOfArticles" items="${articleAll.allAdminArticles}">
         <form action="articles.jsp" method="post">
             <tmc:adminArticles articleBean="${listOfArticles}"/>
         </form>
     </c:forEach>
+
+
 </div>
 
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>

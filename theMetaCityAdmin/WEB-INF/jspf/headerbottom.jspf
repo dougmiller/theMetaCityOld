@@ -1,0 +1,47 @@
+</head>
+
+<body>
+
+<div id="header">
+    <div>
+        <div class="headerright">
+            <ul>
+                <li>Usability</li>
+                <li>HTML/CSS</li>
+                <li>Java</li>
+                <li>Python</li>
+                <li>Joomla</li>
+                <li>PHP support</li>
+            </ul>
+        </div>
+        <div class="headerleft">
+            <span class="bannerTitle"><a href="/">The MetaCity.com</a></span><br/>
+            <span class="bannerSubTitle">Administration</span>
+        </div>
+    </div>
+</div>
+
+<div id="container">
+    <!-- The right nav div -->
+    <div id="sidebar">
+        <!-- About box -->
+        <div>
+            <h2>Tasks</h2>
+            <ul>
+                <li><a href="links.jsp">Links</a></li>
+                <li><a href="users.jsp">User</a></li>
+                <li><a href="./">Home</a></li>
+            </ul>
+        </div>        <!-- About box -->
+        <div>
+            <h2>User</h2>
+            <ul>
+                <li><a href="logout.jsp">Logout!</a></li>
+            </ul>
+        </div>
+
+    <!-- End of the sidebar -->
+    </div>
+
+<!-- The main content div -->
+<div id="maincontent">

@@ -8,11 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-1"/>
     <link href="/styles/style.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="/styles/lightbox.css" type="text/css" media="screen" />
     <title>theMetaCity.com</title>
-    <script type="text/javascript" src="/js/prototype.js"></script>
-    <script type="text/javascript" src="/js/scriptaculous.js?load=effects"></script>
-    <script type="text/javascript" src="/js/lightbox.js"></script>
 </head>
 
 <body>

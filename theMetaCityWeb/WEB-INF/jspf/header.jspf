@@ -6,13 +6,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-1"/>
-    <link href="/styles/style.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="/styles/lightbox.css" type="text/css" media="screen" />
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <title>theMetaCity.com</title>
-    <script type="text/javascript" src="/js/prototype.js"></script>
-    <script type="text/javascript" src="/js/scriptaculous.js?load=effects"></script>
-    <script type="text/javascript" src="/js/lightbox.js"></script>
 </head>
 
 <body>
@@ -43,7 +39,7 @@
         <div>
             <h2><a href="/about">About</a></h2>
             <p>I am an Interaction Designer from Brisbane, Australia. I graduated from The University Of Queensland with a
-            Bachelor of IT with Interaction Design in the middle 2007.
+            Bachelor of IT with Interaction Design in the middle 2007.</p>
 
             <p>I design, build and maintain websites as well as have a formal education in human-computer interaction, game
             design and usability, all backed by technical skills in Java, some PHP and I am slowly learning Python and
