@@ -36,6 +36,7 @@ CREATE TABLE `articles` (
   `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
   `author` varchar(30) NOT NULL COMMENT 'The author who posed this article. References users.username',
   `title` varchar(100) NOT NULL COMMENT 'The title of this article',
+  `url` varchar(100) NOT NULL COMMENT 'The urls for this post. Destructively generated from the title using a strip function.',
   `article_text` text(50000) NOT NULL COMMENT 'The actual content of the article.',
   `date_time` datetime NOT NULL COMMENT 'The date this article was published',
   PRIMARY KEY  (`id`),

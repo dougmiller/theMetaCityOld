@@ -7,12 +7,12 @@ INSERT INTO users VALUES ('dougmiller', 'e273c045363d245ffc7fb8db51a68b3571b9dd8
 		
 ## Article
 # Populate the article table
-INSERT INTO articles (author, title, date_time, article_text) VALUES ('dougmiller','This is the first post',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
-INSERT INTO articles (author, title, date_time, article_text) VALUES ('dougmiller','Second LOL',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
-INSERT INTO articles (author, title, date_time, article_text) VALUES ('dougmiller','How about a third',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
-INSERT INTO articles (author, title, date_time, article_text) VALUES ('dougmiller','Onto four posts',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
-INSERT INTO articles (author, title, date_time, article_text) VALUES ('dougmiller','Five A new record',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
-INSERT INTO articles (author, title, date_time, article_text) VALUES ('dougmiller','Six. Unheard of',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
+INSERT INTO articles (author, title, url, date_time, article_text) VALUES ('dougmiller','This is the first post','',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
+INSERT INTO articles (author, title, url, date_time, article_text) VALUES ('dougmiller','Second LOL','',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
+INSERT INTO articles (author, title, url, date_time, article_text) VALUES ('dougmiller','How about a third','',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
+INSERT INTO articles (author, title, url, date_time, article_text) VALUES ('dougmiller','Onto four posts','',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
+INSERT INTO articles (author, title, url, date_time, article_text) VALUES ('dougmiller','Five A new record','',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
+INSERT INTO articles (author, title, url, date_time, article_text) VALUES ('dougmiller','Six. Unheard of','',NOW(),'<p>This is the content of the post. Here is some more for the road.</p>');
 
 # Populate the articletags table
 INSERT INTO articletags (id, tag) VALUES (1, 'test');
