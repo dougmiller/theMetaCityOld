@@ -1,34 +1,45 @@
 <?xml version="1.0"?>
 <project name="theMetaCity Web Build" default="package" basedir="../theMetaCityWeb">
 
-    <property name="src.dir" value="."/>
-    <property name="app.name" value="ROOT"/>
-    <property name="productionapp.name" value="theMetaCity"/>
-    <property name="deploy.dir" value="../deploy"/>
     <property name="classpath.dir" value="/usr/local/tomcat/lib"/>
-    <property name="weblib.dir" value="./WEB-INF/lib"/>
+    <property name="deployapp.name" value="ROOT"/>
+    <property name="deploy.dir" value="/Users/doug/Sites/theMetaCity/"/>
+    <property name="webinflib.dir" value="./WEB-INF/lib"/>
 
     <target name="clean">
-        <delete file="${deploy.dir}/${app.name}.war"/>
-        <delete dir="${deploy.dir}/${app.name}"/>
+        <delete file="${deploy.dir}/${deployapp.name}.war"/>
     </target>
 
     <!-- Include on the the classes for development -->
     <target name="package" depends="clean">
-        <jar destfile="${deploy.dir}/${app.name}.war" basedir="${src.dir}"
-             excludes="**/*.svn"/>
-    </target>
-
-    <!-- Make new versions of the jar files.
-    Useful for raid development becasue you do not have to deploy the entire webapp -->
-    <target name="newjars">
-        <copy file="${weblib.dir}/theMetaCityCommonTB.jar" todir="${deploy.dir}/${app.name}/WEB-INF/lib" />
-        <copy file="${weblib.dir}/theMetaCityWebTB.jar" todir="${deploy.dir}/${app.name}/WEB-INF/lib" />
+        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
     </target>
     
-    <!-- Include on the the classes for development -->
+    <target name="testpropackage" depends="clean">
+        <move file="META-INF/context.xml" toFile="META-INF/context.backup" />
+        <copy file="../utils/webcontext.xml" toFile="META-INF/context.xml" />
+               
+        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"
+            excludes="**/*.backup" 
+            update="true"/>
+            
+        <move file="META-INF/context.backup" toFile="META-INF/context.xml" overwrite="true"/>        
+    </target>
+
+    <!-- Production server copy
+     Move the production server context files into place -->
     <target name="production">
-        <jar destfile="../${app.name}prodution.war" basedir="${src.dir}"
-             excludes="**/*.svn" />
+        <move file="META-INF/context.xml" toFile="META-INF/context.backup" />
+        <copy file="../utils/webcontext.xml" toFile="META-INF/context.xml" />
+
+        <move file="WEB-INF/classes/log4j.properties" toFile="WEB-INF/classes/log4jproperties.backup" />
+        <copy file="../utils/log4jROOT.properties" toFile="WEB-INF/classes/log4j.properties" />
+
+        <jar destfile="../${deployapp.name}.war" basedir="${basedir}"
+             excludes="**/*.backup" 
+             update="true" />
+
+        <move file="META-INF/context.backup" toFile="META-INF/context.xml" overwrite="true"/>
+        <move file="WEB-INF/classes/log4jproperties.backup" toFile="WEB-INF/classes/log4j.properties" overwrite="true"/>
     </target>
 </project>

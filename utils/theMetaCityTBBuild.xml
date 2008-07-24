@@ -1,15 +1,14 @@
 <?xml version="1.0"?>
 <project name="theMetaCity TB Build" default="package" basedir="../theMetaCityTB">
 
-	<property name="compile.dir" value="./classes" />
-	<property name="src.dir" value="./src" />
-    <property name="classpath.dir" value="/usr/local/tomcat/lib" />
-    <property name="junit.dir" value="/usr/local/junit" />    
-    <property name="builddest.dir" value="../" />
     <property name="adminlib.dir" value="../theMetaCityAdmin/WEB-INF/lib" />
-    <property name="weblib.dir" value="../theMetaCityWeb/WEB-INF/lib" />
-    <property name="deploylib.dir" value="../deploy/ROOT/WEB-INF/lib" />
     <property name="app.name" value="theMetaCityTB" />
+    <property name="builddest.dir" value="../" />
+    <property name="classpath.dir" value="/usr/local/tomcat/lib" />
+	<property name="compile.dir" value="classes" />
+    <property name="junit.dir" value="/usr/local/junit" />    
+	<property name="src.dir" value="src" />
+    <property name="weblib.dir" value="../theMetaCityWeb/WEB-INF/lib" />
 
     <target name="clean">
         <delete dir="${compile.dir}" />
@@ -26,38 +25,34 @@
     <!-- Include on the the classes for development -->
     <target name="package" depends="compile">
         <!-- Include the taglib def list so that the jar actually will work, as it does no get compiled -->
-        <copy file="${src.dir}/META-INF/themetacityweb.tld" toFile="${compile.dir}/META-INF/themetacityweb.tld" />
-        <jar destfile="${builddest.dir}/${app.name}.jar" basedir="${compile.dir}"/>
+        <copy file="${src.dir}/META-INF/themetacity.tld" toFile="${compile.dir}/META-INF/themetacityweb.tld" />
+        <jar destfile="${builddest.dir}/${app.name}.jar" basedir="${compile.dir}"/>       <!-- Gets deleted -->
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${weblib.dir}/${app.name}.jar"/>
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${adminlib.dir}/${app.name}.jar"/>
         <delete file="${builddest.dir}/${app.name}.jar"/>
     </target>
 
-    <target name="devpackage" depends="package">
-        <copy file="${weblib.dir}/${app.name}.jar" toFile="${deploylib.dir}/${app.name}.jar" />
-    </target>
-
     <!-- Generate javadocs -->
-    <target name="javadoc" depends="clean">
-        <javadoc sourcepath="${src.dir}" destdir="${compile.dir}/javadoc" classpath="${classpath.dir}/jsp-api.jar"/>
+    <target name="javadoc">
+        <javadoc sourcepath="${src.dir}" destdir="${compile.dir}/javadoc" classpath="${classpath.dir}/jsp-api.jar; ${classpath.dir}/log4j-1.2.15.jar; ${junit.dir}/junit-4.4.jar;"/>
     </target>
 
     <!-- Include the source, classes and javadocs in the jar -->
     <target name="productionpackage" depends="compile, javadoc">
         <!-- Depends on compile so classes are already here -->
-        <!-- Include the taglib def list so that the jar actually will work, as it does no get compiled -->
-        <copy file="${src.dir}/META-INF/themetacityweb.tld" toFile="${compile.dir}/META-INF/themetacityweb.tld" />
+        <!-- Include the taglib def list so that the jar actually will work, as it does not get compiled -->
+        <copy file="${src.dir}/META-INF/themetacity.tld" toFile="${compile.dir}/META-INF/themetacity.tld" />
 
         <!-- Copy the source across -->
             <copy todir="${compile.dir}">
-                <fileset dir="${src.dir}" excludes="**/*.svn"/>
+                <fileset dir="${src.dir}"/>
             </copy>
 
         <!-- Copy the javadocs across -->
         <!-- Depends on javadoc so they are here also -->
 
         <!-- Now just package it all up -->
-        <jar destfile="${weblib.dir}/theMetaCityWebTBProduction.jar" basedir="${compile.dir}"/>
+        <jar destfile="../theMetaCityTBProduction.jar" basedir="${compile.dir}"/>
 
     </target>
 
