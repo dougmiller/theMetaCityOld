@@ -43,13 +43,18 @@ public class LinkProcessBean {
 
                 noticeList.add(linkBean);
             }
-            // Close the Result Set
-            result.close();
-            // Close the database connection
-            dbaBean.close();
         } catch (SQLException SQLEX) {
             logger.warn("There as an error in the LinkProcessBean");
             logger.warn(SQLEX);
+        } finally {
+            try {// Close the Result Set
+                result.close();
+                // Close the database connection
+                dbaBean.close();
+            } catch (SQLException SQLEx) {
+                logger.warn("Could not close DB connection");
+                logger.warn(SQLEx);
+            }
         }
 
         return noticeList;
@@ -66,17 +71,37 @@ public class LinkProcessBean {
      * Get the lists of front page Links
      * <b>Hardcoded to max 5 at this point in time</b>
      *
-     * @return LinkedList with linktype benas in it
+     * @return LinkedList with linktype beans in it
      */
     public LinkedList<LinkBean> getFrontPageLinks() {
+        DatabaseBean dbaBean = new DatabaseBean();
+        LinkedList<LinkBean> linksList = new LinkedList<LinkBean>();
 
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT URL, desc_text, id, date_posted FROM links ORDER BY id desc LIMIT 5;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT URL, desc_text " +
+                            "FROM links " +
+                            "ORDER BY id desc LIMIT 5;"));
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         }
 
-        return processQuery();
+        ResultSet result = dbaBean.executeQuery();
+        try {
+            while (result.next()) {
+                LinkBean linkBean = new LinkBean();
+
+                linkBean.setLinkURL(result.getString("URL"));
+                linkBean.setDescText(result.getString("desc_text"));
+                linksList.add(linkBean);
+            }
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        } finally {
+            dbaBean.close();
+        }
+        
+        return linksList;
     }
 
     /**
@@ -128,7 +153,7 @@ public class LinkProcessBean {
         return processUpdate();
     }
 
-        /**
+    /**
      * Add a link
      *
      * @return 1 if successful, 0 if unseccessful (rows added to db)

@@ -9,49 +9,49 @@ import org.junit.Test;
 public class ArticleBeanTest {
     ArticleBean articleBean;
 
-    @Before public void setup() {
+    @Before
+    public void setup() {
         articleBean = new ArticleBean();
     }
 
-    @After public void destroy() {
+    @After
+    public void destroy() {
         articleBean = null;
-    }
-
-    /**
-     * Tests that article titles are extracted correctly from the hyphen delimited input
-     */
-    @Test public void titleExtractor() {
-        assertEquals("Single word, no hyphen", "Entry", articleBean.extractTitle("Entry"));
-        assertEquals("Two hyphen separeted words", "Entry Hyphen", articleBean.extractTitle("Entry-Hyphen"));
-        assertEquals("Multiple hyphen separated words", "Entry With Multiple Hyphen", articleBean.extractTitle("Entry-With-Multiple-Hyphen"));
-
-        // These cases should carefully looked at
-        assertEquals("Single hyphen alone", " ", articleBean.extractTitle("-"));
     }
 
     /**
      * Tests that article titles are build into hyphen delimeted strings
      */
-    @Test public void titleBuilder() {
-         assertEquals("Single", "Alone", articleBean.buildTitle("Alone"));
-         assertEquals("Two words", "Alone-Together", articleBean.buildTitle("Alone Together"));
-         assertEquals("Multiple words", "Finally-Alone-Togeather", articleBean.buildTitle("Finally Alone Togeather"));
+    @Test
+    public void buildURL() {
+        assertEquals("Single", "Alone", articleBean.buildURL("Alone"));
+        assertEquals("Two words", "Alone-Together", articleBean.buildURL("Alone Together"));
+        assertEquals("Multiple words", "Finally-Alone-Togeather", articleBean.buildURL("Finally Alone Togeather"));
+
+        // Potential grammar and style issues
+        assertEquals("Too many spaces", "Alone-Together", articleBean.buildURL("Alone  Together"));
+        assertEquals("Really too many spaces", "Alone-Together", articleBean.buildURL("Alone          Together"));
+        assertEquals("Spaces in inappropriate places", "Alone-Together", articleBean.buildURL("   Alone Together   "));
+
+        // Invalid characters
+        assertEquals("Non URL characters", "Alone-Together-at-9", articleBean.buildURL("Alone% % Toge(&^%.$ther at 9"));
     }
 
     /**
      * Tests that the title setter behaves as expected as it has a trim function run on it
      */
-    @Test public void titleSetter() {
+    @Test
+    public void titleSetter() {
         articleBean.setTitle("Alone");
-        assertEquals("Single word no spaces","Alone",articleBean.getTitle());
+        assertEquals("Single word no spaces", "Alone", articleBean.getTitle());
 
         articleBean.setTitle(" Alone ");
-        assertEquals("Spaces around single word","Alone",articleBean.getTitle());
+        assertEquals("Spaces around single word", "Alone", articleBean.getTitle());
 
         articleBean.setTitle("Alone Together");
-        assertEquals("Multiple words no spaces before or after","Alone Together",articleBean.getTitle());
+        assertEquals("Multiple words no spaces before or after", "Alone Together", articleBean.getTitle());
 
         articleBean.setTitle(" Alone Together ");
-        assertEquals("Single word no spaces","Alone Together",articleBean.getTitle());
+        assertEquals("Single word no spaces", "Alone Together", articleBean.getTitle());
     }
 }

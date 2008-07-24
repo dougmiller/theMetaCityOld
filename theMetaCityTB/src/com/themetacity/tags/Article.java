@@ -28,7 +28,7 @@ public class Article extends SimpleTagSupport {
 
         try {
             out.println("    <div class=\"newsarticle\">");
-            out.println("        <h2><a href=\"/" + article.buildTitle(article.getTitle()) + "\">" + article.getTitle() + "</a></h2>");
+            out.println("        <h2><a href=\"/" + article.getURL() + "\">" + article.getTitle() + "</a></h2>");
             out.println("        " + article.getArticleText());
             out.println("        <p>Posted on: " + article.getDateTime() + "</p>");
             out.println("        <p class=\"tagsspan\">Posted under: " + formatTags(article.getTags()) + "</p>");

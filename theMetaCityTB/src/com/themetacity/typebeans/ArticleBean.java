@@ -10,6 +10,7 @@ public class ArticleBean {
 
     private String articleID;            // The id of the article
     private String title;                // The title of the article
+    private String URL;                  // The URL for this article
     private String articleText;          // The actual meat of the article
     private String author;               // Who wrote the article
     private String email;                // Contacting the author
@@ -17,25 +18,18 @@ public class ArticleBean {
     private LinkedList<TagBean> tags;    // A list of the tags that this article was published under
 
     /**
-     * @param inputString is the title from the parameters.
-     * @return a string that has the "-" removed and ready for searching.
-     */
-    public String extractTitle(String inputString) {
-        try {
-            return inputString.replace("-", " ");
-        } catch (NullPointerException nullPoint) {
-            return null;
-        }
-    }
-
-    /**
-     * Build a hypehn delimeted string
+     * Build a URL friendly strign from the given title
+     * A hypehn delimeted string, stripped of non url friendly characters and potential punctuation errors
      *
-     * @param toBuild String to build into the delimeed title
-     * @return a String with the spaced replaced by hyphens
+     * @param toBuild String to build into the delimited url
+     * @return a String with the space replaced by hyphens
      */
-    public String buildTitle(String toBuild) {
-        return toBuild.replace(" ", "-");
+    public String buildURL(String toBuild) {
+        toBuild = toBuild.trim();                   // Remove innapropriate whitespace
+        toBuild = toBuild.replaceAll("[^\\w ]", ""); // Remove non URL friendly characters (inc multiple spaces)
+        toBuild = toBuild.replaceAll(" +", "-");    // Change the spaces to hyphens
+
+        return toBuild;
     }
 
     public String getArticleID() {
@@ -44,14 +38,22 @@ public class ArticleBean {
 
     public void setArticleID(String articleID) {
         this.articleID = articleID;
-    }                                                   
+    }
 
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title.trim();
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 
     public String getArticleText() {

@@ -29,13 +29,6 @@ public class ArchiveEntryTest {
     }
 
     /**
-     * Test that article title Links are converted correctly form space delimeted Links to hyphen delimted Links so the a tags will work
-     */
-    @Test public void convertTitleToWeb() {
-        assertEquals("hyphens to spaces", "This-should-be-the-link", archiveEntry.convertTitleToWeb("This should be the link"));
-    }
-
-    /**
      * Tests that the date Links are built correctly
      */
     @Test public void buildDateLink() {

@@ -14,16 +14,14 @@ import org.apache.log4j.Logger;
  * It makes requests to the database and returns a linkedlist of the results.
  */
 public class TagProcessBean {
-    DatabaseBean dbaBean;
+    DatabaseBean dbaBean = new DatabaseBean();
 
     private String user = "";
     private String articleID = "";
 
     static Logger logger = Logger.getLogger(TagProcessBean.class);
 
-    // Zero argment constructor
     public TagProcessBean() {
-        dbaBean = new DatabaseBean();
     }
 
     /**
@@ -44,25 +42,29 @@ public class TagProcessBean {
 
                 listOfTags.add(tagBean);
             }
-            // Close the Result Set
-            result.close();
-            // Close the database connection
-            dbaBean.close();
 
-        } catch (SQLException SQLEx) {
-            logger.warn("Some problem with the SQL");
+        }  catch (SQLException SQLEx) {
+            logger.warn("You had an error with your SQL");
             logger.warn(SQLEx);
+        } finally {
+            try {// Close the Result Set
+                result.close();
+                // Close the database connection
+                dbaBean.close();
+            } catch (SQLException SQLEx) {
+                logger.warn("Could not close DB connection");
+                logger.warn(SQLEx);
+            }
         }
-
         return listOfTags;
     }
 
     // Perforn the update commands
-    private int processUpdate() {
+   /* private int processUpdate() {
         int result = dbaBean.executeUpdate();
         dbaBean.close();
         return result;
-    }
+    }*/
 
     public LinkedList<TagBean> getAuthorTags(String author) {
         try {
@@ -83,10 +85,10 @@ public class TagProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT tag, count(tag) as timesused " +
-                    "FROM articles, articletags " +
-                    "WHERE articles.id = ? " +
-                    "AND articles.id = articletags.id " +
-                    "GROUP BY tag;"));
+                            "FROM articles, articletags " +
+                            "WHERE articles.id = ? " +
+                            "AND articles.id = articletags.id " +
+                            "GROUP BY tag;"));
             dbaBean.getPrepStmt().setString(1, articleID);
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
@@ -98,8 +100,8 @@ public class TagProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT tag, count(tag) as timesused " +
-                    "FROM articletags " +
-                    "GROUP BY tag;"));
+                            "FROM articletags " +
+                            "GROUP BY tag;"));
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         }

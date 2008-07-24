@@ -37,17 +37,7 @@ public class ArchiveEntry extends SimpleTagSupport {
      * @return an A string in href
      */
     public String buildTitleLink(String title){
-        return "<a href=\"/" + convertTitleToWeb(title) + "\">" + title + "</a>";
-    }
-
-    /**
-     * This function will take a database encoded title and turn it into a hyphen/web encoded title
-     *
-     * @param titleToBuild is the string to encode with hypens
-     * @return a hypen encoded string
-     */
-    public String convertTitleToWeb(String titleToBuild) {
-        return titleToBuild.replace(" ", "-");
+        return "<a href=\"/" + articleBean.getURL() + "\">" + title + "</a>";
     }
 
     /**

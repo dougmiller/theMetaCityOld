@@ -21,7 +21,6 @@ public class TagProcessBeanTest {
     //    assertEquals("User argument set, articleid empty", "SELECT tag, count(tag) as timesused FROM articles, articletags WHERE articles.author = 'dmg' AND articles.articleid = articletags.articleid GROUP BY tag;", tagProcessBean.constructTagQuery("dmg",""));
     //    assertEquals("User argument empty, articleid set", "SELECT tag, count(tag) as timesused FROM articles, articletags WHERE articles.articleid = '1' AND articles.articleid = articletags.articleid GROUP BY tag;", tagProcessBean.constructTagQuery("", "1"));
     //    assertEquals("No argument set","SELECT tag, count(tag) as timesused FROM articles, articletags WHERE articles.articleid = articletags.articleid GROUP BY tag;",tagProcessBean.constructTagQuery("",""));
-
     }
 }
 

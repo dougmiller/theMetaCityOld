@@ -31,7 +31,7 @@ public class ArticleTags extends SimpleTagSupport {
                         break;
                     }
                 }
-                out.println("<input type=\"checkbox\" name=\"tag\" value=\"" + tag.getTag() + "\" " + checked + " />" + tag.getTag());
+                out.println("<input type=\"checkbox\" name=\"tag\" value=\"" + tag.getTag() + "\" " + checked + "/>" + tag.getTag());
                 checked = "";
             }
             out.println("</div>");
