@@ -1,7 +1,6 @@
 package com.themetacity.beans;
 
 import com.themetacity.typebeans.ArticleBean;
-import com.themetacity.typebeans.TagBean;
 import com.themetacity.utilities.DatabaseBean;
 import org.apache.log4j.Logger;
 
@@ -36,85 +35,6 @@ public class ArticleProcessBean {
     private static final Logger logger = Logger.getLogger(ArticleProcessBean.class);
 
     public ArticleProcessBean() {
-    }
-
-    /**
-     * Process the results of an executed SQL statment into article beans that are placed into a LinkedList.
-     * <br />
-     * The statement selects news article(s) and returns them to this method as a ResultSet. The results set is then
-     * iterated over and each record is used to populate a ArticleBean. Once populated the ArticleBean is added
-     * to a LinkedList and once all records have been processed the list is returned.
-     *
-     * @return A linked list of populated NewsArticelBeans
-     */
-    private LinkedList<ArticleBean> processQuery() {
-        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();       // The list of populated beans.
-
-        ResultSet result = dbaBean.executeQuery();
-
-        try {
-            // For every row that is returned from the database query populate a bean and add
-            // it to a linked list so that the JSTL can iterate over it.
-            while (result.next()) {
-                // Make a new ArticleBeanTest that represents one article
-                ArticleBean articleBean = new ArticleBean();
-                // Set the properties of the bean
-                try {
-                    articleBean.setArticleID(result.getString("id"));
-                } catch (SQLException SQLEx) {
-                    //munch
-                }
-                try {
-                    articleBean.setAuthor(result.getString("author"));
-                } catch (SQLException SQLEx) {
-                    //munch
-                }
-                try {
-                    articleBean.setTitle(result.getString("title"));
-                } catch (SQLException SQLEx) {
-                    //munch
-                }
-                try {
-                    articleBean.setURL(result.getString("url"));
-                } catch (SQLException SQLEx) {
-                    //munch
-                }
-                try {
-                    articleBean.setArticleText(result.getString("article_text"));
-                } catch (SQLException SQLEx) {
-                    //munch
-                }
-                try {
-                    articleBean.setDateTime(result.getTimestamp("date_time"));
-                } catch (SQLException SQLEx) {
-                    //munch
-                }
-
-                // Process this articles tags
-                try {
-                    TagProcessBean tagProcessBean = new TagProcessBean();
-                    tagProcessBean.setArticleID("" + result.getInt("id"));       // Set the user in the TagProcessBean *cast to String*
-                    articleBean.setTags(tagProcessBean.getArticleTags());        // Assign the results to the bean
-                } catch (SQLException SQLEx) {
-                    logger.warn(SQLEx);
-                }
-
-                listOfBeans.add(articleBean);                                    //Add the now populated bean to the list to be returned for display
-            }
-        } catch (SQLException SQLEx) {
-            logger.warn("You had an error with your SQL");
-            logger.warn(SQLEx);
-        } finally {
-            try {// Close the Result Set
-                result.close();
-                // Close the database connection
-                dbaBean.close();
-            } catch (SQLException SQLEx) {
-                logger.warn("Could not close DB connection");
-                logger.warn(SQLEx);
-            }
-        }
-        return listOfBeans;
     }
 
     // Perforn the update commands where you just want things to be closed and finished.
@@ -203,7 +123,7 @@ public class ArticleProcessBean {
                             "AND (MONTH(date_time) = ? OR ? is null) AND " +
                             "(DAY(date_time) = ? OR ? is null) AND " +
                             "(url = ? OR ? is null) " +
-                            "ORDER BY id desc;"));
+                            "ORDER BY date_time desc;"));
             dbaBean.getPrepStmt().setString(1, year);
             dbaBean.getPrepStmt().setString(2, year);
             dbaBean.getPrepStmt().setString(3, month);
@@ -262,36 +182,49 @@ public class ArticleProcessBean {
      *
      * @return A linked list of articles
      */
-    public LinkedList<ArticleBean> getArticlesWithTag
-            () {
+    public LinkedList<ArticleBean> getArticlesWithTag() {
+        DatabaseBean dbaBean = new DatabaseBean();
+        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles, articletags " +
-                    "WHERE articles.id = articletags.id " +
-                    "AND articletags.tag = ? " +
-                    "ORDER BY articletags.id desc"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT title, url, date_time " +
+                            "FROM articles, articletags " +
+                            "WHERE articles.id = articletags.id " +
+                            "AND articletags.tag = ? " +
+                            "ORDER BY articletags.id desc;"));
             dbaBean.getPrepStmt().setString(1, searchTag);
-
         } catch (SQLException SQLEx) {
+            logger.fatal("Problem with the SQL in the ArticleProcessBean.getFilteredArticles() function");
             logger.fatal(SQLEx);
         }
-        return processQuery();
-    }
 
-    /**
-     * Get an aricle by the ID
-     *
-     * @return a linked list of the articles with the matching id
-     */
-    public LinkedList<ArticleBean> getArticlesByID
-            () {
+        ResultSet result = dbaBean.executeQuery();
+
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT id, title, article_text FROM articles WHERE id = ?;"));
-            dbaBean.getPrepStmt().setString(1, articleID);
+            while (result.next()) {
+                ArticleBean articleBean = new ArticleBean();
 
+                articleBean.setTitle(result.getString("title"));
+                articleBean.setURL(result.getString("url"));
+                articleBean.setDateTime(result.getTimestamp("date_time"));
+
+                listOfBeans.add(articleBean);
+            }
         } catch (SQLException SQLEx) {
-            logger.fatal(SQLEx);
+            logger.warn("You had an error mapping objects in ArticleProcessBean.getFilteredArticles()");
+            logger.warn(SQLEx);
         }
-        return processQuery();
+        try {
+            result.close();
+            dbaBean.close();
+        } catch (SQLException SQLEx) {
+            logger.warn("There was an error closing the resultset and the database connection.");
+            logger.warn(SQLEx);
+        }
+
+        return listOfBeans;
+
     }
 
     /**
@@ -300,6 +233,7 @@ public class ArticleProcessBean {
      * @return True from succesfully adding a new article or fasle for not adding it
      */
     public int getAddArticle() {
+        DatabaseBean dbaBean = new DatabaseBean();
         ArticleBean articleBean = new ArticleBean();
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("INSERT INTO articles (author, title, url, article_text, date_time) VALUES (?, ?, ?, ?, now());"));
@@ -312,23 +246,11 @@ public class ArticleProcessBean {
         }
 
         int articleResult = dbaBean.executeUpdate();
+        dbaBean.close();
 
         // now add the tags
-        dbaBean = new DatabaseBean();
-
         // get the id of the article just added
-        try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM articles WHERE title = ?;"));
-            dbaBean.getPrepStmt().setString(1, title);
-        } catch (SQLException SQLEx) {
-            logger.fatal(SQLEx);
-        }
-
-        LinkedList<ArticleBean> articleWithID = processQuery();
-
-        for (ArticleBean article : articleWithID) {
-            articleID = article.getArticleID();
-        }
+        articleID = getIdOfArticle() + "";
 
         int tagsResult = updateArticleTags();
 
@@ -344,8 +266,7 @@ public class ArticleProcessBean {
      *
      * @return True from succesfully adding a new article or fasle for not adding it
      */
-    public int getUpdateArticle
-            () {
+    public int getUpdateArticle() {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE articles SET title = ?, article_text = ? WHERE id = ?;"));
             dbaBean.getPrepStmt().setString(1, title);
@@ -380,21 +301,31 @@ public class ArticleProcessBean {
             return 0;
         }
         tagDBBean.close();
-        System.out.println("About o split");
+
+        System.out.println("articletags length " + articleTags.length);
+        if (articleTags.length == 0) {
+            articleTags = new String[0];
+        }
         // Handle textbox input
         String[] textBoxToArray = articleOtherTags.split(",");
-        System.out.println("split");
+        System.out.println("Othertags is:" + textBoxToArray.length);
+
+        // Stop empty tags being inserted
+        try {
+            if (textBoxToArray[0].equals("")) {          // nothing entered into the box
+                System.out.println("junkyjunkknknk");
+                textBoxToArray = new String[0];
+                System.out.println("morejunkyjunkjunk");
+            }
+        } catch (ArrayIndexOutOfBoundsException as) {    // catch if the size is 0 (only happens when string to split is ',' or more only)
+            textBoxToArray = new String[0];
+        }
+
         // Now combine the textbox newly created tags with the already existing ones.
-        System.out.println("About to make new array" + articleTags.length);
         String[] tempTotalTags = new String[textBoxToArray.length + articleTags.length];
-        System.out.println("newarray" + tempTotalTags.length);
         System.arraycopy(textBoxToArray, 0, tempTotalTags, 0, textBoxToArray.length);
-        System.out.println("arraycopied");
         System.arraycopy(articleTags, 0, tempTotalTags, textBoxToArray.length, articleTags.length);
-        System.out.println("articletagscopied");
-        System.out.println("copyed");
         // Put in the tags
-        System.out.println("Inserting");
         tagDBBean = new DatabaseBean();
         for (String tag : tempTotalTags) {
             try {
@@ -407,7 +338,6 @@ public class ArticleProcessBean {
                 return 0;
             }
         }
-        System.out.println("inserted");
         tagDBBean.close();
 
         // end transation
@@ -440,14 +370,47 @@ public class ArticleProcessBean {
      *
      * @return a linked list containg all the articles in ArticleBean format
      */
-    public LinkedList<ArticleBean> getAllAdminArticles
-            () {
+    public LinkedList<ArticleBean> getAllAdminArticles() {
+        DatabaseBean dbaBean = new DatabaseBean();
+        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT id, title, article_text, date_time FROM articles GROUP BY id ASC;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT id, title, url, date_time " +
+                            "FROM articles " +
+                            "GROUP BY id ASC;"));
         } catch (SQLException SQLEx) {
+            logger.fatal("Problem with the SQL in the ArticleProcessBean.getFilteredArticles() function");
             logger.fatal(SQLEx);
         }
-        return processQuery();
+
+        ResultSet result = dbaBean.executeQuery();
+
+        try {
+            while (result.next()) {
+                ArticleBean articleBean = new ArticleBean();
+
+                articleBean.setArticleID(result.getString("id"));
+                articleBean.setTitle(result.getString("title"));
+                articleBean.setURL(result.getString("url"));
+                articleBean.setDateTime(result.getTimestamp("date_time"));
+
+                listOfBeans.add(articleBean);
+            }
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error mapping objects in ArticleProcessBean.getFilteredArticles()");
+            logger.warn(SQLEx);
+        }
+        try {
+            result.close();
+            dbaBean.close();
+        } catch (SQLException SQLEx) {
+            logger.warn("There was an error closing the resultset and the database connection.");
+            logger.warn(SQLEx);
+        }
+
+        return listOfBeans;
+
     }
 
     /**
@@ -457,19 +420,84 @@ public class ArticleProcessBean {
      */
 
     public LinkedList<ArticleBean> getMatchURLByTitle() {
-        ArticleBean articleBean = new ArticleBean();
+        DatabaseBean dbaBean = new DatabaseBean();
+        ArticleBean articleUtilBean = new ArticleBean();
+        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT title, url " +
                             "FROM articles " +
                             "WHERE url = ?;"));
-            dbaBean.getPrepStmt().setString(1, articleBean.buildURL(title));
+            dbaBean.getPrepStmt().setString(1, articleUtilBean.buildURL(title));
         } catch (SQLException SQLEx) {
+            logger.fatal("Problem with the SQL in the ArticleProcessBean.getMatchURLByTitle() function");
             logger.fatal(SQLEx);
         }
 
-        return processQuery();
+        ResultSet result = dbaBean.executeQuery();
+
+        try {
+            while (result.next()) {
+                ArticleBean articleBean = new ArticleBean();
+
+                articleBean.setTitle(result.getString("title"));
+                articleBean.setURL(result.getString("url"));
+
+                listOfBeans.add(articleBean);
+            }
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error mapping objects in ArticleProcessBean.getMatchURLByTitle()");
+            logger.warn(SQLEx);
+        }
+        try {
+            result.close();
+            dbaBean.close();
+        } catch (SQLException SQLEx) {
+            logger.warn("There was an error closing the resultset and the database connection.");
+            logger.warn(SQLEx);
+        }
+
+        return listOfBeans;
     }
+
+
+    // Retrive the ID of articles based on the title. Used primarily to get the id of just entered articles
+    private int getIdOfArticle() {
+        DatabaseBean dbaBean = new DatabaseBean();
+        int idOfArticle = -1;
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT id " +
+                            "FROM articles " +
+                            "WHERE title = ?;"));
+            dbaBean.getPrepStmt().setString(1, title);
+        } catch (SQLException SQLEx) {
+            logger.fatal("Problem with the SQL in the ArticleProcessBean.getIdOfArticle() function");
+            logger.fatal(SQLEx);
+        }
+
+        ResultSet result = dbaBean.executeQuery();
+
+        try {
+            while (result.next()) {
+                idOfArticle = Integer.parseInt(result.getString("title"));
+            }
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error mapping objects in ArticleProcessBean.getMatchURLByTitle()");
+            logger.warn(SQLEx);
+        }
+        try {
+            result.close();
+            dbaBean.close();
+        } catch (SQLException SQLEx) {
+            logger.warn("There was an error closing the resultset and the database connection.");
+            logger.warn(SQLEx);
+        }
+
+        return idOfArticle;
+    }
+
 
     public String getArticleID() {
         return articleID;
