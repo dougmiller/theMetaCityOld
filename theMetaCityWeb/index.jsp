@@ -21,7 +21,7 @@
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
 
 <c:if test="${showNotices == true}">
-    <jsp:useBean id="ImportantNoticeBean" scope="page" class="com.themetacity.beans.ImportantNoticeProcessBean"/>    
+    <jsp:useBean id="ImportantNoticeBean" scope="page" class="com.themetacity.beans.ImportantNoticeProcessBean"/>
     <c:forEach var="noticeBean" items="${ImportantNoticeBean.importantNotices}">
         <tmc:notice importantNotice="${noticeBean}"/>
     </c:forEach>
@@ -36,6 +36,7 @@
         <c:choose>
             <c:when test="${not empty param.year or not empty param.url}"> <%-- There are no results from a search --%>
                 <p>There are no articles for this criteria.</p>
+
                 <p>Perhaps <a href="/<c:url value="archive.jsp"/>">you could try the archive</a> or <a
                         href="/<c:url value="tags.jsp"/>">search via catagory tags</a>.</p>
             </c:when>

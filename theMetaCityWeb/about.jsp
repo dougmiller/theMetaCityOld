@@ -9,7 +9,7 @@
 
 <c:set var="profileList" value="${ProfileProcessBean.profiles}" scope="page"/>
 
-<c:choose>                       
+<c:choose>
     <c:when test="${not empty profileList}">
         <c:forEach var="filteredProfileList" items="${profileList}">
             <tmc:profile userProfile="${filteredProfileList}"/>

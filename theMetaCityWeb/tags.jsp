@@ -16,8 +16,10 @@
 
         <c:choose>
             <c:when test="${not empty resultList}">
+                <c:set var="previousEntry" value="${null}"/>
                 <c:forEach var="articleList" items="${resultList}">
-                    <tmc:archive articleBean="${articleList}"/>
+                    <tmc:archive articleBean="${articleList}" previousDate="${previousEntry}"/>                    
+                    <c:set var="previousEntry" value="${articleList.dateTime}"/>
                 </c:forEach>
             </c:when>
             <c:otherwise>
@@ -35,7 +37,7 @@
         </c:choose>
     </c:when>
     <c:otherwise>
-        <!-- Display all the tags used on the site -->        
+        <!-- Display all the tags used on the site -->
         <c:set var="allTagsList" value="${TagProcessBean.allTags}"/>
         <c:choose>
             <c:when test="${empty allTagsList}">

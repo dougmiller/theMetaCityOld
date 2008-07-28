@@ -50,7 +50,7 @@
             <h2>Cool Links</h2>
         </div>
 
-<!-- Site navigation etc -->
+        <!-- Site navigation etc -->
         <div>
             <h2>Site</h2>
             <ul>
@@ -60,35 +60,35 @@
                 <li><a href="/archive">Archive</a></li>
             </ul>
         </div>
-    <!-- End of the sidebar -->
+        <!-- End of the sidebar -->
     </div>
 
-<!-- The main content div -->
-<div id="maincontent">
-<h2><c:out value="${param.error}"/></h2>
+    <!-- The main content div -->
+    <div id="maincontent">
+        <h2><c:out value="${param.error}"/></h2>
 
-<c:choose>
+        <c:choose>
 
-    <c:when test="${empty param.error}">
-        <c:redirect url="/" />
-    </c:when>
+        <c:when test="${empty param.error}">
+            <c:redirect url="/"/>
+        </c:when>
 
-    <c:when test="${param.error == 404}">
+        <c:when test="${param.error == 404}">
         <p>The file you were looking for has not been found.</p>
-    </c:when>
+        </c:when>
 
-    <c:when test="${param.error == 500}">
+        <c:when test="${param.error == 500}">
         <p>There has been an internal server error.</p>
-    </c:when>
+        </c:when>
 
-    <c:when test="${param.error == 403}">
+        <c:when test="${param.error == 403}">
         <p>This resources has been dened.</p>
-    </c:when>
+        </c:when>
 
-    <c:otherwise>
+        <c:otherwise>
         <p>An error occured.</p>
-    </c:otherwise>
+        </c:otherwise>
 
-</c:choose>
+        </c:choose>
 
 <jsp:include page="footer.jspf"/>

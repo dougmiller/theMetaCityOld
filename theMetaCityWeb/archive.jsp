@@ -14,8 +14,10 @@
 
 <c:choose>
     <c:when test="${not empty articleResultList}">
-        <c:forEach var="archiveList" items="${articleResultList}">
-            <tmc:archive articleBean="${archiveList}"/>
+        <c:set var="previousEntry" value="${null}"/>
+        <c:forEach var="archiveEntry" items="${articleResultList}">
+            <tmc:archive articleBean="${archiveEntry}" previousDate="${previousEntry}"/>
+            <c:set var="previousEntry" value="${archiveEntry.dateTime}"/>
         </c:forEach>
     </c:when>
     <c:otherwise>
