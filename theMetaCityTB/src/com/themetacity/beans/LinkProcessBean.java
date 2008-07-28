@@ -47,9 +47,8 @@ public class LinkProcessBean {
             logger.warn("There as an error in the LinkProcessBean");
             logger.warn(SQLEX);
         } finally {
-            try {// Close the Result Set
+            try {
                 result.close();
-                // Close the database connection
                 dbaBean.close();
             } catch (SQLException SQLEx) {
                 logger.warn("Could not close DB connection");
@@ -100,7 +99,7 @@ public class LinkProcessBean {
         } finally {
             dbaBean.close();
         }
-        
+
         return linksList;
     }
 

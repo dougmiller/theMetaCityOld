@@ -44,7 +44,7 @@ public class TagProcessBean {
             }
 
         }  catch (SQLException SQLEx) {
-            logger.warn("You had an error with your SQL");
+            logger.warn("You had an error with your SQL in the TagProcessBean()");
             logger.warn(SQLEx);
         } finally {
             try {// Close the Result Set

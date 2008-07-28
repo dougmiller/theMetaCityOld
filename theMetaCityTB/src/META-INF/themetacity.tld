@@ -51,6 +51,12 @@
             <rtexprvalue>true</rtexprvalue>
             <type>com.themetacity.typebeans.ArticleBean</type>
         </attribute>
+
+        <attribute>
+            <name>previousDate</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
 
     <!-- Profile tag -->
