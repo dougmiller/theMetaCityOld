@@ -18,17 +18,12 @@
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jspf/error.jsp?error=404</location>
+        <location>/WEB-INF/jspf/404.jsp</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/WEB-INF/jspf/error.jsp?error=500</location>
+        <location>/WEB-INF/jspf/500.jsp</location>
     </error-page>
-
-    <mime-mapping>
-        <extension>jsp</extension>
-        <mime-type>application/vnd.wap.xhtml+xml</mime-type>
-    </mime-mapping>
 
     <resource-ref>
         <description>Resource ref to the datasource configured in the context.xml</description>
@@ -41,9 +36,26 @@
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
     </filter>
+
     <filter-mapping>
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <!--
+    <filter>
+        <filter-name>infrared</filter-name>
+        <filter-class>net.sf.infrared.aspects.servlet.InfraREDServletFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>infrared</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>net.sf.infrared.agent.setup.InfraREDServletContextListener</listener-class>
+    </listener>
+    -->
 
 </web-app>

@@ -15,17 +15,6 @@
 </jsp:useBean>
 <c:if test="${not empty param.submit}">
     <c:choose>
-        <c:when test="${param.submit == 'newarticle'}">
-            <c:choose>
-                <c:when test="${articleFormAction.addArticle == '1'}">
-                    <p class="success">New article added successfully.</p>
-                </c:when>
-                <c:otherwise>
-                    <p class="failure">New article NOT added successfully.</p>
-                </c:otherwise>
-            </c:choose>
-        </c:when>
-
         <c:when test="${param.submit == 'delete'}">
             <c:choose>
                 <c:when test="${articleFormAction.deleteArticle == '1'}">
@@ -37,16 +26,31 @@
             </c:choose>
         </c:when>
 
-        <c:when test="${param.submit == 'update'}">
+        <c:otherwise>
             <c:choose>
-                <c:when test="${articleFormAction.updateArticle == '1'}">
-                    <p class="success">Successfully updated article.</p>
+                <c:when test="${param.submit == 'newarticle'}">
+                    <c:choose>
+                        <c:when test="${articleFormAction.addArticle == '1'}">
+                            <p class="success">New article added successfully.</p>
+                        </c:when>
+                        <c:otherwise>
+                            <p class="failure">New article NOT added successfully.</p>
+                        </c:otherwise>
+                    </c:choose>
                 </c:when>
-                <c:otherwise>
-                    <p class="failure">Did NOT successfully update article.</p>
-                </c:otherwise>
+
+                <c:when test="${param.submit == 'update'}">
+                    <c:choose>
+                        <c:when test="${articleFormAction.updateArticle == '1'}">
+                            <p class="success">Successfully updated article.</p>
+                        </c:when>
+                        <c:otherwise>
+                            <p class="failure">Did NOT successfully update article.</p>
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
             </c:choose>
-        </c:when>
+        </c:otherwise>
     </c:choose>
 </c:if>
 <jsp:useBean id="tagProcessBean" class="com.themetacity.beans.TagProcessBean"/>
@@ -56,18 +60,24 @@
         <p>Add new article:</p>
 
         <form action="articles.jsp" method="post">
-            <p>Title: <input type="text" size="50" name="title" id="titleinput"/></p>
+            <p>Title: <input type="text" size="50" name="title" id="titleinput" value="${param.title}"/></p>
 
             <div id="titlecheckbox"><a href="#">sss</a></div>
-            <div><textarea name="articleText" cols="65" rows="50"></textarea></div>
+            <div><textarea name="articleText" cols="65" rows="50">${param.articleText}</textarea></div>
             <tmc:adminTags tagsList="${listOfAllTags}"/>
             <p>Other tags:</p>
+
             <div><input type="text" name="articleOtherTags"/></div>
 
             <p class="smallnote">Enter a comma delimited list.</p>
+
             <div><input type="hidden" name="author" value="${sessionScope.loggedInUser}"/></div>
-            <div><button type="submit" name="submit" value="newarticle" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button></div>
-            <div><button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear the form"/>Clear!</button></div>
+            <div>
+                <button type="submit" name="submit" value="newarticle" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button>
+            </div>
+            <div>
+                <button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear the form"/>Clear!</button>
+            </div>
         </form>
     </c:when>
     <c:otherwise>
@@ -84,29 +94,31 @@
                 <div><textarea name="articleText" cols="65" rows="50">${listOfArticles.articleText}</textarea></div>
                 <tmc:adminTags tagsList="${listOfAllTags}" usedTagsList="${tagProcessBeanForEdit.articleTags}"/>
                 <p>Other tags:</p>
+
                 <div><input type="text" name="articleOtherTags"/></div>
 
                 <p class="smallnote">Enter a comma delimited list.</p>
+
                 <div><input type="hidden" name="articleID" value="${listOfArticles.articleID}"/></div>
-                <div><button type="submit" name="submit" value="update" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button></div>
-                <div><button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear the form"/>Clear!</button></div>
+                <div>
+                    <button type="submit" name="submit" value="update" class="submitbutton"><img src="siteimages/tick.png" alt="Accept and submit"/>Submit!</button>
+                </div>
+                <div>
+                    <button type="reset" class="reloadbutton"><img src="siteimages/redo.png" alt="Clear the form"/>Clear!</button>
+                </div>
             </form>
         </c:forEach>
     </c:otherwise>
 </c:choose>
 <br/>
 
+<jsp:useBean id="articleAll" class="com.themetacity.beans.ArticleProcessBean"/>
 <div>
-    <jsp:useBean id="articleAll" class="com.themetacity.beans.ArticleProcessBean"/>
-
-
     <c:forEach var="listOfArticles" items="${articleAll.allAdminArticles}">
         <form action="articles.jsp" method="post">
             <tmc:adminArticles articleBean="${listOfArticles}"/>
         </form>
     </c:forEach>
-
-
 </div>
 
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>

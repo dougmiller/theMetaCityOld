@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8"/>
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <title>theMetaCity.com</title>
 </head>
@@ -15,6 +15,10 @@
 
 <div id="header">
     <div>
+        <div class="headerleft">
+            <span class="bannerTitle"><a href="/">The MetaCity.com</a></span><br/>
+            <span class="bannerSubTitle">portfolio of Douglas Miller, Interaction Designer</span>
+        </div>
         <div class="headerright">
             <ul>
                 <li>Usability</li>
@@ -24,10 +28,6 @@
                 <li>Joomla</li>
                 <li>PHP support</li>
             </ul>
-        </div>
-        <div class="headerleft">
-            <span class="bannerTitle"><a href="/">The MetaCity.com</a></span><br/>
-            <span class="bannerSubTitle">portfolio of Douglas Miller, Interaction Designer</span>
         </div>
     </div>
 </div>
