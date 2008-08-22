@@ -16,6 +16,6 @@
         <ant antfile="theMetaCityTBBuild.xml" target="package" inheritAll="false"/>
         <ant antfile="theMetaCityWebBuild.xml" target="production" inheritAll="false"/>
         <ant antfile="theMetaCityAdminBuild.xml" target="production" inheritAll="false"/>
-    </target>
+    </target>    
 </project>
 

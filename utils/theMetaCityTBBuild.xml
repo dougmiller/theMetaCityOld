@@ -4,7 +4,7 @@
     <property name="adminlib.dir" value="../theMetaCityAdmin/WEB-INF/lib" />
     <property name="app.name" value="theMetaCityTB" />
     <property name="builddest.dir" value="../" />
-    <property name="classpath.dir" value="/usr/local/tomcat/lib" />
+    <property name="classpath.dir" value="/usr/local/tomcat6/lib" />
 	<property name="compile.dir" value="classes" />
     <property name="junit.dir" value="/usr/local/junit" />    
 	<property name="src.dir" value="src" />
@@ -26,6 +26,9 @@
     <target name="package" depends="compile">
         <!-- Include the taglib def list so that the jar actually will work, as it does no get compiled -->
         <copy file="${src.dir}/META-INF/themetacity.tld" toFile="${compile.dir}/META-INF/themetacityweb.tld" />
+        <copy todir="${compile.dir}">
+            <fileset dir="${src.dir}"/>
+        </copy>
         <jar destfile="${builddest.dir}/${app.name}.jar" basedir="${compile.dir}"/>       <!-- Gets deleted -->
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${weblib.dir}/${app.name}.jar"/>
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${adminlib.dir}/${app.name}.jar"/>
