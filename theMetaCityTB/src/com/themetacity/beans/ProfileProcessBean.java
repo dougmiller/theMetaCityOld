@@ -6,6 +6,7 @@ import com.themetacity.utilities.SecurityBean;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
@@ -32,41 +33,6 @@ public class ProfileProcessBean {
     public ProfileProcessBean() {
     }
 
-    private LinkedList<ProfileBean> processQuery() {
-        try {
-            // Use a statment that returns them all the users.
-            // Arguments have not been implimented yet
-            ResultSet result = dbaBean.executeQuery();
-
-            while (result.next()) {
-                ProfileBean profileBean = new ProfileBean();              // Make a new bean to be populated
-
-                // Now set all the properties
-                profileBean.setPseudonym(result.getString("pseudonym"));
-                profileBean.setContact(result.getString("contact"));
-                profileBean.setAbout(result.getString("about"));
-
-                // Process this users tags
-                TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setUser(result.getString("username"));     // Set the user in the TagProcessBean
-
-                profileBean.setTags(tagProcessBean.getAuthorTags(tagProcessBean.getUser()));            // Assign the results to the bean
-
-                listOfBeans.add(profileBean);                             // Add the newly populated profile to the list, it could be one or many, it doesnt really matter
-            }
-            // Close the Result Set
-            result.close();
-            // Close the database connection
-            dbaBean.close();
-        }
-        catch (SQLException SQLEx) {
-            logger.warn("There is an error with the database layer.");
-            logger.warn(SQLEx);
-        }
-
-        return listOfBeans; // Return the list full of populated beans
-    }
-
     // Perforn the update commands
     private int processUpdate() {
         int result = dbaBean.executeUpdate();
@@ -80,18 +46,40 @@ public class ProfileProcessBean {
      * @return LinkedList of the authors typebean
      */
     public LinkedList<ProfileBean> getProfiles() {
+
+        DatabaseBean dbaBean = new DatabaseBean();
+        LinkedList<ProfileBean> profileList = new LinkedList<ProfileBean>();
+
         try {
+            PreparedStatement prepStmt;
+
             if (author.equals("")) {
-                dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM users;"));
+                prepStmt = dbaBean.getConn().prepareStatement("SELECT username, pseudonym, contact, about FROM users;");
             } else {
-                dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM users WHERE username = ?;"));
-                dbaBean.getPrepStmt().setString(1, author);
+                prepStmt = dbaBean.getConn().prepareStatement("SELECT username, pseudonym, contact, about FROM users WHERE username = ?;");
+                prepStmt.setString(1, author);
             }
 
+            dbaBean.setPrepStmt(prepStmt);
+
+            ResultSet result = dbaBean.executeQuery();
+
+            while (result.next()) {
+                ProfileBean profileBean = new ProfileBean();
+
+                profileBean.setPseudonym(result.getString("pseudonym"));
+                profileBean.setContact(result.getString("contact"));
+                profileBean.setAbout(result.getString("about"));
+
+                profileList.add(profileBean);
+            }
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
+        } finally {
+            dbaBean.close();
         }
-        return processQuery();
+
+        return profileList;
     }
 
     /**
@@ -100,35 +88,35 @@ public class ProfileProcessBean {
      * @return 0 if the username/password combination does not exist. Return 1 if it does. Becasue usernames are unique there can not be any other value
      */
     public Boolean getValidUser() {
-        try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?;"));
-            dbaBean.getPrepStmt().setString(1, author);
-            dbaBean.getPrepStmt().setString(2, password);
-        } catch (SQLException SQLEx) {
-            logger.fatal(SQLEx);
-        }
 
-        LinkedList<ProfileBean> profile = processQuery();
-
-        return profile.size() > 0;
-    }
-
-    /**
-     * Change a users password.
-     *
-     * @return 1 if the password has been changed successfuly. 0 if it has not been changed.
-     */
-    public Boolean getChangePassword() {
+        DatabaseBean dbaBean = new DatabaseBean();
+        LinkedList<ProfileBean> profileList = new LinkedList<ProfileBean>();
 
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE users SET password = ? WHERE username = ?;"));
-            dbaBean.getPrepStmt().setString(1, password);
-            dbaBean.getPrepStmt().setString(2, author);
+            PreparedStatement prepStmt;
+
+            prepStmt = dbaBean.getConn().prepareStatement("SELECT username FROM users WHERE username = ? AND password = ?;");
+            prepStmt.setString(1, author);
+            prepStmt.setString(2, password);
+
+            dbaBean.setPrepStmt(prepStmt);
+
+            ResultSet result = dbaBean.executeQuery();
+
+            while (result.next()) {
+                ProfileBean profileBean = new ProfileBean();
+
+                profileBean.setUsername(result.getString("username"));
+
+                profileList.add(profileBean);
+            }
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
+        } finally {
+            dbaBean.close();
         }
 
-        return processUpdate() > 0;
+        return profileList.size() > 0;
     }
 
     /**
@@ -183,7 +171,7 @@ public class ProfileProcessBean {
         this.about = about;
     }
 
-    public String getPseudonym() {
+    public String getPseudonym () {
         return pseudonym;
     }
 

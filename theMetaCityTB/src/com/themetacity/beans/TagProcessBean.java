@@ -25,15 +25,25 @@ public class TagProcessBean {
     }
 
     /**
-     * Process the result of a call to the database (a results set) into a linked list containing
-     * TagBean objects, which can be passed to a custom tag for output.
+     * Get all the tags the the author has posted under
      *
-     * @return a linked list containing TagBean objects
+     * @return a linked list of <TagBean> that belong to the given user
      */
-    private LinkedList<TagBean> processQuery() {
+    public LinkedList<TagBean> getAuthorTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        ResultSet result = dbaBean.executeQuery();
+        DatabaseBean dbaBean = new DatabaseBean();
+
         try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT tag, count(tag) as timesused " +
+                    "FROM articles, articletags " +
+                    "WHERE articles.author = ? " +
+                    "AND articles.id = articletags.id " +
+                    "GROUP BY tag;"));
+            dbaBean.getPrepStmt().setString(1, articleID);
+
+            ResultSet result = dbaBean.executeQuery();
+
             while (result.next()) {
                 TagBean tagBean = new TagBean();
 
@@ -42,70 +52,84 @@ public class TagProcessBean {
 
                 listOfTags.add(tagBean);
             }
-
-        }  catch (SQLException SQLEx) {
-            logger.warn("You had an error with your SQL in the TagProcessBean()");
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error in TagProcessBean()");
             logger.warn(SQLEx);
         } finally {
-            try {// Close the Result Set
-                result.close();
-                // Close the database connection
-                dbaBean.close();
-            } catch (SQLException SQLEx) {
-                logger.warn("Could not close DB connection");
-                logger.warn(SQLEx);
-            }
+            dbaBean.close();
         }
         return listOfTags;
     }
 
-    // Perforn the update commands
-   /* private int processUpdate() {
-        int result = dbaBean.executeUpdate();
-        dbaBean.close();
-        return result;
-    }*/
+    /**
+     * Get all the tags posted for an article
+     *
+     * @return a list of <TagBeans> belonging to an article
+     */
+    public LinkedList<TagBean> getArticleTags() {
+        LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
+        DatabaseBean dbaBean = new DatabaseBean();
 
-    public LinkedList<TagBean> getAuthorTags(String author) {
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("" +
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT tag, count(tag) as timesused " +
                     "FROM articles, articletags " +
-                    "WHERE articles.author = ? " +
+                    "WHERE articles.id = ? " +
                     "AND articles.id = articletags.id " +
                     "GROUP BY tag;"));
-            dbaBean.getPrepStmt().setString(1, author);
-        } catch (SQLException SQLEx) {
-            logger.fatal(SQLEx);
-        }
-        return processQuery();
-    }
-
-    public LinkedList<TagBean> getArticleTags() {
-        try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT tag, count(tag) as timesused " +
-                            "FROM articles, articletags " +
-                            "WHERE articles.id = ? " +
-                            "AND articles.id = articletags.id " +
-                            "GROUP BY tag;"));
             dbaBean.getPrepStmt().setString(1, articleID);
+
+            ResultSet result = dbaBean.executeQuery();
+
+            while (result.next()) {
+                TagBean tagBean = new TagBean();
+
+                tagBean.setTag(result.getString("tag"));
+                tagBean.setNumTimesTagUsed(result.getInt("timesused"));
+
+                listOfTags.add(tagBean);
+            }
         } catch (SQLException SQLEx) {
-            logger.fatal(SQLEx);
+            logger.warn("You had an error in TagProcessBean()");
+            logger.warn(SQLEx);
+        } finally {
+            dbaBean.close();
         }
-        return processQuery();
+        return listOfTags;
     }
 
+    /**
+     * Get all lthe tags (useful for the admin)
+     *
+     * @return all the tags in the database
+     */
     public LinkedList<TagBean> getAllTags() {
+        LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
+        DatabaseBean dbaBean = new DatabaseBean();
+
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT tag, count(tag) as timesused " +
-                            "FROM articletags " +
-                            "GROUP BY tag;"));
+                    "FROM articletags " +
+                    "GROUP BY tag;"));
+
+            ResultSet result = dbaBean.executeQuery();
+
+            while (result.next()) {
+                TagBean tagBean = new TagBean();
+
+                tagBean.setTag(result.getString("tag"));
+                tagBean.setNumTimesTagUsed(result.getInt("timesused"));
+
+                listOfTags.add(tagBean);
+            }
         } catch (SQLException SQLEx) {
-            logger.fatal(SQLEx);
+            logger.warn("You had an error in TagProcessBean()");
+            logger.warn(SQLEx);
+        } finally {
+            dbaBean.close();
         }
-        return processQuery();
+        return listOfTags;
     }
 
     public String getUser() {

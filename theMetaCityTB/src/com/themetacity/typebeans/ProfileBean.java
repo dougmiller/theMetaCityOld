@@ -3,14 +3,23 @@ package com.themetacity.typebeans;
 import java.util.LinkedList;
 
 /**
- * This is the bean that repesents an authors profile for display in the about page.
+ * This is the bean that repesents an author 
  */
 public class ProfileBean {
 
+    private String username;
     private String pseudonym;
     private String contact;
     private String about;
     private LinkedList<TagBean> tags;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getPseudonym() {
         return pseudonym;

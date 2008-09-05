@@ -35,11 +35,11 @@ public class RegexTest {
         assertFalse("Only hyphen", titleRegex("-------"));
         assertFalse("Only space", titleRegex("  "));           
 
-        // Funny character and puctutation
-        assertTrue("Funny Character", titleRegex("Entry?"));
-        assertTrue("Funny Character and hyphen", titleRegex("Entry-Next-Wednesday?"));
-        assertTrue("Swearing", titleRegex("?!@*"));
-        assertTrue("Swearing multiple times", titleRegex("?!@*-?!@*-~!@#$%^&*()_+|}{[]\\"));
+        // Funny character and puctutation are not allowed
+        assertFalse("Funny Character", titleRegex("Entry?"));
+        assertFalse("Funny Character and hyphen", titleRegex("Entry-Next-Wednesday?"));
+        assertFalse("Only Swearing", titleRegex("?!@*"));
+        assertFalse("Swearing multiple times", titleRegex("?!@*-?!@*-~!@#$%^&*()_+|}{[]\\"));
     }
 
 

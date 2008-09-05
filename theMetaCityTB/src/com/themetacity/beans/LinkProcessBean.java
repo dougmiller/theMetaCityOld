@@ -25,40 +25,6 @@ public class LinkProcessBean {
     public LinkProcessBean() {
     }
 
-    // Perform the queries
-    private LinkedList<LinkBean> processQuery() {
-        LinkedList<LinkBean> noticeList = new LinkedList<LinkBean>();
-
-        // The statment is already set in the calling method
-        ResultSet result = dbaBean.executeQuery();
-
-        try {
-            while (result.next()) {
-                LinkBean linkBean = new LinkBean();
-
-                linkBean.setLinkID("" + result.getInt("id"));
-                linkBean.setLinkURL(result.getString("URL"));
-                linkBean.setDescText(result.getString("desc_text"));
-                linkBean.setDatePosted(result.getString("date_posted"));
-
-                noticeList.add(linkBean);
-            }
-        } catch (SQLException SQLEX) {
-            logger.warn("There as an error in the LinkProcessBean");
-            logger.warn(SQLEX);
-        } finally {
-            try {
-                result.close();
-                dbaBean.close();
-            } catch (SQLException SQLEx) {
-                logger.warn("Could not close DB connection");
-                logger.warn(SQLEx);
-            }
-        }
-
-        return noticeList;
-    }
-
     // Perforn the update commands
     private int processUpdate() {
         int result = dbaBean.executeUpdate();
@@ -107,13 +73,34 @@ public class LinkProcessBean {
      * @return LinkedList with every link<linkbean> in it
      */
     public LinkedList<LinkBean> getAllLinks() {
+        DatabaseBean dbaBean = new DatabaseBean();
+        LinkedList<LinkBean> linksList = new LinkedList<LinkBean>();
+
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("SELECT * FROM links ORDER BY id desc;"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT URL, desc_text " +
+                            "FROM links " +
+                            "ORDER BY id desc"));
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         }
 
-        return processQuery();
+        ResultSet result = dbaBean.executeQuery();
+        try {
+            while (result.next()) {
+                LinkBean linkBean = new LinkBean();
+
+                linkBean.setLinkURL(result.getString("URL"));
+                linkBean.setDescText(result.getString("desc_text"));
+                linksList.add(linkBean);
+            }
+        } catch (SQLException SQLEx) {
+            logger.fatal(SQLEx);
+        } finally {
+            dbaBean.close();
+        }
+
+        return linksList;
     }
 
 
