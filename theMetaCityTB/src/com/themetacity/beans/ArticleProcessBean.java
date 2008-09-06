@@ -33,6 +33,8 @@ public class ArticleProcessBean {
 
     private String searchTag = "";          // Select articles with this tag
 
+    private String searchString = "";
+
     private static final Logger logger = Logger.getLogger(ArticleProcessBean.class);
 
     public ArticleProcessBean() {
@@ -83,7 +85,6 @@ public class ArticleProcessBean {
 
                 listOfBeans.add(articleBean);                              //Add the now populated bean to the list to be returned for display
             }
-            System.out.println("asdsads");
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in ArticleProcessBean.getFrontpageArticles()");
             logger.warn(SQLEx);
@@ -225,7 +226,7 @@ public class ArticleProcessBean {
                 listOfBeans.add(articleBean);
             }
         } catch (SQLException SQLEx) {
-            logger.warn("You had an error mapping objects in ArticleProcessBean.getFilteredArticles()");
+            logger.warn("You had an error in ArticleProcessBean.getArticlesWithTag()");
             logger.warn(SQLEx);
         }
         finally {
@@ -233,7 +234,44 @@ public class ArticleProcessBean {
         }
 
         return listOfBeans;
+    }
 
+    /**
+     * Search for articles with the given string in the title
+     *
+     * @return A linked list of articles
+     */
+    public LinkedList<ArticleBean> getSearchArticles() {
+        DatabaseBean dbaBean = new DatabaseBean();
+        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT title, url, date_time " +
+                    "FROM articles " +
+                    "WHERE title LIKE ? " +
+                    "ORDER BY date_time desc;"));
+            dbaBean.getPrepStmt().setString(1, "%" + searchString + "%");
+
+            ResultSet result = dbaBean.executeQuery();
+
+            while (result.next()) {
+                ArticleBean articleBean = new ArticleBean();
+
+                articleBean.setTitle(result.getString("title"));
+                articleBean.setURL(result.getString("url"));
+                articleBean.setDateTime(result.getTimestamp("date_time"));
+
+                listOfBeans.add(articleBean);
+            }
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error in ArticleProcessBean.getSearchArticles()");
+            logger.warn(SQLEx);
+        }
+        finally {
+            dbaBean.close();
+        }
+        return listOfBeans;
     }
 
     /**
@@ -354,7 +392,6 @@ public class ArticleProcessBean {
             }
 
             insertTags.close();
-
 
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
@@ -604,5 +641,13 @@ public class ArticleProcessBean {
 
     public void setSearchTag(String searchTag) {
         this.searchTag = searchTag;
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
     }
 }
