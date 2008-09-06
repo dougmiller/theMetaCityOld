@@ -40,7 +40,7 @@ public class TagProcessBean {
                     "WHERE articles.author = ? " +
                     "AND articles.id = articletags.id " +
                     "GROUP BY tag;"));
-            dbaBean.getPrepStmt().setString(1, articleID);
+            dbaBean.getPrepStmt().setString(1, user);
 
             ResultSet result = dbaBean.executeQuery();
 

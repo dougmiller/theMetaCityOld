@@ -71,6 +71,12 @@ public class ProfileProcessBean {
                 profileBean.setContact(result.getString("contact"));
                 profileBean.setAbout(result.getString("about"));
 
+                // Process this users tags
+                TagProcessBean tagProcessBean = new TagProcessBean();
+                tagProcessBean.setUser(result.getString("username"));
+
+                profileBean.setTags(tagProcessBean.getAuthorTags());
+
                 profileList.add(profileBean);
             }
         } catch (SQLException SQLEx) {

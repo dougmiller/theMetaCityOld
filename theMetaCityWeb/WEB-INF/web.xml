@@ -36,7 +36,7 @@
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
     </filter>
-    <!--
+
     <filter-mapping>
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -55,7 +55,6 @@
 
     <listener>
         <listener-class>net.sf.infrared.agent.setup.InfraREDServletContextListener</listener-class>
-    </listener>   -->
-
+    </listener>
 
 </web-app>
