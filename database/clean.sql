@@ -1,5 +1,5 @@
 # Drop all the tables in the database
-USE themetacitycom;
+USE themetacity;
 
 #DROP DATABASE themetacity;
 # OR if no permission to create database
