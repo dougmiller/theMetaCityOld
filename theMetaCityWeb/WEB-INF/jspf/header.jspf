@@ -35,11 +35,20 @@
 <div id="container">
     <!-- The right nav div -->
     <div id="sidebar">
+        <!-- Search -->
+        <div>
+            <h2><a href="/search">Search</a></h2>
+            <form action="/search.jsp">
+                <input type="text" size="20" name="searchString" value="${param.searchString}"/>
+                <button type="submit" name="submit" value="search" class="submitbutton"><img src="siteimages/magnifier.png" alt="Search!"/>Search!</button>
+            </form>
+        </div>
         <!-- About box -->
         <div>
             <h2><a href="/about">About</a></h2>
 
-            <p>theMetaCity is a small Brisbane based web design and development firm. We specialize in helping small businesses and professional individuals launch a presence on the Internet.</p>
+            <p>theMetaCity is a small Brisbane based web design and development firm. We specialize in helping small
+                businesses and professional individuals launch a presence on the Internet.</p>
 
             <p>In addition we can help redesign and retool existing websites to better focus their purpose.</p>
 
