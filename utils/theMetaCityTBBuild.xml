@@ -4,7 +4,7 @@
     <property name="adminlib.dir" value="../theMetaCityAdmin/WEB-INF/lib" />
     <property name="app.name" value="theMetaCityTB" />
     <property name="builddest.dir" value="../" />
-    <property name="classpath.dir" value="/usr/local/tomcat6/lib" />
+    <property name="classpath.dir" value="/usr/local/tomcat/lib" />
 	<property name="compile.dir" value="classes" />
     <property name="junit.dir" value="/usr/local/junit" />    
 	<property name="src.dir" value="src" />
