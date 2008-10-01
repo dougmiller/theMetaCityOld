@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
 <div id="header">
     <div>
         <div class="headerleft">
@@ -45,14 +44,10 @@
         </div>
         <!-- About box -->
         <div>
-            <h2><a href="/about">About</a></h2>
-
-            <p>theMetaCity is a small Brisbane based web design and development firm. We specialize in helping small
-                businesses and professional individuals launch a presence on the Internet.</p>
-
-            <p>In addition we can help redesign and retool existing websites to better focus their purpose.</p>
-
-            <p><a href="/about">Click here for more information</a> about theMetaCity or its members.</p>
+            <h2><a href="#">About</a></h2>
+            <p>This is my place to rant and rave and generally run amok. Content is wildly diverse but almost always has to do with living and dying in a digital world. Most certainly it is inane.</p>
+            <p>Content is not limited to; soapboxing, tech, tutorials, design trends, junk I am working on, junk people I know are working on and generaly life online.</p>
+            <p>The about page is currently dead.</p>
         </div>
 
         <!-- The projects div -->
@@ -67,7 +62,7 @@
         <!-- The Cool Links (tm) div -->
         <jsp:useBean id="linksBean" scope="page" class="com.themetacity.beans.LinkProcessBean"/>
         <div>
-            <h2>Cool Links</h2>
+            <h2>Junky links</h2>
             <ul>
                 <c:forEach var="linksItem" items="${linksBean.frontPageLinks}">
                     <tmc:link linkBean="${linksItem}"/>
@@ -80,9 +75,9 @@
             <h2>Site</h2>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/tags">Tags</a></li>
-                <li><a href="/archive">Archive</a></li>
+                <li><a href="#">About (currently dead)</a></li>
+                <li><a href="/tags">Browse by tags</a></li>
+                <li><a href="/archive">Browse via the archive</a></li>
             </ul>
         </div>
         <!-- End of the sidebar -->
