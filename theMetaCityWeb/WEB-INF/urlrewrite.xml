@@ -5,17 +5,6 @@
         "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
 
 <urlrewrite>
-    <!-- About page rules -->
-    <rule match-type="regex">
-        <from>/about/([\w*](-?[\w*])*)/?</from>
-        <to>/about.jsp?author=$1</to>
-    </rule>
-
-    <rule match-type="regex">
-        <from>^/about/?$</from>
-        <to>/about.jsp</to>
-    </rule>
-
     <!-- Tag rules -->
     <rule match-type="regex">
         <from>^/tags/([\w*](-?[\w*])*)/?$</from>

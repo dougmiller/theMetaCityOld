@@ -35,26 +35,16 @@
     <filter>
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+
+        <init-param>
+            <param-name>statusEnabled</param-name>
+            <param-value>false</param-value>
+        </init-param>
+
     </filter>
 
     <filter-mapping>
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <!--
-    <filter>
-        <filter-name>infrared</filter-name>
-        <filter-class>net.sf.infrared.aspects.servlet.InfraREDServletFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>infrared</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <listener>
-        <listener-class>net.sf.infrared.agent.setup.InfraREDServletContextListener</listener-class>
-    </listener>
-    -->
 </web-app>
