@@ -6,8 +6,8 @@
 
 <urlrewrite>
     <rule match-type="regex">
-        <from>/([\w*](-?[\w*])*)/?</from>
-        <to>/index.jsp?author=$1</to>
+        <from>^/resume/?$</from>
+        <to>/resume.jsp</to>
     </rule>
 
     <rule match-type="regex">

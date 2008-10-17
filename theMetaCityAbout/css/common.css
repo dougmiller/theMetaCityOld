@@ -1,0 +1,87 @@
+@charset
+"utf-8"
+;
+
+html {
+    font-family: "Helvetica", sans-serif;
+    font-size: 10pt;
+    background: #333;
+}
+
+#container {
+    width: 500px;
+    padding: 5px;
+    margin: 100px auto auto;
+}
+
+#mainbox {
+    padding: 1px;
+    background: #FFF;
+    text-align: justify;
+}
+
+h1 {
+    background: #000;
+    margin: 0;
+    padding-top: 3px;
+}
+
+h2{}
+
+h3 {
+    color: #333;
+}
+
+.abouthighlight {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+p {
+    margin: 0;
+    color: #666;
+    line-height: 1.3em;
+}
+
+a {
+    color: #666;
+}
+
+a:hover {
+    text-decoration: none; 
+}
+
+a:visited {
+    color: #666;
+}
+
+.navbox {
+    float: left;
+    height: 45px;
+    color: #666;
+    font-size: 36pt;
+}
+
+.navbox a {
+    color: #666;
+    text-decoration: none;
+}
+
+.navbox a:visited {
+    color: #666;
+    text-decoration: none;
+}
+
+.aboutnavbox {
+    width: 130px;
+    background: #00F;
+}
+
+.resumenavtbox {
+    width: 180px;
+    background: #0F0;
+}
+
+.activenavbox {
+    border-bottom: 3px solid silver;
+}
