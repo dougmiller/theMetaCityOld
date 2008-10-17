@@ -373,22 +373,23 @@ public class ArticleProcessBean {
             System.arraycopy(articleTags, 0, tempTotalTags, textBoxToArray.length, articleTags.length);
 
             // Put in the tags
-            for (String tag : tempTotalTags) {
-                try {
+
+            try {
+                for (String tag : tempTotalTags) {
                     tagDBBean.setPrepStmt(insertTags);
                     insertTags.setString(1, articleID);
                     insertTags.setString(2, tag.trim());
                     insertTags.executeUpdate();
-                } catch (SQLException SQLEx) {
-                    logger.fatal(SQLEx);
-                    try {
-                        tagDBBean.getConn().rollback();
-                    } catch (SQLException rollbackSQLEx) {
-                        logger.error("There was an error in ArticleProcessBean.updateArticleTags() when rolling back the transaction.");
-                        logger.error(rollbackSQLEx);
-                    }
-                    return 0;
                 }
+            } catch (SQLException SQLEx) {
+                logger.fatal(SQLEx);
+                try {
+                    tagDBBean.getConn().rollback();
+                } catch (SQLException rollbackSQLEx) {
+                    logger.error("There was an error in ArticleProcessBean.updateArticleTags() when rolling back the transaction.");
+                    logger.error(rollbackSQLEx);
+                }
+                return 0;
             }
 
             insertTags.close();
