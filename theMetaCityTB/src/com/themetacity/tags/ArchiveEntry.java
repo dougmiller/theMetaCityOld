@@ -34,18 +34,15 @@ public class ArchiveEntry extends SimpleTagSupport {
             if (!splitPreviousDate[0].equals(splitThisDate[0])) {    //[0] is year
                 out.println("<h2>" + splitThisDate[0] + "</h2>");
             }
-
             if ((!(splitPreviousDate[0]+splitPreviousDate[1]).equals(splitThisDate[0]+splitThisDate[1]))) {    //[1] is month
                 out.println("<h3>" + splitThisDate[1] + "</h3>");
             }
-
-
+            // Dont bother with day granularity
         }
         catch (IOException IOEx) {
             logger.warn("There was an error with the archive rendering");
             logger.warn(IOEx);
         }
-
 
         try {
             out.println("<p class=\"archiveEntryTitle\">" + buildTitleLink(articleBean.getTitle()) + "</p>");
