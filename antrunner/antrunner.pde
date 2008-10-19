@@ -13,8 +13,6 @@ int timeout = 5000; /* Timout for waiting for the python script to tell us it is
 int isProcessing = false; // Set when the script confirms that it is processing the build
 int hasRun = false; // Used to only write to the serial port once when the button is pushed/held down
 int runOnce = false; // Used to check that dont start listening for serial if the button is held down
-int returned[1];
-
 
 void setup() {
   pinMode(inPin, INPUT);
