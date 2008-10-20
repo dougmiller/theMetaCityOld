@@ -1,28 +1,36 @@
-Ant runner is a combined python and arduino script that can run ant scripts on your computer at the touch of a button. It was originally conceived so that projects could be compiled, built and deployed into a test environment in one step. You may find other uses. Hooray.
+Ant runner is a combined python and Arduino script that can run ant scripts on your computer at the touch of a button. It was originally conceived so that projects could be compiled, built and deployed into a test environment in one step. You may find other uses. Hooray.
 
-You will need:
+YOU WILL NEED:
 Python with a serial library. http://pyserial.wiki.sourceforge.net/pySerial works well enough.
 
-An arduino with a serial port. This was build on a Dicimila. It will conceivably work with an bluetooth board but this is as yet untested (if you want to buy me one, I wont say no.).
+An Arduino with a serial port. This was build on a Dicimila. It will conceivably work with an bluetooth board but this is as yet untested (if you want to buy me one, I wont say no.).
 
 Some sort of input; momentary switches will work quite well, but anything should do. Be creative, different inputs will lend the script to different situations. Eg maybe put a motion detector as the switch so that it fires whenever you leave/enter the room. Or a LDR so that it goes off when the sun rises/sets. Go nuts. See the note in the pin setup below for some useful information about deciding which switch to use.
 
 Some outputs; LEDs of different colours in this case. You could make it drive some motors so that robotic monkeys dance. Or fire a relay and potentially make anything go. Again, your imagination is the limit.
 
 RUNNING THIS PROGRAM
-Open the python file and modifly the path to your ant file. This could be changed to any arbitrary program, however the script is build to interpret the result of an ant build execution.
+Open the python file and modify the path to your ant file. This could be changed to any arbitrary program, however the script is build to interpret the result of an ant build execution.
 
 Modify the serial port to match the one you are running on.
 
-Upload the arduino sketch to the board. You should not have to modify anything in the sketch.
+Upload the Arduino sketch to the board. You should not have to modify anything in the sketch.
 ** NOTE **
 The sketch assumes that the switch is running on pin 7 and will fire when it is HIGH. It will not fire again until the switch has returned to LOW first. *You can not hold down the switch to make it run again and again etc*
 The success build are on 8 and 9, the failure are on 11 and 12 and the working/waiting is on 13. Modify as appropriate.
 
+THE LED FLASHES INTERPRETED:
+When the button is pushed a message is send over the serial port to the python script. The working/waiting LED with flash @ 500ms intervals for 5 seconds and then timeout, returning the Arduino to the ready state.
+
+If in that five seconds the python script returns a confirmed and processing message, the Arduino will go into the waiting mode for the ant script to finish running. This is designated by the working/waiting LED flashing @ 200ms intervals. This will continue until the python script returns either success or failure messages. The Ardunio has no idea how long this will take and so will do this indefinitely. It the connection to the computer is lost at this point the Arduino will need to be reset.
+
+When the python script has finished running the script either a success or failure message will be returned to the Arduino. At this point the appropriate LEDs will flash depending on what you have set.
+
+Only at this point, if the switch has been set to low, will the Arduino be ready to run again.
+
 TROUBLESHOOTING
 It does not work!!!
-Have you followed the steps in RUNNING THIS PROGRAM? If no: do that. Otherwise: I have no idea.
-
+Have you followed the steps in RUNNING THIS PROGRAM? If no: do that. Otherwise: I have no idea. Look at the code maybe figure it out.
 
 Enjoy
 dougmiller@themetacity.com
