@@ -356,14 +356,14 @@ public class ArticleProcessBean {
                 articleTags = new String[0];
             }
             // Handle textbox input
-            String[] textBoxToArray = articleOtherTags.split(",");
+            String[] textBoxToArray = articleOtherTags.trim().split(",");
 
             // Stop empty tags being inserted
             try {
                 if (textBoxToArray[0].equals("")) {          // nothing entered into the box
                     textBoxToArray = new String[0];
                 }
-            } catch (ArrayIndexOutOfBoundsException as) {    // catch if the size is 0 (only happens when string to split is ',' or more only)
+            } catch (ArrayIndexOutOfBoundsException outOfBoundEx) {    // catch if the size is 0 (only happens when string to split is a ',' or more only)
                 textBoxToArray = new String[0];
             }
 
