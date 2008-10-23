@@ -1,17 +1,16 @@
-@charset
-"utf-8"
-;
+@charset "utf-8";
 
 html {
     font-family: "Helvetica", sans-serif;
     font-size: 10pt;
     background: #333;
+    margin: 50px auto;
 }
 
 #container {
     width: 500px;
     padding: 5px;
-    margin: 100px auto auto;
+    margin: auto;
 }
 
 #mainbox {
@@ -26,7 +25,9 @@ h1 {
     padding-top: 3px;
 }
 
-h2{}
+h2{
+    margin-bottom: 0;
+}
 
 h3 {
     color: #333;
@@ -39,7 +40,7 @@ h3 {
 
 p {
     margin: 0;
-    color: #666;
+    color: #333;
     line-height: 1.3em;
 }
 
@@ -80,6 +81,11 @@ a:visited {
 .resumenavtbox {
     width: 180px;
     background: #0F0;
+}
+
+.homenavtbox {
+    background: #FFB03B;
+    width: 17px;
 }
 
 .activenavbox {

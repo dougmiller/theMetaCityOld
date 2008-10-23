@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="tmc" uri="http://com.themetacity" %>
 

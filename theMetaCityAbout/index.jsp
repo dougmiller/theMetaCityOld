@@ -23,6 +23,7 @@
                 Finally my interests broadly range from software to hardware, people and places, history and the future and how it all works together to make this place livable.&para;
                 <a href="resume/">Click here to see my <span class="abouthighlight">r&eacute;sum&eacute;</span></a>.&para;</p>
             </div>
+            <div class="navbox homenavtbox"><a href="/">/</a></div>
             <div class="navbox aboutnavbox activenavbox"><a href="/about/">About</a></div>
             <div class="navbox resumenavtbox"><a href="/about/resume">R&eacute;sum&eacute;</a></div>
         </div>

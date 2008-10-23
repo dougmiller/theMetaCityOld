@@ -1,6 +1,7 @@
 $(document).ready(function() {
-  $(".contactinfo").hide();
-  $("#references > div > h3").click(function(){
-      $(this).next('.contactinfo').toggle('fast');
+  $('.workdetails').hide();
+
+  $('.workdetailsdiv > h3').click(function(){
+    $(this).next('.workdetails').toggle('fast');
   });
 });

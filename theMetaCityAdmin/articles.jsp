@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
-<script type="text/javascript" src="/js/jquery-1.2.5.min.js"></script>
-<script type="text/javascript" src="/js/admin_articles.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/admin_articles.js"></script>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 <%@ taglib uri="http://com.themetacity" prefix="tmc" %>
 

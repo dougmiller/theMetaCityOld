@@ -1,6 +1,4 @@
-@charset
-"utf-8"
-;
+@charset "utf-8";
 
 h1 {
     color: #0F0;
@@ -8,62 +6,105 @@ h1 {
 
 #workhistory {
     background: url(/about/images/timlinebackground.jpg) no-repeat;
-    height: 300px;
 }
 
 #workhistorybottom {
     background: url(/about/images/timlinebottom.jpg) bottom left no-repeat;
-    padding: 300px 0 0 0;
-    position: relative;
+    padding: 30px 0 5px 0;
 }
 
 #workhistorybottom > div {
-    height: 15px;
-    background-color: #eeeeff;
+
     padding: 2px 5px;
-    position: absolute;
+}
+
+#workhistorybottom p {
+    display: block;
 }
 
 #workhistorybottom > div > h3 {
+    background-color: #E1E1E1;
+    color: #333333;
     margin: 0;
+    border: 1px solid #EFEFEF;
 }
 
-#bitid {
+#bitid {                        
     width: 350px;
-    left: 0;
-    top: 30px;
+    margin: 0 0 10px 0;
 }
 
 #qnp {
     width: 40px;
-    left: 310px;
-    top: 80px;
+    margin: 0 0 10px 310px;
 }
 
 #indoorvball {
     width: 430px;
-    left: 50px;
-    top: 120px;
+    margin: 0 0 10px 50px;
 }
 
 #beachvball {
-    width: 160px;
-    left: 320px;
-    top: 150px;
+    width: 165px;
+    margin: 0 0 10px 315px;
 }
 
 #selfemployed {
     width: 130px;
-    left: 350px;
-    top: 190px;
+    margin: 0 0 10px 350px;
+}
+
+.workdetails {
+    width: 300px;
+    background: #f9f9f9;
+    padding: 1px;
+    border: 1px solid #EFEFEF;
+}
+
+#bitiddetails {
+    position: relative;
+    left: 15px;
+}
+
+#qnpdetails {
+    position: relative;
+    right: 130px;
+}
+
+#indoorvalldtails {
+    position: relative;
+    left: 15px;
+}
+
+#beachvballdetails {
+    position: relative;
+    right: 155px;
+}
+
+#selfemployeddetails {
+    position: relative;
+    right: 190px;
 }
 
 #references > div {
     width: 240px;
 }
 
-#references ul{
+#references ul {
     list-style: none;
     padding-left: 1em;
     text-indent: 0;
+    color: #666;
+}
+
+#damianreference {
+    float: right;
+}
+
+#ralfreference{
+    float: left;
+}
+
+#pdflinktoresume {
+    clear: both;
 }

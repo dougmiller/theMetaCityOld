@@ -1,0 +1,206 @@
+body {
+    background-color: #000000;
+    color: #fafafa;
+    font-size: 10pt;
+    font-family: verdana, arial, sans-serif;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+a {
+    color: #FFB03B;
+    text-decoration: none;
+}
+
+a :hover {
+    color: #8E2800;
+    text-decoration: none;
+}
+
+#container {
+    width: 850px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header related classes */
+#header {
+    margin: 50px 0;
+    background-color: #B64926;
+    height: 100px;
+}
+
+#header > div {
+    max-width: 850px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#header .headerleft {
+	float: left;
+    max-width:739px;
+    padding: 10px 0;
+}
+
+#header .headerright {
+    float: right;
+    width: 100px;
+    border-left: dashed 1px #468966;
+    padding-left: 10px;
+}
+
+#header .headerright ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0em;
+    text-indent: 0em;
+    height: 100px;
+}
+
+.bannerTitle {
+    font-size: 24pt;
+}
+
+.bannerSubTitle {
+    font-size: 18pt;
+}
+
+/* Main content related classes */
+#maincontent {
+    margin-right: 260px;
+}
+
+    /* Important notice box */
+.importantNotice {
+    border: 1px solid red;
+    padding: 3px;
+    margin-bottom: 10px;
+}
+
+.importantNotice p {
+    margin: 0;
+}
+
+.noticeAuthor {
+    text-align: right;
+}
+    /* Quote box */
+.quote {
+    margin: 5px 20px;
+    border-left: 10px solid #B64926;
+    padding: 5px;
+}
+
+.quote p {
+    font-family: arial, sans-serif;
+    margin: 0;
+}
+
+.quoteauthor {
+}
+
+    /* Code sample */
+pre {
+    padding: 6px;
+    border: 3px dashed green;
+    background: black;
+    color: green;
+}
+
+    /* Archive entry */
+.archiveEntry .archiveEntryTitle {
+    margin-right: 100px;
+}
+.archiveEntry .archiveEntryTime {
+    float: right;
+}
+
+    /* News article */
+.newsarticle {
+    margin-bottom: 17px;
+}
+
+#maincontent pre {
+    padding: 5px;
+    font-family: monospace;
+    border: 1px dashed #FFB03B;
+    color: #00ff00;
+    background-color: #000000;
+}
+
+.newsarticle h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Sidebar classes */
+#sidebar {
+    float: right;
+    width: 240px;
+}
+
+/* Select the direct div decendants of the sidebar, that is every section on the sidebar */
+#sidebar > div {
+    margin-bottom: 10px;
+}
+
+/* Select the title <h2> */
+#sidebar > div h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* The unorded lists used for link boxes */
+#sidebar ul {
+    list-style: none;
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+/* Footer related classes */
+#footer {
+    border-top: 1px black dotted;
+    padding-top: 3px;
+    text-align: center;
+    clear: both;
+}
+
+#footer img {
+    border: none;
+}
+
+.copyright {
+    font-size: 10pt;
+}
+
+.articlemetainfo {
+    width: 100%;
+}
+
+/* Buttons */
+button {
+    background-color: #f5f5f5; /* The border is a seperate entity than the background */
+    border: 1px solid #dedede; /* Get a drop shadow effect */
+    border-top: 1px solid #eee;
+    border-right: 1px solid #eee;
+    margin: 2px 5px 0 0;
+    vertical-align: middle;
+}
+
+.submitbutton:hover {
+    color: green;
+    background-color: #ccffcc;
+    border-color: #99bb99;
+    border-top-color: #bbeebb;
+    border-right-color: #bbeebb;
+}
+
+.submitbutton:active {
+    background-color: #aaddaa;
+    border-color: #779977;
+    border-top-color: #99cc99;
+    border-right-color: #99cc99;
+}

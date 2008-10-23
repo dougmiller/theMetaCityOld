@@ -6,7 +6,7 @@
 <head>
     <title>Please log in</title>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
-    <link href="styles/login.css" rel="stylesheet" type="text/css"/>
+    <link href="css/login.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 

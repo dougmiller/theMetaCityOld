@@ -1,12 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://com.themetacity" prefix="tmc" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8"/>
+    <meta http-equiv="content-type" content="application/xhtml+xml;"/>
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <title>theMetaCity.com</title>
 </head>
@@ -38,16 +35,17 @@
         <div>
             <h2><a href="/search">Search</a></h2>
             <form action="/search.jsp">
-                <input type="text" size="20" name="searchString" value="${param.searchString}"/>
-                <button type="submit" name="submit" value="search" class="submitbutton"><img src="siteimages/magnifier.png" alt="Search!"/>Search!</button>
+                <div>
+                    <input type="text" size="20" height="1em" name="searchString" value="${param.searchString}"/>
+                    <button type="submit" name="submit" value="search" class="submitbutton"><img src="siteimages/magnifier.png" alt="Search!"/>Search!</button>
+                </div>
             </form>
         </div>
         <!-- About box -->
         <div>
-            <h2><a href="#">About</a></h2>
+            <h2><a href="/about">About</a></h2>
             <p>This is my place to rant and rave and generally run amok. Content is wildly diverse but almost always has to do with living and dying in a digital world. Most certainly it is inane.</p>
-            <p>Content is not limited to; soapboxing, tech, tutorials, design trends, junk I am working on, junk people I know are working on and generaly life online.</p>
-            <p>The about page is currently dead.</p>
+            <p>Content is not limited to; soapboxing, tech, tutorials, design trends, junk I am working on, junk people I know are working on and general life online.</p>
         </div>
 
         <!-- The projects div -->
@@ -61,13 +59,16 @@
 
         <!-- The Cool Links (tm) div -->
         <jsp:useBean id="linksBean" scope="page" class="com.themetacity.beans.LinkProcessBean"/>
+        <c:set var="listOfLinks" value="${linksBean.frontPageLinks}"/>
         <div>
             <h2>Junky links</h2>
+            <c:if test="${not empty listOfLinks}">
             <ul>
-                <c:forEach var="linksItem" items="${linksBean.frontPageLinks}">
+                <c:forEach var="linksItem" items="listOfLinks">
                     <tmc:link linkBean="${linksItem}"/>
                 </c:forEach>
             </ul>
+            </c:if>
         </div>
 
         <!-- Site navigation etc -->
@@ -75,7 +76,7 @@
             <h2>Site</h2>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="#">About (currently dead)</a></li>
+                <li><a href="/about">About</a></li>
                 <li><a href="/tags">Browse by tags</a></li>
                 <li><a href="/archive">Browse via the archive</a></li>
             </ul>
