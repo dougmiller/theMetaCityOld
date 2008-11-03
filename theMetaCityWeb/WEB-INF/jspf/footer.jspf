@@ -1,20 +1,13 @@
-<!-- The end of the main div -->
-</div>
 <!-- This is the footer consistant across all pages -->
 <div id="footer">
-    <a class="xhtmlw3cbox" href="http://validator.w3.org/check?uri=referer">
-        <img src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1!"/>
-    </a>
-
-    <a class="cssw3cbox" href="http://jigsaw.w3.org/css-validator/">
-        <img src="http://www.w3.org/Icons/valid-css" alt="Valid CSS"/>
-    </a>
-
-    <p class="copyright">Copyright 2008 theMetaCity.com</p>
-
+    <p class="copyright">
+        <a class="xhtmlw3cbox" href="http://validator.w3.org/check?uri=referer">Valid HTML</a>
+        <a class="cssw3cbox" href="http://jigsaw.w3.org/css-validator/">Valid CSS</a><br/>
+        Copyright 2008 theMetaCity.com
+    </p>
     <!--End of footer-->
 </div>
-<!--End of container-->
+<!-- The end of the right div -->
 </div>
 <!--End of body-->
 </body>

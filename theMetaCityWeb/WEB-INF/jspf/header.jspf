@@ -4,85 +4,47 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <meta http-equiv="content-type" content="application/xhtml+xml;"/>
-    <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.lightbox-0.5.pack.js"></script>
+    <script type="text/javascript" src="/js/jquery.lightbox-0.5-configured.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" media="screen" />
+    <link href="/css/common.css" rel="stylesheet" type="text/css" media="screen"/>
     <title>theMetaCity.com</title>
 </head>
 
 <body>
-<div id="header">
-    <div>
-        <div class="headerleft">
-            <span class="bannerTitle"><a href="/">The MetaCity.com</a></span><br/>
-            <span class="bannerSubTitle">portfolio of Douglas Miller, Interaction Designer</span>
-        </div>
-        <div class="headerright">
+<div id="left">
             <ul>
-                <li>Usability</li>
-                <li>HTML/CSS</li>
-                <li>Java</li>
-                <li>Python</li>
-                <li>Joomla</li>
-                <li>PHP support</li>
+                <li><a href="/">home</a></li>
+                <li><a href="/about">about</a></li>
+                <li><a href="/tags">tags</a></li>
+                <li><a href="/archive">archive</a></li>
             </ul>
-        </div>
-    </div>
-</div>
 
-<div id="container">
-    <!-- The right nav div -->
-    <div id="sidebar">
         <!-- Search -->
-        <div>
-            <h2><a href="/search">Search</a></h2>
             <form action="/search.jsp">
-                <div>
-                    <input type="text" size="20" height="1em" name="searchString" value="${param.searchString}"/>
-                    <button type="submit" name="submit" value="search" class="submitbutton"><img src="siteimages/magnifier.png" alt="Search!"/>Search!</button>
+                <div class="searchdiv">
+                    <input type="text" size="20" name="searchString"/>
+                    <button type="submit" name="submit" value="search" class="submitbutton">Search!</button>
                 </div>
             </form>
-        </div>
-        <!-- About box -->
-        <div>
-            <h2><a href="/about">About</a></h2>
-            <p>This is my place to rant and rave and generally run amok. Content is wildly diverse but almost always has to do with living and dying in a digital world. Most certainly it is inane.</p>
-            <p>Content is not limited to; soapboxing, tech, tutorials, design trends, junk I am working on, junk people I know are working on and general life online.</p>
-        </div>
 
-        <!-- The projects div -->
-        <div>
-            <h2>Projects</h2>
-            <!--<ul>       -->
-            <!--<li><a href="#">pyMarshmellow Dual</a></li>-->
-            <!--<li><a href="#">MSN Announcer</a></li>-->
-            <!--</ul>      -->
-        </div>
-
-        <!-- The Cool Links (tm) div -->
-        <jsp:useBean id="linksBean" scope="page" class="com.themetacity.beans.LinkProcessBean"/>
-        <c:set var="listOfLinks" value="${linksBean.frontPageLinks}"/>
-        <div>
-            <h2>Junky links</h2>
-            <c:if test="${not empty listOfLinks}">
-            <ul>
-                <c:forEach var="linksItem" items="listOfLinks">
-                    <tmc:link linkBean="${linksItem}"/>
+        <jsp:useBean id="ProjectProcessBean" scope="page" class="com.themetacity.beans.ProjectProcessBean"/>
+        <c:set var="ProjectList" value="${ProjectProcessBean.frontPageProjects}"/>
+        <h2>Projects</h2>
+        <c:choose>
+            <c:when test="${not empty ProjectList}">
+                <ul>
+                <c:forEach items="${ProjectList}" var="ProjectsItem">
+                    <tmc:project projectBean="${ProjectsItem}"/>
                 </c:forEach>
-            </ul>
-            </c:if>
-        </div>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <p>No active projects at the moment.</p>
+            </c:otherwise>
+        </c:choose>
+</div>
 
-        <!-- Site navigation etc -->
-        <div>
-            <h2>Site</h2>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/tags">Browse by tags</a></li>
-                <li><a href="/archive">Browse via the archive</a></li>
-            </ul>
-        </div>
-        <!-- End of the sidebar -->
-    </div>
-
-    <!-- The main content div -->
-    <div id="maincontent">
+<!-- The main content div -->
+<div id="right">

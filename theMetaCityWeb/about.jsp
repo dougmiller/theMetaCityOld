@@ -2,30 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="tmc" uri="http://com.themetacity" %>
 
-<jsp:useBean id="ProfileProcessBean" scope="page" class="com.themetacity.beans.ProfileProcessBean">
-    <jsp:setProperty name="ProfileProcessBean" property="author" value="${param.author}"/>
-</jsp:useBean>
-
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
-
-<c:set var="profileList" value="${ProfileProcessBean.profiles}" scope="page"/>
-
-<c:choose>
-    <c:when test="${not empty profileList}">
-        <c:forEach var="filteredProfileList" items="${profileList}">
-            <tmc:profile userProfile="${filteredProfileList}"/>
-        </c:forEach>
-    </c:when>
-    <c:otherwise>
-        <c:choose>
-            <c:when test="${empty param.author}">
-                <p>There is nobody here yet.</p>
-            </c:when>
-            <c:otherwise>
-                <p>There is nobody here matching your query.</p>
-            </c:otherwise>
-        </c:choose>
-    </c:otherwise>
-</c:choose>
-
+                <p>My name is <span class="abouthighlight">Douglas Miller</span>. I graduated university in 2007 with a bachelor degree in IT with <span class="abouthighlight">Interaction Design</span> from the University of Queensland, Australia.&para;
+                My job is to <span class="abouthighlight">understand how people interact with and respond to technology</span>. From the very focused and personal interactions, such as software interfaces and physical artifacts to the broad and general like new technology trends and how the history of technology affects up today.&para;
+                Part of my job involves developing. I have experience with: <span class="abouthighlight">Java</span>, <span class="abouthighlight">Python</span>, <span class="abouthighlight">Javascript</span>, <span class="abouthighlight">PHP</span> and exposure to many other languages such as <span class="abouthighlight">C</span>, <span class="abouthighlight">AVR programming</span> and <span class="abouthighlight">Haskell</span>. In addition I have worked with data and markup languages including <span class="abouthighlight">JSON</span>, <span class="abouthighlight">XML</span>, <span class="abouthighlight">HTML</span> and <span class="abouthighlight">CSS</span>.&para;
+                Another part involves designing. My modus operandi is to use <span class="abouthighlight">lightweight mockups</span>, usually pencil and paper or small physical artifacts (lego works well) to get feedback from the customer and a good understanding of expectations. Combined with <span class="abouthighlight">rapid prototyping</span>, this approach allows for great flexibility and understanding for all the parties involved.&para;
+                The third part involves working in teams. My job often requires me to work with many different professionals and types of client. Often, I have to act as a kind of <span class="abouthighlight">translator</span> between clients, developers and designers which means that I have to have to be able to effectively <span class="abouthighlight">communicate and coordinate</span> with people who have quite different needs at the same time.&para;
+                My OS of choice is <span class="abouthighlight">Unix</span>. Currently <span class="abouthighlight">OS X</span> reigns supreme on my desk, however some problems with python internals has me reconsidering <span class="abouthighlight">Gentoo Linux</span>.&para;
+                In my (scanty) spare time I play <span class="abouthighlight">guitar</span>, train for <span class="abouthighlight">Parkour</span> and other outsidey things like rock climbing, bush walking and <span class="abouthighlight">volleyball</span>.&para;
+                Finally my interests broadly range from software to hardware, people and places, history and the future and how it all works together to make this place livable.&para;
+                <a href="resume/">Click here to see my <span class="abouthighlight">r&eacute;sum&eacute;</span></a>.&para;</p>
 <jsp:include page="/WEB-INF/jspf/footer.jspf"/>
