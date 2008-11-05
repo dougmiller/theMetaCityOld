@@ -8,7 +8,7 @@ int redPin = 11;
 int redPin2 = 12;
 
 int timeout = 5000; /* Timout for waiting for the python script to tell us it is running the build. If it does not 
- respond in time then it is assumed that it is not connected and the build is abandoned*/
+ respond in time then it is assumed that it is not connected and the build is abandoned */
 
 int isProcessing = false; // Set when the script confirms that it is processing the build
 int hasRun = false; // Used to only write to the serial port once when the button is pushed/held down
@@ -32,7 +32,7 @@ void loop() {
     }
 
     if (hasRun && !runOnce){  // If button has been pushed and it is the first loop for the button push
-      for (int i = 0; i < timeout; i += 1000){  // Check that the script is running and will respond in time 
+      for (int i = 0; i < timeout; i += (timeout/5)){  // Check that the script is running and will respond in time 
         if (Serial.available() > 0){     
           if (Serial.read() == 'p') { //p for processing
             isProcessing = true;
