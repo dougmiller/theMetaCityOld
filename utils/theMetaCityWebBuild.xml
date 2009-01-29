@@ -31,17 +31,4 @@ Move the production server context files into place -->
         <move file="META-INF/context.backup" toFile="META-INF/context.xml" overwrite="true"/>
         <move file="WEB-INF/classes/log4jproperties.backup" toFile="WEB-INF/classes/log4j.properties" overwrite="true"/>
     </target>
-    
-    <target name="infrared">
-    <taskdef name="infrared" classname="net.sf.infrared.tools.ant.InfraRedTask">
-        <classpath>
-            <pathelement location="/usr/local/infrared-2.4.1.BETA/infrared-ant-2.4.1.BETA.jar"/>
-        </classpath>
-        
-        </taskdef>
-        <infrared system="aspectj" offline="true" server="tomcat" agentConfiguration="/Users/doug/Code/theMetaCity/theMetaCityWeb/WEB-INF/classes/infrared-agent.properties">
-            <war src="../ROOT.war" dest="../ROOT1.war">
-            </war>
-        </infrared>
-    </target>
 </project>

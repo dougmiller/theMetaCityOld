@@ -9,6 +9,7 @@
     <property name="junit.dir" value="/usr/local/junit" />    
 	<property name="src.dir" value="src" />
     <property name="weblib.dir" value="../theMetaCityWeb/WEB-INF/lib" />
+    <property name="rsslib.dir" value="../rss/WEB-INF/lib" />
 
     <target name="clean">
         <delete dir="${compile.dir}" />
@@ -32,6 +33,7 @@
         <jar destfile="${builddest.dir}/${app.name}.jar" basedir="${compile.dir}"/>       <!-- Gets deleted -->
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${weblib.dir}/${app.name}.jar"/>
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${adminlib.dir}/${app.name}.jar"/>
+        <copy file="${builddest.dir}/${app.name}.jar" toFile="${rsslib.dir}/${app.name}.jar"/>
         <delete file="${builddest.dir}/${app.name}.jar"/>
     </target>
 

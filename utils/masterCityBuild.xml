@@ -4,24 +4,27 @@
         <ant antfile="theMetaCityTBBuild.xml" target="package" inheritAll="false"/>
         <ant antfile="theMetaCityWebBuild.xml" target="package" inheritAll="false"/>
         <ant antfile="theMetaCityAdminBuild.xml" target="package" inheritAll="false"/>
-        <ant antfile="theMetaCityAboutBuild.xml" target="package" inheritAll="false"/>
+        <ant antfile="workshop.xml" target="package" inheritAll="false"/>
         <ant antfile="theMetaCityRSSBuild.xml" target="package" inheritAll="false"/>
+        <ant antfile="theMetaCityOpenIDBuild.xml" target="package" inheritAll="false"/>
     </target>
     
     <target name="productiontest" description="Build all the development apps from scratch">
         <ant antfile="theMetaCityTBBuild.xml" target="package" inheritAll="false"/>
         <ant antfile="theMetaCityWebBuild.xml" target="testpropackage" inheritAll="false"/>
         <ant antfile="theMetaCityAdminBuild.xml" target="testpropackage" inheritAll="false"/>
-        <ant antfile="theMetaCityAboutBuild.xml" target="testpropackage" inheritAll="false"/>
+        <ant antfile="workshop.xml" target="testpropackage" inheritAll="false"/>
         <ant antfile="theMetaCityRSSBuild.xml" target="testpropackage" inheritAll="false"/>
+        <ant antfile="theMetaCityOpenIDBuild.xml" target="testpropackage" inheritAll="false"/>
     </target>
     
     <target name="production" description="Build all the development apps from scratch">
         <ant antfile="theMetaCityTBBuild.xml" target="package" inheritAll="false"/>
         <ant antfile="theMetaCityWebBuild.xml" target="production" inheritAll="false"/>
         <ant antfile="theMetaCityAdminBuild.xml" target="production" inheritAll="false"/>
-        <ant antfile="theMetaCityAboutBuild.xml" target="production" inheritAll="false"/>
+        <ant antfile="workshop.xml" target="production" inheritAll="false"/>
         <ant antfile="theMetaCityRSSBuild.xml" target="production" inheritAll="false"/>
+        <ant antfile="theMetaCityOpenIDBuild.xml" target="production" inheritAll="false"/>
     </target>
 </project>
 
