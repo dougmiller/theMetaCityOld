@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<project name="theMetaCity Web Build" default="package" basedir="../../blog">
+<project name="blog" default="package" basedir="../../blog">
     <property name="classpath.dir" value="/usr/local/tomcat/lib"/>
-    <property name="deployapp.name" value="ROOT"/>
+    <property name="deployapp.name" value="blog"/>
     <property name="deploy.dir" value="/Users/doug/Sites/theMetaCity/"/>
     <property name="webinflib.dir" value="./WEB-INF/lib"/>
     

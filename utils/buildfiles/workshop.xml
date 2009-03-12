@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="theMetaCity Workshop Build" default="package" basedir="../../workshop">
+<project name="workshop" default="package" basedir="../../workshop">
     <property name="classpath.dir" value="/usr/local/tomcat/lib"/>
     <property name="deployapp.name" value="workshop"/>
     <property name="deploy.dir" value="/Users/doug/Sites/theMetaCity/"/>

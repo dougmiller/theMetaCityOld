@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<project name="OpenID" default="package" basedir="../../OpenID">
+<project name="ROOT" default="package" basedir="../../ROOT">
     <property name="classpath.dir" value="/usr/local/tomcat/lib"/>
-    <property name="deployapp.name" value="OpenID"/>
+    <property name="deployapp.name" value="ROOT"/>
     <property name="deploy.dir" value="/Users/doug/Sites/theMetaCity/"/>
     <property name="webinflib.dir" value="./WEB-INF/lib"/>
     
