@@ -15,6 +15,7 @@ public class ArticleBean {
     private String author;               // Who wrote the article
     private String email;                // Contacting the author
     private String dateTime;             // The dateTime/time the artcle was pubished
+    private String timestamp;             // The dateTime/time the artcle was pubished
     private LinkedList<TagBean> tags;    // A list of the tags that this article was published under
 
     /**
@@ -87,6 +88,15 @@ public class ArticleBean {
     public void setDateTime(Date dateTime) {
         java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm z");
         this.dateTime = formatter.format(dateTime);
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm z");
+        this.timestamp = formatter.format(timestamp);
     }
 
     public LinkedList<TagBean> getTags() {

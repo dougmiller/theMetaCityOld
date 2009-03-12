@@ -1,6 +1,6 @@
 package com.themetacity.tags;
 
-import com.themetacity.typebeans.LinkBean;
+import com.themetacity.typebeans.ProjectBean;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspWriter;
@@ -11,11 +11,11 @@ import org.apache.log4j.Logger;
 
 /**
  */
-public class Links extends SimpleTagSupport {
+public class Projects extends SimpleTagSupport {
 
-    private LinkBean linkBean = new LinkBean();
+    private ProjectBean projectBean = new ProjectBean();
 
-    static Logger logger = Logger.getLogger(Links.class);
+    static Logger logger = Logger.getLogger(Projects.class);
 
     public void doTag() {
         // * Initialise the context here as will not be valid in the container previously. *
@@ -24,7 +24,7 @@ public class Links extends SimpleTagSupport {
         JspWriter out = jspContext.getOut();
 
         try {
-            out.println("<li>" + buildLink(linkBean) +"</li>");
+            out.println("<li>" + buildLink(projectBean) +"</li>");
         } catch (IOException IOEx) {
             logger.warn("There was an error with the article rendering");
             logger.warn(IOEx);
@@ -33,18 +33,18 @@ public class Links extends SimpleTagSupport {
 
     // Free the Article used
     public void release() {
-        linkBean = null;
+        projectBean = null;
     }
 
-    private String buildLink(LinkBean linkBean) {
-        return "<a href=\"" + linkBean.getLinkURL() + "\">" + linkBean.getDescText() + "</a>";
+    private String buildLink(ProjectBean linkBean) {
+        return "<a href=\"" + linkBean.getProjectURL() + "\">" + linkBean.getDescText() + "</a>";
     }
 
-    public LinkBean getLinkBean() {
-        return linkBean;
+    public ProjectBean getProjectBean() {
+        return projectBean;
     }
 
-    public void setLinkBean(LinkBean linkBean) {
-        this.linkBean = linkBean;
+    public void setProjectBean(ProjectBean projectBean) {
+        this.projectBean = projectBean;
     }
 }

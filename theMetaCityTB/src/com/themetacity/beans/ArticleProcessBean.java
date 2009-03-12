@@ -60,9 +60,9 @@ public class ArticleProcessBean {
         try {
             PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
                     "SELECT id, title, url, author, date_time, article_text " +
-                    "FROM articles " +
-                    "ORDER BY id desc " +
-                    "LIMIT 5;");
+                            "FROM articles " +
+                            "ORDER BY id desc " +
+                            "LIMIT 5;");
 
             articlesDBBean.setPrepStmt(prepStmt);
 
@@ -94,7 +94,6 @@ public class ArticleProcessBean {
         return listOfBeans;
     }
 
-
     /**
      * Filter the articles according to date or title or both
      *
@@ -108,12 +107,12 @@ public class ArticleProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id, author, title, url, article_text, date_time " +
-                    "FROM articles WHERE " +
-                    "(YEAR(date_time) = ? OR ? is null) " +
-                    "AND (MONTH(date_time) = ? OR ? is null) AND " +
-                    "(DAY(date_time) = ? OR ? is null) AND " +
-                    "(url = ? OR ? is null) " +
-                    "ORDER BY date_time desc;"));
+                            "FROM articles WHERE " +
+                            "(YEAR(date_time) = ? OR ? is null) " +
+                            "AND (MONTH(date_time) = ? OR ? is null) AND " +
+                            "(DAY(date_time) = ? OR ? is null) AND " +
+                            "(url = ? OR ? is null) " +
+                            "ORDER BY date_time desc;"));
             dbaBean.getPrepStmt().setString(1, year);
             dbaBean.getPrepStmt().setString(2, year);
             dbaBean.getPrepStmt().setString(3, month);
@@ -158,7 +157,7 @@ public class ArticleProcessBean {
     }
 
     /**
-     * Get an aricle vy the ID
+     * Get an article by the ID
      *
      * @return a linked list of the articles with the matching id
      */
@@ -169,8 +168,8 @@ public class ArticleProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id, title, url, article_text " +
-                    "FROM articles " +
-                    "WHERE id = ?;"));
+                            "FROM articles " +
+                            "WHERE id = ?;"));
             dbaBean.getPrepStmt().setString(1, articleID);
 
             ResultSet result = dbaBean.executeQuery();
@@ -208,10 +207,10 @@ public class ArticleProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT title, url, date_time " +
-                    "FROM articles, articletags " +
-                    "WHERE articles.id = articletags.id " +
-                    "AND articletags.tag = ? " +
-                    "ORDER BY articletags.id desc;"));
+                            "FROM articles, articletags " +
+                            "WHERE articles.id = articletags.id " +
+                            "AND articletags.tag = ? " +
+                            "ORDER BY articletags.id desc;"));
             dbaBean.getPrepStmt().setString(1, searchTag);
 
             ResultSet result = dbaBean.executeQuery();
@@ -220,6 +219,48 @@ public class ArticleProcessBean {
                 ArticleBean articleBean = new ArticleBean();
 
                 articleBean.setTitle(result.getString("title"));
+                articleBean.setURL(result.getString("url"));
+                articleBean.setDateTime(result.getTimestamp("date_time"));
+
+                listOfBeans.add(articleBean);
+            }
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error in ArticleProcessBean.getArticlesWithTag()");
+            logger.warn(SQLEx);
+        }
+        finally {
+            dbaBean.close();
+        }
+
+        return listOfBeans;
+    }
+
+        /**
+     * Return all the articles posted under the given tag.
+     * Written for the RSS Feed
+     *
+     * @return A linked list of articles
+     */
+    public LinkedList<ArticleBean> getArticlesWithTagForRSSFeed() {
+        DatabaseBean dbaBean = new DatabaseBean();
+        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT  title, url, article_text, date_time  " +
+                            "FROM articles, articletags " +
+                            "WHERE articles.id = articletags.id " +
+                            "AND articletags.tag = ? " +
+                            "ORDER BY articletags.id desc;"));
+            dbaBean.getPrepStmt().setString(1, searchTag);
+
+            ResultSet result = dbaBean.executeQuery();
+
+            while (result.next()) {
+                ArticleBean articleBean = new ArticleBean();
+
+                articleBean.setTitle(result.getString("title"));
+                articleBean.setArticleText(result.getString("article_text"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setDateTime(result.getTimestamp("date_time"));
 
@@ -248,9 +289,9 @@ public class ArticleProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT title, url, date_time " +
-                    "FROM articles " +
-                    "WHERE title LIKE ? " +
-                    "ORDER BY date_time desc;"));
+                            "FROM articles " +
+                            "WHERE title LIKE ? " +
+                            "ORDER BY date_time desc;"));
             dbaBean.getPrepStmt().setString(1, "%" + searchString + "%");
 
             ResultSet result = dbaBean.executeQuery();
@@ -448,8 +489,8 @@ public class ArticleProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id, title, url, date_time " +
-                    "FROM articles " +
-                    "GROUP BY id ASC;"));
+                            "FROM articles " +
+                            "GROUP BY id ASC;"));
 
             ResultSet result = dbaBean.executeQuery();
 
@@ -490,8 +531,8 @@ public class ArticleProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT title, url " +
-                    "FROM articles " +
-                    "WHERE url = ?;"));
+                            "FROM articles " +
+                            "WHERE url = ?;"));
             dbaBean.getPrepStmt().setString(1, articleUtilBean.buildURL(title));
 
             ResultSet result = dbaBean.executeQuery();
@@ -515,7 +556,6 @@ public class ArticleProcessBean {
         return listOfBeans;
     }
 
-
     // Retrive the ID of articles based on the title. Used primarily to get the id of just entered articles
     private int getIdOfArticleFromTitle() {
         DatabaseBean dbaBean = new DatabaseBean();
@@ -523,8 +563,8 @@ public class ArticleProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id " +
-                    "FROM articles " +
-                    "WHERE title = ?;"));
+                            "FROM articles " +
+                            "WHERE title = ?;"));
             dbaBean.getPrepStmt().setString(1, title);
 
             ResultSet result = dbaBean.executeQuery();
@@ -543,6 +583,113 @@ public class ArticleProcessBean {
         return idOfArticle;
     }
 
+    public LinkedList<ArticleBean> getSiteMapArticles() {
+        DatabaseBean articlesDBBean = new DatabaseBean();
+        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+
+        try {
+            PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
+                    "SELECT url, timestamp " +
+                            "FROM articles;");
+
+            articlesDBBean.setPrepStmt(prepStmt);
+
+            ResultSet result = articlesDBBean.executeQuery();
+
+            while (result.next()) {
+                ArticleBean articleBean = new ArticleBean();
+
+                articleBean.setURL(result.getString("url"));
+                articleBean.setTimestamp(result.getTimestamp("timestamp"));
+
+                listOfBeans.add(articleBean);
+            }
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error in ArticleProcessBean.getSiteMapArticles()");
+            logger.warn(SQLEx);
+        } finally {
+            articlesDBBean.close();
+        }
+        return listOfBeans;
+    }
+
+    /**
+     * Get the title of the RSS Feed based on the year month and day params
+     *
+     * @return the constructed string
+     */
+    public String getRSSFeedTitle() {
+        String feedTitle = "The MetaCity";
+        if ((year != null) && (!year.equals(""))) {
+            feedTitle += (" - " + year);
+        }
+
+        if ((month != null) && (!month.equals(""))) {
+            feedTitle += ("/" + month);
+
+        }
+
+        if ((day != null) && (!day.equals(""))) {
+            feedTitle += ("/" + day);
+
+        }
+
+        return feedTitle;
+    }
+
+    /**
+     * Get the link of the RSS Feed based on the year month and day params
+     *
+     * @return the constructed string
+     */
+    public String getRSSFeedLink() {
+        String feedLink = "http://www.themetacity.com/";
+
+        if ((year != null) && (!year.equals(""))) {
+            feedLink += (year + "/");
+        }
+
+        if ((month != null) && (!month.equals(""))) {
+            feedLink += (month + "/");
+        }
+
+        if ((day != null) && (!day.equals(""))) {
+            feedLink += (day + "/");
+
+        }
+
+        return feedLink;
+    }
+
+    /**
+     * Get the link of the RSS Feed based on the tag
+     *
+     * @return the constructed string
+     */
+    public String getRSSFeedTagTitle() {
+        String feedLink = "The MetaCity Tags - ";
+
+        if ((searchTag != null) && (!searchTag.equals(""))) {
+            feedLink += (searchTag);
+        }
+
+        return feedLink;
+    }
+
+    /**
+     * Get the link of the RSS Feed based on the tag
+     *
+     * @return the constructed string
+     */
+    public String getRSSFeedTagLink() {
+        String feedLink = "http://www.themetacity.com/tags/";
+
+        if ((searchTag != null) && (!searchTag.equals(""))) {
+            feedLink += (searchTag + "/");
+        }
+
+        return feedLink;
+    }
 
     public String getArticleID() {
         return articleID;

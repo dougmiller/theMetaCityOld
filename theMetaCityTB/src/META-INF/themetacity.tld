@@ -88,21 +88,21 @@
         </attribute>
     </tag>
 
-    <!-- Links tag -->
+    <!-- Projects tag, used on the front page for quick links -->
     <tag>
-        <name>link</name>
-        <tag-class>com.themetacity.tags.Links</tag-class>
+        <name>project</name>
+        <tag-class>com.themetacity.tags.Projects</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
-            <name>linkBean</name>
+            <name>projectBean</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.LinkBean</type>
+            <type>com.themetacity.typebeans.ProjectBean</type>
         </attribute>
     </tag>
 
-    <!-- AllTags tag -->
+    <!-- All Article Tags -->
     <tag>
         <name>allTags</name>
         <tag-class>com.themetacity.tags.AllTags</tag-class>
@@ -114,6 +114,21 @@
             <rtexprvalue>true</rtexprvalue>
             <type>java.util.LinkedList</type>
         </attribute>
+    </tag>
+
+    <!-- Workshop Entries tag -->
+    <tag>
+        <name>workshop</name>
+        <tag-class>com.themetacity.tags.Workshop</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>projetList</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.LinkedList</type>
+        </attribute>
+
     </tag>
 
     <!-- Quote tag -->
@@ -131,14 +146,14 @@
     <!-- Admin tags -->
     <tag>
         <name>adminLinks</name>
-        <tag-class>com.themetacity.admintags.Links</tag-class>
+        <tag-class>com.themetacity.admintags.Projects</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
             <name>linkBean</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.LinkBean</type>
+            <type>com.themetacity.typebeans.ProjectBean</type>
         </attribute>
     </tag>
 
@@ -202,4 +217,45 @@
         </attribute>
     </tag>
 
+    <!-- Sitemap Article tag -->
+    <tag>
+        <name>sitemapArticle</name>
+        <tag-class>com.themetacity.tags.SitemapArticle</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>article</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.ArticleBean</type>
+        </attribute>
+    </tag>
+
+    <!-- Sitemap Article tag -->
+    <tag>
+        <name>sitemapTag</name>
+        <tag-class>com.themetacity.tags.SitemapTags</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>tag</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.TagBean</type>
+        </attribute>
+    </tag>
+
+    <!-- RSS Item tag -->
+    <tag>
+        <name>RSSItem</name>
+        <tag-class>com.themetacity.rsstags.Item</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>article</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.ArticleBean</type>
+        </attribute>
+    </tag>
 </taglib>

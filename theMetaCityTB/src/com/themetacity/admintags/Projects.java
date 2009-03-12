@@ -1,6 +1,6 @@
 package com.themetacity.admintags;
 
-import com.themetacity.typebeans.LinkBean;
+import com.themetacity.typebeans.ProjectBean;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspWriter;
@@ -11,11 +11,11 @@ import org.apache.log4j.Logger;
 
 /**
  */
-public class Links extends SimpleTagSupport {
+public class Projects extends SimpleTagSupport {
 
-    private LinkBean linkBean = new LinkBean();
+    private ProjectBean projectBean = new ProjectBean();
 
-    static Logger logger = Logger.getLogger(Links.class);
+    static Logger logger = Logger.getLogger(Projects.class);
 
     public void doTag() {
         // * Initialise the context here as will not be valid in the container previously. *
@@ -25,10 +25,10 @@ public class Links extends SimpleTagSupport {
 
         try {
             out.println("<div>" +
-                    "<a href=\"" + linkBean.getLinkURL() + "\"><img src=\"siteimages/link_go.png\" alt=\"Visit Link\"/></a>" +
-                    "<input type=\"text\" name=\"descText\" value=\"" + linkBean.getDescText() + "\"/>" +
-                    "<input type=\"text\" name=\"linkURL\" value=\"" + linkBean.getLinkURL() + "\"/>" +
-                    "<input type=\"hidden\" name=\"linkID\" value=\"" + linkBean.getLinkID() + "\"/>" +
+                    "<a href=\"" + projectBean.getProjectURL() + "\"><img src=\"siteimages/link_go.png\" alt=\"Visit Link\"/></a>" +
+                    "<input type=\"text\" name=\"descText\" value=\"" + projectBean.getDescText() + "\"/>" +
+                    "<input type=\"text\" name=\"linkURL\" value=\"" + projectBean.getProjectURL() + "\"/>" +
+                    "<input type=\"hidden\" name=\"linkID\" value=\"" + projectBean.getProjectID() + "\"/>" +
                     "<button type=\"submit\" class=\"submitbutton\" name=\"submit\" value=\"update\"><img src=\"siteimages/tick.png\" alt=\"Update\"/>Update</button>" +
                     "<button type=\"submit\" class=\"deletebutton\" name=\"submit\" value=\"delete\"><img src=\"siteimages/delete.png\" alt=\"Delete\"/>Delete</button>" +
                     "</div>");
@@ -40,14 +40,14 @@ public class Links extends SimpleTagSupport {
 
     // Free the Article used
     public void release() {
-        linkBean = null;
+        projectBean = null;
     }
 
-    public LinkBean getLinkBean() {
-        return linkBean;
+    public ProjectBean getProjectBean() {
+        return projectBean;
     }
 
-    public void setLinkBean(LinkBean linkBean) {
-        this.linkBean = linkBean;
+    public void setProjectBean(ProjectBean projectBean) {
+        this.projectBean = projectBean;
     }
 }
