@@ -74,6 +74,10 @@ a:visited {
     color: #999;
 }
 
+.imagecentered {
+    text-align: center;
+}
+
 #left ul {
     padding: 0;
     list-style: none;
@@ -134,7 +138,7 @@ font-size: 8pt;
 
 code {
     display: block;
-    background: black;
+    background: #f9f9f9;
     color: green;
     padding: 5px;
 }

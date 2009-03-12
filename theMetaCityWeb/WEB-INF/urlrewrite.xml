@@ -5,6 +5,12 @@
         "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
 
 <urlrewrite>
+    <!-- Sitemap -->
+    <rule match-type="regex">
+        <from>^/sitemap.xml$</from>
+        <to>/sitemap.jsp</to>
+    </rule>
+
     <!-- About page rules -->
     <rule match-type="regex">
         <from>^/about/?$</from>

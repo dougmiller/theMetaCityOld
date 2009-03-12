@@ -39,8 +39,7 @@
             <c:when test="${not empty param.year or not empty param.url}"> <%-- There are no results from a search --%>
                 <p>There are no articles for this criteria.</p>
 
-                <p>Perhaps <a href="/<c:url value="archive.jsp"/>">you could try the archive</a> or <a
-                        href="/<c:url value="tags.jsp"/>">search via catagory tags</a>.</p>
+                <p>Perhaps <a href="/<c:url value="archive.jsp"/>">you could try the archive</a> or <a href="/<c:url value="tags.jsp"/>">search via catagory tags</a>.</p>
             </c:when>
             <c:otherwise>  <%-- There is nothing in the database --%>
                 <p>There is nothing in here yet.</p>
