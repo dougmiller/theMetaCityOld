@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="theMetaCity TB Build" default="package" basedir="../theMetaCityTB">
+<project name="theMetaCity TB Build" default="package" basedir="../../theMetaCityTB">
 
     <property name="adminlib.dir" value="../theMetaCityAdmin/WEB-INF/lib" />
     <property name="app.name" value="theMetaCityTB" />
@@ -8,8 +8,9 @@
 	<property name="compile.dir" value="classes" />
     <property name="junit.dir" value="/usr/local/junit" />    
 	<property name="src.dir" value="src" />
-    <property name="weblib.dir" value="../theMetaCityWeb/WEB-INF/lib" />
-    <property name="rsslib.dir" value="../rss/WEB-INF/lib" />
+    <property name="blog.dir" value="../blog/WEB-INF/lib" />
+    <property name="rss.dir" value="../rss/WEB-INF/lib" />
+    <property name="workshop.dir" value="../workshop/WEB-INF/lib" />
 
     <target name="clean">
         <delete dir="${compile.dir}" />
@@ -31,9 +32,9 @@
             <fileset dir="${src.dir}"/>
         </copy>
         <jar destfile="${builddest.dir}/${app.name}.jar" basedir="${compile.dir}"/>       <!-- Gets deleted -->
-        <copy file="${builddest.dir}/${app.name}.jar" toFile="${weblib.dir}/${app.name}.jar"/>
+        <copy file="${builddest.dir}/${app.name}.jar" toFile="${blog.dir}/${app.name}.jar"/>
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${adminlib.dir}/${app.name}.jar"/>
-        <copy file="${builddest.dir}/${app.name}.jar" toFile="${rsslib.dir}/${app.name}.jar"/>
+        <copy file="${builddest.dir}/${app.name}.jar" toFile="${rss.dir}/${app.name}.jar"/>
         <delete file="${builddest.dir}/${app.name}.jar"/>
     </target>
 

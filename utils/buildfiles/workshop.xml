@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="theMetaCity Workshop Build" default="package" basedir="../workshop">
+<project name="theMetaCity Workshop Build" default="package" basedir="../../workshop">
     <property name="classpath.dir" value="/usr/local/tomcat/lib"/>
     <property name="deployapp.name" value="workshop"/>
     <property name="deploy.dir" value="/Users/doug/Sites/theMetaCity/"/>
@@ -24,9 +24,9 @@
 Move the production server context files into place -->
     <target name="production">
         <move file="META-INF/context.xml" toFile="META-INF/context.backup"/>
-        <copy file="../utils/webcontext.xml" toFile="META-INF/context.xml"/>
+        <copy file="../utils/contextfiles/webcontext.xml" toFile="META-INF/context.xml"/>
         <move file="WEB-INF/classes/log4j.properties" toFile="WEB-INF/classes/log4jproperties.backup"/>
-        <copy file="../utils/log4jROOT.properties" toFile="WEB-INF/classes/log4j.properties"/>
+        <copy file="../utils/properties/log4jROOT.properties" toFile="WEB-INF/classes/log4j.properties"/>
         <jar destfile="../${deployapp.name}.war" basedir="${basedir}" excludes="**/*.backup" update="true"/>
         <move file="META-INF/context.backup" toFile="META-INF/context.xml" overwrite="true"/>
         <move file="WEB-INF/classes/log4jproperties.backup" toFile="WEB-INF/classes/log4j.properties" overwrite="true"/>
