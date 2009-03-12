@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="theMetaCity TB Build" default="package" basedir="../../theMetaCityTB">
+<project name="theMetaCity TB Build" default="package" basedir="../../tb">
 
     <property name="adminlib.dir" value="../theMetaCityAdmin/WEB-INF/lib" />
     <property name="app.name" value="theMetaCityTB" />
