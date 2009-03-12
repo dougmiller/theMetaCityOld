@@ -3,10 +3,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Database: `theMetaCity`
 -- 
 
-#DROP DATABASE `themetacity`;
+--DROP DATABASE `themetacity`;
 -- Uncomment the next lines if creating from scratch
-#CREATE DATABASE `themetacity` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-#USE `themetacity`;
+--CREATE DATABASE `themetacity` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+--USE `themetacity`;
 
 -- --------------------------------------------------------
 
@@ -20,15 +20,15 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- If you do not have permission on the security table then you will need to log in manually to set the password
 
 -- Dont really need him for now
-#CREATE USER tmcRoot;
-#GRANT ALL ON theMetaCity.* TO 'tmcRoot'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
+--CREATE USER tmcRoot;
+--GRANT ALL ON theMetaCity.* TO 'tmcRoot'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
 
 -- A user for selecting data only. Extra safety net.
 -- CREATE USER tmcSelector;
-#GRANT SELECT ON themetacity.* TO 'tmcSelector'@'localhost' IDENTIFIED BY PASSWORD '*9AF6DB6DC277180622AC3BD28DD928DE5B8CBD3F';
+--GRANT SELECT ON themetacity.* TO 'tmcSelector'@'localhost' IDENTIFIED BY PASSWORD '*9AF6DB6DC277180622AC3BD28DD928DE5B8CBD3F';
 -- A user for updating and inserting records.
 -- CREATE USER tmcAdmin;
-#GRANT SELECT, INSERT, UPDATE, DELETE ON themetacity.* TO 'tmcAdmin'@'localhost' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
+--GRANT SELECT, INSERT, UPDATE, DELETE ON themetacity.* TO 'tmcAdmin'@'localhost' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
 
 -- 
 -- Table structure for table `articles`
@@ -41,6 +41,7 @@ CREATE TABLE `articles` (
   `url` varchar(100) NOT NULL COMMENT 'The urls for this post. Destructively generated from the title using a strip function.',
   `article_text` text(50000) NOT NULL COMMENT 'The actual content of the article.',
   `date_time` datetime NOT NULL COMMENT 'The date this article was published',
+  `timestamp` timestamp NOT NULL COMMENT 'Auto timestamp',
   PRIMARY KEY  (`id`),
   KEY `author` (`author`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Article information. Autoincrement articleid.' AUTO_INCREMENT=1;
@@ -81,14 +82,27 @@ CREATE TABLE `importantnotices` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Important notices' AUTO_INCREMENT=1;
 
+--
+--
+--
+CREATE TABLE `workshop` (
+  `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
+  `URL` varchar(150) NOT NULL COMMENT 'The title',
+  `desc_text` varchar(150) NOT NULL COMMENT '',
+  `is_valid` boolean NOT NULL COMMENT 'Wether or not this is approved context.',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sidebar Projects' AUTO_INCREMENT=1;
 
-CREATE TABLE `links` (
+--
+-- 
+--
+CREATE TABLE `projects` (
   `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
   `URL` varchar(150) NOT NULL COMMENT 'The URL to link to',
   `desc_text` varchar(150) NOT NULL COMMENT 'Desc text that will show up that user click on',
-  `date_posted` datetime NOT NULL COMMENT 'The date this was posted.',
+  `is_valid` boolean NOT NULL COMMENT 'Wether or not this is approved context.',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sidebar Links' AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sidebar Projects' AUTO_INCREMENT=1;
 
 -- These come last to make sure that all tables exist before making references to them.
 -- 

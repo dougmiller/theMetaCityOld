@@ -5,7 +5,8 @@ USE themetacity;
 # OR if no permission to create database
 
 DROP TABLE importantnotices;
-DROP TABLE links;
+DROP TABLE projects;
+DROP TABLE workshop;
 DROP TABLE articletags;
 DROP TABLE articles;
 DROP TABLE users;
