@@ -1,0 +1,33 @@
+html {
+    background: #000000;
+    color: gray;
+}
+
+.workshopposter {
+    width: 130px;
+    height: 150px;
+    border: 1px gray solid;
+    float: left;
+    margin: 10px;
+}
+
+.posterpicture {
+    
+}
+
+.postertitle {
+    padding: 0 3px;
+    text-align: center;
+    height: 10px;
+    font-size: 10pt;
+    
+}
+
+#body {
+    width: 486px;
+    margin: 0 auto;
+}
+
+#footer {
+    clear: both;
+}

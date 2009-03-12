@@ -10,4 +10,8 @@
         <from>^/?$</from>
         <to>/index.jsp</to>
     </rule>
+    <rule match-type="regex">
+        <from>^/([0-9]*)/?$</from>
+        <to>/project.jsp?id=$1</to>
+    </rule>
 </urlrewrite>
