@@ -9,6 +9,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>theMetaCity.com Administration</title>
-    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-1"/>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="styles/adminstyle.css" rel="stylesheet" type="text/css" media="screen"/>
