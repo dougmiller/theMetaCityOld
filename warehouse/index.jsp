@@ -1,22 +1,57 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://com.themetacity" prefix="tmc" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <title>theMetaCity.com</title>
-        <meta http-equiv="content-type" content="application/xhtml+xml;"/>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
-        <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
-    </head>
-    <body>
-        <div id="container">
-            <h1>The MetaCity.com</h1>
-            <h2>Design, development and dissemination of the digital domain.</h2>
-            <h3>Who?</h3>
-            <p>Douglas Miller, interaction designer, runs this site most of the time. Occasionally other people turn up to help.</p>
-            <h3>What?</h3>
-            <p>A place to discuss, showcase and explore projects and issues that are interesting, especially in the world of the Internet.</p>
-        </div>
-    </body>
-</html>
+<%@ page import="java.io.File" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.io.FileReader" %>
+<%@ page import="java.util.LinkedList" %>
+<%@ include file="/WEB-INF/jspf/headertop.jspf" %>
+<%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
+
+<h1>Warehouse</h1>
+<%
+    String root = "/Users/doug/Sites/theMetaCity/warehouse/wares";
+    java.io.File dir = new java.io.File(root);
+
+    File[] listOfDirs = dir.listFiles();
+
+    LinkedList<File> goodDirs = new LinkedList<File>();
+
+    for (File dirToCheck : listOfDirs) {
+        if (dirToCheck.isDirectory()) {
+            goodDirs.add(dirToCheck);
+        }
+    }
+
+    if (goodDirs.size() == 0) {
+%>
+<p>There is nothing here yet.</p>
+<%
+} else {
+
+    for (File goodDir : goodDirs) {
+        java.io.File readme = new java.io.File(goodDir + "/README");
+
+        BufferedReader br = new BufferedReader(new FileReader(readme));
+
+        String strLine;
+        String allOfReadme = "";
+
+        while ((strLine = br.readLine()) != null) {
+            allOfReadme += strLine;
+        }
+
+        br.close();
+
+%>
+<div class="entry">
+    <div class="image"><img src="wares/<%=goodDir.getName()%>/default.jpg" alt="<%=goodDir.getName()%> default image."/></div>
+    <div class="text">
+        <h2><a href="wares/<%=goodDir.getName()%>"><%=goodDir.getName()%></a></h2>
+        <%=allOfReadme%>
+    </div>
+</div>
+<%
+        }
+    }
+%>
+
+
+<%@ include file="/WEB-INF/jspf/footer.jspf" %>
