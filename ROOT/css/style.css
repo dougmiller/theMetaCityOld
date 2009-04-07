@@ -1,4 +1,86 @@
 @charset "utf-8";
 
-html {}
-body {}
+html {
+    background: #000000 url(/site-images/c1.jpg);
+    color: #BCBCBC;
+}
+
+body {
+    margin: 100px auto;
+    width: 640px;
+}
+
+.contentdiv {
+	background: url(/site-images/30percentblackblock.png);
+	border: 2px solid #333333;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	padding: 3px 10px;
+}
+
+#left {
+	width: 200px;
+	height: 200px;
+	float: left;
+}
+
+#right {
+	margin-left: 240px;
+    height: 200px;
+}
+
+#right * {
+    font-family: Georgia, san serif;
+    padding: 0;
+	margin: 0;
+}
+
+#right h1 {
+    font-family: arial, san serif;
+}
+
+#right h2 {
+    font-family: arial, san serif;
+}
+
+.contentdiv a {
+    color: #BCBCBC;
+}
+
+.contentdiv a :hover{
+    color: #BCBCBC;   
+}
+
+.contentdiv a :visited {
+    color: #646464;
+}
+
+.contentdiv a :active {
+    color: #969696;
+}
+
+#aboutdiv {
+    padding: 3px 10px;
+    margin: 20px 0 0 240px;
+}
+
+#abouth3 {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#aboutdiv p {
+    padding: 0;
+    margin: 0;
+}
+
+#aboutclose {
+    margin-left: 90%;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#nojavascript {
+    padding: 3px 10px;
+    margin: 0 0 20px 240px;
+}
