@@ -3,33 +3,33 @@
 <body>
 <div id="left">
             <ul>
-                <li><a href="/">home</a></li>
-                <li><a href="/about">about</a></li>
-                <li><a href="/tags">tags</a></li>
-                <li><a href="/archive">archive</a></li>
+                <li><a href="/blog/">home</a></li>
+                <li><a href="/blog/about">about</a></li>
+                <li><a href="/blog/tags">tags</a></li>
+                <li><a href="/blog/archive">archive</a></li>
             </ul>
 
         <!-- Search -->
-            <form action="/search.jsp">
+            <form action="/blog/search.jsp">
                 <div class="searchdiv">
                     <input type="text" size="20" name="searchString"/>
                     <button type="submit" name="submit" value="search" class="submitbutton">Search!</button>
                 </div>
             </form>
 
-        <jsp:useBean id="ProjectProcessBean" scope="page" class="com.themetacity.beans.ProjectProcessBean"/>
-        <c:set var="ProjectList" value="${ProjectProcessBean.frontPageProjects}"/>
+        <jsp:useBean id="workshopProcessBean" scope="page" class="com.themetacity.beans.WorkshopProcessBean"/>
+        <c:set var="workshopLinks" value="${workshopProcessBean.workshopLinks}"/>
         <h2>Projects</h2>
         <c:choose>
-            <c:when test="${not empty ProjectList}">
+            <c:when test="${not empty workshopLinks}">
                 <ul>
-                <c:forEach items="${ProjectList}" var="ProjectsItem">
-                    <tmc:project projectBean="${ProjectsItem}"/>
+                <c:forEach items="${workshopLinks}" var="workshopLinkBean">
+                    <tmc:workshopLink workshopLinkBean="${workshopLinkBean}"/>
                 </c:forEach>
                 </ul>
             </c:when>
             <c:otherwise>
-                <p>No active projects at the moment.</p>
+                <p>No links at the moment.</p>
             </c:otherwise>
         </c:choose>
 </div>

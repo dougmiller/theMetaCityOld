@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-    <display-name>theMetaCity</display-name>
-    <description>Home of Douglas Miller</description>
+    <display-name>Blog</display-name>
+    <description>Blog for the metacity</description>
 
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
@@ -40,7 +40,6 @@
             <param-name>statusEnabled</param-name>
             <param-value>false</param-value>
         </init-param>
-
     </filter>
 
     <filter-mapping>

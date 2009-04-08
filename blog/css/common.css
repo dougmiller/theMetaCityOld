@@ -3,10 +3,10 @@
 html {
     font-family: "Times New Roman", sans-serif;
     font-size: 10pt;
-    background: #FFF;
     margin: 10px auto 10px 0;
     width: 800px;
     color: #666;
+	background: url(/site-images/background.png) no-repeat #000000 fixed;
 }
 
 #left {
