@@ -4,13 +4,22 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-    <display-name>theMetaCity</display-name>
-    <description>Home of Douglas Miller</description>
+    <display-name>workshop</display-name>
+    <description>The workshop application</description>
 
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
         <welcome-file>/index.html</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jspf/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/jspf/500.jsp</location>
+    </error-page>
 
     <resource-ref>
         <description>Resource ref to the datasource configured in the context.xml</description>
