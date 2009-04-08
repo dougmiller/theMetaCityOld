@@ -17,7 +17,7 @@ public class TagProcessBean {
     DatabaseBean dbaBean = new DatabaseBean();
 
     private String user = "";
-    private String articleID = "";
+    private String id = "";
 
     static Logger logger = Logger.getLogger(TagProcessBean.class);
 
@@ -77,7 +77,7 @@ public class TagProcessBean {
                             "WHERE articles.id = ? " +
                             "AND articles.id = articletags.id " +
                             "GROUP BY tag;"));
-            dbaBean.getPrepStmt().setString(1, articleID);
+            dbaBean.getPrepStmt().setString(1, id);
 
             ResultSet result = dbaBean.executeQuery();
 
@@ -167,6 +167,42 @@ public class TagProcessBean {
         return listOfTags;
     }
 
+        /**
+     * Get all the tags posted for an article
+     *
+     * @return a list of <TagBeans> belonging to an article
+     */
+    public LinkedList<TagBean> getWorkshopTags() {
+        LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
+        DatabaseBean dbaBean = new DatabaseBean();
+
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT tag " +
+                            "FROM workshop, workshoptags " +
+                            "WHERE workshop.id = ? " +
+                            "AND workshop.id = workshoptags.id " +
+                            "GROUP BY tag;"));
+            dbaBean.getPrepStmt().setString(1, id);
+
+            ResultSet result = dbaBean.executeQuery();
+
+            while (result.next()) {
+                TagBean tagBean = new TagBean();
+
+                tagBean.setTag(result.getString("tag"));
+
+                listOfTags.add(tagBean);
+            }
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error in TagProcessBean()");
+            logger.warn(SQLEx);
+        } finally {
+            dbaBean.close();
+        }
+        return listOfTags;
+    }
+    
     public String getUser() {
         return user;
     }
@@ -175,11 +211,11 @@ public class TagProcessBean {
         this.user = user;
     }
 
-    public String getArticleID() {
-        return articleID;
+    public String getId() {
+        return id;
     }
 
-    public void setArticleID(String articleID) {
-        this.articleID = articleID;
+    public void setId(String id) {
+        this.id = id;
     }
 }

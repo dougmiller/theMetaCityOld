@@ -1,7 +1,6 @@
 package com.themetacity.rsstags;
 
 import com.themetacity.typebeans.ArticleBean;
-import com.themetacity.typebeans.TagBean;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;

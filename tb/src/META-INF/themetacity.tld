@@ -5,7 +5,7 @@
 
     <!-- This is the custom tag library configuration file for theMeataCity -->
 
-    <tlib-version>0.75</tlib-version>
+    <tlib-version>0.85</tlib-version>
     <short-name>tmc</short-name>
     <uri>http://com.themetacity</uri>
 
@@ -87,21 +87,6 @@
             <type>com.themetacity.typebeans.ImportantNoticeBean</type>
         </attribute>
     </tag>
-
-    <!-- Projects tag, used on the front page for quick links -->
-    <tag>
-        <name>project</name>
-        <tag-class>com.themetacity.tags.Projects</tag-class>
-        <body-content>scriptless</body-content>
-
-        <attribute>
-            <name>projectBean</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.ProjectBean</type>
-        </attribute>
-    </tag>
-
     <!-- All Article Tags -->
     <tag>
         <name>allTags</name>
@@ -116,19 +101,46 @@
         </attribute>
     </tag>
 
-    <!-- Workshop Entries tag -->
+    <!-- workshopLink tag, used on the front page for quick links to the workshop-->
     <tag>
-        <name>workshop</name>
-        <tag-class>com.themetacity.tags.Workshop</tag-class>
+        <name>workshopLink</name>
+        <tag-class>com.themetacity.tags.WorkshopLink</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
-            <name>projetList</name>
+            <name>workshopLinkBean</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.util.LinkedList</type>
+            <type>com.themetacity.typebeans.WorkshopBean</type>
         </attribute>
+    </tag>
 
+    <!-- WorkshopBlurb Entries tag -->
+    <tag>
+        <name>workshopBlurb</name>
+        <tag-class>com.themetacity.tags.WorkshopBlurb</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>workshop</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.WorkshopBean</type>
+        </attribute>
+    </tag>
+
+    <!-- Workshop articles, generates the article in the Workshop -->
+    <tag>
+        <name>workshopArticle</name>
+        <tag-class>com.themetacity.tags.WorkshopArticle</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>workshop</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.WorkshopBean</type>
+        </attribute>
     </tag>
 
     <!-- Quote tag -->
@@ -143,9 +155,9 @@
         </attribute>
     </tag>
 
-    <!-- Admin tags -->
+    <!-- Admin tags
     <tag>
-        <name>adminLinks</name>
+        <name>adminWorkshopLinks</name>
         <tag-class>com.themetacity.admintags.Projects</tag-class>
         <body-content>scriptless</body-content>
 
@@ -153,10 +165,10 @@
             <name>linkBean</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.ProjectBean</type>
+            <type>com.themetacity.typebeans.ArticleLinksBean</type>
         </attribute>
     </tag>
-
+            -->
     <tag>
         <name>adminProfile</name>
         <tag-class>com.themetacity.admintags.Profile</tag-class>
@@ -184,7 +196,7 @@
         </attribute>
     </tag>
 
-        <tag>
+    <tag>
         <name>adminNotices</name>
         <tag-class>com.themetacity.admintags.ImportantNotice</tag-class>
         <body-content>scriptless</body-content>

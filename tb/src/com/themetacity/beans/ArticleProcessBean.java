@@ -80,7 +80,7 @@ public class ArticleProcessBean {
 
                 // Process this articles tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setArticleID("" + result.getInt("id"));     // Set the user in the TagProcessBean *cast to String*
+                tagProcessBean.setId("" + result.getInt("id"));     // Set the user in the TagProcessBean *cast to String*
                 articleBean.setTags(tagProcessBean.getArticleTags());      // Assign the results to the bean
 
                 listOfBeans.add(articleBean);                              //Add the now populated bean to the list to be returned for display
@@ -138,7 +138,7 @@ public class ArticleProcessBean {
                 // Process this articles tags
                 try {
                     TagProcessBean tagProcessBean = new TagProcessBean();
-                    tagProcessBean.setArticleID("" + result.getInt("id"));     // Set the user in the TagProcessBean *cast to String*
+                    tagProcessBean.setId("" + result.getInt("id"));     // Set the user in the TagProcessBean *cast to String*
                     articleBean.setTags(tagProcessBean.getArticleTags());      // Assign the results to the bean
                 } catch (SQLException SQLEx) {
                     logger.warn(SQLEx);
