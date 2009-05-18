@@ -1,12 +1,22 @@
 @charset "utf-8";
 
 html {
-    font-family: "Times New Roman", sans-serif;
-    font-size: 10pt;
     margin: 10px auto 10px 0;
     width: 800px;
-    color: #666;
+    color: #BCBCBC;
 	background: url(/site-images/background.png) no-repeat #000000 fixed;
+}
+
+#heading {
+    margin-bottom: 0;
+}
+
+#headerhighlight{
+    color: #666666;
+}
+
+#subheading {
+    margin: 0 0 30px 50px;
 }
 
 #left {
@@ -19,7 +29,6 @@ html {
     padding: 1px;
     margin-left: 190px;
     text-align: justify;
-    color: #666;
 }
 
 #right p {
@@ -30,7 +39,6 @@ html {
 #left h2 {
     margin-top: .5em;
     margin-bottom: .2em;
-    color: #666;
 }
 
 #left .searchdiv {
@@ -38,7 +46,7 @@ html {
 }
 
 a {
-    color: #666;
+    color: #DEDEDE;
     text-decoration: underline;
 }
 
@@ -62,16 +70,12 @@ a {
     color: #666666;
 }
 
-.newsarticle h1 a:hover{
-    color: #666666;
-}
-
 a:hover {
-    color: #090909;
+    color: #999999;
 }
 
 a:visited {
-    color: #999;
+    color: #8A8A8A;
 }
 
 .imagecentered {

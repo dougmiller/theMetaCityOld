@@ -1,21 +1,24 @@
 </head>
 
 <body>
-<div id="left">
-            <ul>
-                <li><a href="/blog/">home</a></li>
-                <li><a href="/blog/about">about</a></li>
-                <li><a href="/blog/tags">tags</a></li>
-                <li><a href="/blog/archive">archive</a></li>
-            </ul>
+    <h1 id="heading">theMetaCity<span id="headerhighlight">Blog</span></h1>
+    <h3 id="subheading">News, events and exposition.</h3>
+
+    <div id="left">
+        <ul>
+            <li><a href="/">/home</a></li>
+            <li><a href="/blog/">/blog</a></li>
+            <li><a href="/blog/tags">tags</a></li>
+            <li><a href="/blog/archive">archive</a></li>
+        </ul>
 
         <!-- Search -->
-            <form action="/blog/search.jsp">
-                <div class="searchdiv">
-                    <input type="text" size="20" name="searchString"/>
-                    <button type="submit" name="submit" value="search" class="submitbutton">Search!</button>
-                </div>
-            </form>
+        <form action="/blog/search.jsp">
+            <div class="searchdiv">
+                <input type="text" size="20" name="searchString"/>
+                <button type="submit" name="submit" value="search" class="submitbutton">Search!</button>
+            </div>
+        </form>
 
         <jsp:useBean id="workshopProcessBean" scope="page" class="com.themetacity.beans.WorkshopProcessBean"/>
         <c:set var="workshopLinks" value="${workshopProcessBean.workshopLinks}"/>
@@ -23,16 +26,16 @@
         <c:choose>
             <c:when test="${not empty workshopLinks}">
                 <ul>
-                <c:forEach items="${workshopLinks}" var="workshopLinkBean">
-                    <tmc:workshopLink workshopLinkBean="${workshopLinkBean}"/>
-                </c:forEach>
+                    <c:forEach items="${workshopLinks}" var="workshopLinkBean">
+                        <tmc:workshopLink workshopLinkBean="${workshopLinkBean}"/>
+                    </c:forEach>
                 </ul>
             </c:when>
             <c:otherwise>
-                <p>No links at the moment.</p>
+                <p><a href="/workshop">No projects at the moment.</a></p>
             </c:otherwise>
         </c:choose>
-</div>
+    </div>
 
-<!-- The main content div -->
-<div id="right">
+    <!-- The main content div -->
+    <div id="right">
