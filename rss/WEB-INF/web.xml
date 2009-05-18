@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-    <display-name>theMetaCity RSS</display-name>
-    <description>RSS</description>
+    <display-name>RSS</display-name>
+    <description>RSS feeds application</description>
 
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
