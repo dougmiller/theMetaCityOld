@@ -1,4 +1,4 @@
-package com.themetacity.tags;
+package com.themetacity.tags.blog;
 
 import com.themetacity.typebeans.TagBean;
 
@@ -36,7 +36,7 @@ public class AllTags extends SimpleTagSupport {
     }
 
     private String buildLink(TagBean tag){
-        return "<a href=\"/tags/" + tag.getTag() + "\">" + tag.getTag() + "(" + tag.getNumTimesTagUsed()+ ")</a>";
+        return "<a href=\"/blog/tags/" + tag.getTag() + "\">" + tag.getTag() + "(" + tag.getNumTimesTagUsed()+ ")</a>";
     }
 
     public LinkedList<TagBean> getTagsList() {

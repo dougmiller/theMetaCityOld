@@ -1,4 +1,4 @@
-package com.themetacity.tags;
+package com.themetacity.tags.blog;
 
 import com.themetacity.typebeans.ArticleBean;
 import com.themetacity.typebeans.TagBean;
@@ -28,7 +28,7 @@ public class Article extends SimpleTagSupport {
         //logger.debug("This is a test to send over a custom socket");
         try {
             out.println("    <div class=\"newsarticle\">");
-            out.println("        <h1><a href=\"/" + article.getURL() + "\">" + article.getTitle() + "</a></h1>");
+            out.println("        <h1><a href=\"/blog/" + article.getURL() + "\">" + article.getTitle() + "</a></h1>");
             out.println("        " + article.getArticleText());
             out.println("        <div class=\"tagmetainfo\">");
             out.println("           <span>"+ article.getTitle()  + ";</span>");
@@ -52,14 +52,14 @@ public class Article extends SimpleTagSupport {
         StringBuilder outputString = new StringBuilder();
 
         for (TagBean tag : tagList) {
-            outputString.append("<a href=\"/tags/").append(tag.getTag()).append("\">");
+            outputString.append("<a href=\"/blog/tags/").append(tag.getTag()).append("\">");
             outputString.append(tag.getTag());
             outputString.append("</a> ");
         }
 
         // There are not tags for this article
         if (outputString.length() == 0) {
-            outputString.append("This article has no tags associated with it");
+            outputString.append("This article has no <a href=\"/blog/tags/\">tags</a> associated with it");
         }
 
         return outputString.toString().trim();

@@ -1,11 +1,10 @@
-package com.themetacity.rsstags;
+package com.themetacity.tags.rss;
 
 import com.themetacity.typebeans.ArticleBean;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
-import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 

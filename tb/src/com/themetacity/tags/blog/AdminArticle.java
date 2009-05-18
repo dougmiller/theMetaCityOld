@@ -1,4 +1,4 @@
-package com.themetacity.admintags;
+package com.themetacity.tags.blog;
 
 import com.themetacity.typebeans.ArticleBean;
 
@@ -10,15 +10,13 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class Articles extends SimpleTagSupport {
+public class AdminArticle extends SimpleTagSupport {
 
     private ArticleBean articleBean = new ArticleBean();
     
-    private static Logger logger = Logger.getLogger(Articles.class);
+    private static Logger logger = Logger.getLogger(AdminArticle.class);
 
     public void doTag() {
-        // * Initialise the context here as will not be valid in the container previously. *
-        // The writer gives access to the page context so its possible to write output
         JspContext jspContext = getJspContext();
         JspWriter out = jspContext.getOut();
 

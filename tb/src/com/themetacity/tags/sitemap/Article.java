@@ -1,33 +1,31 @@
-package com.themetacity.tags;
+package com.themetacity.tags.sitemap;
 
 import com.themetacity.typebeans.ArticleBean;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import org.apache.log4j.Logger;
 
 /**
- * This is the custom tag that formats a ArticleBean into readable format. It is called in JSP pages.
+ * This is the custom tag that formats a ArticleBean into sitemap entries.
  */
-public class SitemapArticle extends SimpleTagSupport {
+public class Article extends SimpleTagSupport {
 
-    // Variables
     private ArticleBean article = new ArticleBean();
 
-    private static final Logger logger = Logger.getLogger(Article.class);
+    private static final Logger logger = Logger.getLogger(com.themetacity.tags.blog.Article.class);
 
-    // Start processing
+    SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
     public void doTag() {
-        // * Initialise the context here as will not be valid in the container previously. *
-        // The writer gives access to the page context so its possible to write output
         JspWriter out = getJspContext().getOut();
-        //logger.debug("This is a test to send over a custom socket");
         try {
             out.println("    <url>");
-            out.println("        <loc>http://www.themetacity.com/" + article.getURL() + "</loc>");
-            out.println("        <lastmod>" + formatTimestamp(article.getTimestamp()) + "</lastmod>");
+            out.println("        <loc>http://www.themetacity.com/blog/" + article.getURL() + "</loc>");
+            out.println("        <lastmod>" + formatter.format(article.getTimestamp()) + "</lastmod>");
             out.println("        <changefreq>monthly</changefreq>");
             out.println("        <priority>0.8</priority>");
             out.println("    </url>");
@@ -38,13 +36,8 @@ public class SitemapArticle extends SimpleTagSupport {
         }
     }
 
-    // Free the Article used
     public void release() {
         article = null;
-    }
-
-    private String formatTimestamp(String timestamp) {
-        return timestamp.split(" ")[0];
     }
 
     public ArticleBean getArticle() {

@@ -1,4 +1,4 @@
-package com.themetacity.tags;
+package com.themetacity.tags.workshop;
 
 import org.apache.log4j.Logger;
 
@@ -23,7 +23,7 @@ public class WorkshopLink extends SimpleTagSupport {
         // The writer gives access to the page context so its possible to write output
         JspWriter out = getJspContext().getOut();
         try {
-            out.println("    <li>" + workshopLinkBean.getTitle() + "</span></li>");
+            out.println("    <li><a href=\"/workshop/" + workshopLinkBean.getId() + "\">" + workshopLinkBean.getTitle() + "</a></li>");
         } catch (IOException IOEx) {
             logger.warn("There was an error with the workshopLinkBean rendering tag.");
             logger.warn(IOEx);

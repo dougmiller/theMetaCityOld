@@ -1,4 +1,4 @@
-package com.themetacity.admintags;
+package com.themetacity.tags;
 
 import com.themetacity.typebeans.ImportantNoticeBean;
 import org.apache.log4j.Logger;
@@ -8,10 +8,10 @@ import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspWriter;
 import java.io.IOException;
 
-public class ImportantNotice extends SimpleTagSupport {
+public class AdminImportantNotice extends SimpleTagSupport {
     private ImportantNoticeBean noticeBean = new ImportantNoticeBean();
 
-    private static Logger logger = Logger.getLogger(ImportantNotice.class);
+    private static Logger logger = Logger.getLogger(AdminImportantNotice.class);
 
     public void doTag() {
         JspContext jspContext = getJspContext();
