@@ -4,16 +4,14 @@
 <div id="main">
     <jsp:useBean id="workshopProcessBean" class="com.themetacity.beans.WorkshopProcessBean"/>
     <c:set var="workshopEntryList" value="${workshopProcessBean.workshopBlurbs}"/>
-
-
-    <div id="header">Workshop</div>
     <div id="search">
-        <input type="text" id="searchinput"/><br />
+        <p>Just type to search: </p>
+        <input type="text" id="searchinput" class="bgimg"/><br />
         <button id="reset">Reset the search.</button>
     </div>
     <c:choose>
         <c:when test="${empty workshopEntryList}">
-            <p>No projects at the moment. Check back later</p>
+            <h2 id="noresults">No projects at the moment. Come back again soon.</h2>
         </c:when>
         <c:otherwise>
             <c:forEach var="workshopEntry" items="${workshopEntryList}">

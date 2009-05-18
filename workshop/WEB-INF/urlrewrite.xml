@@ -5,7 +5,11 @@
         "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
 
 <urlrewrite>
-	/* Prettify the main page */
+    <rule match-type="regex">
+        <from>^/sitemap.xml$</from>
+        <to>/sitemap.jsp</to>
+    </rule>
+	
     <rule match-type="regex">
         <from>^/?$</from>
         <to>/index.jsp</to>

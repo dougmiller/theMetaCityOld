@@ -20,9 +20,14 @@ $(document).ready(function() {
                     $(this).addClass('searchMatch');
                     $(this).parent().parent().parent().fadeIn(1000);
                 }
+
+                if (searchTerm == "") {
+                    total = 1;
+                    $('.workshopentry').fadeIn(1000);
+                }
             });
             if (!total) {
-                $('#main').append('<p id="noresults">No matches. Please try again.</p>');
+                $('#main').append('<h2 id="noresults">No matches. Please try again.</h2>');
             }
         });
     }
@@ -41,11 +46,24 @@ $(document).ready(function() {
         }
     });
 
-    if ($('#search input').val() != ""){
-        $(this).addClass('nobgimg');
+    
+    if ($('#searchinput').val().length) {
+        $('#searchinput').addClass('nobgimg');
+        $('#searchinput').removeClass('bgimg');
     } else {
-        $(this).addClass('nobgimg');  
+        $('#searchinput').removeClass('nobgimg');
+        $('#searchinput').addClass('bgimg');
     }
+
+    $('#searchinput').keyup(function () {
+        if ($('#searchinput').val().length) {
+            $('#searchinput').addClass('nobgimg');
+            $('#searchinput').removeClass('bgimg');
+        } else {
+            $('#searchinput').removeClass('nobgimg');
+            $('#searchinput').addClass('bgimg');
+        }
+    });
 
     $('#reset').click(function () {
         resetSearch();

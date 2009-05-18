@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
+<link href="/workshop/css/projectoverride.css" rel="stylesheet" media="screen, projection" type="text/css"/>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 <div id="main">
     <jsp:useBean id="workshopProcessBean" class="com.themetacity.beans.WorkshopProcessBean">
