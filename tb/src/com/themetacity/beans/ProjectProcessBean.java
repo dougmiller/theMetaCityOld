@@ -42,30 +42,38 @@ public class ProjectProcessBean {
     public LinkedList<ProjectBean> getFrontPageProjects() {
         DatabaseBean dbaBean = new DatabaseBean();
         LinkedList<ProjectBean> projectsList = new LinkedList<ProjectBean>();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT URL, desc_text " +
                             "FROM projects " +
                             "WHERE is_valid = true " +
-                            "ORDER BY id desc LIMIT 5;"));
-        } catch (SQLException SQLEx) {
-            logger.fatal(SQLEx);
-        }
+                            "ORDER BY id desc " +
+                            "LIMIT 5;"));
 
-        ResultSet result = dbaBean.executeQuery();
-        try {
+            result = dbaBean.executeQuery();
+
             while (result.next()) {
                 ProjectBean projectBean = new ProjectBean();
 
                 projectBean.setProjectURL(result.getString("URL"));
                 projectBean.setDescText(result.getString("desc_text"));
-                
+
                 projectsList.add(projectBean);
             }
         } catch (SQLException SQLEx) {
+            logger.warn("You had an error in ProjectProcessBean().getFrontPageProjects()");
             logger.fatal(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in ProjectProcessBean.getFrontPageProjects()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
 
@@ -78,18 +86,15 @@ public class ProjectProcessBean {
     public LinkedList<ProjectBean> getAllProjects() {
         DatabaseBean dbaBean = new DatabaseBean();
         LinkedList<ProjectBean> projectsList = new LinkedList<ProjectBean>();
-
+        ResultSet result = null;
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id, URL, desc_text, is_valid " +
                             "FROM projects " +
                             "ORDER BY id desc"));
-        } catch (SQLException SQLEx) {
-            logger.fatal(SQLEx);
-        }
 
-        ResultSet result = dbaBean.executeQuery();
-        try {
+            result = dbaBean.executeQuery();
+
             while (result.next()) {
                 ProjectBean projectBean = new ProjectBean();
 
@@ -102,6 +107,15 @@ public class ProjectProcessBean {
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in ProjectProcessBean.getallProjects;()");
+                    logger.warn(SQLEx);
+                }
+            }
+
             dbaBean.close();
         }
 
@@ -118,7 +132,7 @@ public class ProjectProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "DELETE FROM projects " +
-                    "WHERE id = ?;"));
+                            "WHERE id = ?;"));
             dbaBean.getPrepStmt().setInt(1, Integer.parseInt(projectID));
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
@@ -136,7 +150,7 @@ public class ProjectProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "INSERT INTO projects (URL, desc_text, is_valid) " +
-                    "VALUES (?, ?, ?);"));
+                            "VALUES (?, ?, ?);"));
             dbaBean.getPrepStmt().setString(1, projectURL);
             dbaBean.getPrepStmt().setString(2, descText);
             dbaBean.getPrepStmt().setDate(3, new java.sql.Date(System.currentTimeMillis()));
@@ -157,8 +171,8 @@ public class ProjectProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "UPDATE projects " +
-                    "SET URL = ?, desc_text = ?, is_valid = ? " +
-                    "WHERE id = ?;"));
+                            "SET URL = ?, desc_text = ?, is_valid = ? " +
+                            "WHERE id = ?;"));
             dbaBean.getPrepStmt().setString(1, projectURL);
             dbaBean.getPrepStmt().setString(2, descText);
             dbaBean.getPrepStmt().setString(3, isValid);

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.LinkedList;
+import java.util.Date;
 
 /**
  * This is the bean that process the articles from the database into ArticleBeans and then presents them for the tag.
@@ -31,9 +32,9 @@ public class ArticleProcessBean {
     private String[] articleTags;           // The tag checkboxes
     private String articleOtherTags;        // The text box for other tags
 
-    private String searchTag = "";          // Select articles with this tag
+    private String searchTag = "";          // Select articles with this tag from /blog/tag
 
-    private String searchString = "";
+    private String searchString = "";       // the inputbox search value
 
     private static final Logger logger = Logger.getLogger(ArticleProcessBean.class);
 
@@ -56,17 +57,16 @@ public class ArticleProcessBean {
     public LinkedList<ArticleBean> getFrontpageArticles() {
         DatabaseBean articlesDBBean = new DatabaseBean();
         LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+        ResultSet result = null;
 
         try {
-            PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
+            articlesDBBean.setPrepStmt(articlesDBBean.getConn().prepareStatement(
                     "SELECT id, title, url, author, date_time, article_text " +
                             "FROM articles " +
                             "ORDER BY id desc " +
-                            "LIMIT 5;");
+                            "LIMIT 5;"));
 
-            articlesDBBean.setPrepStmt(prepStmt);
-
-            ResultSet result = articlesDBBean.executeQuery();
+            result = articlesDBBean.executeQuery();
 
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
@@ -80,15 +80,23 @@ public class ArticleProcessBean {
 
                 // Process this articles tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setId("" + result.getInt("id"));     // Set the user in the TagProcessBean *cast to String*
-                articleBean.setTags(tagProcessBean.getArticleTags());      // Assign the results to the bean
+                tagProcessBean.setId("" + result.getInt("id"));
+                articleBean.setTags(tagProcessBean.getArticleTags());
 
-                listOfBeans.add(articleBean);                              //Add the now populated bean to the list to be returned for display
+                listOfBeans.add(articleBean);
             }
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in ArticleProcessBean.getFrontpageArticles()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the REsultSet in ArticleProcessBean.getFrontpageArticles()");
+                    logger.warn(SQLEx);
+                }
+            }
             articlesDBBean.close();
         }
         return listOfBeans;
@@ -103,7 +111,7 @@ public class ArticleProcessBean {
 
         DatabaseBean dbaBean = new DatabaseBean();
         LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
-
+        ResultSet result = null;
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id, author, title, url, article_text, date_time " +
@@ -122,12 +130,11 @@ public class ArticleProcessBean {
             dbaBean.getPrepStmt().setString(7, URL);
             dbaBean.getPrepStmt().setString(8, URL);
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
-                // Make a new ArticleBeanTest that represents one article
                 ArticleBean articleBean = new ArticleBean();
-                // Set the properties of the bean
+
                 articleBean.setArticleID(result.getString("id"));
                 articleBean.setAuthor(result.getString("author"));
                 articleBean.setTitle(result.getString("title"));
@@ -138,19 +145,26 @@ public class ArticleProcessBean {
                 // Process this articles tags
                 try {
                     TagProcessBean tagProcessBean = new TagProcessBean();
-                    tagProcessBean.setId("" + result.getInt("id"));     // Set the user in the TagProcessBean *cast to String*
-                    articleBean.setTags(tagProcessBean.getArticleTags());      // Assign the results to the bean
+                    tagProcessBean.setId("" + result.getInt("id"));
+                    articleBean.setTags(tagProcessBean.getArticleTags());
                 } catch (SQLException SQLEx) {
                     logger.warn(SQLEx);
                 }
 
-                listOfBeans.add(articleBean);                                  //Add the now populated bean to the list to be returned for display
+                listOfBeans.add(articleBean);
             }
         } catch (SQLException SQLEx) {
             logger.warn("You had an error mapping objects in ArticleProcessBean.getFilteredArticles()");
             logger.warn(SQLEx);
-        }
-        finally {
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getFilteredArticles()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
         return listOfBeans;
@@ -164,6 +178,7 @@ public class ArticleProcessBean {
     public LinkedList<ArticleBean> getArticlesByID() {
         DatabaseBean dbaBean = new DatabaseBean();
         LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -172,7 +187,7 @@ public class ArticleProcessBean {
                             "WHERE id = ?;"));
             dbaBean.getPrepStmt().setString(1, articleID);
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
@@ -182,13 +197,20 @@ public class ArticleProcessBean {
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
 
-                listOfBeans.add(articleBean);                                  //Add the now populated bean to the list to be returned for display
+                listOfBeans.add(articleBean);
             }
         } catch (SQLException SQLEx) {
             logger.warn("You had an error mapping objects in ArticleProcessBean.getArticlesByID()");
             logger.warn(SQLEx);
-        }
-        finally {
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getArticleByID()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
 
@@ -203,6 +225,7 @@ public class ArticleProcessBean {
     public LinkedList<ArticleBean> getArticlesWithTag() {
         DatabaseBean dbaBean = new DatabaseBean();
         LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -213,7 +236,7 @@ public class ArticleProcessBean {
                             "ORDER BY articletags.id desc;"));
             dbaBean.getPrepStmt().setString(1, searchTag);
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
@@ -227,15 +250,22 @@ public class ArticleProcessBean {
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in ArticleProcessBean.getArticlesWithTag()");
             logger.warn(SQLEx);
-        }
-        finally {
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getArticlesWithTag()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
 
         return listOfBeans;
     }
 
-        /**
+    /**
      * Return all the articles posted under the given tag.
      * Written for the RSS Feed
      *
@@ -244,6 +274,7 @@ public class ArticleProcessBean {
     public LinkedList<ArticleBean> getArticlesWithTagForRSSFeed() {
         DatabaseBean dbaBean = new DatabaseBean();
         LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -254,7 +285,7 @@ public class ArticleProcessBean {
                             "ORDER BY articletags.id desc;"));
             dbaBean.getPrepStmt().setString(1, searchTag);
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
@@ -269,8 +300,15 @@ public class ArticleProcessBean {
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in ArticleProcessBean.getArticlesWithTag()");
             logger.warn(SQLEx);
-        }
-        finally {
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getArticlesWithTagForRSSFeed()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
 
@@ -285,6 +323,7 @@ public class ArticleProcessBean {
     public LinkedList<ArticleBean> getSearchArticles() {
         DatabaseBean dbaBean = new DatabaseBean();
         LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -294,7 +333,7 @@ public class ArticleProcessBean {
                             "ORDER BY date_time desc;"));
             dbaBean.getPrepStmt().setString(1, "%" + searchString + "%");
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
@@ -308,8 +347,15 @@ public class ArticleProcessBean {
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in ArticleProcessBean.getSearchArticles()");
             logger.warn(SQLEx);
-        }
-        finally {
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getSearchArticles()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
         return listOfBeans;
@@ -338,7 +384,9 @@ public class ArticleProcessBean {
 
         // now add the tags
         // get the id of the article just added
-        articleID = getIdOfArticleFromTitle() + "";
+        // There is an unlikely concurrancy issue (currently only one user and not updating very often)
+        // so best to do it via title and not last added 
+        articleID = getIDOfArticleFromTitle() + "";
 
         int tagsResult = updateArticleTags();
 
@@ -414,7 +462,6 @@ public class ArticleProcessBean {
             System.arraycopy(articleTags, 0, tempTotalTags, textBoxToArray.length, articleTags.length);
 
             // Put in the tags
-
             try {
                 for (String tag : tempTotalTags) {
                     tagDBBean.setPrepStmt(insertTags);
@@ -517,7 +564,7 @@ public class ArticleProcessBean {
     }
 
     /**
-     * Get the potential article that will have the same url as the submitted title. The can be only one.
+     * Get the potential article that will have the same url as the submitted title. There should be only one.
      * Used in JSON AJAX call
      *
      * @return a linked list of ArticleBeans
@@ -527,6 +574,7 @@ public class ArticleProcessBean {
         DatabaseBean dbaBean = new DatabaseBean();
         ArticleBean articleUtilBean = new ArticleBean();
         LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -535,7 +583,7 @@ public class ArticleProcessBean {
                             "WHERE url = ?;"));
             dbaBean.getPrepStmt().setString(1, articleUtilBean.buildURL(title));
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
@@ -548,8 +596,15 @@ public class ArticleProcessBean {
         } catch (SQLException SQLEx) {
             logger.warn("You had an error mapping objects in ArticleProcessBean.getMatchURLByTitle()");
             logger.warn(SQLEx);
-        }
-        finally {
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getMatchURLByTitle()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
 
@@ -557,9 +612,11 @@ public class ArticleProcessBean {
     }
 
     // Retrive the ID of articles based on the title. Used primarily to get the id of just entered articles
-    private int getIdOfArticleFromTitle() {
+    private int getIDOfArticleFromTitle() {
         DatabaseBean dbaBean = new DatabaseBean();
         int idOfArticle = -1;
+        ResultSet result = null;
+
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id " +
@@ -567,25 +624,33 @@ public class ArticleProcessBean {
                             "WHERE title = ?;"));
             dbaBean.getPrepStmt().setString(1, title);
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 idOfArticle = Integer.parseInt(result.getString("id"));
             }
         } catch (SQLException SQLEx) {
-            logger.warn("You had an error mapping objects in ArticleProcessBean.getIdOfArticleFromTitle()");
+            logger.warn("You had an error mapping objects in ArticleProcessBean.getIDOfArticleFromTitle()");
             logger.warn(SQLEx);
-        }
-        finally {
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getIDOfArticleFromTitle()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
 
         return idOfArticle;
     }
 
-    public LinkedList<ArticleBean> getSiteMapArticles() {
+    public LinkedList<ArticleBean> getSitemapArticles() {
         DatabaseBean articlesDBBean = new DatabaseBean();
         LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+        ResultSet result = null;
 
         try {
             PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
@@ -594,7 +659,7 @@ public class ArticleProcessBean {
 
             articlesDBBean.setPrepStmt(prepStmt);
 
-            ResultSet result = articlesDBBean.executeQuery();
+            result = articlesDBBean.executeQuery();
 
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
@@ -605,13 +670,60 @@ public class ArticleProcessBean {
                 listOfBeans.add(articleBean);
             }
         } catch (SQLException SQLEx) {
-            logger.warn("You had an error in ArticleProcessBean.getSiteMapArticles()");
+            logger.warn("You had an error in ArticleProcessBean.getSitemapArticles()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getSitemapArticles()");
+                    logger.warn(SQLEx);
+                }
+            }
             articlesDBBean.close();
         }
         return listOfBeans;
     }
+
+    /**
+     * Gets the date of the last updated article. Used in the sitemap to show when the articles section has been updated.
+     * @return a Date object.
+     */
+    public Date getLastUpdateDate() {
+        DatabaseBean articlesDBBean = new DatabaseBean();
+        ResultSet result = null;
+        Date lastModified = new Date(0);
+        try {
+            PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
+                    "SELECT max(timestamp)  as timestamp " +
+                            "FROM articles;");
+
+            articlesDBBean.setPrepStmt(prepStmt);
+
+            result = articlesDBBean.executeQuery();
+
+            while (result.next()) {
+                lastModified = result.getTimestamp("timestamp");    // Query only returns 1 result;
+            }
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error in ArticleProcessBean.getLastUpdateDate()");
+            logger.warn(SQLEx);
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getLastUpdateDate()");
+                    logger.warn(SQLEx);
+                }
+            }
+            articlesDBBean.close();
+        }
+        
+        return lastModified;
+    }
+
 
     /**
      * Get the title of the RSS Feed based on the year month and day params
@@ -626,12 +738,10 @@ public class ArticleProcessBean {
 
         if ((month != null) && (!month.equals(""))) {
             feedTitle += ("/" + month);
-
         }
 
         if ((day != null) && (!day.equals(""))) {
             feedTitle += ("/" + day);
-
         }
 
         return feedTitle;
@@ -655,7 +765,6 @@ public class ArticleProcessBean {
 
         if ((day != null) && (!day.equals(""))) {
             feedLink += (day + "/");
-
         }
 
         return feedLink;

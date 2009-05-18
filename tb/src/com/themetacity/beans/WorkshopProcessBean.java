@@ -5,6 +5,7 @@ import com.themetacity.utilities.DatabaseBean;
 import com.themetacity.typebeans.WorkshopBean;
 
 import java.util.LinkedList;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +27,8 @@ public class WorkshopProcessBean {
     public LinkedList<WorkshopBean> getWorkshopEntry() {
         DatabaseBean workshopDBBean = new DatabaseBean();
         LinkedList<WorkshopBean> listOfBeans = new LinkedList<WorkshopBean>();
+        ResultSet result = null;
+
         try {
             workshopDBBean.setPrepStmt(workshopDBBean.getConn().prepareStatement(
                     "SELECT id, title, article_text, date_time, timestamp " +
@@ -34,19 +37,21 @@ public class WorkshopProcessBean {
                             "ORDER BY id desc;"));
             workshopDBBean.getPrepStmt().setString(1, id);
 
-            ResultSet result = workshopDBBean.executeQuery();
+            result = workshopDBBean.executeQuery();
+
             while (result.next()) {
                 WorkshopBean workshopBean = new WorkshopBean();
+
                 workshopBean.setId(result.getInt("id"));
                 workshopBean.setTitle(result.getString("title"));
                 workshopBean.setContent(result.getString("article_text"));
                 workshopBean.setDateTime(result.getDate("date_time"));
-                workshopBean.setTimestamp(result.getTimestamp("timestamp"));
+                workshopBean.setTimestamp(result.getDate("timestamp"));
 
                 // Process this workshops tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setId("" + result.getInt("id"));     // Set the user in the TagProcessBean *cast to String*
-                workshopBean.setTags(tagProcessBean.getWorkshopTags());      // Assign the results to the bean
+                tagProcessBean.setId("" + result.getInt("id"));
+                workshopBean.setTags(tagProcessBean.getWorkshopTags());
 
                 listOfBeans.add(workshopBean);
             }
@@ -54,6 +59,14 @@ public class WorkshopProcessBean {
             logger.warn("You had an error in WorkshopProcessBean.getWorkshopEntries()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in WorkshopProcessBean().getWorkshopEntry()");
+                    logger.warn(SQLEx);
+                }
+            }
             workshopDBBean.close();
         }
         return listOfBeans;
@@ -61,12 +74,14 @@ public class WorkshopProcessBean {
 
     /**
      * Get the links to the workshop entries
+     *
      * @return a linked list of WorkshopBeans, mapped to the databased relations
      */
     public LinkedList<WorkshopBean> getWorkshopLinks() {
 
         DatabaseBean workshopDBBean = new DatabaseBean();
         LinkedList<WorkshopBean> listOfBeans = new LinkedList<WorkshopBean>();
+        ResultSet result = null;
 
         try {
             workshopDBBean.setPrepStmt(workshopDBBean.getConn().prepareStatement(
@@ -74,7 +89,7 @@ public class WorkshopProcessBean {
                             "FROM workshop " +
                             "ORDER BY id desc;"));
 
-            ResultSet result = workshopDBBean.executeQuery();
+            result = workshopDBBean.executeQuery();
 
             while (result.next()) {
                 WorkshopBean workshopBean = new WorkshopBean();
@@ -88,38 +103,49 @@ public class WorkshopProcessBean {
             logger.warn("You had an error in WorkshopProcessBean.getWorkshopLinks()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in WorkshopProcessBean().getWorkshopLinks()");
+                    logger.warn(SQLEx);
+                }
+            }
             workshopDBBean.close();
         }
         return listOfBeans;
     }
 
     /**
-     * Get the blurb entries for the workshop entries
+     * Get the blurb entries for the workshop entries, used in the index
+     *
      * @return a linked list of WorkshopBeans, mapped to the databased relations
      */
     public LinkedList<WorkshopBean> getWorkshopBlurbs() {
-
         DatabaseBean workshopDBBean = new DatabaseBean();
         LinkedList<WorkshopBean> listOfBeans = new LinkedList<WorkshopBean>();
+        ResultSet result = null;
+
         try {
             workshopDBBean.setPrepStmt(workshopDBBean.getConn().prepareStatement(
                     "SELECT id, title, blurb, date_time, timestamp " +
                             "FROM workshop " +
                             "ORDER BY id desc;"));
 
-            ResultSet result = workshopDBBean.executeQuery();
+            result = workshopDBBean.executeQuery();
+
             while (result.next()) {
                 WorkshopBean workshopBean = new WorkshopBean();
                 workshopBean.setId(result.getInt("id"));
                 workshopBean.setTitle(result.getString("title"));
                 workshopBean.setBlurb(result.getString("blurb"));
                 workshopBean.setDateTime(result.getDate("date_time"));
-                workshopBean.setTimestamp(result.getTimestamp("timestamp"));
+                workshopBean.setTimestamp(result.getDate("timestamp"));
 
                 // Process this workshops tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setId("" + result.getInt("id"));     // Set the user in the TagProcessBean *cast to String*
-                workshopBean.setTags(tagProcessBean.getWorkshopTags());      // Assign the results to the bean
+                tagProcessBean.setId("" + result.getInt("id"));
+                workshopBean.setTags(tagProcessBean.getWorkshopTags());
 
                 listOfBeans.add(workshopBean);
             }
@@ -127,9 +153,58 @@ public class WorkshopProcessBean {
             logger.warn("You had an error in WorkshopProcessBean.getWorkshopBlurbs()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in WorkshopProcessBean().getWorkshopBlurbs()");
+                    logger.warn(SQLEx);
+                }
+            }
             workshopDBBean.close();
         }
         return listOfBeans;
+    }
+
+    /**
+     * Gets the date of the last updated article. Used in the sitemap to show when the articles section has been updated.
+     *
+     * @return a Date object.
+     */
+    public Date getLastUpdateDate() {
+        DatabaseBean workshopDBBean = new DatabaseBean();
+        ResultSet result = null;
+        Date lastModified = new Date(0);
+
+        try {
+            PreparedStatement prepStmt = workshopDBBean.getConn().prepareStatement(
+                    "SELECT max(timestamp) as timestamp " +
+                            "FROM workshop;");
+
+            workshopDBBean.setPrepStmt(prepStmt);
+
+            result = workshopDBBean.executeQuery();
+
+            while (result.next()) {
+                lastModified = result.getTimestamp("timestamp");    // Query only returns 1 result;
+            }
+
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error in WorkshopProcessBean.getLastUpdateDate()");
+            logger.warn(SQLEx);
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResutlSet in WorkshopProcessBean.getLastUpdateDate()");
+                    logger.warn(SQLEx);
+                }
+            }
+            workshopDBBean.close();
+        }
+
+        return lastModified;
     }
 
     public String getId() {

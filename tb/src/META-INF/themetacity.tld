@@ -12,7 +12,7 @@
     <!-- Article tag -->
     <tag>
         <name>article</name>
-        <tag-class>com.themetacity.tags.Article</tag-class>
+        <tag-class>com.themetacity.tags.blog.Article</tag-class>
         <body-content>scriptless</body-content>
 
         <!-- The article tag requires an article type bean -->
@@ -24,25 +24,10 @@
         </attribute>
     </tag>
 
-    <!-- Comment tag -->
-    <tag>
-        <name>comment</name>
-        <tag-class>com.themetacity.tags.Comment</tag-class>
-        <body-content>scriptless</body-content>
-
-        <!-- The comment tag requires a comment type bean -->
-        <attribute>
-            <name>comment</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.CommentBean</type>
-        </attribute>
-    </tag>
-
     <!-- Archive tag -->
     <tag>
         <name>archive</name>
-        <tag-class>com.themetacity.tags.ArchiveEntry</tag-class>
+        <tag-class>com.themetacity.tags.blog.ArchiveEntry</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -56,21 +41,7 @@
             <name>previousDate</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
-        </attribute>
-    </tag>
-
-    <!-- Profile tag -->
-    <tag>
-        <name>profile</name>
-        <tag-class>com.themetacity.tags.Profile</tag-class>
-        <body-content>scriptless</body-content>
-
-        <!-- The profile tag requires a profile type bean -->
-        <attribute>
-            <name>userProfile</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.ProfileBean</type>
+            <type>java.util.Date</type>
         </attribute>
     </tag>
 
@@ -90,7 +61,7 @@
     <!-- All Article Tags -->
     <tag>
         <name>allTags</name>
-        <tag-class>com.themetacity.tags.AllTags</tag-class>
+        <tag-class>com.themetacity.tags.blog.AllTags</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -104,7 +75,7 @@
     <!-- workshopLink tag, used on the front page for quick links to the workshop-->
     <tag>
         <name>workshopLink</name>
-        <tag-class>com.themetacity.tags.WorkshopLink</tag-class>
+        <tag-class>com.themetacity.tags.workshop.WorkshopLink</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -118,7 +89,7 @@
     <!-- WorkshopBlurb Entries tag -->
     <tag>
         <name>workshopBlurb</name>
-        <tag-class>com.themetacity.tags.WorkshopBlurb</tag-class>
+        <tag-class>com.themetacity.tags.workshop.WorkshopBlurb</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -132,7 +103,7 @@
     <!-- Workshop articles, generates the article in the Workshop -->
     <tag>
         <name>workshopArticle</name>
-        <tag-class>com.themetacity.tags.WorkshopArticle</tag-class>
+        <tag-class>com.themetacity.tags.workshop.WorkshopArticle</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -143,49 +114,11 @@
         </attribute>
     </tag>
 
-    <!-- Quote tag -->
-    <tag>
-        <name>quote</name>
-        <tag-class>com.themetacity.tags.Quote</tag-class>
-        <body-content>scriptless</body-content>
-
-        <attribute>
-            <name>quoteAuthor</name>
-            <required>true</required>
-        </attribute>
-    </tag>
-
     <!-- Admin tags
-    <tag>
-        <name>adminWorkshopLinks</name>
-        <tag-class>com.themetacity.admintags.Projects</tag-class>
-        <body-content>scriptless</body-content>
-
-        <attribute>
-            <name>linkBean</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.ArticleLinksBean</type>
-        </attribute>
-    </tag>
-            -->
-    <tag>
-        <name>adminProfile</name>
-        <tag-class>com.themetacity.admintags.Profile</tag-class>
-        <body-content>scriptless</body-content>
-
-        <!-- The profile tag requires a profile type bean -->
-        <attribute>
-            <name>userProfile</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.ProfileBean</type>
-        </attribute>
-    </tag>
 
     <tag>
         <name>adminArticles</name>
-        <tag-class>com.themetacity.admintags.Articles</tag-class>
+        <tag-class>com.themetacity.tags.blog.AdminArticleicle</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -198,7 +131,7 @@
 
     <tag>
         <name>adminNotices</name>
-        <tag-class>com.themetacity.admintags.ImportantNotice</tag-class>
+        <tag-class>com.themetacity.tags.AdminImportantNoticeotice</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -211,7 +144,7 @@
 
     <tag>
         <name>adminTags</name>
-        <tag-class>com.themetacity.admintags.ArticleTags</tag-class>
+        <tag-class>com.themetacity.tags.blog.AdminArticleTags</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -228,11 +161,12 @@
             <type>java.util.LinkedList</type>
         </attribute>
     </tag>
+    -->
 
     <!-- Sitemap Article tag -->
     <tag>
         <name>sitemapArticle</name>
-        <tag-class>com.themetacity.tags.SitemapArticle</tag-class>
+        <tag-class>com.themetacity.tags.sitemap.Article</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -246,7 +180,7 @@
     <!-- Sitemap Article tag -->
     <tag>
         <name>sitemapTag</name>
-        <tag-class>com.themetacity.tags.SitemapTags</tag-class>
+        <tag-class>com.themetacity.tags.sitemap.ArticleTags</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
@@ -254,6 +188,19 @@
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>com.themetacity.typebeans.TagBean</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>sitemapWorkshop</name>
+        <tag-class>com.themetacity.tags.sitemap.Workshop</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>workshop</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.themetacity.typebeans.WorkshopBean</type>
         </attribute>
     </tag>
 

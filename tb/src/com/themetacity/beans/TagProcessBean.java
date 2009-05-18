@@ -32,6 +32,7 @@ public class TagProcessBean {
     public LinkedList<TagBean> getAuthorTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
         DatabaseBean dbaBean = new DatabaseBean();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -42,7 +43,7 @@ public class TagProcessBean {
                             "GROUP BY tag;"));
             dbaBean.getPrepStmt().setString(1, user);
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 TagBean tagBean = new TagBean();
@@ -56,6 +57,14 @@ public class TagProcessBean {
             logger.warn("You had an error in TagProcessBean()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in TagProcessBean().getAuthorTags()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
         return listOfTags;
@@ -69,6 +78,7 @@ public class TagProcessBean {
     public LinkedList<TagBean> getArticleTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
         DatabaseBean dbaBean = new DatabaseBean();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -79,7 +89,7 @@ public class TagProcessBean {
                             "GROUP BY tag;"));
             dbaBean.getPrepStmt().setString(1, id);
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 TagBean tagBean = new TagBean();
@@ -93,6 +103,14 @@ public class TagProcessBean {
             logger.warn("You had an error in TagProcessBean()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in TagProcessBean().getArticleTags()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
         return listOfTags;
@@ -106,6 +124,7 @@ public class TagProcessBean {
     public LinkedList<TagBean> getAllTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
         DatabaseBean dbaBean = new DatabaseBean();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -113,7 +132,7 @@ public class TagProcessBean {
                             "FROM articletags " +
                             "GROUP BY tag;"));
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 TagBean tagBean = new TagBean();
@@ -127,6 +146,14 @@ public class TagProcessBean {
             logger.warn("You had an error in TagProcessBean()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in TagProcessBean().getAllTags()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
         return listOfTags;
@@ -137,9 +164,10 @@ public class TagProcessBean {
      *
      * @return all the tags in the database
      */
-    public LinkedList<TagBean> getSiteMapTags() {
+    public LinkedList<TagBean> getSitemapTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
         DatabaseBean dbaBean = new DatabaseBean();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -148,7 +176,7 @@ public class TagProcessBean {
                             + "WHERE articletags.id = articles.id "
                             + "GROUP BY articletags.tag"));
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 TagBean tagBean = new TagBean();
@@ -159,15 +187,23 @@ public class TagProcessBean {
                 listOfTags.add(tagBean);
             }
         } catch (SQLException SQLEx) {
-            logger.warn("You had an error in TagProcessBean().getSiteMapTags()");
+            logger.warn("You had an error in TagProcessBean().getSitemapTags()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in TagProcessBean().getSitemapTags()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
         return listOfTags;
     }
 
-        /**
+    /**
      * Get all the tags posted for an article
      *
      * @return a list of <TagBeans> belonging to an article
@@ -175,6 +211,7 @@ public class TagProcessBean {
     public LinkedList<TagBean> getWorkshopTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
         DatabaseBean dbaBean = new DatabaseBean();
+        ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
@@ -185,7 +222,7 @@ public class TagProcessBean {
                             "GROUP BY tag;"));
             dbaBean.getPrepStmt().setString(1, id);
 
-            ResultSet result = dbaBean.executeQuery();
+            result = dbaBean.executeQuery();
 
             while (result.next()) {
                 TagBean tagBean = new TagBean();
@@ -195,14 +232,22 @@ public class TagProcessBean {
                 listOfTags.add(tagBean);
             }
         } catch (SQLException SQLEx) {
-            logger.warn("You had an error in TagProcessBean()");
+            logger.warn("You had an error in TagProcessBean().getWorkshopTags()");
             logger.warn(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in TagProcessBean().getWorkshopTags()");
+                    logger.warn(SQLEx);
+                }
+            }
             dbaBean.close();
         }
         return listOfTags;
     }
-    
+
     public String getUser() {
         return user;
     }

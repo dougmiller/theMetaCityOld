@@ -8,14 +8,14 @@ import java.util.LinkedList;
  */
 public class WorkshopBean {
 
-    private int id;                   // The id of the article
+    private int id;                      // The id of the article
     private String title;                // The title of the article
     private String blurb;                // The blurb/short description for the workshop index;
     private String content;              // The actual meat of the article
     private String author;               // Who wrote the article
     private String email;                // Contacting the author
-    private String dateTime;             // The dateTime/time the artcle was pubished
-    private String timestamp;            // The dateTime/time the artcle was pubished
+    private Date dateTime;               // The dateTime/time the artcle was pubished
+    private Date timestamp;              // The dateTime/time the artcle was pubished
     private LinkedList<TagBean> tags;    // A list of the tags that this article was published under
 
     public int getId() {
@@ -66,22 +66,20 @@ public class WorkshopBean {
         this.email = email;
     }
 
-    public String getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
     public void setDateTime(Date dateTime) {
-        java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        this.dateTime = formatter.format(dateTime);
+        this.dateTime = dateTime;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(Date timestamp) {
-        java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        this.timestamp = formatter.format(timestamp);
+        this.timestamp = timestamp;
     }
 
     public LinkedList<TagBean> getTags() {

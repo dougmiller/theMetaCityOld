@@ -12,8 +12,6 @@ import org.apache.log4j.Logger;
 
 public class ImportantNoticeProcessBean {
 
-    private LinkedList<ImportantNoticeBean> noticeList = new LinkedList<ImportantNoticeBean>();
-
     private static final Logger logger = Logger.getLogger(ImportantNoticeProcessBean.class);
 
     DatabaseBean dbaBean = new DatabaseBean();
@@ -38,15 +36,14 @@ public class ImportantNoticeProcessBean {
 
         DatabaseBean noticesDBBean = new DatabaseBean();
         LinkedList<ImportantNoticeBean> listOfNotices = new LinkedList<ImportantNoticeBean>();
-
+        ResultSet result = null;
         try {
-            PreparedStatement preStmt = noticesDBBean.getConn().prepareStatement("SELECT pseudonym, message, date_to, date_from " +
+            noticesDBBean.setPrepStmt(noticesDBBean.getConn().prepareStatement("SELECT pseudonym, message, date_to, date_from " +
                     "FROM importantnotices, users " +
                     "WHERE importantnotices.username = users.username " +
-                    "AND NOW() >= date_from AND NOW() <= date_to;");
+                    "AND NOW() >= date_from AND NOW() <= date_to;"));
 
-            noticesDBBean.setPrepStmt(preStmt);
-            ResultSet result = noticesDBBean.executeQuery();
+            result = noticesDBBean.executeQuery();
 
             while (result.next()) {
                 ImportantNoticeBean noticeBean = new ImportantNoticeBean();
@@ -57,14 +54,19 @@ public class ImportantNoticeProcessBean {
                 noticeBean.setDateFrom(result.getDate("date_from"));
 
                 listOfNotices.add(noticeBean);
-            }
-
-            result.close();
-
+            }          
         } catch (SQLException SQLEx) {
             logger.error("There was an error in ImportantNoticesBean.getImportantNotices()");
             logger.error(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in ImportantNoticeProcessBean().getImportantNotices()");
+                    logger.warn(SQLEx);
+                }
+            }
             noticesDBBean.close();
         }
         return listOfNotices;
@@ -74,6 +76,7 @@ public class ImportantNoticeProcessBean {
 
         DatabaseBean noticesDBBean = new DatabaseBean();
         LinkedList<ImportantNoticeBean> listOfNotices = new LinkedList<ImportantNoticeBean>();
+        ResultSet result = null;
 
         try {
             PreparedStatement preStmt = noticesDBBean.getConn().prepareStatement(
@@ -81,7 +84,7 @@ public class ImportantNoticeProcessBean {
                             "FROM importantnotices;");
 
             noticesDBBean.setPrepStmt(preStmt);
-            ResultSet result = noticesDBBean.executeQuery();
+            result = noticesDBBean.executeQuery();
 
             while (result.next()) {
                 ImportantNoticeBean noticeBean = new ImportantNoticeBean();
@@ -101,23 +104,30 @@ public class ImportantNoticeProcessBean {
             logger.error("There was an error in ImportantNoticesBean.getImportantNotices()");
             logger.error(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in ImportantNoticeProcessBean().getAllImportantNotices()");
+                    logger.warn(SQLEx);
+                }
+            }
             noticesDBBean.close();
         }
         return listOfNotices;
     }
 
     public LinkedList<ImportantNoticeBean> getImportantNoticeToEdit() {
-
         DatabaseBean noticesDBBean = new DatabaseBean();
         LinkedList<ImportantNoticeBean> listOfNotices = new LinkedList<ImportantNoticeBean>();
+        ResultSet result = null;
 
         try {
-            PreparedStatement preStmt = noticesDBBean.getConn().prepareStatement(
-                    "SELECT * FROM importantnotices WHERE id = ?;");
-            preStmt.setString(1, messageID);
+            noticesDBBean.setPrepStmt(noticesDBBean.getConn().prepareStatement(
+                    "SELECT * FROM importantnotices WHERE id = ?;"));
+            noticesDBBean.getPrepStmt().setString(1, messageID);
 
-            noticesDBBean.setPrepStmt(preStmt);
-            ResultSet result = noticesDBBean.executeQuery();
+            result = noticesDBBean.executeQuery();
 
             while (result.next()) {
                 ImportantNoticeBean noticeBean = new ImportantNoticeBean();
@@ -137,6 +147,14 @@ public class ImportantNoticeProcessBean {
             logger.error("There was an error in ImportantNoticesBean.getImportantNotices()");
             logger.error(SQLEx);
         } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in ImportantNoticeProcessBean().getImportantNoticesToEdit()");
+                    logger.warn(SQLEx);
+                }
+            }
             noticesDBBean.close();
         }
         return listOfNotices;
