@@ -4,11 +4,15 @@ $(document).ready(function() {
     $('#aboutdiv').hide();
 
     $('#abouth3').click(function() {
-        if $('#aboutdiv').opacy(1000);
-        $('#aboutdiv').fadeIn(1000);
+        var displayed = $('#aboutdiv').css('display');
+        if (displayed == 'none') {
+            $('#aboutdiv').fadeIn(1000);
+        } else {
+            $('#aboutdiv').fadeOut(1000);
+        }
     });
 
-    $('#aboutdiv #aboutclose').click(function() {
+    $('#aboutclose').click(function() {
         $('#aboutdiv').fadeOut(1000);
     });
 });

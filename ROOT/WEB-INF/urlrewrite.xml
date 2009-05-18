@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE urlrewrite
+        PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
+
+<urlrewrite>
+    <rule match-type="regex">
+        <from>^/sitemap.xml$</from>
+        <to>/sitemap.jsp</to>
+    </rule>
+</urlrewrite>
