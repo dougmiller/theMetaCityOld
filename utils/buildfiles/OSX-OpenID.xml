@@ -1,10 +1,8 @@
 <?xml version="1.0"?>
 <project name="OpenID" default="package" basedir="../../OpenID">
-    <property name="classpath.dir" value="/usr/local/tomcat/lib"/>
     <property name="deployapp.name" value="OpenID"/>
     <property name="deploy.dir" value="/Users/doug/Sites/theMetaCity/"/>
-    <property name="webinflib.dir" value="./WEB-INF/lib"/>
-    
+
     <target name="clean">
         <delete file="${deploy.dir}/${deployapp.name}.war"/>
     </target>
