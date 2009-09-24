@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="Master Builder" default="development" basedir=".">
     <target name="development" description="Build all the development apps from scratch">
-	<ant antfile="OSX-TB.xml" target="package" inheritAll="false"/>
+	    <ant antfile="OSX-TB.xml" target="package" inheritAll="false"/>
         <ant antfile="OSX-Root.xml" target="package" inheritAll="false"/>
         <ant antfile="OSX-blog.xml" target="package" inheritAll="false"/>
         <ant antfile="OSX-workshop.xml" target="package" inheritAll="false"/>
