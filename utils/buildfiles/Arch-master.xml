@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project name="Archlinux Master Builder" default="development" basedir=".">
+    <target name="development" description="Build all the development apps from scratch">
+        <ant antfile="Arch-TB.xml" target="package" inheritAll="false"/>
+        <ant antfile="Arch-Root.xml" target="package" inheritAll="false"/>
+        <ant antfile="Arch-blog.xml" target="package" inheritAll="false"/>
+        <ant antfile="Arch-workshop.xml" target="package" inheritAll="false"/>
+        <ant antfile="Arch-rss.xml" target="package" inheritAll="false"/>
+        <ant antfile="Arch-OpenID.xml" target="package" inheritAll="false"/>
+    </target>
+
+    <target name="productiontest" description="Build all the development apps from scratch">
+        <ant antfile="Arch-TB.xml" target="package" inheritAll="false"/>
+        <ant antfile="Arch-Root.xml" target="testpropackage" inheritAll="false"/>
+        <ant antfile="Arch-blog.xml" target="testpropackage" inheritAll="false"/>
+        <ant antfile="Arch-workshop.xml" target="testpropackage" inheritAll="false"/>
+        <ant antfile="Arch-rss.xml" target="testpropackage" inheritAll="false"/>
+        <ant antfile="Arch-OpenID.xml" target="testpropackage" inheritAll="false"/>
+    </target>
+    
+    <target name="production" description="Build all the development apps from scratch">
+        <ant antfile="Arch-TB.xml" target="package" inheritAll="false"/>
+        <ant antfile="Arch-Root.xml" target="production" inheritAll="false"/>
+        <ant antfile="Arch-blog.xml" target="production" inheritAll="false"/>
+        <ant antfile="Arch-workshop.xml" target="production" inheritAll="false"/>
+        <ant antfile="Arch-rss.xml" target="production" inheritAll="false"/>
+        <ant antfile="Arch-OpenID.xml" target="production" inheritAll="false"/>
+    </target>
+</project>

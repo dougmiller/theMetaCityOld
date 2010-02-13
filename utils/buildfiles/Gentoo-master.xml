@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Master Builder" default="development" basedir=".">
+<project name="Gentoo Master Builder" default="development" basedir=".">
     <target name="development" description="Build all the development apps from scratch">
         <ant antfile="Gentoo-TB.xml" target="package" inheritAll="false"/>
         <ant antfile="Gentoo-Root.xml" target="package" inheritAll="false"/>

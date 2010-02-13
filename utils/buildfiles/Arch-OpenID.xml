@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project name="OpenID" default="package" basedir="../../OpenID">
+    <property name="classpath.dir" value="/opt/tomcat/lib"/>
+    <property name="deployapp.name" value="OpenID"/>
+    <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
+    <property name="webinflib.dir" value="./WEB-INF/lib"/>
+    
+    <target name="clean">
+        <delete file="${deploy.dir}/${deployapp.name}.war"/>
+    </target>
+
+    <target name="package" depends="clean">
+        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+    </target>
+    
+    <target name="testpropackage" depends="clean">
+        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}" excludes="**/*.backup" update="true"/>
+    </target>
+    
+    <target name="production">
+        <jar destfile="../${deployapp.name}.war" basedir="${basedir}" excludes="**/*.backup" update="true"/>
+    </target>
+</project>
