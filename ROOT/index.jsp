@@ -13,7 +13,9 @@
     <body>
         <div id="container">
             <div id="left" class="contentdiv">
-                <img alt="The MetaCity Logo" src="site-images/logo.png"/>
+                <object data="site-images/logo.svg" type="image/svg+xml" id="logo">
+                    <img alt="The MetaCity Logo" src="site-images/logo.png"/>
+                </object>
             </div>
             <div id="right" class="contentdiv">
                 <h1>The MetaCity.com</h1>

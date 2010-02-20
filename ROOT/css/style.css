@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 html {
-    background: #000000 url(/site-images/c1.jpg);
+    background: #000000 url(/site-images/background.png) no-repeat;
     color: #BCBCBC;
 }
 
@@ -16,16 +16,28 @@ p {
 }
 
 .contentdiv {
-	background: url(/site-images/30percentblackblock.png);
+	background: #ffffff;
+    opacity: .30;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	padding: 3px 10px;
+}
+
+.contentdiv > * {
+    opacity: 1.0;
 }
 
 #left {
 	width: 200px;
 	height: 200px;
 	float: left;
+}
+
+#logo {
+	width: 200px;
+	height:200px;
+	padding 0;
+	margin 0;
 }
 
 #right {
