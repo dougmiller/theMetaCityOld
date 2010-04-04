@@ -36,6 +36,10 @@ html {
     line-height: 1.5em;
 }
 
+#right video, object {
+    display: block;
+}
+
 #left h2 {
     margin-top: .5em;
     margin-bottom: .2em;

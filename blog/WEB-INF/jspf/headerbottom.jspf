@@ -3,8 +3,7 @@
 <body>
     <h1 id="heading">theMetaCity<span id="headerhighlight">Blog</span></h1>
     <h3 id="subheading">News, events and exposition.</h3>
-
-    <div id="left">
+    <nav id="left">
         <ul>
             <li><a href="/">/home</a></li>
             <li><a href="/blog/">/blog</a></li>
@@ -35,7 +34,6 @@
                 <p><a href="/workshop">No projects at the moment.</a></p>
             </c:otherwise>
         </c:choose>
-    </div>
-
+    </nav>
     <!-- The main content div -->
     <div id="right">
