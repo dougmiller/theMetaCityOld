@@ -34,7 +34,9 @@ public class ArticleProcessBean {
 
     private String searchTag = "";          // Select articles with this tag from /blog/tag
 
-    private String searchString = "";       // the inputbox search value
+    private String searchString = "";       // The inputbox search value
+
+    private String numberOfAritclesToShow = ""; // The number of articles to show in the summary front page
 
     private static final Logger logger = Logger.getLogger(ArticleProcessBean.class);
 
