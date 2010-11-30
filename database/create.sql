@@ -44,7 +44,7 @@ CREATE TABLE `articles` (
   `timestamp` timestamp NOT NULL COMMENT 'Auto timestamp',
   PRIMARY KEY  (`id`),
   KEY `author` (`author`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Article information. Autoincrement articleid.' AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Article information. Autoincrement id.' AUTO_INCREMENT=1;
 
 -- 
 -- Table structure for table `articletags`
@@ -83,18 +83,30 @@ CREATE TABLE `importantnotices` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Important notices' AUTO_INCREMENT=1;
 
 --
---
+-- An entry in the workshop, both the small and large view
 --
 CREATE TABLE `workshop` (
   `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
-  `URL` varchar(150) NOT NULL COMMENT 'The title',
-  `desc_text` varchar(150) NOT NULL COMMENT '',
-  `is_valid` boolean NOT NULL COMMENT 'Wether or not this is approved context.',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sidebar Projects' AUTO_INCREMENT=1;
+  `author` varchar(30) NOT NULL COMMENT 'The author who posed this workshop. References users.username',
+  `title` varchar(100) NOT NULL COMMENT 'The title of this workshop',
+  `blurb` text(5000) NOT NULL COMMENT 'The blurb to show on the index page.',
+  `article_text` text(50000) NOT NULL COMMENT 'The actual content of the workshop.',
+  `date_time` datetime NOT NULL COMMENT 'The date this workshop was published',
+  `timestamp` timestamp NOT NULL COMMENT 'Auto timestamp, useful for updated stamps',
+  PRIMARY KEY  (`id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Workshop information. Autoincrement id.' AUTO_INCREMENT=1;
+
+-- 
+-- Table structure for table `articletags`
+-- 
+CREATE TABLE `workshoptags` (
+  `id` smallint(6) NOT NULL COMMENT 'References a workshop by workshop.id',
+  `tag` varchar(20) NOT NULL COMMENT 'The meta tag',
+  PRIMARY KEY  (`id`,`tag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='The tags describing the workshop';
 
 --
--- 
+-- A link to currently active projects, either internal or external.
 --
 CREATE TABLE `projects` (
   `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
@@ -116,6 +128,18 @@ ALTER TABLE `articles`
 -- 
 ALTER TABLE `articletags`
   ADD CONSTRAINT `articletags_fk` FOREIGN KEY (`id`) REFERENCES `articles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Constraints for table `workshop`
+-- 
+ALTER TABLE `workshop`
+  ADD CONSTRAINT `workshop_fk` FOREIGN KEY (`author`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- 
+-- Constraints for table `workshoptags`
+-- 
+ALTER TABLE `workshoptags`
+  ADD CONSTRAINT `workshoptags_fk` FOREIGN KEY (`id`) REFERENCES `workshop` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `importantNotices`

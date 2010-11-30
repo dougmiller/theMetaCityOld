@@ -6,6 +6,7 @@ USE themetacity;
 
 DROP TABLE importantnotices;
 DROP TABLE projects;
+DROP TABLE workshoptags;
 DROP TABLE workshop;
 DROP TABLE articletags;
 DROP TABLE articles;
