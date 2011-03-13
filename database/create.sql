@@ -4,7 +4,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 
 
 DROP DATABASE IF EXISTS  `themetacity`;
--- Uncomment the next lines if creating from scratch
+
 CREATE DATABASE `themetacity` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `themetacity`;
 
@@ -16,7 +16,7 @@ USE `themetacity`;
 --
 
 -- A pseudoroot for special needs
--- GRANT is not included in ALL for security reasons. -> You cant grant yoursef as ROOT
+-- GRANT is not included in ALL for security reasons. -> You cant grant yourself as ROOT
 -- If you do not have permission on the security table then you will need to log in manually to set the password
 
 -- Dont really need him for now
@@ -105,18 +105,7 @@ CREATE TABLE `workshoptags` (
   PRIMARY KEY  (`id`,`tag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='The tags describing the workshop';
 
---
--- A link to currently active projects, either internal or external.
---
-CREATE TABLE `projects` (
-  `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
-  `URL` varchar(150) NOT NULL COMMENT 'The URL to link to',
-  `desc_text` varchar(150) NOT NULL COMMENT 'Desc text that will show up that user click on',
-  `is_valid` boolean NOT NULL COMMENT 'Wether or not this is approved context.',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sidebar Projects' AUTO_INCREMENT=1;
-
--- These come last to make sure that all tables exist before making references to them.
+-- These foreign keys come last to make sure that all tables exist before making references to them.
 -- 
 -- Constraints for table `articles`
 -- 

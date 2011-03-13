@@ -5,8 +5,7 @@ USE 'themetacity';
 
 INSERT INTO users VALUES ('dougmiller', 'e273c045363d245ffc7fb8db51a68b3571b9dd83f835b419df46b1b4412d99ecca130c4212315311441f536fc32de4de419ef045d7ea30f9bf892a4b7891b7a3', 'Douglas Miller', 'dougmiller@themetacity.com', '<p></p>');
 		
--- Article
--- Populate the article table
+-- Articles
 INSERT INTO articles (author, title, url, date_time, article_text) VALUES ('dougmiller','First Post LOL!!!','First-Post-LOL',NOW(),'
 <p>Welcome to yet another site on the interwebz. My name is Douglas Miller. I am an <a href="http://en.wikipedia.org/wiki/Interaction_design">Interaction Designer</a> from Brisbane, Australia.</p>
 <p>I use this place as a scrapbook for my projects, ideas, thoughts and reviews.</p>
@@ -37,14 +36,32 @@ INSERT INTO articles (author, title, url, date_time, article_text) VALUES ('doug
 </ol>
 ');
 
--- Populate the articletags table
+INSERT INTO articles (author, title, url, date_time, article_text) VALUES ('dougmiller','I make things.','I-make-things',NOW(),'
+<p>I like to try my hand at hacking hardware and software, specifically to make interesting reuslts for other projects I work on.</p>
+<p>This is an example of one such thing that I derped with to solve a herp problem</p>
+');
+
 INSERT INTO articletags (id, tag) VALUES (1, 'administration');
 INSERT INTO articletags (id, tag) VALUES (2, 'tomcat');
 INSERT INTO articletags (id, tag) VALUES (2, 'guide');
 INSERT INTO articletags (id, tag) VALUES (2, 'java');
+INSERT INTO articletags (id, tag) VALUES (3, 'guide');
+INSERT INTO articletags (id, tag) VALUES (3, 'hacking');
 
--- Populate the projects database
-INSERT INTO projects (URL, desc_text, is_valid) VALUES ('Tomcat-Guide', 'Tomcat Guide', 1);
+
+-- Workshop
+INSERT INTO workshop (author, title, blurb, article_text, date_time) VALUES ('dougmiller', 'Arduino clicker', 'Hacking the auto taker for a Cannon 400D',
+					  '<p>The defautl values for a the automatic taking of pictures on the 400D can be somewhat lacking, so I whipped something up a couple weekends ago to see how I could do better.</p>
+					  <p>With results</p>', now());
+
+INSERT INTO workshop (author, title, blurb, article_text, date_time) VALUES ('dougmiller', 'Tomcat App Dev Guide', 'Build an app for tomcat 5.5 and 6.',
+					  '<p>The current guides for tomcat are terrible and so I will make my own with beter wasy to do things.</p>
+					  <p>Things start off slow and do not get much better from there.</p>', now());
+
+INSERT INTO workshoptags (id, tag) VALUES ('1','arduino');
+INSERT INTO workshoptags (id, tag) VALUES ('1','hacking');
+INSERT INTO workshoptags (id, tag) VALUES ('2','tomcat');
+INSERT INTO workshoptags (id, tag) VALUES ('2','guide');
 
 -- Important notices 
 -- Nothing for default
