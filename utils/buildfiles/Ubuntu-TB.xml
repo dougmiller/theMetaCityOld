@@ -3,7 +3,7 @@
     <property name="adminlib.dir" value="../theMetaCityAdmin/WEB-INF/lib" />
     <property name="app.name" value="theMetaCityTB" />
     <property name="builddest.dir" value="../" />
-    <property name="classpath.dir" value="/usr/share/tomcat-6/lib" />
+    <property name="classpath.dir" value="/usr/share/java" />
 	<property name="compile.dir" value="classes" />
 	<property name="src.dir" value="src" />
     <property name="root.dir" value="../ROOT/WEB-INF/lib" />
@@ -18,9 +18,9 @@
 
     <target name="compile" depends="clean">
 		<javac srcdir="${src.dir}" destdir="${compile.dir}"
-               classpath="${classpath.dir}/log4j-1.2.15.jar;
+               classpath="${classpath.dir}/log4j-1.2.jar;
                           ${classpath.dir}/jsp-api.jar;
-                          ${classpath.dir}/junit-4.7.jar;"/>
+                          ${classpath.dir}/junit4.jar;"/>
 	</target>
 
     <!-- Include on the the classes for development -->
