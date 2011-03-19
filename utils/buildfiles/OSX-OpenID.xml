@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project name="OpenID" default="package" basedir="../../OpenID">
-    <property name="deployapp.name" value="OpenID"/>
+    <property name="app.name" value="OpenID"/>
     <property name="deploy.dir" value="/Users/doug/Sites/theMetaCity/"/>
 
     <target name="clean">
@@ -8,6 +8,6 @@
     </target>
 
     <target name="package" depends="clean">
-        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+        <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
     </target>
 </project>

@@ -5,7 +5,7 @@
     <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
     
     <target name="clean">
-        <delete file="${deploy.dir}/${deployapp.name}.war"/>
+        <delete file="${deploy.dir}/${app.name}.war"/>
     </target>
 
     <target name="package" depends="clean">

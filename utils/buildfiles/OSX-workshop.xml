@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project name="workshop" default="package" basedir="../../workshop">
-    <property name="deployapp.name" value="workshop"/>
+    <property name="app.name" value="workshop"/>
     <property name="deploy.dir" value="/Users/doug/Sites/theMetaCity/"/>
 
     <target name="clean">
@@ -8,6 +8,6 @@
     </target>
 
     <target name="package" depends="clean">
-        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+        <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
     </target>
 </project>
