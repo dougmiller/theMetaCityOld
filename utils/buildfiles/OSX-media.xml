@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<project name="workshop" default="package" basedir="../../">   <!-- We take care of the specific dir to copy below -->
+    <property name="app.name" value="media"/>
+    <property name="deploy.dir" value="/Users/doug/Sites/theMetaCity/"/>
+    
+    <target name="clean">
+        <delete dir="${deploy.dir}/${app.name}"/>
+    </target>
+
+    <target name="package" depends="clean">
+        <copy todir="${deploy.dir}/${app.name}">
+			<fileset dir="${app.name}"/>		 <!-- here -->
+		</copy>
+    </target>
+</project>

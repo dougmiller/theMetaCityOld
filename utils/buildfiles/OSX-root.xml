@@ -10,12 +10,4 @@
     <target name="package" depends="clean">
         <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}" update="true"/>
     </target>
-    
-    <target name="testpropackage" depends="clean">
-        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}" update="true"/>
-    </target>
-    
-    <target name="production">
-        <jar destfile="../${deployapp.name}.war" basedir="${basedir}" update="true"/>
-    </target>
 </project>

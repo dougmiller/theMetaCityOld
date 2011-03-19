@@ -10,16 +10,4 @@
     <target name="package" depends="clean">
         <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
     </target>
-    
-    <target name="testpropackage" depends="clean">
-        <copy file="../utils/contextfiles/productiontestselector.xml" toFile="META-INF/context.xml"/>
-        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}" excludes="**/*.backup" update="true"/>
-    </target>
-    
-<!-- Production server copy 
-Move the production server context files into place -->
-    <target name="production">
-        <copy file="../utils/contextfiles/productionselector.xml" toFile="META-INF/context.xml"/>
-        <jar destfile="../${deployapp.name}.war" basedir="${basedir}" excludes="**/*.backup" update="true"/>
-    </target>
 </project>

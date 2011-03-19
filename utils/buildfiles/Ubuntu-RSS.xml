@@ -1,30 +1,14 @@
 <?xml version="1.0"?>
 <project name="RSS" default="package" basedir="../../rss">
     <property name="classpath.dir" value="/opt/tomcat/lib"/>
-    <property name="deployapp.name" value="rss"/>
+    <property name="app.name" value="rss"/>
     <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
-    <property name="webinflib.dir" value="./WEB-INF/lib"/>
     
     <target name="clean">
-        <delete file="${deploy.dir}/${deployapp.name}.war"/>
+        <delete file="${deploy.dir}/${app.name}.war"/>
     </target>
 
     <target name="package" depends="clean">
-        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
-    </target>
-    
-	<!-- Local app copy, production database -->
-    <target name="testpropackage" depends="clean">
-        <move file="META-INF/context.xml" toFile="META-INF/context.backup"/>
-        <copy file="../utils/contextfiles/rss.xml" toFile="META-INF/context.xml"/>
-        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}" excludes="**/*.backup" update="true"/>
-        <move file="META-INF/context.backup" toFile="META-INF/context.xml" overwrite="true"/>
-    </target>
-    
-    <target name="production">
-        <move file="META-INF/context.xml" toFile="META-INF/context.backup"/>
-        <copy file="../utils/contextfiles/rsscontext.xml" toFile="META-INF/context.xml"/>
-        <jar destfile="../${deployapp.name}.war" basedir="${basedir}" excludes="**/*.backup" update="true"/>
-        <move file="META-INF/context.backup" toFile="META-INF/context.xml" overwrite="true"/>
+        <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
     </target>
 </project>

@@ -1,30 +1,24 @@
 <?xml version="1.0"?>
-<project name="Master Builder" default="development" basedir=".">
-    <target name="development" description="Build all the development apps from scratch">
+<project name="OSX Master Builder" default="development" basedir=".">
+
+    <target name="development" description="Remvoe everyting via each app's own clean method">
+	    <ant antfile="OSX-TB.xml" target="clean" inheritAll="false"/>
+        <ant antfile="OSX-blog.xml" target="clean" inheritAll="false"/>
+        <ant antfile="OSX-media.xml" target="clean" inheritAll="false"/>
+        <ant antfile="OSX-OpenID.xml" target="clean" inheritAll="false"/>
+        <ant antfile="OSX-root.xml" target="clean" inheritAll="false"/>
+        <ant antfile="OSX-RSS.xml" target="clean" inheritAll="false"/>
+        <ant antfile="OSX-workshop.xml" target="clean" inheritAll="false"/>
+    </target>
+
+    <target name="development" depends="clean" description="Build all the development apps from scratch">
 	    <ant antfile="OSX-TB.xml" target="package" inheritAll="false"/>
-        <ant antfile="OSX-Root.xml" target="package" inheritAll="false"/>
         <ant antfile="OSX-blog.xml" target="package" inheritAll="false"/>
-        <ant antfile="OSX-workshop.xml" target="package" inheritAll="false"/>
-        <ant antfile="OSX-rss.xml" target="package" inheritAll="false"/>
+        <ant antfile="OSX-media.xml" target="package" inheritAll="false"/>
         <ant antfile="OSX-OpenID.xml" target="package" inheritAll="false"/>
-    </target>
-    
-    <target name="productiontest" description="Build all the development apps from scratch">
-        <ant antfile="OSX-TB.xml" target="package" inheritAll="false"/>
-        <ant antfile="OSX-Root.xml" target="testpropackage" inheritAll="false"/>
-        <ant antfile="OSX-blog.xml" target="testpropackage" inheritAll="false"/>
-        <ant antfile="OSX-workshop.xml" target="testpropackage" inheritAll="false"/>
-        <ant antfile="OSX-rss.xml" target="testpropackage" inheritAll="false"/>
-        <ant antfile="OSX-OpenID.xml" target="testpropackage" inheritAll="false"/>
-    </target>
-    
-    <target name="production" description="Build all the development apps from scratch">
-        <ant antfile="OSX-TB.xml" target="package" inheritAll="false"/>
-        <ant antfile="OSX-Root.xml" target="production" inheritAll="false"/>
-        <ant antfile="OSX-blog.xml" target="production" inheritAll="false"/>
-        <ant antfile="OSX-workshop.xml" target="production" inheritAll="false"/>
-        <ant antfile="OSX-rss.xml" target="production" inheritAll="false"/>
-        <ant antfile="OSX-OpenID.xml" target="production" inheritAll="false"/>
+        <ant antfile="OSX-root.xml" target="package" inheritAll="false"/>
+        <ant antfile="OSX-RSS.xml" target="package" inheritAll="false"/>
+        <ant antfile="OSX-workshop.xml" target="package" inheritAll="false"/>
     </target>
 </project>
 
