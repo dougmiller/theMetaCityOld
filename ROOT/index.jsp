@@ -3,11 +3,12 @@
     <head>
         <title>theMetaCity.com</title>
         <meta charset="utf-8">
-        <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+		<link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+        <link href="/media/css/root.css" rel="stylesheet" type="text/css" media="screen"/>
     </head>
     <body>
-    	<object data="site-images/logo.svg" type="image/svg+xml" id="logo">
-    		<img alt="The MetaCity Logo" src="site-images/logo.png"/>
-    	</object>
+        <img alt="The MetaCity Logo" src="/media/images/site/logo.svg" onerror='this.onerror = null; this.src="/media/images/site/logo.png"' />
     </body>
 </html>
