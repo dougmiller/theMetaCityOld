@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+html {
+    background: #000000;
+    color: #BCBCBC;
+}
+
+body {
+    margin: 100px auto auto;
+    width: 600px;
+	font-family: Orbitron;
+}
+
+body a {
+	color: #BCBCBC;
+	text-decoration: underline;
+}
+
+body a:visited {
+	color: #BCBCBC;
+}
+
+body a:hover {
+	color: #666666;
+}
+
+#logo {
+	width: 600px;
+	height: 600px;
+	padding 0;
+	margin 0;
+}
+
+.title {
+    margin-left: auto;
+    margin-right: auto;
+}

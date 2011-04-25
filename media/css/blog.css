@@ -1,0 +1,149 @@
+@charset "utf-8";
+
+html {
+	background: url(/media/site-images/background.png) no-repeat #000000 fixed;
+}
+
+#heading {
+    margin-bottom: 0;
+}
+
+#headerhighlight{
+    color: #666666;
+}
+
+#subheading {
+    margin: 0 0 30px 50px;
+}
+
+#left {
+    float:left;
+    width: 180px;
+    padding-left: 5px;
+}
+
+#right {
+    padding: 1px;
+    margin-left: 190px;
+    text-align: justify;
+}
+
+#right p {
+    font-family: "Droid Sans", sans-serif;
+    line-height: 1.3em;
+}
+
+#right video, object {
+    display: block;
+}
+
+#left h2 {
+    margin-top: .5em;
+    margin-bottom: .2em;
+}
+
+#left .searchdiv {
+    margin-top: .5em;
+}
+
+a {
+    color: #DEDEDE;
+    text-decoration: underline;
+}
+
+#left a {
+    text-decoration: none;
+}
+
+.newsarticle {
+    border-top: 2px solid #666    
+}
+
+.newsarticle h1 {
+    margin: 0;
+}
+
+.newsarticle h1 a {
+    text-decoration: none;
+}
+
+.newsarticle h1 a:visited{
+    color: #666666;
+}
+
+a:hover {
+    color: #999999;
+}
+
+a:visited {
+    color: #8A8A8A;
+}
+
+.imagecentered {
+    text-align: center;
+}
+
+#left ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+#left input {
+    border: 1px solid #999;
+    color: #666;
+}
+
+#left button {
+    margin-top: 3px;
+    background: #F9F9F9;
+    border: 1px solid #999;
+    width: 151px;
+    color: #666;
+}
+
+#footer {
+    text-align: center;
+    clear: both;
+}
+
+#footer div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#footer  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#footer li {
+    float: left;
+    position: relative;
+    margin: .5em;
+}
+
+.tagmetainfo {
+font-size: 8pt;
+}
+
+.tagmetainfo p {
+    margin: 0;
+}
+
+.abouthighlight {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#right > p:first-child {
+    margin-top: 0;
+}
+
+code {
+    display: block;
+    background: #f9f9f9;
+    color: green;
+    padding: 5px;
+}

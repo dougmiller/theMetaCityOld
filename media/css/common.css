@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+html {
+    margin: 10px auto 10px 0;
+    width: 800px;
+    color: #BCBCBC;
+}
+
+h1 {
+	font-family: Orbitron;
+}
+
+h3 {
+	font-family: Inconsolata;
+}
+
+p {
+	font-family: "Droid Sans", sans-serif;
+}
+
+#heading {
+    margin-bottom: 0;
+}
+
+#headerhighlight{
+    color: #666666;
+}
+
+#subheading {
+    margin: 0 0 30px 50px;
+}
+
+a {
+    color: #DEDEDE;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #999999;
+}
+
+a:visited {
+    color: #8A8A8A;
+}
+
+.imagecentered {
+    text-align: center;
+}
+
+#footer {
+    text-align: center;
+    clear: both;
+}
+
+code {
+    display: block;
+    background: #f9f9f9;
+    color: green;
+    padding: 5px;
+}
