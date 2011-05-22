@@ -12,7 +12,6 @@ $(document).ready(function() {
 				$(this).parent().hide();
 				$('li', this).removeClass('searchMatch');
 		
-				var tags = [];
 				$('li', this).each(function() {
 					if ($(this).text().toLowerCase() === tag) {
 						$(this).closest('.workshopentry').show();
@@ -21,7 +20,7 @@ $(document).ready(function() {
 				});
 			});
 
-			if ($('.workshopentry[style*="block"]', this).length === 0) {
+			if ($('.workshopentry[style*="block"]').length === 0) {
 				$('#noresults').show();
 			}
 
