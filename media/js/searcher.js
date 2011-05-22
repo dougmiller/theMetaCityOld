@@ -1,79 +1,55 @@
 $(document).ready(function() {
 
-	var searchBox = $('#searchinput');
-	var workshop = $('.workshopentry');
-	var workshopli = $('.workshopentry .left li');
+	$('#noresults').hide();
 
-	var reset = $('#reset');
+	function filter(tag) {
+		tag = tag.toLowerCase();
 
-    function resetSearch() {
-		var noresult = $('#noresults');
+		$('#entries').fadeOut(500, function() {
+			$('#noresults').hide();
 
-        workshop.fadeOut(1000, function() {
-            workshopli.removeClass('searchMatch');
-
-			searchBox.val("");
-
-			if (noresult){
-				noresult.fadeOut(1000, function(){
-					noresult.remove();				
-				});
-			}
-        });
-        
-		workshop.fadeIn(1000);
-    }
-
-    function doSearch(searchTerm) {
-		var toFadeIn = [];
+			$('.workshopentry .left', this).each(function() {
+				$(this).parent().hide();
+				$('li', this).removeClass('searchMatch');
 		
-		var noresult = $('#noresults');	
-		if (noresult) {noresult.remove();}
-
-		workshop.fadeOut(1000, function() {
-            var tags = $('.left ul li', this);
-            tags.removeClass('searchMatch');      //reset the search results
-            tags.each(function() {                
-				if ($(this).text().toLowerCase() === searchTerm.toLowerCase()) {
-                    $(this).addClass('searchMatch');
-                    toFadeIn.push($(this).parent().parent().parent());
-                }
+				var tags = [];
+				$('li', this).each(function() {
+					if ($(this).text().toLowerCase() === tag) {
+						$(this).closest('.workshopentry').show();
+						$(this).addClass('searchMatch');
+					}
+				});
 			});
 
-			if (searchTerm === "") {
-				toFadeIn.push(workshop);
+			if ($('.workshopentry[style*="block"]', this).length === 0) {
+				$('#noresults').show();
 			}
 
-			if (toFadeIn.length < 1) {		//No results found
-			var main = $('#main');
-				main.append('<h2 id="noresults">No matches. Please try again.</h2>');
-			}
+			$('#entries').fadeIn();
 		});
+	}
 
-		$(toFadeIn).each(function(index, div){
-			div.fadeIn(1000);		
-		});    
-	}	
+	$('.workshopentry .left ul li').click(function () {
+		filter($(this).text());
+	});
 
-
-	// Run the search when clicking a tag
-	workshopli.click(function () {
-		doSearch($(this).text());
-	});    
-
-	// Also run the search after the timeout period of people not pressing anything in the search box
 	var searchTimout = null;
-	searchBox.bind("keypress", function() {
+	$('#searchinput').bind('keypress', function() {
 		clearTimeout(searchTimout);
 		if ($(this).val().length) {
 			searchTimout = setTimeout(function() {
-				doSearch(searchBox.val());
-			}, 800);
+				filter($('#searchinput').val());
+			}, 500);
 		}
 	});
 
-	reset.click(function () {
-		resetSearch();
+	$('#reset').click(function() {
+		$('#searchinput').val('');
+		$('#entries').fadeOut(500, function() {
+			$('.left ul li').removeClass('searchMatch');
+			$('.workshopentry', this).show();
+			$('#noresults').hide();
+			$('#entries').fadeIn();
+		});
 	});
-	
 });
