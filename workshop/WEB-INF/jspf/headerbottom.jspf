@@ -1,4 +1,8 @@
 </head>
 <body>
-<h1 id="heading">theMetaCity<span id="headerhighlight">Workshop</span></h1>
-    <h3 id="subheading" >Documentation, explanation and showcase for projects.</h3>
+	<header>
+		<hgroup>
+			<h1 id="heading">theMetaCity<span id="headerhighlight">Workshop</span></h1>
+    		<h3 id="subheading" >Documentation, explanation and showcase for projects.</h3>
+		</hgroup>
+	</header>

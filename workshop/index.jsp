@@ -1,15 +1,16 @@
 <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
 <script type="text/javascript" src="/media/js/searcher.js"></script>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
+
 <div id="main">
     <jsp:useBean id="workshopProcessBean" class="com.themetacity.beans.WorkshopProcessBean"/>
     <c:set var="workshopEntryList" value="${workshopProcessBean.workshopBlurbs}"/>
-    <div id="search">
-        <p>Just type to search: </p>
-        <input type="text" id="searchinput" placeholder="Search the workshop"/><br />
-        <button id="reset">Reset the search.</button>
-    </div>
-    <c:choose>
+
+		<input type="text" id="searchinput" placeholder="Type to search the workshop"/>
+		<button id="reset">Reset</button>
+		<br />
+	<div id="entries">
+	<c:choose>
         <c:when test="${empty workshopEntryList}">
             <h2 id="noresults">No projects at the moment. Come back again soon.</h2>
         </c:when>
@@ -19,5 +20,7 @@
             </c:forEach>
         </c:otherwise>
     </c:choose>
+		<h2 id="noresults">No matches. Please try again.</h2>
+	</div>
 </div>
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>
