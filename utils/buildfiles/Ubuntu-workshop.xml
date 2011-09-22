@@ -9,6 +9,9 @@
     </target>
 
     <target name="package" depends="clean">
+		<!-- Error pages need to be put in and included -->
+		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
         <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
     </target>
 </project>
