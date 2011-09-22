@@ -1,10 +1,7 @@
 <!-- This is the footer consistant across all pages -->
-<div id="footer">
-    <p class="copyright">
-        <a rel="license" href="http://creativecommons.org/licenses/by/2.5/au/"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by/2.5/au/88x31.png" /></a><br />Unless otherwise specified, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/au/">Creative Commons Attribution 2.5 Australia License</a>.
-    </p>
-    <!--End of footer-->
-</div>
+<footer>
+    <p class="copyright">Unless otherwise specified, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.5/au/">Creative Commons Attribution 2.5 Australia License</a>.</p>
+</footer>
 <!-- The end of the right div -->
 </div>
 <!--End of body-->
