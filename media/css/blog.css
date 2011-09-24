@@ -1,19 +1,7 @@
 @charset "utf-8";
 
 html {
-	background: url(/media/site-images/background.png) no-repeat #000000 fixed;
-}
-
-#heading {
-    margin-bottom: 0;
-}
-
-#headerhighlight{
-    color: #666666;
-}
-
-#subheading {
-    margin: 0 0 30px 50px;
+	background: url(/media/site-images/frameback.svg) no-repeat #000000 fixed;
 }
 
 #left {
@@ -25,25 +13,10 @@ html {
 #right {
     padding: 1px;
     margin-left: 190px;
-    text-align: justify;
-}
-
-#right p {
-    font-family: "Droid Sans", sans-serif;
-    line-height: 1.3em;
 }
 
 #right video, object {
     display: block;
-}
-
-#left h2 {
-    margin-top: .5em;
-    margin-bottom: .2em;
-}
-
-#left .searchdiv {
-    margin-top: .5em;
 }
 
 a {
@@ -98,7 +71,7 @@ a:visited {
     margin-top: 3px;
     background: #F9F9F9;
     border: 1px solid #999;
-    width: 151px;
+    width: 149px;
     color: #666;
 }
 
@@ -110,18 +83,6 @@ a:visited {
 #footer div {
     margin-left: auto;
     margin-right: auto;
-}
-
-#footer  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-#footer li {
-    float: left;
-    position: relative;
-    margin: .5em;
 }
 
 .tagmetainfo {
@@ -139,11 +100,4 @@ font-size: 8pt;
 
 #right > p:first-child {
     margin-top: 0;
-}
-
-code {
-    display: block;
-    background: #f9f9f9;
-    color: green;
-    padding: 5px;
 }

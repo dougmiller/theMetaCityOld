@@ -1,30 +1,56 @@
-$(document).ready(function() {
+$(document).ready(function(){
 
-	$('#noresults').hide();
+	var noResults = $('#noresults');
+	var searchBox = $('#searchinput');
+	var entries = $('#entries');
 
-	function filter(tag) {
-		tag = tag.toLowerCase();
+	noResults.hide();
 
-		$('#entries').fadeOut(500, function() {
-			$('#noresults').hide();
+	function filter(searchTerm) {
+		var searchPattern = new RegExp(searchTerm, 'ig');
+
+		entries.fadeOut(500, function() {
+			noResults.hide();
 
 			$('.workshopentry .left', this).each(function() {
 				$(this).parent().hide();
-				$('li', this).removeClass('searchMatch');
-		
-				$('li', this).each(function() {
-					if ($(this).text().toLowerCase() === tag) {
+
+				// Clear results of previous search
+				$('li', this).removeClass('searchMatchTag');
+				$('h3', this).removeClass('searchMatchTitle');
+
+				// Cheack the title
+				$('h3', this).each(function() {
+					if ($(this).text().match(searchPattern)) {
 						$(this).closest('.workshopentry').show();
-						$(this).addClass('searchMatch');
+						$(this).addClass('searchMatchTitle');
+					}
+				});
+
+				// Check the tags
+				$('li', this).each(function() {
+					if ($(this).text().match(searchPattern)) {
+						$(this).closest('.workshopentry').show();
+						$(this).addClass('searchMatchTag');
 					}
 				});
 			});
 
 			if ($('.workshopentry[style*="block"]').length === 0) {
-				$('#noresults').show();
+				noResults.show();
 			}
 
-			$('#entries').fadeIn();
+			entries.fadeIn();
+		});
+	}
+
+	function reset() {
+		entries.fadeOut(500, function() {
+			$('.left ul li').removeClass('searchMatchTag');
+			$('.left h3').removeClass('searchMatchTitle');
+			$('.workshopentry', this).show();
+			noResults.hide();
+			entries.fadeIn();
 		});
 	}
 
@@ -33,22 +59,24 @@ $(document).ready(function() {
 	});
 
 	var searchTimout = null;
-	$('#searchinput').bind('keypress', function() {
+	searchBox.bind('keyup', function() {
 		clearTimeout(searchTimout);
 		if ($(this).val().length) {
 			searchTimout = setTimeout(function() {
-				filter($('#searchinput').val());
+				filter(searchBox.val());
 			}, 500);
 		}
+
+		if ($(this).val().length === 0) {
+			searchTimout = setTimeout(function() {
+				reset();
+			}, 500);
+		}
+
 	});
 
 	$('#reset').click(function() {
-		$('#searchinput').val('');
-		$('#entries').fadeOut(500, function() {
-			$('.left ul li').removeClass('searchMatch');
-			$('.workshopentry', this).show();
-			$('#noresults').hide();
-			$('#entries').fadeIn();
-		});
+		searchBox.val('');
+		reset();
 	});
 });

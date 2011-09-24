@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 html {
+    background: #000000;
     margin: 10px auto 10px 0;
     width: 800px;
     color: #BCBCBC;
@@ -10,12 +11,13 @@ h1 {
 	font-family: Orbitron;
 }
 
-h3 {
+h2, h3, h4, h5{
 	font-family: Inconsolata;
 }
 
 p {
 	font-family: "Droid Sans", sans-serif;
+	line-height: 1.3em;
 }
 
 #heading {
@@ -27,7 +29,7 @@ p {
 }
 
 #subheading {
-    margin: 0 0 30px 50px;
+    margin: 0 0 20px 50px;
 }
 
 a {
@@ -54,7 +56,19 @@ a:visited {
 
 code {
     display: block;
-    background: #f9f9f9;
     color: green;
     padding: 5px;
+    font-family: "Droid Sans", sans-serif;
+	font-size: 14px;
 }
+
+video {
+	padding: 10px;
+	border: 1px solid #DEDEDE;
+}
+
+footer {
+    clear: both;
+	font-size: 9px;
+}
+
