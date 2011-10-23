@@ -1,2 +1,0 @@
-<%@ include file="/WEB-INF/jspf/headertop.jspf" %>
-<%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
