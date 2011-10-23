@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Context reloadable="true">
+		  <ResourceLink name="jdbc/theMetaCity"
+		            global="jdbc/theMetaCitySelector"
+		            type="javax.sql.DataSource"/>
+</Context>
