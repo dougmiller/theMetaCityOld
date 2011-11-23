@@ -4,12 +4,12 @@
     <head>
         <title>theMetaCity.com</title>
         <meta http-equiv="content-type" content="application/xhtml+xml;"/>
-        <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="/media/css/root.css" rel="stylesheet" type="text/css" media="screen"/>
     </head>
     <body>
         <div id="container">
             <div id="left" class="contentdiv">
-                <img alt="The MetaCity Logo" src="/site-images/broken.png"/>
+                <img alt="The MetaCity Logo" src="/media/site-images/broken.png"/>
             </div>
             <div id="right" class="contentdiv">
                 <h1>Opps, something broke.</h1>

@@ -9,4 +9,16 @@
         <from>^/sitemap.xml$</from>
         <to>/sitemap.jsp</to>
     </rule>
+    <rule match-type="regex">
+        <from>^/about$</from>
+        <to>/about.jsp</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/twitter$</from>
+        <to>/twitter.jsp</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/github$</from>
+        <to>/github.jsp</to>
+    </rule>
 </urlrewrite>
