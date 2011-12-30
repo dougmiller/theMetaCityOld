@@ -12,18 +12,23 @@ h1, h2, h3 {
 
 h1 {
 	font-size: 24pt;
+	display: inline;
 }
 
 h2 {
 	font-size: 18pt;
+	display: inline;
 }
 
 h3 {
 	font-size: 16pt;
 }
 
-
 p {
 	font-size: 14pt;
+	text-align: center; 
+}
+
+#centeredcontainer {
 	text-align: center; 
 }

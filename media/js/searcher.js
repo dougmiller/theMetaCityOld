@@ -1,18 +1,20 @@
-$(document).ready(function(){
-
-	var noResults = $('#noresults');
-	var searchBox = $('#searchinput');
-	var entries = $('#entries');
+$(document).ready(function () {
+	"use strict";
+	var noResults, searchBox, entries, searchTimout;
+	noResults = $('#noresults');
+	searchBox = $('#searchinput');
+	entries = $('#entries');
+	searchTimout = null;
 
 	noResults.hide();
 
 	function filter(searchTerm) {
 		var searchPattern = new RegExp(searchTerm, 'ig');
 
-		entries.fadeOut(500, function() {
+		entries.fadeOut(500, function () {
 			noResults.hide();
 
-			$('.workshopentry .left', this).each(function() {
+			$('.workshopentry .left', this).each(function () {
 				$(this).parent().hide();
 
 				// Clear results of previous search
@@ -20,7 +22,7 @@ $(document).ready(function(){
 				$('h3', this).removeClass('searchMatchTitle');
 
 				// Cheack the title
-				$('h3', this).each(function() {
+				$('h3', this).each(function () {
 					if ($(this).text().match(searchPattern)) {
 						$(this).closest('.workshopentry').show();
 						$(this).addClass('searchMatchTitle');
@@ -28,7 +30,7 @@ $(document).ready(function(){
 				});
 
 				// Check the tags
-				$('li', this).each(function() {
+				$('li', this).each(function () {
 					if ($(this).text().match(searchPattern)) {
 						$(this).closest('.workshopentry').show();
 						$(this).addClass('searchMatchTag');
@@ -45,7 +47,7 @@ $(document).ready(function(){
 	}
 
 	function reset() {
-		entries.fadeOut(500, function() {
+		entries.fadeOut(500, function () {
 			$('.left ul li').removeClass('searchMatchTag');
 			$('.left h3').removeClass('searchMatchTitle');
 			$('.workshopentry', this).show();
@@ -58,25 +60,25 @@ $(document).ready(function(){
 		filter($(this).text());
 	});
 
-	var searchTimout = null;
-	searchBox.bind('keyup', function() {
+	searchBox.bind('keyup', function () {
 		clearTimeout(searchTimout);
 		if ($(this).val().length) {
-			searchTimout = setTimeout(function() {
+			searchTimout = setTimeout(function () {
 				filter(searchBox.val());
 			}, 500);
 		}
 
 		if ($(this).val().length === 0) {
-			searchTimout = setTimeout(function() {
+			searchTimout = setTimeout(function () {
 				reset();
 			}, 500);
 		}
 
 	});
 
-	$('#reset').click(function() {
+	$('#reset').click(function () {
 		searchBox.val('');
 		reset();
 	});
 });
+
