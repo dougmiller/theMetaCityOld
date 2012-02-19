@@ -3,6 +3,7 @@
     <property name="app.name" value="workshop"/>
     <property name="classpath.dir" value="/opt/tomcat/lib"/>
     <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
+    <property name="production.dir" value="/media/tmc/"/>
     
     <target name="clean">
         <delete file="${deploy.dir}/${app.name}.war"/>
@@ -13,5 +14,9 @@
 		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
 		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
         <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
+    </target>
+
+    <target name="production" depends="clean">
+        <jar destfile="${production.dir}/${app.name}.war" basedir="${basedir}"/>
     </target>
 </project>
