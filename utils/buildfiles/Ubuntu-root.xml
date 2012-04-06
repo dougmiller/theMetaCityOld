@@ -10,10 +10,14 @@
     </target>
 
     <target name="package" depends="clean">
+		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
         <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
     </target>
 
-    <target name="production" depends="clean">
+    <target name="production">
+		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
         <jar destfile="${production.dir}/${app.name}.war" basedir="${basedir}"/>
     </target>
 

@@ -2,5 +2,7 @@ blog/WEB-INF/jspf/404.jsp
 blog/WEB-INF/jspf/500.jsp
 workshop/WEB-INF/jspf/404.jsp
 workshop/WEB-INF/jspf/500.jsp
+ROOT/WEB-INF/jspf/404.jsp
+ROOT/WEB-INF/jspf/500.jsp
 tb/classes
 *.jar

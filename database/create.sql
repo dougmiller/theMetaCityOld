@@ -1,12 +1,12 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 
--- Database: `theMetaCity`
+-- Database: `themetacitycom`
 -- 
 
-DROP DATABASE IF EXISTS  `themetacity`;
+DROP DATABASE IF EXISTS  `themetacitycom`;
 
-CREATE DATABASE `themetacity` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `themetacity`;
+CREATE DATABASE `themetacitycom` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `themetacitycom`;
 
 -- --------------------------------------------------------
 
@@ -21,14 +21,14 @@ USE `themetacity`;
 
 -- Dont really need him for now
 -- CREATE USER tmcRoot;
--- GRANT ALL ON theMetaCity.* TO 'tmcRoot'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
+-- GRANT ALL ON themetacitycom.* TO 'tmcRoot'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
 
 -- A user for selecting data only. Extra safety net.
 -- CREATE USER tmcSelector;
--- GRANT SELECT ON themetacity.* TO 'tmcSelector'@'localhost' IDENTIFIED BY PASSWORD '*9AF6DB6DC277180622AC3BD28DD928DE5B8CBD3F';
+GRANT SELECT ON themetacitycom.* TO 'tmcSelector'@'localhost' IDENTIFIED BY PASSWORD '*9AF6DB6DC277180622AC3BD28DD928DE5B8CBD3F';
 -- A user for updating and inserting records.
 -- CREATE USER tmcAdmin;
--- GRANT SELECT, INSERT, UPDATE, DELETE ON themetacity.* TO 'tmcAdmin'@'localhost' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
+-- GRANT SELECT, INSERT, UPDATE, DELETE ON themetacitycom.* TO 'tmcAdmin'@'localhost' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
 
 -- 
 -- Table structure for table `articles`

@@ -13,14 +13,14 @@
     <target name="clean">
         <delete dir="${compile.dir}" />
         <mkdir dir="${compile.dir}" />
-	</target>
+    </target>
 
     <target name="compile" depends="clean">
 		<javac srcdir="${src.dir}" destdir="${compile.dir}" target="1.5"
                classpath="${classpath.dir}/log4j.jar;
                           ${classpath.dir}/jsp-api.jar;
                           ${classpath.dir}/junit4.jar;"/>
-	</target>
+    </target>
 
     <!-- Include on the the classes for development -->
     <target name="package" depends="compile">
