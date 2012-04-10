@@ -1,12 +1,13 @@
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 
--- Database: `themetacitycom`
+-- Database: "themetacitycom"
 -- 
 
-DROP DATABASE IF EXISTS  `themetacitycom`;
+DROP DATABASE IF EXISTS  "themetacitycom";
 
-CREATE DATABASE `themetacitycom` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `themetacitycom`;
+CREATE DATABASE "themetacitycom";
+DROP USER tmcSelector;
+--  Connect to the newly created database
+\c "themetacitycom";
 
 -- --------------------------------------------------------
 
@@ -21,117 +22,120 @@ USE `themetacitycom`;
 
 -- Dont really need him for now
 -- CREATE USER tmcRoot;
--- GRANT ALL ON themetacitycom.* TO 'tmcRoot'@'%' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
+-- GRANT ALL ON themetacitycom.* TO "tmcRoot"@"%" IDENTIFIED BY PASSWORD "*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F";
 
 -- A user for selecting data only. Extra safety net.
--- CREATE USER tmcSelector;
-GRANT SELECT ON themetacitycom.* TO 'tmcSelector'@'localhost' IDENTIFIED BY PASSWORD '*9AF6DB6DC277180622AC3BD28DD928DE5B8CBD3F';
+CREATE USER tmcSelector;
 -- A user for updating and inserting records.
 -- CREATE USER tmcAdmin;
--- GRANT SELECT, INSERT, UPDATE, DELETE ON themetacitycom.* TO 'tmcAdmin'@'localhost' IDENTIFIED BY PASSWORD '*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F';
+-- GRANT SELECT, INSERT, UPDATE, DELETE ON themetacitycom.* TO "tmcAdmin"@"localhost" IDENTIFIED BY PASSWORD "*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F";
 
 -- 
--- Table structure for table `articles`
+-- Table structure for table "articles"
 -- 
 
-CREATE TABLE `articles` (
-  `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
-  `author` varchar(30) NOT NULL COMMENT 'The author who posed this article. References users.username',
-  `title` varchar(100) NOT NULL COMMENT 'The title of this article',
-  `url` varchar(100) NOT NULL COMMENT 'The urls for this post. Destructively generated from the title using a strip function.',
-  `article_text` text(50000) NOT NULL COMMENT 'The actual content of the article.',
-  `date_time` datetime NOT NULL COMMENT 'The date this article was published',
-  `timestamp` timestamp NOT NULL COMMENT 'Auto timestamp',
-  PRIMARY KEY  (`id`),
-  KEY `author` (`author`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Article information. Autoincrement id.' AUTO_INCREMENT=1;
+CREATE TABLE articles (
+  id int UNIQUE NOT NULL,
+  author varchar(30) NOT NULL,
+  title varchar(100) NOT NULL,
+  url varchar(100) NOT NULL,
+  article_text text NOT NULL,
+  date_time timestamp NOT NULL,
+  timestamp timestamp NOT NULL,
+  PRIMARY KEY (id)
+);
 
 -- 
--- Table structure for table `articletags`
+-- Table structure for table "articletags"
 -- 
 
-CREATE TABLE `articletags` (
-  `id` smallint(6) NOT NULL COMMENT 'References an article by articleid',
-  `tag` varchar(20) NOT NULL COMMENT 'The text tag',
-  PRIMARY KEY  (`id`,`tag`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='The tags describing the articles';
+CREATE TABLE articletags (
+  id int UNIQUE NOT NULL,
+  tag varchar(20) UNIQUE NOT NULL,
+  PRIMARY KEY (id, tag)
+);
 
 -- 
--- Table structure for table `users`
+-- Table structure for table "users"
 -- 
 
-CREATE TABLE `users` (
-  `username` varchar(30) NOT NULL COMMENT 'The users username, used for loggining in etc and for references',
-  `password` varchar(128) NOT NULL COMMENT 'The users password. Stored as an SHA-512 hash. the salt is the SHA-512 of the username)',
-  `pseudonym` varchar(25) NOT NULL COMMENT 'The users pseudonym that is displayed instead of the username',
-  `contact` varchar(40) NOT NULL COMMENT 'The email/website users wish to be contacted at.',
-  `about` varchar(20000) NOT NULL COMMENT 'The about text of a user.',
-  PRIMARY KEY  (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Information about users. Passwords, email etc.';
+CREATE TABLE users (
+  username varchar(30) UNIQUE NOT NULL,
+  password varchar(128) NOT NULL,
+  pseudonym varchar(25) NOT NULL,
+  contact varchar(40) NOT NULL,
+  about text NOT NULL,
+  PRIMARY KEY (username)
+);
 
 -- 
--- Table structure for table `importantNotices`
+-- Table structure for table "importantNotices"
 -- 
 
-CREATE TABLE `importantnotices` (
-  `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
-  `username` varchar(30) NOT NULL COMMENT 'The user who this message relates to.',
-  `message` varchar(500) NOT NULL COMMENT 'The actual important message.',
-  `date_from` datetime NOT NULL COMMENT 'The date this notice starts from.',
-  `date_to` datetime NOT NULL COMMENT 'The date this notice finished.',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Important notices' AUTO_INCREMENT=1;
+CREATE TABLE importantnotices (
+  id int UNIQUE NOT NULL,
+  username varchar(30) NOT NULL,
+  message varchar(500) NOT NULL,
+  date_from timestamp NOT NULL,
+  date_to timestamp NOT NULL,
+  PRIMARY KEY (id)
+);
 
 --
 -- An entry in the workshop, both the small and large view
 --
-CREATE TABLE `workshop` (
-  `id` smallint(6) NOT NULL auto_increment COMMENT 'The ID used for indexing and ordering',
-  `author` varchar(30) NOT NULL COMMENT 'The author who posed this workshop. References users.username',
-  `title` varchar(100) NOT NULL COMMENT 'The title of this workshop',
-  `blurb` text(5000) NOT NULL COMMENT 'The blurb to show on the index page.',
-  `article_text` text(50000) NOT NULL COMMENT 'The actual content of the workshop.',
-  `date_time` datetime NOT NULL COMMENT 'The date this workshop was published',
-  `timestamp` timestamp NOT NULL COMMENT 'Auto timestamp, useful for updated stamps',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Workshop information. Autoincrement id.' AUTO_INCREMENT=1;
+CREATE TABLE workshop (
+  id int UNIQUE NOT NULL,
+  author varchar(30) NOT NULL,
+  title varchar(100) NOT NULL,
+  blurb text NOT NULL,
+  article_text text NOT NULL,
+  date_time timestamp NOT NULL,
+  timestamp timestamp NOT NULL,
+  PRIMARY KEY (id)
+);
 
 -- 
--- Table structure for table `articletags`
+-- Table structure for table "articletags"
 -- 
-CREATE TABLE `workshoptags` (
-  `id` smallint(6) NOT NULL COMMENT 'References a workshop by workshop.id',
-  `tag` varchar(20) NOT NULL COMMENT 'The meta tag',
-  PRIMARY KEY  (`id`,`tag`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='The tags describing the workshop';
+CREATE TABLE workshoptags (
+  id int NOT NULL,
+  tag char(20) NOT NULL,
+  PRIMARY KEY  (id, tag)
+);
 
 -- These foreign keys come last to make sure that all tables exist before making references to them.
 -- 
--- Constraints for table `articles`
+-- Constraints for table "articles"
 -- 
-ALTER TABLE `articles`
-  ADD CONSTRAINT `articles_fk` FOREIGN KEY (`author`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE articles
+  ADD CONSTRAINT "articles_fk" FOREIGN KEY ("author") REFERENCES "users" ("username") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- 
--- Constraints for table `articleTags`
+-- Constraints for table "articleTags"
 -- 
-ALTER TABLE `articletags`
-  ADD CONSTRAINT `articletags_fk` FOREIGN KEY (`id`) REFERENCES `articles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE articletags
+  ADD CONSTRAINT "articletags_fk" FOREIGN KEY ("id") REFERENCES "articles" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- 
--- Constraints for table `workshop`
+-- Constraints for table "workshop"
 -- 
-ALTER TABLE `workshop`
-  ADD CONSTRAINT `workshop_fk` FOREIGN KEY (`author`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE workshop
+  ADD CONSTRAINT "workshop_fk" FOREIGN KEY ("author") REFERENCES "users" ("username") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- 
--- Constraints for table `workshoptags`
+-- Constraints for table "workshoptags"
 -- 
-ALTER TABLE `workshoptags`
-  ADD CONSTRAINT `workshoptags_fk` FOREIGN KEY (`id`) REFERENCES `workshop` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE workshoptags
+  ADD CONSTRAINT "workshoptags_fk" FOREIGN KEY ("id") REFERENCES "workshop" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `importantNotices`
+-- Constraints for table "importantNotices"
 --
-ALTER TABLE `importantnotices`
-  ADD CONSTRAINT `users_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE importantnotices
+  ADD CONSTRAINT "users_fk" FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE ON UPDATE CASCADE;
+  
+  
+  
+  
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO public;
