@@ -34,23 +34,24 @@ CREATE USER tmcSelector;
 -- Table structure for table "articles"
 -- 
 
+CREATE SEQUENCE article_id_seq;
 CREATE TABLE articles (
-  id int UNIQUE NOT NULL,
+  id int UNIQUE NOT NULL DEFAULT nextval('article_id_seq'),
   author varchar(30) NOT NULL,
   title varchar(100) NOT NULL,
   url varchar(100) NOT NULL,
   article_text text NOT NULL,
-  date_time timestamp NOT NULL,
-  timestamp timestamp NOT NULL,
+  date_created timestamp NOT NULL DEFAULT now(),
+  date_modified timestamp NOT NULL DEFAULT now(),
   PRIMARY KEY (id)
 );
 
 -- 
 -- Table structure for table "articletags"
 -- 
-
+CREATE SEQUENCE articletags_id_seq;
 CREATE TABLE articletags (
-  id int UNIQUE NOT NULL,
+  id int UNIQUE NOT NULL DEFAULT nextval('articletags_id_seq'),
   tag varchar(20) UNIQUE NOT NULL,
   PRIMARY KEY (id, tag)
 );
@@ -71,9 +72,9 @@ CREATE TABLE users (
 -- 
 -- Table structure for table "importantNotices"
 -- 
-
+CREATE SEQUENCE importantnotices_id_seq;
 CREATE TABLE importantnotices (
-  id int UNIQUE NOT NULL,
+  id int UNIQUE NOT NULL DEFAULT nextval('importantnotices_id_seq'),
   username varchar(30) NOT NULL,
   message varchar(500) NOT NULL,
   date_from timestamp NOT NULL,
@@ -84,22 +85,24 @@ CREATE TABLE importantnotices (
 --
 -- An entry in the workshop, both the small and large view
 --
+CREATE SEQUENCE workshop_id_seq;
 CREATE TABLE workshop (
-  id int UNIQUE NOT NULL,
+  id int UNIQUE NOT NULL DEFAULT nextval('workshop_id_seq'),
   author varchar(30) NOT NULL,
   title varchar(100) NOT NULL,
   blurb text NOT NULL,
   article_text text NOT NULL,
-  date_time timestamp NOT NULL,
-  timestamp timestamp NOT NULL,
+  date_created timestamp NOT NULL DEFAULT now(),
+  date_modified timestamp NOT NULL DEFAULT now(),
   PRIMARY KEY (id)
 );
 
 -- 
 -- Table structure for table "articletags"
--- 
+--
+CREATE SEQUENCE workshoptags_id_seq;
 CREATE TABLE workshoptags (
-  id int NOT NULL,
+  id int NOT NULL DEFAULT nextval('workshoptags_id_seq'),
   tag char(20) NOT NULL,
   PRIMARY KEY  (id, tag)
 );
@@ -135,7 +138,28 @@ ALTER TABLE workshoptags
 ALTER TABLE importantnotices
   ADD CONSTRAINT "users_fk" FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE ON UPDATE CASCADE;
   
-  
-  
-  
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO public;
+
+--
+-- Automatically update the modified timestamps on update (all tables that use the modified timestamp)
+--
+
+CREATE FUNCTION update_modified_timestamp_to_now()
+RETURNS TRIGGER AS $$
+BEGIN
+   NEW.changetimestamp = now(); 
+   RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+-- Articles table
+CREATE TRIGGER update_articles_modified_timestamp_to_now BEFORE UPDATE
+ON articles FOR EACH ROW EXECUTE PROCEDURE 
+update_modified_timestamp_to_now();
+
+-- Workshop table
+CREATE TRIGGER update_workshop_modified_timestamp_to_now BEFORE UPDATE
+ON workshop FOR EACH ROW EXECUTE PROCEDURE 
+update_modified_timestamp_to_now();
+
+-- Give users their permissions
+GRANT SELECT ON articles, articletags, workshop, workshoptags, importantnotices, users  TO tmcSelector;
