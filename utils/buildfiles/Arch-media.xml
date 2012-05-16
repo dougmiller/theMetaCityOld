@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project name="media" default="package" basedir="../../">   <!-- We take care of the specific dir to copy below -->
+    <property name="app.name" value="media"/>
+    <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
+    <property name="production.dir" value="/media/tmc/"/>
+
+    <target name="clean">
+        <delete dir="${deploy.dir}/${app.name}/css"/>
+		<delete dir="${deploy.dir}/${app.name}/js"/>
+    </target>
+
+    <target name="package" depends="clean">
+        <copy todir="${deploy.dir}/${app.name}/css">			<!-- here -->
+			<fileset dir="${app.name}/css">
+  				<include name="**/*.css"/>
+			</fileset>
+		</copy>
+
+        <copy todir="${deploy.dir}/${app.name}/js">			<!-- here -->
+			<fileset dir="${app.name}/js">
+  				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+    </target>
+
+    <target name="production" depends="clean">
+        <copy todir="${production.dir}/${app.name}/css">			<!-- here -->
+			<fileset dir="${app.name}/css">
+  				<include name="**/*.css"/>
+			</fileset>
+		</copy>
+
+        <copy todir="${production.dir}/${app.name}/js">			<!-- here -->
+			<fileset dir="${app.name}/js">
+  				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+    </target>
+</project>

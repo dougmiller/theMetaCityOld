@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<project name="blog" default="package" basedir="../../blog">
+    <property name="classpath.dir" value="/opt/tomcat/lib"/>
+    <property name="deployapp.name" value="blog"/>
+    <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
+    <property name="production.dir" value="/media/tmc/"/>    
+
+    <target name="clean">
+        <delete file="${deploy.dir}/${deployapp.name}.war"/>
+    </target>
+
+    <target name="package" depends="clean">
+		<!-- Error pages need to be put in and included -->
+		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
+        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+    </target>
+
+    <target name="production" depends="clean">
+		<!-- Error pages need to be put in and included -->
+		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
+        <jar destfile="${production.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+    </target>
+</project>
