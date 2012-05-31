@@ -2,7 +2,7 @@
 <project name="Tags and Beans" default="package" basedir="../../tb">
     <property name="app.name" value="theMetaCityTB" />
     <property name="builddest.dir" value="../" />
-    <property name="classpath.dir" value="/usr/share/tomcat6/lib" />
+    <property name="classpath.dir" value="/usr/share/tomcat7/lib" />
     <property name="compile.dir" value="classes" />
     <property name="src.dir" value="src" />
     <property name="blog.dir" value="../blog/WEB-INF/lib" />
