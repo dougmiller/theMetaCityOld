@@ -1,33 +1,33 @@
 <?xml version="1.0"?>
-<project name="Ubuntu Master Builder" default="development" basedir=".">
+<project name="Arch Master Builder" default="development" basedir=".">
 
     <target name="clean" description="Remvoe everyting via each app's own clean method">
-        <ant antfile="Ubuntu-TB.xml" target="clean"  inheritAll="false" />
-        <ant antfile="Ubuntu-blog.xml" target="clean" inheritAll="false" />
-        <ant antfile="Ubuntu-media.xml" target="clean" inheritAll="false" />
-        <ant antfile="Ubuntu-OpenID.xml" target="clean" inheritAll="false" />
-        <ant antfile="Ubuntu-root.xml" target="clean" inheritAll="false" />
-        <ant antfile="Ubuntu-RSS.xml" target="clean" inheritAll="false" />
-        <ant antfile="Ubuntu-workshop.xml" target="clean" inheritAll="false" />
+        <ant antfile="Arch-TB.xml" target="clean"  inheritAll="false" />
+        <ant antfile="Arch-blog.xml" target="clean" inheritAll="false" />
+        <ant antfile="Arch-media.xml" target="clean" inheritAll="false" />
+        <ant antfile="Arch-OpenID.xml" target="clean" inheritAll="false" />
+        <ant antfile="Arch-root.xml" target="clean" inheritAll="false" />
+        <ant antfile="Arch-RSS.xml" target="clean" inheritAll="false" />
+        <ant antfile="Arch-workshop.xml" target="clean" inheritAll="false" />
     </target>
 
     <target name="development" depends="clean" description="Build all the development apps from scratch">
-        <ant antfile="Ubuntu-TB.xml" target="package" inheritAll="false" />
-        <ant antfile="Ubuntu-blog.xml" target="package" inheritAll="false" />
-        <ant antfile="Ubuntu-media.xml" target="package" inheritAll="false" />
-        <ant antfile="Ubuntu-OpenID.xml" target="package" inheritAll="false" />
-        <ant antfile="Ubuntu-root.xml" target="package" inheritAll="false" />
-        <ant antfile="Ubuntu-RSS.xml" target="package" inheritAll="false" />
-        <ant antfile="Ubuntu-workshop.xml" target="package" inheritAll="false" />
+        <ant antfile="Arch-TB.xml" target="package" inheritAll="false" />
+        <ant antfile="Arch-blog.xml" target="package" inheritAll="false" />
+        <ant antfile="Arch-media.xml" target="package" inheritAll="false" />
+        <ant antfile="Arch-OpenID.xml" target="package" inheritAll="false" />
+        <ant antfile="Arch-root.xml" target="package" inheritAll="false" />
+        <ant antfile="Arch-RSS.xml" target="package" inheritAll="false" />
+        <ant antfile="Arch-workshop.xml" target="package" inheritAll="false" />
     </target>
 
     <target name="production" depends="clean" description="Build all the development apps from scratch">
-        <ant antfile="Ubuntu-TB.xml" target="package" inheritAll="false" />
-        <ant antfile="Ubuntu-blog.xml" target="production" inheritAll="false" />
-        <ant antfile="Ubuntu-media.xml" target="production" inheritAll="false" />
-        <ant antfile="Ubuntu-OpenID.xml" target="production" inheritAll="false" />
-        <ant antfile="Ubuntu-root.xml" target="production" inheritAll="false" />
-        <ant antfile="Ubuntu-RSS.xml" target="production" inheritAll="false" />
-        <ant antfile="Ubuntu-workshop.xml" target="production" inheritAll="false" />
+        <ant antfile="Arch-TB.xml" target="package" inheritAll="false" />
+        <ant antfile="Arch-blog.xml" target="production" inheritAll="false" />
+        <ant antfile="Arch-media.xml" target="production" inheritAll="false" />
+        <ant antfile="Arch-OpenID.xml" target="production" inheritAll="false" />
+        <ant antfile="Arch-root.xml" target="production" inheritAll="false" />
+        <ant antfile="Arch-RSS.xml" target="production" inheritAll="false" />
+        <ant antfile="Arch-workshop.xml" target="production" inheritAll="false" />
     </target>
 </project>
