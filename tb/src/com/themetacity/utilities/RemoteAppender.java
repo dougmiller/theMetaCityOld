@@ -32,7 +32,7 @@ public class RemoteAppender extends AppenderSkeleton {
     // The iterator across the "clients" Collection must
     // support a "remove()" method.
 
-    private Collection clients = new LinkedList();
+    private LinkedList<OutputStreamWriter> clients = new LinkedList<OutputStreamWriter>();
     private int port = 7890;
     private ServerSocket listenerSocket;
     private Thread listenerThread;
@@ -65,9 +65,7 @@ public class RemoteAppender extends AppenderSkeleton {
                             // collection of listeners.
 
                             synchronized (clients) {
-                                clients.add(
-                                        new OutputStreamWriter(
-                                                clientSocket.getOutputStream()));
+                                clients.add(new OutputStreamWriter(clientSocket.getOutputStream()));
                             }
                         }
                     }

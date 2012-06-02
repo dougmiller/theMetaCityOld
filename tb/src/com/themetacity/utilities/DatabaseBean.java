@@ -29,22 +29,23 @@ public class DatabaseBean {
             conn = ds.getConnection();
         }
         catch (SQLException SQLEx) {
-            logger.fatal("There was a problem with the database connection.");
+            logger.fatal("There was a problem with the database connection:");
             logger.fatal(SQLEx);
             logger.fatal(SQLEx.getCause());
         }
         catch (NamingException nameEx) {
-            logger.fatal("There was a naming exception");
+            logger.fatal("There was a naming exception:");
             logger.fatal(nameEx);
             logger.fatal(nameEx.getCause());
         }
     }
 
     /**
-     * Execute a query. Do not use for statements (update, delete, insert etc).
+     * Execute a query against the database (SELECT)
+     * Do not use for statements (UPDATE, DELETE, INSERT etc)
      *
      * @return A ResultSet of the execute query. A set of size zero if no results were returned. It is never null.
-     * @see #executeUpdate() for running update, insert delete etc.
+     * @see #executeUpdate() for running updates, inserts, deletes etc.
      */
 
     public ResultSet executeQuery() {
@@ -54,18 +55,19 @@ public class DatabaseBean {
             logger.debug(prepStmt.toString());
         }
         catch (SQLException SQLEx) {
-            logger.fatal("There was an error running a query");
+            logger.fatal("There was an error running a query:");
             logger.fatal(SQLEx);
+            logger.info(SQLEx.getCause());
         }
         return result;
     }
 
     /**
-     * Execute updates on the server (UPDATE, DELETE etc)
-     * Do not use for querires (SELECT)
+     * Execute updates against the server (UPDATE, DELETE, INSERT etc)
+     * Do not use for queries (SELECT)
      *
      * @return an int for the number of rows affected.
-     * @see #executeQuery() for queries (SELECT etc)
+     * @see #executeQuery() for queries (select etc)
      */
     public int executeUpdate() {
         int returnValue = 0;
@@ -75,18 +77,18 @@ public class DatabaseBean {
             logger.debug(prepStmt.toString());
         }
         catch (SQLException SQLEx) {
-            logger.warn("There was a problem running an update");
-            logger.warn(SQLEx);
-
+            logger.fatal("There was a problem running an update:");
+            logger.fatal(SQLEx);
+            logger.info(SQLEx.getCause());
         }
         return returnValue;
     }
 
     /**
      * Close the open database connection.
-     * This method is called from the process beans as the connections cant be closed before the resultset is returned<br />
-     * <p/>
-     * This closes both the statment and the connection
+     * This method is called from the process bean as the connections cant be closed before the ResultSet is returned.
+     *
+     * This closes both the statement and the connection
      */
     public void close() {
         if (prepStmt != null) {
@@ -94,7 +96,9 @@ public class DatabaseBean {
                 prepStmt.close();
                 prepStmt = null;
             } catch (SQLException SQLEx) {
-                logger.warn("There was an error closing the prepared statment connection.");
+                logger.warn("There was an error closing the prepared statement connection:");
+                logger.warn(SQLEx);
+                logger.info(SQLEx.getCause());
             }
         }
 
@@ -103,7 +107,9 @@ public class DatabaseBean {
                 conn.close();
                 conn = null;
             } catch (SQLException SQLEx) {
-                logger.warn("There was an error closing the database connection.");
+                logger.warn("There was an error closing the database connection:");
+                logger.warn(SQLEx);
+                logger.info(SQLEx.getCause());
             }
         }
     }
