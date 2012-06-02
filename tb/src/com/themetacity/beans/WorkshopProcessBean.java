@@ -58,6 +58,7 @@ public class WorkshopProcessBean {
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in WorkshopProcessBean.getWorkshopEntries()");
             logger.warn(SQLEx);
+            logger.info(SQLEx.getCause());
         } finally {
             if (result != null) {
                 try {
@@ -65,6 +66,7 @@ public class WorkshopProcessBean {
                 } catch (SQLException SQLEx) {
                     logger.warn("You had an error closing the ResultSet in WorkshopProcessBean().getWorkshopEntry()");
                     logger.warn(SQLEx);
+                    logger.info(SQLEx.getCause());
                 }
             }
             workshopDBBean.close();
@@ -109,6 +111,7 @@ public class WorkshopProcessBean {
                 } catch (SQLException SQLEx) {
                     logger.warn("You had an error closing the ResultSet in WorkshopProcessBean().getWorkshopLinks()");
                     logger.warn(SQLEx);
+                    logger.info(SQLEx.getCause());
                 }
             }
             workshopDBBean.close();
@@ -151,14 +154,15 @@ public class WorkshopProcessBean {
             }
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in WorkshopProcessBean.getWorkshopBlurbs()");
-            logger.warn(SQLEx);
+            logger.info(SQLEx);
         } finally {
             if (result != null) {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
                     logger.warn("You had an error closing the ResultSet in WorkshopProcessBean().getWorkshopBlurbs()");
-                    logger.warn(SQLEx);
+                    logger.info(SQLEx);
+                    logger.info(SQLEx.getCause());
                 }
             }
             workshopDBBean.close();
@@ -191,14 +195,15 @@ public class WorkshopProcessBean {
 
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in WorkshopProcessBean.getLastUpdateDate()");
-            logger.warn(SQLEx);
+            logger.info(SQLEx);
         } finally {
             if (result != null) {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResutlSet in WorkshopProcessBean.getLastUpdateDate()");
-                    logger.warn(SQLEx);
+                    logger.warn("You had an error closing the ResultSet in WorkshopProcessBean.getLastUpdateDate()");
+                    logger.info(SQLEx);
+                    logger.info(SQLEx.getCause());
                 }
             }
             workshopDBBean.close();
