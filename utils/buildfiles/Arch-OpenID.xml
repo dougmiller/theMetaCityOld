@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <project name="OpenID" default="package" basedir="../../OpenID">
     <property name="app.name" value="OpenID"/>
-    <property name="classpath.dir" value="/opt/tomcat/lib"/>
     <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
     <property name="production.dir" value="/media/tmc/"/>    
 

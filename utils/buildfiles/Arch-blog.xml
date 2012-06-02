@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <project name="blog" default="package" basedir="../../blog">
-    <property name="classpath.dir" value="/opt/tomcat/lib"/>
     <property name="deployapp.name" value="blog"/>
     <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
     <property name="production.dir" value="/media/tmc/"/>    
