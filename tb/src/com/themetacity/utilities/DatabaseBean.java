@@ -20,7 +20,7 @@ public class DatabaseBean {
 
     /**
 	 * Setup a connection to the database
-	 * The connection specifics are managed in thetomcat server configuratio nand referenced through web.xml and context.xml
+	 * The connection specifics are managed in the tomcat server configuration and referenced through web.xml and context.xml
      */
     public DatabaseBean() {
         try {

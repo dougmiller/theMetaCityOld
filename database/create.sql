@@ -5,7 +5,7 @@
 DROP DATABASE IF EXISTS  "themetacitycom";
 
 CREATE DATABASE "themetacitycom";
-DROP USER tmcSelector;
+DROP USER tmcselector;
 --  Connect to the newly created database
 \c "themetacitycom";
 
@@ -162,4 +162,4 @@ ON workshop FOR EACH ROW EXECUTE PROCEDURE
 update_modified_timestamp_to_now();
 
 -- Give users their permissions
-GRANT SELECT ON articles, articletags, workshop, workshoptags, importantnotices, users  TO tmcSelector;
+GRANT SELECT ON articles, articletags, workshop, workshoptags, importantnotices, users  TO tmcselector;

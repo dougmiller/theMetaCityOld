@@ -190,7 +190,7 @@ public class WorkshopProcessBean {
             result = workshopDBBean.executeQuery();
 
             while (result.next()) {
-                lastModified = result.getTimestamp("timestamp");    // Query only returns 1 result;
+                lastModified = result.getTimestamp("timestamp");    // Query only returns 1 result (due to MAX);
             }
 
         } catch (SQLException SQLEx) {
