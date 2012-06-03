@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="media" default="package" basedir="../../">   <!-- We take care of the specific dir to copy below -->
     <property name="app.name" value="media"/>
-    <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
+    <property name="deploy.dir" value="/srv/http/localcity"/>
     <property name="production.dir" value="/media/tmc/"/>
 
     <target name="clean">

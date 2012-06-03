@@ -11,7 +11,7 @@
     </head>
     <body>
 		<div id="centeredcontainer">
-			<img alt="The MetaCity Logo" src="/media/site-images/logo.svg" onerror="this.removeAttribute('onerror'); this.src='/media/site-images/logo.png'" height="600px" width="600px"/>	
+			<img alt="The MetaCity Logo" src="/media/site-images/logo.svg" onerror="this.removeAttribute('onerror'); this.src='/media/site-images/logo.png'" height="600px" width="600px"/>
 			<h1><a href="/blog">Blog</a></h1>&nbsp;
 			<h1><a href="/workshop">Workshop</a></h1>
 			<br />

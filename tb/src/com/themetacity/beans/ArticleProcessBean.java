@@ -63,7 +63,7 @@ public class ArticleProcessBean {
 
         try {
             articlesDBBean.setPrepStmt(articlesDBBean.getConn().prepareStatement(
-                    "SELECT id, title, url, author, date_time, article_text " +
+                    "SELECT id, title, url, author, date_created, article_text " +
                             "FROM articles " +
                             "ORDER BY id desc " +
                             "LIMIT 5;"));
@@ -78,7 +78,7 @@ public class ArticleProcessBean {
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
-                articleBean.setDateTime(result.getTimestamp("date_time"));
+                articleBean.setDateTime(result.getTimestamp("date_created"));
 
                 // Process this articles tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
@@ -95,7 +95,7 @@ public class ArticleProcessBean {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the REsultSet in ArticleProcessBean.getFrontpageArticles()");
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getFrontpageArticles()");
                     logger.warn(SQLEx);
                 }
             }
@@ -116,13 +116,13 @@ public class ArticleProcessBean {
         ResultSet result = null;
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT id, author, title, url, article_text, date_time " +
+                    "SELECT id, author, title, url, article_text, date_created " +
                             "FROM articles WHERE " +
-                            "(YEAR(date_time) = ? OR ? is null) " +
-                            "AND (MONTH(date_time) = ? OR ? is null) AND " +
-                            "(DAY(date_time) = ? OR ? is null) AND " +
+                            "(YEAR(date_created) = ? OR ? is null) " +
+                            "AND (MONTH(date_created) = ? OR ? is null) AND " +
+                            "(DAY(date_created) = ? OR ? is null) AND " +
                             "(url = ? OR ? is null) " +
-                            "ORDER BY date_time desc;"));
+                            "ORDER BY date_created desc;"));
             dbaBean.getPrepStmt().setString(1, year);
             dbaBean.getPrepStmt().setString(2, year);
             dbaBean.getPrepStmt().setString(3, month);
@@ -142,7 +142,7 @@ public class ArticleProcessBean {
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
-                articleBean.setDateTime(result.getTimestamp("date_time"));
+                articleBean.setDateTime(result.getTimestamp("date_created"));
 
                 // Process this articles tags
                 try {
@@ -209,7 +209,7 @@ public class ArticleProcessBean {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getArticleByID()");
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getArticleByID()");
                     logger.warn(SQLEx);
                 }
             }
@@ -231,7 +231,7 @@ public class ArticleProcessBean {
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT title, url, date_time " +
+                    "SELECT title, url, date_created " +
                             "FROM articles, articletags " +
                             "WHERE articles.id = articletags.id " +
                             "AND articletags.tag = ? " +
@@ -245,7 +245,7 @@ public class ArticleProcessBean {
 
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
-                articleBean.setDateTime(result.getTimestamp("date_time"));
+                articleBean.setDateTime(result.getTimestamp("date_created"));
 
                 listOfBeans.add(articleBean);
             }
@@ -280,7 +280,7 @@ public class ArticleProcessBean {
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT  title, url, article_text, date_time  " +
+                    "SELECT  title, url, article_text, date_created  " +
                             "FROM articles, articletags " +
                             "WHERE articles.id = articletags.id " +
                             "AND articletags.tag = ? " +
@@ -295,7 +295,7 @@ public class ArticleProcessBean {
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setArticleText(result.getString("article_text"));
                 articleBean.setURL(result.getString("url"));
-                articleBean.setDateTime(result.getTimestamp("date_time"));
+                articleBean.setDateTime(result.getTimestamp("date_created"));
 
                 listOfBeans.add(articleBean);
             }
@@ -329,10 +329,10 @@ public class ArticleProcessBean {
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT title, url, date_time " +
+                    "SELECT title, url, date_created " +
                             "FROM articles " +
                             "WHERE title LIKE ? " +
-                            "ORDER BY date_time desc;"));
+                            "ORDER BY date_created desc;"));
             dbaBean.getPrepStmt().setString(1, "%" + searchString + "%");
 
             result = dbaBean.executeQuery();
@@ -342,7 +342,7 @@ public class ArticleProcessBean {
 
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
-                articleBean.setDateTime(result.getTimestamp("date_time"));
+                articleBean.setDateTime(result.getTimestamp("date_created"));
 
                 listOfBeans.add(articleBean);
             }
@@ -372,7 +372,10 @@ public class ArticleProcessBean {
         DatabaseBean dbaBean = new DatabaseBean();
         ArticleBean articleBean = new ArticleBean();
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("INSERT INTO articles (author, title, url, article_text, date_time) VALUES (?, ?, ?, ?, now());"));
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "INSERT INTO articles " +
+                            "(author, title, url, article_text, date_created) " +
+                            "VALUES (?, ?, ?, ?, now());"));
             dbaBean.getPrepStmt().setString(1, author);
             dbaBean.getPrepStmt().setString(2, title);
             dbaBean.getPrepStmt().setString(3, articleBean.buildURL(title));
@@ -537,7 +540,7 @@ public class ArticleProcessBean {
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT id, title, url, date_time " +
+                    "SELECT id, title, url, date_created " +
                             "FROM articles " +
                             "GROUP BY id ASC;"));
 
@@ -549,7 +552,7 @@ public class ArticleProcessBean {
                 articleBean.setArticleID(result.getString("id"));
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
-                articleBean.setDateTime(result.getTimestamp("date_time"));
+                articleBean.setDateTime(result.getTimestamp("date_created"));
 
                 listOfBeans.add(articleBean);
             }
@@ -656,7 +659,7 @@ public class ArticleProcessBean {
 
         try {
             PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
-                    "SELECT url, timestamp " +
+                    "SELECT url, date_modified " +
                             "FROM articles;");
 
             articlesDBBean.setPrepStmt(prepStmt);
@@ -667,7 +670,7 @@ public class ArticleProcessBean {
                 ArticleBean articleBean = new ArticleBean();
 
                 articleBean.setURL(result.getString("url"));
-                articleBean.setTimestamp(result.getTimestamp("timestamp"));
+                articleBean.setTimestamp(result.getTimestamp("date_modified"));
 
                 listOfBeans.add(articleBean);
             }
@@ -698,7 +701,7 @@ public class ArticleProcessBean {
         Date lastModified = new Date(0);
         try {
             PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
-                    "SELECT max(timestamp)  as timestamp " +
+                    "SELECT max(date_modified) as timestamp " +
                             "FROM articles;");
 
             articlesDBBean.setPrepStmt(prepStmt);

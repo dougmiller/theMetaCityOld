@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="workshop" default="package" basedir="../../ROOT">
     <property name="deployapp.name" value="root"/>
-    <property name="deploy.dir" value="/home/doug/Sites/localcity/"/>
+    <property name="deploy.dir" value="/srv/http/localcity"/>
     <property name="production.dir" value="/media/tmc/"/>
     
     <target name="clean">

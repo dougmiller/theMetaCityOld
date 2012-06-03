@@ -20,7 +20,7 @@ public class WorkshopProcessBean {
     private String id = "";
 
     /**
-     * Get the full list of workshop entries
+     * Get a specific workshop entry
      *
      * @return a list of workshop entries
      */
@@ -31,7 +31,7 @@ public class WorkshopProcessBean {
 
         try {
             workshopDBBean.setPrepStmt(workshopDBBean.getConn().prepareStatement(
-                    "SELECT id, title, article_text, date_time, timestamp " +
+                    "SELECT id, title, article_text, date_created, date_modified " +
                             "FROM workshop " +
                             "WHERE id = ? " +
                             "ORDER BY id desc;"));
@@ -45,8 +45,8 @@ public class WorkshopProcessBean {
                 workshopBean.setId(result.getInt("id"));
                 workshopBean.setTitle(result.getString("title"));
                 workshopBean.setContent(result.getString("article_text"));
-                workshopBean.setDateTime(result.getDate("date_time"));
-                workshopBean.setTimestamp(result.getDate("timestamp"));
+                workshopBean.setDateTime(result.getDate("date_created"));
+                workshopBean.setTimestamp(result.getDate("date_modified"));
 
                 // Process this workshops tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
@@ -131,7 +131,7 @@ public class WorkshopProcessBean {
 
         try {
             workshopDBBean.setPrepStmt(workshopDBBean.getConn().prepareStatement(
-                    "SELECT id, title, blurb, date_time, timestamp " +
+                    "SELECT id, title, blurb, date_created, date_modified " +
                             "FROM workshop " +
                             "ORDER BY id desc;"));
 
@@ -142,8 +142,8 @@ public class WorkshopProcessBean {
                 workshopBean.setId(result.getInt("id"));
                 workshopBean.setTitle(result.getString("title"));
                 workshopBean.setBlurb(result.getString("blurb"));
-                workshopBean.setDateTime(result.getDate("date_time"));
-                workshopBean.setTimestamp(result.getDate("timestamp"));
+                workshopBean.setDateTime(result.getDate("date_created"));
+                workshopBean.setTimestamp(result.getDate("date_modified"));
 
                 // Process this workshops tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
@@ -182,7 +182,7 @@ public class WorkshopProcessBean {
 
         try {
             PreparedStatement prepStmt = workshopDBBean.getConn().prepareStatement(
-                    "SELECT max(timestamp) as timestamp " +
+                    "SELECT MAX(date_modified) as timestamp " +
                             "FROM workshop;");
 
             workshopDBBean.setPrepStmt(prepStmt);
