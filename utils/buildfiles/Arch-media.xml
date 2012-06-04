@@ -3,6 +3,7 @@
     <property name="app.name" value="media"/>
     <property name="deploy.dir" value="/srv/http/localcity"/>
     <property name="production.dir" value="/media/tmc/"/>
+    <property name="utilities.dir" value="${basedir}/utils"/>    
 
     <target name="clean">
         <delete dir="${deploy.dir}/${app.name}/css"/>
@@ -10,9 +11,11 @@
     </target>
 
     <target name="package" depends="clean">
+        <exec executable="utils/csscombiner.sh" />
         <copy todir="${deploy.dir}/${app.name}/css">			<!-- here -->
 			<fileset dir="${app.name}/css">
-  				<include name="**/*.css"/>
+  				<include name="screen.css"/>
+  				<include name="mobile.css"/>
 			</fileset>
 		</copy>
 
@@ -24,11 +27,13 @@
     </target>
 
     <target name="production" depends="clean">
+        <exec executable="utils/csscombiner.sh" />
         <copy todir="${production.dir}/${app.name}/css">			<!-- here -->
 			<fileset dir="${app.name}/css">
-  				<include name="**/*.css"/>
+  				<include name="screen.css"/>
+  				<include name="mobile.css"/>
 			</fileset>
-		</copy>
+        </copy>
 
         <copy todir="${production.dir}/${app.name}/js">			<!-- here -->
 			<fileset dir="${app.name}/js">

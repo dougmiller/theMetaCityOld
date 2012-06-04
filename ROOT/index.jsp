@@ -3,11 +3,11 @@
     <head>
         <title>theMetaCity.com</title>
         <meta charset="utf-8">
-		<link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-        <link href="/media/css/common.css" rel="stylesheet" media="all"/>
-        <link href="/media/css/root.css" rel="stylesheet" media="screen, print, handheld"/>
+        <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+        <link href="/media/css/screen.css" rel="stylesheet" media="screen"/>
+        <link href="/media/css/mobile.css" rel="stylesheet" media="handheld"/>
     </head>
     <body>
 		<div id="centeredcontainer">
