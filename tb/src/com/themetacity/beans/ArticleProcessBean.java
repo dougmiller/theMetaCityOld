@@ -65,7 +65,7 @@ public class ArticleProcessBean {
             articlesDBBean.setPrepStmt(articlesDBBean.getConn().prepareStatement(
                     "SELECT id, title, url, author, date_created, article_text " +
                             "FROM articles " +
-                            "ORDER BY id desc " +
+                            "ORDER BY id DESC " +
                             "LIMIT 5;"));
 
             result = articlesDBBean.executeQuery();
@@ -118,11 +118,12 @@ public class ArticleProcessBean {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id, author, title, url, article_text, date_created " +
                             "FROM articles WHERE " +
-                            "(YEAR(date_created) = ? OR ? is null) " +
-                            "AND (MONTH(date_created) = ? OR ? is null) AND " +
-                            "(DAY(date_created) = ? OR ? is null) AND " +
+                            "(EXTRACT(YEAR FROM date_created) = ? OR ? is null) " +
+                            "AND (EXTRACT(MONTH FROM date_created) = ? OR ? is null) " +
+                            "AND (EXTRACT(DAY FROM date_created) = ? OR ? is null) AND " +
                             "(url = ? OR ? is null) " +
-                            "ORDER BY date_created desc;"));
+                            "ORDER BY date_created DESC;"));
+
             dbaBean.getPrepStmt().setString(1, year);
             dbaBean.getPrepStmt().setString(2, year);
             dbaBean.getPrepStmt().setString(3, month);
@@ -131,6 +132,8 @@ public class ArticleProcessBean {
             dbaBean.getPrepStmt().setString(6, day);
             dbaBean.getPrepStmt().setString(7, URL);
             dbaBean.getPrepStmt().setString(8, URL);
+
+            System.out.println(dbaBean.getPrepStmt().toString());
 
             result = dbaBean.executeQuery();
 
@@ -163,7 +166,7 @@ public class ArticleProcessBean {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getFilteredArticles()");
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getFilteredArticles()");
                     logger.warn(SQLEx);
                 }
             }
@@ -235,7 +238,7 @@ public class ArticleProcessBean {
                             "FROM articles, articletags " +
                             "WHERE articles.id = articletags.id " +
                             "AND articletags.tag = ? " +
-                            "ORDER BY articletags.id desc;"));
+                            "ORDER BY articletags.id DESC;"));
             dbaBean.getPrepStmt().setString(1, searchTag);
 
             result = dbaBean.executeQuery();
@@ -257,7 +260,7 @@ public class ArticleProcessBean {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getArticlesWithTag()");
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getArticlesWithTag()");
                     logger.warn(SQLEx);
                 }
             }
@@ -284,7 +287,7 @@ public class ArticleProcessBean {
                             "FROM articles, articletags " +
                             "WHERE articles.id = articletags.id " +
                             "AND articletags.tag = ? " +
-                            "ORDER BY articletags.id desc;"));
+                            "ORDER BY articletags.id DESC;"));
             dbaBean.getPrepStmt().setString(1, searchTag);
 
             result = dbaBean.executeQuery();
@@ -307,7 +310,7 @@ public class ArticleProcessBean {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getArticlesWithTagForRSSFeed()");
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getArticlesWithTagForRSSFeed()");
                     logger.warn(SQLEx);
                 }
             }
@@ -405,7 +408,7 @@ public class ArticleProcessBean {
     /**
      * Add an article
      *
-     * @return True from succesfully adding a new article or fasle for not adding it
+     * @return True from successfully adding a new article or false for not adding it
      */
     public int getUpdateArticle() {
         try {

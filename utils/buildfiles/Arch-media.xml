@@ -18,6 +18,8 @@
   				<include name="mobile.css"/>
 			</fileset>
 		</copy>
+        <delete file="${app.name}/css/screen.css"/>
+        <delete file="${app.name}/css/mobile.css"/>
 
         <copy todir="${deploy.dir}/${app.name}/js">			<!-- here -->
 			<fileset dir="${app.name}/js">
@@ -34,6 +36,8 @@
   				<include name="mobile.css"/>
 			</fileset>
         </copy>
+        <delete file="${app.name}/css/screen.css"/>
+        <delete file="${app.name}/css/mobile.css"/>
 
         <copy todir="${production.dir}/${app.name}/js">			<!-- here -->
 			<fileset dir="${app.name}/js">

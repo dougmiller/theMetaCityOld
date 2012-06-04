@@ -4,5 +4,7 @@ workshop/WEB-INF/jspf/404.jsp
 workshop/WEB-INF/jspf/500.jsp
 ROOT/WEB-INF/jspf/404.jsp
 ROOT/WEB-INF/jspf/500.jsp
+media/css/screen.css
+media/css/mobile.css
 tb/classes
 *.jar
