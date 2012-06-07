@@ -118,10 +118,10 @@ public class ArticleProcessBean {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id, author, title, url, article_text, date_created " +
                             "FROM articles WHERE " +
-                            "(EXTRACT(YEAR FROM date_created) = ? OR ? is null) " +
-                            "AND (EXTRACT(MONTH FROM date_created) = ? OR ? is null) " +
-                            "AND (EXTRACT(DAY FROM date_created) = ? OR ? is null) AND " +
-                            "(url = ? OR ? is null) " +
+                            "(TO_CHAR(DATE_PART('YEAR', date_created), '99') = ? OR ? IS NULL) " +
+                            "AND (TO_CHAR(DATE_PART('MONTH', date_created), '99') = ? OR ? IS NULL) " +
+                            "AND (TO_CHAR(DATE_PART('DAY', date_created), '99') = ? OR ? IS NULL) AND " +
+                            "(url = ? OR ? IS NULL) " +
                             "ORDER BY date_created DESC;"));
 
             dbaBean.getPrepStmt().setString(1, year);

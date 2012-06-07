@@ -33,7 +33,7 @@ public class WorkshopProcessBean {
             workshopDBBean.setPrepStmt(workshopDBBean.getConn().prepareStatement(
                     "SELECT id, title, article_text, date_created, date_modified " +
                             "FROM workshop " +
-                            "WHERE id = ? " +
+                            "WHERE TO_CHAR(id, '999') = ? " +
                             "ORDER BY id desc;"));
             workshopDBBean.getPrepStmt().setString(1, id);
 
