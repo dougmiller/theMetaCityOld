@@ -6,19 +6,19 @@
 
 <urlrewrite>
     <rule match-type="regex">
-        <from>^/sitemap.xml$</from>
+        <from>^/sitemap.xml/?$</from>
         <to>/sitemap.jsp</to>
     </rule>
     <rule match-type="regex">
-        <from>^/about$</from>
+        <from>^/about/?$</from>
         <to>/about.jsp</to>
     </rule>
     <rule match-type="regex">
-        <from>^/twitter$</from>
+        <from>^/twitter/?$</from>
         <to>/twitter.jsp</to>
     </rule>
     <rule match-type="regex">
-        <from>^/github$</from>
+        <from>^/github/?$</from>
         <to>/github.jsp</to>
     </rule>
 </urlrewrite>
