@@ -16,7 +16,7 @@ echo 'Removing unessary commands'
 # newlines, tabs and spaces
 sed -i ':a;N;$!ba;s/\n//g' screen.css
 sed -i 's/\t//g' screen.css
-sed -i 's/ //g' screen.css
+#sed -i 's/ //g' screen.css   Spacing matters!
 
 echo 'Finished combining all screen css files'
 

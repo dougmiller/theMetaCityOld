@@ -12,15 +12,16 @@
 	<div id="entries">
 	<c:choose>
         <c:when test="${empty workshopEntryList}">
-            <h2 id="noresults">No projects at the moment. Come back again soon.</h2>
+            <h2 id="noentries">No projects at the moment. Come back again soon.</h2>
         </c:when>
         <c:otherwise>
             <c:forEach var="workshopEntry" items="${workshopEntryList}">
                 <tmc:workshopBlurb workshop="${workshopEntry}"/>
             </c:forEach>
+
+    		<h2 id="noresults">No matches. Please try again.</h2>
         </c:otherwise>
     </c:choose>
-		<h2 id="noresults">No matches. Please try again.</h2>
 	</div>
 </div>
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>

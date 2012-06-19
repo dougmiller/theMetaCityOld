@@ -2,7 +2,6 @@
 
 html {
     margin: 100px auto auto;
-    width: 600px;
 }
 
 h1, h2, h3 {
@@ -31,4 +30,5 @@ p {
 
 #centeredcontainer {
 	text-align: center; 
+    width: 600px;
 }
