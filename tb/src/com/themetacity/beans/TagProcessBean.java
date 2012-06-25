@@ -204,7 +204,7 @@ public class TagProcessBean {
     }
 
     /**
-     * Get all the tags posted for an article
+     * Get all the tags posted for a workshop article
      *
      * @return a list of <TagBeans> belonging to an article
      */
@@ -217,7 +217,7 @@ public class TagProcessBean {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT tag " +
                             "FROM workshop, workshoptags " +
-                            "WHERE workshop.id = ? " +
+                            "WHERE TO_CHAR(workshop.id, '999') = ? " +
                             "AND workshop.id = workshoptags.id " +
                             "GROUP BY tag;"));
             dbaBean.getPrepStmt().setString(1, id);
