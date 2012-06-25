@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from urllib.error import HTTPError
 import urllib.request
 
-baseURL = 'http://localcity:8080'
+baseURL = 'http://enc:80'
 
 checkedURLs = []
 excludedURLs = ['/github/', '/twitter/']
