@@ -1,0 +1,9 @@
+<link href="/media/css/screen-common.css" rel="stylesheet" media="screen"/>
+<link href="/media/css/screen-root.css" rel="stylesheet" media="screen"/>
+<link href="/media/css/screen-blog.css" rel="stylesheet" media="screen"/>
+<link href="/media/css/screen-workshop.css" rel="stylesheet" media="screen"/>
+
+<link href="/media/css/mobile-common.css" rel="stylesheet" media="handheld"/>
+<link href="/media/css/mobile-root.css" rel="stylesheet" media="handheld"/>
+<link href="/media/css/mobile-blog.css" rel="stylesheet" media="handheld"/>
+<link href="/media/css/mobile-workshop.css" rel="stylesheet" media="handheld"/>

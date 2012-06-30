@@ -12,13 +12,17 @@
 		<!-- Error pages need to be put in and included -->
 		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
 		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/css-testing.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
         <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+        <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
     </target>
 
     <target name="production" depends="clean">
 		<!-- Error pages need to be put in and included -->
 		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
 		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/css-production.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
         <jar destfile="${production.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+        <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
     </target>
 </project>

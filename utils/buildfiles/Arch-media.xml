@@ -11,15 +11,19 @@
     </target>
 
     <target name="package" depends="clean">
-        <exec executable="utils/csscombiner.sh" />
         <copy todir="${deploy.dir}/${app.name}/css">			<!-- here -->
 			<fileset dir="${app.name}/css">
-  				<include name="screen.css"/>
-  				<include name="mobile.css"/>
+  				<include name="screen-common.css"/>
+  				<include name="screen-root.css"/>
+  				<include name="screen-blog.css"/>
+  				<include name="screen-workshop.css"/>
+
+  				<include name="mobile-common.css"/>
+  				<include name="mobile-root.css"/>
+  				<include name="mobile-blog.css"/>
+  				<include name="mobile-workshop.css"/>
 			</fileset>
 		</copy>
-        <delete file="${app.name}/css/screen.css"/>
-        <delete file="${app.name}/css/mobile.css"/>
 
         <copy todir="${deploy.dir}/${app.name}/js">			<!-- here -->
 			<fileset dir="${app.name}/js">
@@ -29,14 +33,14 @@
     </target>
 
     <target name="production" depends="clean">
-        <exec executable="utils/csscombiner.sh" />
+        <exec executable="utils/csscombiner.sh" />                  <!-- Smash the files together to optimise requests -->
         <copy todir="${production.dir}/${app.name}/css">			<!-- here -->
 			<fileset dir="${app.name}/css">
   				<include name="screen.css"/>
   				<include name="mobile.css"/>
 			</fileset>
         </copy>
-        <delete file="${app.name}/css/screen.css"/>
+        <delete file="${app.name}/css/screen.css"/>                 <!-- We dont need them here anymore sice the folder is deployed -->
         <delete file="${app.name}/css/mobile.css"/>
 
         <copy todir="${production.dir}/${app.name}/js">			<!-- here -->
