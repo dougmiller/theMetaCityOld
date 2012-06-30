@@ -27,7 +27,7 @@ public class WorkshopArticle extends SimpleTagSupport {
         try {
             out.println("    <div class=\"workshopentry\">");
             out.println("        <div class=\"left\">");
-            out.println("            <h3><a href=\"" + workshop.getId() + "\">" + workshop.getTitle() + "</a></h3>");
+            out.println("            <h3><a href=\"/workshop/" + workshop.getId() + "\">" + workshop.getTitle() + "</a></h3>");
             out.println("            <h5>Started: " + workshop.getDateTime() + "</h5>");
 
              SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
