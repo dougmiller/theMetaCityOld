@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 from urllib.error import HTTPError
 import urllib.request
 
-baseURL = 'http://enc:80'
+baseURL = 'http://localcity:8080'
 
 checkedURLs = []
-excludedURLs = ['/github/', '/twitter/']
+excludedURLs = ['/github/', '/twitter/']   # These pages lead to different domains.
 
 errorURLs = []
 
@@ -41,8 +41,12 @@ checkURL('/')
 
 print('Checked the following URLs:')
 for fineURL in checkedURLs:
-    print(fineURL)
+    print(fineURL)  
 
-print('The following URLs returned an error:')
-for errorURL in errorURLs:
-    print(errorURL)
+if not errorURLs:
+    print('All pages retuned 200.')
+
+if errorURLs:
+    print('The following URLs returned an error:')
+    for errorURL in errorURLs:
+        print(errorURL)
