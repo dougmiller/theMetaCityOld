@@ -1,3 +1,7 @@
+<link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+
 <link href="/media/css/screen-common.css" rel="stylesheet" media="screen"/>
 <link href="/media/css/screen-root.css" rel="stylesheet" media="screen"/>
 <link href="/media/css/screen-blog.css" rel="stylesheet" media="screen"/>

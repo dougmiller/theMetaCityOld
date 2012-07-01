@@ -1,4 +1,10 @@
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>theMetaCity.com</title>
+        <meta http-equiv="content-type" content="application/xhtml+xml;"/>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+        <%@ include file="/WEB-INF/jspf/css.jspf" %>
         <div id="centeredcontainer">
             <img alt="Missing logo" src="/media/site-images/missing.svg"/>
             <h1>Hrrm, I can not find that.</h1>
