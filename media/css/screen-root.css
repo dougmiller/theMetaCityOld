@@ -1,34 +1,19 @@
 @charset "utf-8";
 
-html {
-    margin: 100px auto auto;
-}
-
-h1, h2, h3 {
-	text-align: center;
-	font-family: "Orbitron";
-}
-
-h1 {
-	font-size: 24pt;
-	display: inline;
-}
-
-h2 {
-	font-size: 18pt;
-	display: inline;
-}
-
-h3 {
-	font-size: 16pt;
-}
-
-p {
-	font-size: 14pt;
-	text-align: center; 
-}
-
 #centeredcontainer {
+    margin: 50px auto auto;
 	text-align: center; 
     width: 600px;
+}
+
+#centeredcontainer h1 {
+	font-size: 24pt;
+	display: inline;
+    font-family: "Orbitron";
+}
+
+#centeredcontainer h2 {
+	font-size: 18pt;
+	display: inline;
+    font-family: "Orbitron";
 }

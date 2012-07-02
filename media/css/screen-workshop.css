@@ -1,13 +1,5 @@
 @charset "utf-8";
 
-html {
-}
-
-body {
-    margin: auto;
-    width: 900px;
-}
-
 #main {
     margin-right: auto;
 }

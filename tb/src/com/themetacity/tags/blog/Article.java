@@ -27,15 +27,16 @@ public class Article extends SimpleTagSupport {
         JspWriter out = getJspContext().getOut();
         //logger.debug("This is a test to send over a custom socket");
         try {
-            out.println("    <article class=\"newsarticle\">");
-            out.println("        <h1><a href=\"/blog/" + article.getURL() + "\">" + article.getTitle() + "</a></h1>");
-            out.println("        " + article.getArticleText());
-            out.println("        <footer class=\"tagmetainfo\">");
-            out.println("           "+ article.getTitle()  + ";");
-            out.println("           Posted on: <time datetime=\"" + article.getDateTime() +"\">" + article.getDateTime() + "</time>;");
-            out.println("           Posted under: " + formatTags(article.getTags()));
-            out.println("       </footer>");
-            out.println("    </article>");
+            out.println("<article class=\"newsarticle\">");
+            out.println("   <h1><a href=\"/blog/" + article.getURL() + "\">" + article.getTitle() + "</a></h1>");
+            out.println("    " + article.getArticleText());
+            out.println("    <footer class=\"tagmetainfo\">");
+            out.println("        <p>"+ article.getTitle()  + ";");
+            out.println("        Posted on: <time datetime=\"" + article.getDateTime() +"\">" + article.getDateTime() + "</time>;");
+            out.println("        Posted under: " + formatTags(article.getTags()));
+            out.println("        </p>");
+            out.println("    </footer>");
+            out.println("</article>");
 
         } catch (IOException IOEx) {
             logger.warn("There was an error with the article rendering");

@@ -25,12 +25,12 @@ public class WorkshopArticle extends SimpleTagSupport {
         // The writer gives access to the page context so its possible to write output
         JspWriter out = getJspContext().getOut();
         try {
-            out.println("    <div class=\"workshopentry\">");
-            out.println("        <div class=\"left\">");
+            out.println("    <article class=\"workshopentry\">");
+            out.println("        <header class=\"left\">");
             out.println("            <h3><a href=\"/workshop/" + workshop.getId() + "\">" + workshop.getTitle() + "</a></h3>");
             out.println("            <h5>Started: " + workshop.getDateTime() + "</h5>");
 
-             SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
             if (workshop.getDateTime().compareTo(workshop.getTimestamp()) < 0 ) {
                 out.println("            <h5>Updated: " + formatter.format(workshop.getTimestamp()) + "</h5>");
@@ -45,12 +45,11 @@ public class WorkshopArticle extends SimpleTagSupport {
             } else {
                 out.println("            <p>No tags</p>");
             }
-            
-            out.println("        </div>");
-            out.println("        <div class=\"right\">");
+            out.println("        </header>");
+            out.println("        <section class=\"right\">");
             out.println("            " + workshop.getContent());
-            out.println("        </div>");
-            out.println("    </div>");
+            out.println("        </section>");
+            out.println("    </article>");
 
         } catch (IOException IOEx) {
             logger.warn("There was an error with the workshop rendering tag.");
