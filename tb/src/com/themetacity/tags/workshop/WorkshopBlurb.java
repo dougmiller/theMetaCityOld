@@ -27,7 +27,7 @@ public class WorkshopBlurb extends SimpleTagSupport {
         try {
             out.println("    <article class=\"workshopentry\">");
             out.println("        <header class=\"left\">");
-            out.println("            <h3><a href=\"/workshop/" + workshop.getId() + "\">" + workshop.getTitle() + "</a></h3>");
+            out.println("            <h1><a href=\"/workshop/" + workshop.getId() + "\">" + workshop.getTitle() + "</a></h1>");
             out.println("            <h5>Started: " + workshop.getDateTime() + "</h5>");
 
             SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
@@ -46,9 +46,9 @@ public class WorkshopBlurb extends SimpleTagSupport {
                 out.println("            <p>No tags</p>");
             }
             out.println("        </header>");
-            out.println("        <section class=\"right\">");
+            out.println("        <div class=\"right\">");
             out.println("            " + workshop.getBlurb());
-            out.println("        </section>");
+            out.println("        </div>");
             out.println("    </article>");
 
         } catch (IOException IOEx) {
