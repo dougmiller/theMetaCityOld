@@ -49,10 +49,9 @@ CREATE TABLE articles (
 -- 
 -- Table structure for table "articletags"
 -- 
-CREATE SEQUENCE articletags_id_seq;
 CREATE TABLE articletags (
-  id int UNIQUE NOT NULL DEFAULT nextval('articletags_id_seq'),
-  tag varchar(20) UNIQUE NOT NULL,
+  id int NOT NULL,
+  tag varchar(20) NOT NULL,
   PRIMARY KEY (id, tag)
 );
 
@@ -100,9 +99,8 @@ CREATE TABLE workshop (
 -- 
 -- Table structure for table "articletags"
 --
-CREATE SEQUENCE workshoptags_id_seq;
 CREATE TABLE workshoptags (
-  id int NOT NULL DEFAULT nextval('workshoptags_id_seq'),
+  id int NOT NULL,
   tag char(20) NOT NULL,
   PRIMARY KEY  (id, tag)
 );
