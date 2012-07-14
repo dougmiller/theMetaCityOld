@@ -84,7 +84,7 @@ public class TagProcessBean {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT tag, count(tag) as timesused " +
                             "FROM articles, articletags " +
-                            "WHERE articles.id = ? " +
+                            "WHERE TO_CHAR(articles.id, '99' ) = ? " +
                             "AND articles.id = articletags.id " +
                             "GROUP BY tag;"));
             dbaBean.getPrepStmt().setString(1, id);
@@ -117,7 +117,7 @@ public class TagProcessBean {
     }
 
     /**
-     * Get all lthe tags (useful for the admin)
+     * Get all the tags (useful for the admin)
      *
      * @return all the tags in the database
      */
@@ -159,8 +159,9 @@ public class TagProcessBean {
         return listOfTags;
     }
 
+    //todo check this out for names and purpose etc
     /**
-     * Get all lthe tags (useful for the admin)
+     * Get all the tags (useful for the admin)
      *
      * @return all the tags in the database
      */
