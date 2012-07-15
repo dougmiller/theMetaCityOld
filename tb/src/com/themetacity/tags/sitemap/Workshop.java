@@ -24,7 +24,7 @@ public class Workshop extends SimpleTagSupport {
         try {
             out.println("    <url>");
             out.println("        <loc>http://www.themetacity.com/workshop/" + workshop.getId() + "</loc>");
-            out.println("        <lastmod>" + formatter.format(workshop.getTimestamp()) + "</lastmod>");
+            out.println("        <lastmod>" + formatter.format(workshop.getModifiedDate()) + "</lastmod>");
             out.println("        <changefreq>monthly</changefreq>");
             out.println("        <priority>0.8</priority>");
             out.println("    </url>");

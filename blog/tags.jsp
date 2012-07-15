@@ -19,7 +19,7 @@
                 <c:set var="previousEntry" value="${null}"/>
                 <c:forEach var="articleList" items="${resultList}">
                     <tmc:archive articleBean="${articleList}" previousDate="${previousEntry}"/>                    
-                    <c:set var="previousEntry" value="${articleList.dateTime}"/>
+                    <c:set var="previousEntry" value="${articleList.modifiedDate}"/>
                 </c:forEach>
             </c:when>
             <c:otherwise>

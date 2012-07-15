@@ -14,8 +14,8 @@ public class WorkshopBean {
     private String content;              // The actual meat of the article
     private String author;               // Who wrote the article
     private String email;                // Contacting the author
-    private Date dateTime;               // The dateTime/time the artcle was pubished
-    private Date timestamp;              // The dateTime/time the artcle was pubished
+    private Date createdDate;            // The date the article was published
+    private Date modifiedDate;              // The date the article was modified
     private LinkedList<TagBean> tags;    // A list of the tags that this article was published under
 
     public int getId() {
@@ -66,20 +66,20 @@ public class WorkshopBean {
         this.email = email;
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public Date getModifiedDate() {
+        return modifiedDate;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 
     public LinkedList<TagBean> getTags() {

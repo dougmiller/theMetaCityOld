@@ -45,8 +45,8 @@ public class WorkshopProcessBean {
                 workshopBean.setId(result.getInt("id"));
                 workshopBean.setTitle(result.getString("title"));
                 workshopBean.setContent(result.getString("article_text"));
-                workshopBean.setDateTime(result.getDate("date_created"));
-                workshopBean.setTimestamp(result.getDate("date_modified"));
+                workshopBean.setCreatedDate(result.getDate("date_created"));
+                workshopBean.setModifiedDate(result.getDate("date_modified"));
 
                 // Process this workshops tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
@@ -142,8 +142,8 @@ public class WorkshopProcessBean {
                 workshopBean.setId(result.getInt("id"));
                 workshopBean.setTitle(result.getString("title"));
                 workshopBean.setBlurb(result.getString("blurb"));
-                workshopBean.setDateTime(result.getDate("date_created"));
-                workshopBean.setTimestamp(result.getDate("date_modified"));
+                workshopBean.setCreatedDate(result.getDate("date_created"));
+                workshopBean.setModifiedDate(result.getDate("date_modified"));
 
                 // Process this workshops tags
                 TagProcessBean tagProcessBean = new TagProcessBean();

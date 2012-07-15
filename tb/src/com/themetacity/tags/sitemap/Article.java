@@ -25,7 +25,7 @@ public class Article extends SimpleTagSupport {
         try {
             out.println("    <url>");
             out.println("        <loc>http://www.themetacity.com/blog/" + article.getURL() + "</loc>");
-            out.println("        <lastmod>" + formatter.format(article.getTimestamp()) + "</lastmod>");
+            out.println("        <lastmod>" + formatter.format(article.getModifiedDate()) + "</lastmod>");
             out.println("        <changefreq>monthly</changefreq>");
             out.println("        <priority>0.8</priority>");
             out.println("    </url>");

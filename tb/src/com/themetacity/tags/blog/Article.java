@@ -32,7 +32,7 @@ public class Article extends SimpleTagSupport {
             out.println("    " + article.getArticleText());
             out.println("    <footer class=\"tagmetainfo\">");
             out.println("        <p>"+ article.getTitle()  + ";");
-            out.println("        Posted on: <time datetime=\"" + article.getDateTime() +"\">" + article.getDateTime() + "</time>;");
+            out.println("        Posted on: <time datetime=\"" + article.getCreatedDate() +"\">" + article.getCreatedDate() + "</time>;");
             out.println("        Posted under: " + formatTags(article.getTags()));
             out.println("        </p>");
             out.println("    </footer>");

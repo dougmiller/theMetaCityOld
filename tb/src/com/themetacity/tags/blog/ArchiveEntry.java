@@ -29,7 +29,7 @@ public class ArchiveEntry extends SimpleTagSupport {
         JspWriter out = jspContext.getOut();
 
         Calendar currentDate = new GregorianCalendar();
-        currentDate.setTime(articleBean.getDateTime());
+        currentDate.setTime(articleBean.getCreatedDate());
 
         Calendar oldDate = new GregorianCalendar();
 

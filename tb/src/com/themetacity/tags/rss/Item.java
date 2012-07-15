@@ -26,7 +26,7 @@ public class Item extends SimpleTagSupport {
             out.println("        <link>/" + article.getURL() + "</link>");
             out.println("        <description>" + article.getArticleText() + "</description>");
             out.println("        <guid>" + article.getURL() + "</guid>");
-            out.println("        <pubdate>" + article.getDateTime() + "</pubdate>");
+            out.println("        <pubdate>" + article.getCreatedDate() + "</pubdate>");
             out.println("    </item>");
         } catch (IOException IOEx) {
             logger.warn("There was an error with the article rendering");

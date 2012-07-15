@@ -28,12 +28,12 @@ public class WorkshopBlurb extends SimpleTagSupport {
             out.println("    <article class=\"workshopentry\">");
             out.println("        <header class=\"left\">");
             out.println("            <h1><a href=\"/workshop/" + workshop.getId() + "\">" + workshop.getTitle() + "</a></h1>");
-            out.println("            <h5>Started: " + workshop.getDateTime() + "</h5>");
+            out.println("            <h5>Started: " + workshop.getCreatedDate() + "</h5>");
 
             SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
-            if (workshop.getDateTime().compareTo(workshop.getTimestamp()) < 0 ) {
-                out.println("            <h5>Updated: " + formatter.format(workshop.getTimestamp()) + "</h5>");
+            if (workshop.getCreatedDate().compareTo(workshop.getModifiedDate()) < 0 ) {
+                out.println("            <h5>Updated: " + formatter.format(workshop.getModifiedDate()) + "</h5>");
             }
             
             if (workshop.getTags().size() > 0) {

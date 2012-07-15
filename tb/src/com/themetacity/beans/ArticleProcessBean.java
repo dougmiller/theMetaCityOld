@@ -36,8 +36,6 @@ public class ArticleProcessBean {
 
     private String searchString = "";       // The inputbox search value
 
-    private String numberOfAritclesToShow = ""; // The number of articles to show in the summary front page
-
     private static final Logger logger = Logger.getLogger(ArticleProcessBean.class);
 
     public ArticleProcessBean() {
@@ -78,7 +76,7 @@ public class ArticleProcessBean {
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
-                articleBean.setDateTime(result.getTimestamp("date_created"));
+                articleBean.setCreatedDate(result.getDate("date_created"));
 
                 // Process this articles tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
@@ -145,7 +143,7 @@ public class ArticleProcessBean {
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
-                articleBean.setDateTime(result.getTimestamp("date_created"));
+                articleBean.setCreatedDate(result.getDate("date_created"));
 
                 // Process this articles tags
                 try {
@@ -248,7 +246,7 @@ public class ArticleProcessBean {
 
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
-                articleBean.setDateTime(result.getTimestamp("date_created"));
+                articleBean.setCreatedDate(result.getDate("date_created"));
 
                 listOfBeans.add(articleBean);
             }
@@ -298,7 +296,7 @@ public class ArticleProcessBean {
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setArticleText(result.getString("article_text"));
                 articleBean.setURL(result.getString("url"));
-                articleBean.setDateTime(result.getTimestamp("date_created"));
+                articleBean.setCreatedDate(result.getDate("date_created"));
 
                 listOfBeans.add(articleBean);
             }
@@ -345,7 +343,7 @@ public class ArticleProcessBean {
 
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
-                articleBean.setDateTime(result.getTimestamp("date_created"));
+                articleBean.setCreatedDate(result.getDate("date_created"));
 
                 listOfBeans.add(articleBean);
             }
@@ -555,7 +553,7 @@ public class ArticleProcessBean {
                 articleBean.setArticleID(result.getString("id"));
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
-                articleBean.setDateTime(result.getTimestamp("date_created"));
+                articleBean.setCreatedDate(result.getDate("date_created"));
 
                 listOfBeans.add(articleBean);
             }
@@ -673,7 +671,7 @@ public class ArticleProcessBean {
                 ArticleBean articleBean = new ArticleBean();
 
                 articleBean.setURL(result.getString("url"));
-                articleBean.setTimestamp(result.getTimestamp("date_modified"));
+                articleBean.setModifiedDate(result.getDate("date_modified"));
 
                 listOfBeans.add(articleBean);
             }
@@ -712,7 +710,7 @@ public class ArticleProcessBean {
             result = articlesDBBean.executeQuery();
 
             while (result.next()) {
-                lastModified = result.getTimestamp("timestamp");    // Query only returns 1 result;
+                lastModified = result.getDate("timestamp");    // Query only returns 1 result;
             }
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in ArticleProcessBean.getLastUpdateDate()");
@@ -779,7 +777,7 @@ public class ArticleProcessBean {
     }
 
     /**
-     * Get the link of the RSS Feed based on the tag
+     * Get the title of the RSS Feed based on the tag
      *
      * @return the constructed string
      */

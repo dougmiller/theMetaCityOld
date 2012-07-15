@@ -41,8 +41,8 @@ CREATE TABLE articles (
   title varchar(100) NOT NULL,
   url varchar(100) NOT NULL,
   article_text text NOT NULL,
-  date_created timestamp NOT NULL DEFAULT now(),
-  date_modified timestamp NOT NULL DEFAULT now(),
+  date_created date NOT NULL DEFAULT current_date,
+  date_modified date NOT NULL DEFAULT current_date,
   PRIMARY KEY (id)
 );
 
@@ -76,8 +76,8 @@ CREATE TABLE importantnotices (
   id int UNIQUE NOT NULL DEFAULT nextval('importantnotices_id_seq'),
   username varchar(30) NOT NULL,
   message varchar(500) NOT NULL,
-  date_from timestamp NOT NULL,
-  date_to timestamp NOT NULL,
+  date_created date NOT NULL DEFAULT current_date,
+  date_modified date NOT NULL DEFAULT current_date,
   PRIMARY KEY (id)
 );
 
@@ -91,8 +91,8 @@ CREATE TABLE workshop (
   title varchar(100) NOT NULL,
   blurb text NOT NULL,
   article_text text NOT NULL,
-  date_created timestamp NOT NULL DEFAULT now(),
-  date_modified timestamp NOT NULL DEFAULT now(),
+  date_created date NOT NULL DEFAULT current_date,
+  date_modified date NOT NULL DEFAULT current_date,
   PRIMARY KEY (id)
 );
 
@@ -138,26 +138,26 @@ ALTER TABLE importantnotices
   
 
 --
--- Automatically update the modified timestamps on update (all tables that use the modified timestamp)
+-- Automatically update the modified date on update (all tables that use the modified date)
 --
 
-CREATE FUNCTION update_modified_timestamp_to_now()
+CREATE FUNCTION update_modified_date_to_now()
 RETURNS TRIGGER AS $$
 BEGIN
-   NEW.changetimestamp = now(); 
+   NEW.changedate = current_date
    RETURN NEW;
 END;
 $$ language 'plpgsql';
 
 -- Articles table
-CREATE TRIGGER update_articles_modified_timestamp_to_now BEFORE UPDATE
+CREATE TRIGGER update_articles_modified_date_to_now BEFORE UPDATE
 ON articles FOR EACH ROW EXECUTE PROCEDURE 
-update_modified_timestamp_to_now();
+update_modified_date_to_now();
 
 -- Workshop table
-CREATE TRIGGER update_workshop_modified_timestamp_to_now BEFORE UPDATE
+CREATE TRIGGER update_workshop_modified_date_to_now BEFORE UPDATE
 ON workshop FOR EACH ROW EXECUTE PROCEDURE 
-update_modified_timestamp_to_now();
+update_modified_date_to_now();
 
 -- Give users their permissions
 GRANT SELECT ON articles, articletags, workshop, workshoptags, importantnotices, users  TO tmcselector;
