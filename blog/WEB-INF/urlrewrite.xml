@@ -11,12 +11,6 @@
         <to>/sitemap.jsp</to>
     </rule>
 
-    <!-- About page rules -->
-    <rule match-type="regex">
-        <from>^/about/?$</from>
-        <to>/about.jsp</to>
-    </rule>
-
     <!-- Tag rules -->
     <rule match-type="regex">
         <from>^/tags/([\w*](-?[\w*])*)/?$</from>
@@ -26,12 +20,6 @@
     <rule match-type="regex">
         <from>^/tags/?$</from>
         <to>/tags.jsp</to>
-    </rule>
-
-    <!-- Internal error page handling -->
-    <rule>
-        <from>^error/([0-9]*)/?$</from>
-        <to>/error.jsp?error=$1</to>
     </rule>
 
     <!-- Archive rules-->
