@@ -207,7 +207,7 @@
     <!-- RSS Item tag -->
     <tag>
         <name>RSSItem</name>
-        <tag-class>com.themetacity.rsstags.Item</tag-class>
+        <tag-class>com.themetacity.tags.rss.Item</tag-class>
         <body-content>scriptless</body-content>
 
         <attribute>
