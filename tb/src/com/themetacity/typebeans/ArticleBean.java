@@ -14,19 +14,19 @@ public class ArticleBean {
     private String articleText;          // The actual meat of the article
     private String author;               // Who wrote the article
     private String email;                // Contacting the author
-    private Date dateTime;               // The dateTime/time the artcle was pubished
-    private Date timestamp;              // The dateTime/time the artcle was pubished
+    private Date dateTime;               // The dateTime/time the article was published
+    private Date timestamp;              // The dateTime/time the article was modified
     private LinkedList<TagBean> tags;    // A list of the tags that this article was published under
 
     /**
-     * Build a URL friendly strign from the given title
-     * A hypehn delimeted string, stripped of non url friendly characters and potential punctuation errors
+     * Build a URL friendly string from the given title
+     * A hyphen delimited string, stripped of non url friendly characters and potential punctuation errors
      *
      * @param toBuild String to build into the delimited url
      * @return a String with the space replaced by hyphens
      */
     public String buildURL(String toBuild) {
-        toBuild = toBuild.trim();                     // Remove innapropriate whitespace
+        toBuild = toBuild.trim();                     // Remove inappropriate whitespace
         toBuild = toBuild.replaceAll("[^\\w ]", "");  // Remove non URL friendly characters (inc multiple spaces)
         toBuild = toBuild.replaceAll(" +", "-");      // Change the spaces to hyphens
 
@@ -80,7 +80,7 @@ public class ArticleBean {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    //todo fix the output to have no decimals
     public Date getDateTime() {
         return dateTime;
     }
