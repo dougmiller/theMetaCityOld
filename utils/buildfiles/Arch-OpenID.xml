@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project name="OpenID" default="package" basedir="../../OpenID">
-    <property name="app.name" value="OpenID"/>
+    <property name="deployapp.name" value="OpenID"/>
     <property name="deploy.dir" value="/srv/http/localcity"/>
     <property name="production.dir" value="/media/tmc/"/>    
 
@@ -9,10 +9,20 @@
     </target>
 
     <target name="package" depends="clean">
-        <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
+		<!-- Error pages need to be put in and included -->
+		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/css-testing.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
+        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+        <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
     </target>
 
     <target name="production" depends="clean">
-        <jar destfile="${production.dir}/${app.name}.war" basedir="${basedir}"/>
+		<!-- Error pages need to be put in and included -->
+		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/css-production.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
+        <jar destfile="${production.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+        <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
     </target>
 </project>

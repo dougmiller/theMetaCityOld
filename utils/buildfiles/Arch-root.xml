@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <project name="ROOT" default="package" basedir="../../ROOT">
-    <property name="deployapp.name" value="ROOT"/>
+    <property name="app.name" value="ROOT"/>
     <property name="deploy.dir" value="/srv/http/localcity"/>
     <property name="production.dir" value="/media/tmc/"/>
     
     <target name="clean">
-        <delete file="${deploy.dir}/${deployapp.name}.war"/>
+        <delete file="${deploy.dir}/${app.name}.war"/>
     </target>
 
     <target name="package" depends="clean">
@@ -13,7 +13,7 @@
         <copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
         <copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
 		<copy file="../utils/includes/css-testing.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
-        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+        <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
         <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
     </target>
 
@@ -22,7 +22,7 @@
         <copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
         <copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
 		<copy file="../utils/includes/css-production.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
-        <jar destfile="${production.dir}/${deployapp.name}.war" basedir="${basedir}"/>
+        <jar destfile="${production.dir}/${app.name}.war" basedir="${basedir}"/>
         <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
     </target>
 </project>
