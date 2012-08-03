@@ -144,7 +144,7 @@ ALTER TABLE importantnotices
 CREATE FUNCTION update_modified_date_to_now()
 RETURNS TRIGGER AS $$
 BEGIN
-   NEW.changedate = current_date
+   NEW.changedate = current_date;
    RETURN NEW;
 END;
 $$ language 'plpgsql';
