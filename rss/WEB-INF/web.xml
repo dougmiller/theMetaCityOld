@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-         version="2.4">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_3_0.xsd"
+       version="3.0">
 
     <display-name>RSS</display-name>
     <description>RSS feeds application</description>
 
-    <welcome-file-list>
-        <welcome-file>/index.jsp</welcome-file>
-        <welcome-file>/index.html</welcome-file>
-    </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jspf/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/jspf/500.jsp</location>
+    </error-page>
 
     <resource-ref>
         <description>Resource ref to the datasource configured in the context.xml</description>
@@ -22,16 +26,16 @@
     <filter>
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-
         <init-param>
             <param-name>statusEnabled</param-name>
             <param-value>false</param-value>
         </init-param>
-        
     </filter>
 
     <filter-mapping>
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 </web-app>
