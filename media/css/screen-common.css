@@ -10,7 +10,7 @@ h1 {
 	font-family: Orbitron;
 }
 
-h2, h3, h4, h5{
+h2, h3, h4, h5 {
 	font-family: Inconsolata;
 }
 
@@ -57,7 +57,7 @@ code {
     display: block;
     color: green;
     padding: 5px;
-    font-family: "Droid Sans", sans-serif;
+    font-family: "Inconsolata", sans-serif;
 	font-size: 14px;
 }
 
