@@ -11,7 +11,7 @@ commands=(mount unmount)
 
 if [ "$1" == "${commands[0]}" ];  then      # Mounts the file system
   if [ "$2" == "tmc" ];  then
-    sshfs doug@enc:/home/www/tmctomcat /media/tmc   # Port set in ssh config (not sshd config). Directory needs to exist and need rights on it.
+    sshfs doug@enc:/srv/http/tmc /media/tmc   # Port set in ssh config (not sshd config). Directory needs to exist and need rights on it.
   fi
 
 elif [ "$1" == "${commands[1]}" ];  then    # Unmounts the file system
