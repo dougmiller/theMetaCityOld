@@ -161,3 +161,4 @@ update_modified_date_to_now();
 
 -- Give users their permissions
 GRANT SELECT ON articles, articletags, workshop, workshoptags, importantnotices, users  TO tmcselector;
+ALTER USER tmcselector WITH CONNECTION LIMIT 10;
