@@ -11,12 +11,14 @@ tail screen-root.css -n +2 >> screen.css
 tail screen-blog.css -n +2 >> screen.css
 tail screen-workshop.css -n +2 >> screen.css
 
-echo 'Removing unessary commands'
+echo 'Removing unessary characters'
 # Comments
-# newlines, tabs and spaces
-sed -i ':a;N;$!ba;s/\n//g' screen.css
-sed -i 's/\t//g' screen.css
-#sed -i 's/ //g' screen.css   Spacing matters!
+# new lines, tabs and spaces
+sed -i ':a;N;$!ba;s/\n//g' screen.css  # New lines
+sed -i 's/\t//g' screen.css            # Tabs
+sed -i 's/\(;\) */\1/g' screen.css     # Spacing matters!
+sed -i 's/ *\({\) */\1/g' screen.css   # Spacing still matters!
+sed -i 's/\(:\) */\1/g' screen.css     # Spacing never stopped mattering!
 
 echo 'Finished combining all screen css files'
 
