@@ -1,28 +1,18 @@
 <?xml version="1.0"?>
-<project name="OpenID" default="package" basedir="../../OpenID">
-    <property name="deployapp.name" value="OpenID"/>
+<project name="OpenID" default="development" basedir="../../OpenID">
+    <property name="app.name" value="OpenID"/>
     <property name="deploy.dir" value="/srv/http/localcity"/>
     <property name="production.dir" value="/media/tmc/"/>    
-
+    
     <target name="clean">
-        <delete file="${deploy.dir}/${app.name}.war"/>
+        <ant antfile="../utils/buildfiles/Arch-common.xml" target="clean"/>
     </target>
 
-    <target name="package" depends="clean">
-		<!-- Error pages need to be put in and included -->
-		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
-		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
-		<copy file="../utils/includes/css-testing.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
-        <jar destfile="${deploy.dir}/${deployapp.name}.war" basedir="${basedir}"/>
-        <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
+    <target name="development" depends="clean">
+        <ant antfile="../utils/buildfiles/Arch-common.xml" target="development"/>
     </target>
 
     <target name="production" depends="clean">
-		<!-- Error pages need to be put in and included -->
-		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
-		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
-		<copy file="../utils/includes/css-production.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
-        <jar destfile="${production.dir}/${deployapp.name}.war" basedir="${basedir}"/>
-        <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
+        <ant antfile="../utils/buildfiles/Arch-common.xml" target="production"/>
     </target>
 </project>

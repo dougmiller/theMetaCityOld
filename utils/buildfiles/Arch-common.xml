@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project name="Arch common deployment setup" default="development" basedir=".">
+
+    <target name="clean">
+        <delete file="${deploy.dir}/${app.name}.war"/>
+    </target>
+
+    <target name="development">
+		<!-- Error pages need to be put in and included -->
+		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/css-testing.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
+		<copy file="../utils/includes/js-testing.jspf" tofile="${basedir}/WEB-INF/jspf/js.jspf"/>
+        <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
+        <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
+        <delete file="${basedir}/WEB-INF/jspf/js.jspf"/>
+    </target>
+
+    <target name="production">
+		<!-- Error pages need to be put in and included -->
+		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
+		<copy file="../utils/includes/css-production.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
+		<copy file="../utils/includes/js-production.jspf" tofile="${basedir}/WEB-INF/jspf/js.jspf"/>
+        <jar destfile="${production.dir}/${app.name}.war" basedir="${basedir}"/>
+        <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
+        <delete file="${basedir}/WEB-INF/jspf/js.jspf"/>
+    </target>
+</project>

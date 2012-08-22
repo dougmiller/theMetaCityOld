@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="media" default="package" basedir="../../">   <!-- We take care of the specific dir to copy below -->
+<project name="media" default="development" basedir="../../">   <!-- We take care of the specific dir to copy below -->
     <property name="app.name" value="media"/>
     <property name="deploy.dir" value="/srv/http/localcity"/>
     <property name="production.dir" value="/media/tmc/"/>
@@ -10,18 +10,10 @@
 		<delete dir="${deploy.dir}/${app.name}/js"/>
     </target>
 
-    <target name="package" depends="clean">
+    <target name="development" depends="clean">
         <copy todir="${deploy.dir}/${app.name}/css">			<!-- here -->
 			<fileset dir="${app.name}/css">
-  				<include name="screen-common.css"/>
-  				<include name="screen-root.css"/>
-  				<include name="screen-blog.css"/>
-  				<include name="screen-workshop.css"/>
-
-  				<include name="mobile-common.css"/>
-  				<include name="mobile-root.css"/>
-  				<include name="mobile-blog.css"/>
-  				<include name="mobile-workshop.css"/>
+                <include name="**/*.css"/>
 			</fileset>
 		</copy>
 
@@ -40,13 +32,15 @@
   				<include name="mobile.css"/>
 			</fileset>
         </copy>
-        <delete file="${app.name}/css/screen.css"/>                 <!-- We dont need them here anymore sice the folder is deployed -->
+        <delete file="${app.name}/css/screen.css"/>                 <!-- We dont need them here anymore sice the app is deployed -->
         <delete file="${app.name}/css/mobile.css"/>
 
-        <copy todir="${production.dir}/${app.name}/js">			<!-- here -->
+        <exec executable="utils/jscombiner.sh" />                  <!-- Smash the files together to optimise requests -->
+        <copy todir="${production.dir}/${app.name}/js">			   <!-- here -->
 			<fileset dir="${app.name}/js">
-  				<include name="**/*.js"/>
+  				<include name="tmcscripts.js"/>
 			</fileset>
 		</copy>
+        <delete file="${app.name}/js/tmcscripts.js"/>           <!-- We dont need this here anymore sice the app is deployed -->
     </target>
 </project>
