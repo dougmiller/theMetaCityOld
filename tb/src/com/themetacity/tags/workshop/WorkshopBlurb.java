@@ -26,7 +26,7 @@ public class WorkshopBlurb extends SimpleTagSupport {
         JspWriter out = getJspContext().getOut();
         try {
             out.println("    <article class=\"workshopentry\">");
-            out.println("        <header class=\"left\">");
+            out.println("        <header>");
             out.println("            <h1><a href=\"/workshop/" + workshop.getId() + "\">" + workshop.getTitle() + "</a></h1>");
             out.println("            <h5>Started: " + workshop.getCreatedDate() + "</h5>");
 
