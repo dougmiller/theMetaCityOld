@@ -14,26 +14,26 @@ $(document).ready(function () {
 		entries.fadeOut(500, function () {
 			noResults.hide();
 
-			$('.workshopentry .left', this).each(function () {
+			$('article.workshopentry header', this).each(function () {
 				$(this).parent().hide();
 
 				// Clear results of previous search
 				$('li', this).removeClass('searchMatchTag');
-				$('h3', this).removeClass('searchMatchTitle');
+				$('h1', this).removeClass('searchMatchTitle');
 
-				// Cheack the title
-				$('h3', this).each(function () {
+				// Check the title
+				$('h1', this).each(function () {
 					if ($(this).text().match(searchPattern)) {
-						$(this).closest('.workshopentry').show();
 						$(this).addClass('searchMatchTitle');
+						$(this).closest('.workshopentry').show();
 					}
 				});
 
 				// Check the tags
 				$('li', this).each(function () {
 					if ($(this).text().match(searchPattern)) {
-						$(this).closest('.workshopentry').show();
 						$(this).addClass('searchMatchTag');
+						$(this).closest('.workshopentry').show();
 					}
 				});
 			});
@@ -47,16 +47,16 @@ $(document).ready(function () {
 	}
 
 	function reset() {
-		entries.fadeOut(500, function () {
-			$('.left ul li').removeClass('searchMatchTag');
-			$('.left h3').removeClass('searchMatchTitle');
+		entries.fadeOut(300, function () {
+			$('header ul li').removeClass('searchMatchTag');
+			$('header h1', this).removeClass('searchMatchTitle');
 			$('.workshopentry', this).show();
 			noResults.hide();
 			entries.fadeIn();
 		});
 	}
 
-	$('.workshopentry .left ul li').click(function () {
+	$('article.workshopentry header ul li').click(function () {
 		filter($(this).text());
 	});
 
@@ -73,7 +73,6 @@ $(document).ready(function () {
 				reset();
 			}, 500);
 		}
-
 	});
 
 	$('#reset').click(function () {
@@ -81,4 +80,3 @@ $(document).ready(function () {
 		reset();
 	});
 });
-
