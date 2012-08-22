@@ -15,6 +15,6 @@
             </c:forEach>
 		</c:otherwise>
 	</c:choose>
-	<p class="ancillaryright"><a href="/workshop">Back to the workshop.</a></p>
+	<p class="ancillaryright"><a href="/workshop/">Back to the workshop.</a></p>
 </div>
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>

@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
 		<div id="centeredcontainer">
-			<img alt="The MetaCity Logo" src="/media/site-images/logo.svg" height="600px" width="600px"/>
+			<img alt="The MetaCity Logo" src="/media/site-images/logo.svg" height="600" width="600"/>
 			<h1><a href="/blog/">Blog</a></h1>&nbsp;
 			<h1><a href="/workshop/">Workshop</a></h1>
 			<br />
