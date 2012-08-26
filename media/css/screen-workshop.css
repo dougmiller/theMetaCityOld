@@ -58,7 +58,7 @@
     background-image: none;
 }
 
-.workshopentry .left {
+.workshopentry header {
     width: 200px;
     margin-right: 20px;
     padding-right: 20px;
@@ -67,18 +67,18 @@
     height: 100%
 }
 
-.workshopentry .left ul {
-    font-size: 9pt;
-    line-height: 1;
+.workshopentry header ul {
+    font-size: 0.8em;
+    line-height: 1.1em;
     list-style: none outside none;
 }
 
-.workshopentry .left li {
+.workshopentry header li {
     text-decoration: underline;
     cursor: pointer;
 }
 
-.workshopentry .left h3, .workshopentry .left h5 {
+.workshopentry header h1, .workshopentry header h5 {
     padding: 0;
     margin: 0;
 }
