@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="Tags and Beans" default="package" basedir="../../tb">
     <property name="app.name" value="theMetaCityTB" />
-    <property name="builddest.dir" value="../" />
+    <property name="builddest.dir" value="../out" />
     <property name="classpath.dir" value="/usr/share/tomcat7/lib" />
     <property name="compile.dir" value="classes" />
     <property name="src.dir" value="src" />
@@ -19,7 +19,7 @@
 		<javac srcdir="${src.dir}" destdir="${compile.dir}" target="1.7"
                classpath="${classpath.dir}/log4j.jar;
                           ${classpath.dir}/jsp-api.jar;
-                          ${classpath.dir}/junit4.jar;"/>
+                          ${classpath.dir}/junit.jar;"/>
     </target>
 
     <!-- Include on the the classes for development -->
@@ -27,15 +27,14 @@
         <!-- Include the taglib def list so that the jar actually will work, as it does no get pulled in with the compile -->
         <copy file="${src.dir}/META-INF/themetacity.tld" toFile="${compile.dir}/META-INF/themetacity.tld" />
 
-        <jar destfile="${builddest.dir}/${app.name}.jar" basedir="${compile.dir}"/>       <!-- Gets deleted -->
+        <jar destfile="${builddest.dir}/${app.name}.jar" basedir="${compile.dir}"/>        <!--Kept for a reference in IDEs and for looking at -->
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${root.dir}/${app.name}.jar"/>
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${blog.dir}/${app.name}.jar"/>
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${rss.dir}/${app.name}.jar"/>
         <copy file="${builddest.dir}/${app.name}.jar" toFile="${workshop.dir}/${app.name}.jar"/>
-        <delete file="${builddest.dir}/${app.name}.jar"/>
-    </target>
+ </target>
 
-    <!-- Generate javadocs -->
+ <!-- Generate javadocs -->
     <target name="javadoc">
         <javadoc sourcepath="${src.dir}" destdir="${compile.dir}/javadoc" classpath="${classpath.dir}/jsp-api.jar; ${classpath.dir}/log4j.jar; ${classpath.dir}/junit-4.7.jar;"/>
     </target>
