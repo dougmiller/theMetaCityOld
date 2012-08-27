@@ -172,7 +172,7 @@ public class TagProcessBean {
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT articletags.tag, MAX(articles.timestamp) as latest "
+                    "SELECT articletags.tag, MAX(articles.date_modified) as latest "
                             + "FROM articles, articletags "
                             + "WHERE articletags.id = articles.id "
                             + "GROUP BY articletags.tag"));
@@ -195,7 +195,7 @@ public class TagProcessBean {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResultSet in TagProcessBean().getSitemapTags()");
+                    logger.warn("You had an error closing the ResultSet in TagProcessBean().getSiteMapTags()");
                     logger.warn(SQLEx);
                 }
             }

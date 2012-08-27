@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="d" %>
 <%@ taglib uri="http://com.themetacity" prefix="tmc" %>
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <jsp:useBean id="ArticleProcessBean" scope="page" class="com.themetacity.beans.ArticleProcessBean"/>
     <c:set var="sitemapArticles" value="${ArticleProcessBean.sitemapArticles}"/>
 

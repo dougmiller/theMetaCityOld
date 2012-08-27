@@ -41,7 +41,7 @@ public class ArticleProcessBean {
     public ArticleProcessBean() {
     }
 
-    // Perforn the update commands where you just want things to be closed and finished.
+    // Perform the update commands where you just want things to be closed and finished.
     // Otherwise call the database manually and do it that way
     private int processUpdate() {
         int result = dbaBean.executeUpdate();
@@ -367,7 +367,7 @@ public class ArticleProcessBean {
     /**
      * Add an article
      *
-     * @return True from succesfully adding a new article or fasle for not adding it
+     * @return True from successfully adding a new article or false for not adding it
      */
     public int getAddArticle() {
         DatabaseBean dbaBean = new DatabaseBean();
@@ -514,7 +514,7 @@ public class ArticleProcessBean {
     /**
      * Delete an article by it's id number. Including associated tags.
      *
-     * @return and integer shoing the number of rows affected
+     * @return and integer showing the number of rows affected
      */
     public int getDeleteArticle() {
         try {
@@ -533,7 +533,7 @@ public class ArticleProcessBean {
     /**
      * Get all the articles for the edit/delete list in the admin app
      *
-     * @return a linked list containg all the articles in ArticleBean format
+     * @return a linked list containing all the articles in ArticleBean format
      */
     public LinkedList<ArticleBean> getAllAdminArticles() {
         DatabaseBean dbaBean = new DatabaseBean();
@@ -607,7 +607,7 @@ public class ArticleProcessBean {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getMatchURLByTitle()");
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getMatchURLByTitle()");
                     logger.warn(SQLEx);
                 }
             }
@@ -617,7 +617,7 @@ public class ArticleProcessBean {
         return listOfBeans;
     }
 
-    // Retrive the ID of articles based on the title. Used primarily to get the id of just entered articles
+    // Retrieve the ID of articles based on the title. Used primarily to get the id of just entered articles
     private int getIDOfArticleFromTitle() {
         DatabaseBean dbaBean = new DatabaseBean();
         int idOfArticle = -1;
@@ -655,8 +655,8 @@ public class ArticleProcessBean {
 
     public LinkedList<ArticleBean> getSitemapArticles() {
         DatabaseBean articlesDBBean = new DatabaseBean();
-        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
         ResultSet result = null;
+        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
 
         try {
             PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
@@ -683,7 +683,7 @@ public class ArticleProcessBean {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getSitemapArticles()");
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getSitemapArticles()");
                     logger.warn(SQLEx);
                 }
             }
@@ -699,10 +699,10 @@ public class ArticleProcessBean {
     public Date getLastUpdateDate() {
         DatabaseBean articlesDBBean = new DatabaseBean();
         ResultSet result = null;
-        Date lastModified = new Date(0);
+        Date lastModified = new Date();
         try {
             PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
-                    "SELECT max(date_modified) as timestamp " +
+                    "SELECT MAX(date_modified) " +
                             "FROM articles;");
 
             articlesDBBean.setPrepStmt(prepStmt);
@@ -710,7 +710,7 @@ public class ArticleProcessBean {
             result = articlesDBBean.executeQuery();
 
             while (result.next()) {
-                lastModified = result.getDate("timestamp");    // Query only returns 1 result;
+                lastModified = result.getDate("date_modified");    // Query only returns 1 result;
             }
         } catch (SQLException SQLEx) {
             logger.warn("You had an error in ArticleProcessBean.getLastUpdateDate()");
@@ -720,7 +720,7 @@ public class ArticleProcessBean {
                 try {
                     result.close();
                 } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResutlSet in ArticleProcessBean.getLastUpdateDate()");
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getLastUpdateDate()");
                     logger.warn(SQLEx);
                 }
             }
@@ -729,7 +729,6 @@ public class ArticleProcessBean {
         
         return lastModified;
     }
-
 
     /**
      * Get the title of the RSS Feed based on the year month and day params

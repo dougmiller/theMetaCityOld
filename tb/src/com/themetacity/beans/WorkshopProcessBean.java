@@ -178,11 +178,11 @@ public class WorkshopProcessBean {
     public Date getLastUpdateDate() {
         DatabaseBean workshopDBBean = new DatabaseBean();
         ResultSet result = null;
-        Date lastModified = new Date(0);
+        Date lastModified = new Date();
 
         try {
             PreparedStatement prepStmt = workshopDBBean.getConn().prepareStatement(
-                    "SELECT MAX(date_modified) as timestamp " +
+                    "SELECT MAX(date_modified) " +
                             "FROM workshop;");
 
             workshopDBBean.setPrepStmt(prepStmt);
@@ -190,7 +190,7 @@ public class WorkshopProcessBean {
             result = workshopDBBean.executeQuery();
 
             while (result.next()) {
-                lastModified = result.getTimestamp("timestamp");    // Query only returns 1 result (due to MAX);
+                lastModified = result.getTimestamp("date_modified");    // Query only returns 1 result (due to MAX);
             }
 
         } catch (SQLException SQLEx) {
