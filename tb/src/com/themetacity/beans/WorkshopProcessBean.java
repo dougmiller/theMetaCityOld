@@ -132,8 +132,8 @@ public class WorkshopProcessBean {
         try {
             workshopDBBean.setPrepStmt(workshopDBBean.getConn().prepareStatement(
                     "SELECT id, title, blurb, date_created, date_modified " +
-                            "FROM workshop " +
-                            "ORDER BY id desc;"));
+                    "FROM workshop " +
+                    "ORDER BY id desc;"));
 
             result = workshopDBBean.executeQuery();
 
@@ -182,15 +182,15 @@ public class WorkshopProcessBean {
 
         try {
             PreparedStatement prepStmt = workshopDBBean.getConn().prepareStatement(
-                    "SELECT MAX(date_modified) " +
-                            "FROM workshop;");
+                    "SELECT MAX(date_modified) AS date_modified " +
+                    "FROM workshop;");
 
             workshopDBBean.setPrepStmt(prepStmt);
 
             result = workshopDBBean.executeQuery();
 
             while (result.next()) {
-                lastModified = result.getTimestamp("date_modified");    // Query only returns 1 result (due to MAX);
+                lastModified = result.getDate("date_modified");    // Query only returns 1 result (due to MAX);
             }
 
         } catch (SQLException SQLEx) {

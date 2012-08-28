@@ -4,14 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="d" %>
 <%@ taglib uri="http://com.themetacity" prefix="tmc" %>
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    <jsp:useBean id="ArticleProcessBean" scope="page" class="com.themetacity.beans.ArticleProcessBean"/>
-    <c:set var="sitemapArticles" value="${ArticleProcessBean.sitemapArticles}"/>
-
-    <jsp:useBean id="ArticleLatestUpdateProcessBean" scope="page" class="com.themetacity.beans.ArticleProcessBean"/>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <jsp:useBean id="ArticleLatestUpdateProcessBean" class="com.themetacity.beans.ArticleProcessBean"/>
     <c:set var="articleUpdateDate" value="${ArticleLatestUpdateProcessBean.lastUpdateDate}"/>
 
-    <jsp:useBean id="TagProcessBean" scope="page" class="com.themetacity.beans.TagProcessBean"/>
+    <jsp:useBean id="ArticleProcessBean" class="com.themetacity.beans.ArticleProcessBean"/>
+    <c:set var="sitemapArticles" value="${ArticleProcessBean.sitemapArticles}"/>
+
+    <jsp:useBean id="TagProcessBean" class="com.themetacity.beans.TagProcessBean"/>
     <c:set var="sitemapArticleTags" value="${TagProcessBean.sitemapTags}"/>
 
     <url>

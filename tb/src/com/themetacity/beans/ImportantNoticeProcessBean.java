@@ -38,9 +38,8 @@ public class ImportantNoticeProcessBean {
         LinkedList<ImportantNoticeBean> listOfNotices = new LinkedList<ImportantNoticeBean>();
         ResultSet result = null;
         try {
-            noticesDBBean.setPrepStmt(noticesDBBean.getConn().prepareStatement("SELECT pseudonym, message, date_to, date_from " +
-                    "FROM importantnotices, users " +
-                    "WHERE importantnotices.username = users.username " +
+            noticesDBBean.setPrepStmt(noticesDBBean.getConn().prepareStatement("SELECT message, date_to, date_from " +
+                    "FROM importantnotices " +
                     "AND NOW() >= date_from AND NOW() <= date_to;"));
 
             result = noticesDBBean.executeQuery();
@@ -48,7 +47,6 @@ public class ImportantNoticeProcessBean {
             while (result.next()) {
                 ImportantNoticeBean noticeBean = new ImportantNoticeBean();
 
-                noticeBean.setAuthor(result.getString("pseudonym"));
                 noticeBean.setMessage(result.getString("message"));
                 noticeBean.setDateTo(result.getDate("date_to"));
                 noticeBean.setDateFrom(result.getDate("date_from"));
@@ -90,7 +88,6 @@ public class ImportantNoticeProcessBean {
                 ImportantNoticeBean noticeBean = new ImportantNoticeBean();
 
                 noticeBean.setMessageID(result.getString("id"));
-                noticeBean.setUsername(result.getString("username"));
                 noticeBean.setMessage(result.getString("message"));
                 noticeBean.setDateTo(result.getDate("date_to"));
                 noticeBean.setDateFrom(result.getDate("date_from"));
@@ -133,7 +130,6 @@ public class ImportantNoticeProcessBean {
                 ImportantNoticeBean noticeBean = new ImportantNoticeBean();
 
                 noticeBean.setMessageID(result.getString("id"));
-                noticeBean.setUsername(result.getString("username"));
                 noticeBean.setMessage(result.getString("message"));
                 noticeBean.setDateTo(result.getDate("date_to"));
                 noticeBean.setDateFrom(result.getDate("date_from"));

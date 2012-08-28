@@ -74,10 +74,9 @@ CREATE TABLE users (
 CREATE SEQUENCE importantnotices_id_seq;
 CREATE TABLE importantnotices (
   id int UNIQUE NOT NULL DEFAULT nextval('importantnotices_id_seq'),
-  username varchar(30) NOT NULL,
   message varchar(500) NOT NULL,
-  date_created date NOT NULL DEFAULT current_date,
-  date_modified date NOT NULL DEFAULT current_date,
+  date_from date NOT NULL DEFAULT current_date,
+  date_to date NOT NULL DEFAULT current_date + 7,     -- 7 days
   PRIMARY KEY (id)
 );
 

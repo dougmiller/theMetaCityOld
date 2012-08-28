@@ -702,7 +702,7 @@ public class ArticleProcessBean {
         Date lastModified = new Date();
         try {
             PreparedStatement prepStmt = articlesDBBean.getConn().prepareStatement(
-                    "SELECT MAX(date_modified) " +
+                    "SELECT MAX(date_modified) AS date_modified " +
                             "FROM articles;");
 
             articlesDBBean.setPrepStmt(prepStmt);

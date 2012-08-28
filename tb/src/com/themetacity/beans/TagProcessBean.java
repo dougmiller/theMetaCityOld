@@ -172,7 +172,7 @@ public class TagProcessBean {
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT articletags.tag, MAX(articles.date_modified) as latest "
+                    "SELECT articletags.tag, MAX(articles.date_modified) AS date_modified "
                             + "FROM articles, articletags "
                             + "WHERE articletags.id = articles.id "
                             + "GROUP BY articletags.tag"));
@@ -183,7 +183,7 @@ public class TagProcessBean {
                 TagBean tagBean = new TagBean();
 
                 tagBean.setTag(result.getString("tag"));
-                tagBean.setLastUpdatedDate(result.getDate("latest"));
+                tagBean.setLastUpdatedDate(result.getDate("date_modified"));
 
                 listOfTags.add(tagBean);
             }

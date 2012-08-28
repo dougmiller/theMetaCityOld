@@ -18,13 +18,12 @@ public class ImportantNotice extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
         JspWriter out = getJspContext().getOut();
         try {
-            out.println("<div class=\"importantNotice\">");
-            out.println("   " + importantNotice.getMessage());
-            out.println("   <div class=\"importantnoticedates\">Posted: " + importantNotice.getDateFrom() + " End: " + importantNotice.getDateTo() + "</div>");
-            out.println("   <div class=\"noticeAuthor\">- " + importantNotice.getAuthor() + "</div>");
-            out.println("</div>");
+            out.println("<aside class=\"importantNotice\">");
+            out.println("   <p>" + importantNotice.getMessage() + "</p>");
+            out.println("   <p class=\"importantNoticeFooter\">Posted: " + importantNotice.getDateFrom() + " End: " + importantNotice.getDateTo() + "</p>");
+            out.println("</aside>");
         } catch (IOException IOEx) {
-            logger.warn("There was an error.");
+            logger.warn("There was an error in ImportantNotices tag.");
             logger.warn(IOEx);
         }
     }

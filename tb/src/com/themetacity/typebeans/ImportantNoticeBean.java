@@ -10,8 +10,6 @@ import java.util.Date;
  */
 public class ImportantNoticeBean {
     private String messageID;
-    private String username;
-    private String author;      // As the pseudonym not username
     private String message;
     private Date dateTo;
     private Date dateFrom;
@@ -22,22 +20,6 @@ public class ImportantNoticeBean {
 
     public void setMessageID(String messageID) {
         this.messageID = messageID;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getMessage() {

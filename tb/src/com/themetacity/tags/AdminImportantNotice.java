@@ -14,8 +14,7 @@ public class AdminImportantNotice extends SimpleTagSupport {
     private static Logger logger = Logger.getLogger(AdminImportantNotice.class);
 
     public void doTag() {
-        JspContext jspContext = getJspContext();
-        JspWriter out = jspContext.getOut();
+        JspWriter out = getJspContext().getOut();
 
         try {
             out.println("<div>");
