@@ -1,82 +1,127 @@
 $(document).ready(function () {
-	"use strict";
-	var noResults, searchBox, entries, searchTimout;
-	noResults = $('#noresults');
-	searchBox = $('#searchinput');
-	entries = $('#entries');
-	searchTimout = null;
+    "use strict";
+    var noResults, searchBox, entries, searchTimeout, firstRun, loc, hist, win;
+    noResults = $('#noresults');
+    searchBox = $('#searchinput');
+    entries = $('#entries');
+    searchTimeout = null;
+    firstRun = true;
+    loc = location;
+    hist = history;
+    win = window;
 
-	noResults.hide();
+    function clearFilter() {
+        entries.fadeOut(150, function () {
+            noResults.hide();
 
-	function filter(searchTerm) {
-		var searchPattern = new RegExp(searchTerm, 'ig');
+            $('header', this).each(function () {
+                $(this).parent().hide();
 
-		entries.fadeOut(500, function () {
-			noResults.hide();
+                // Clear results of previous search
+                $('li', this).removeClass('searchMatchTag');
+                $('h1', this).removeClass('searchMatchTitle');
+                $(this).closest('.workshopentry').show();
+            });
+            entries.fadeIn(150);
+        });
+    }
 
-			$('article.workshopentry header', this).each(function () {
-				$(this).parent().hide();
+    function filter(searchTerm) {
+        var searchPattern = new RegExp(searchTerm, 'ig');
 
-				// Clear results of previous search
-				$('li', this).removeClass('searchMatchTag');
-				$('h1', this).removeClass('searchMatchTitle');
+        entries.fadeOut(150, function () {
+            noResults.hide();
 
-				// Check the title
-				$('h1', this).each(function () {
-					if ($(this).text().match(searchPattern)) {
-						$(this).addClass('searchMatchTitle');
-						$(this).closest('.workshopentry').show();
-					}
-				});
+            $('header', this).each(function () {
+                $(this).parent().hide();
 
-				// Check the tags
-				$('li', this).each(function () {
-					if ($(this).text().match(searchPattern)) {
-						$(this).addClass('searchMatchTag');
-						$(this).closest('.workshopentry').show();
-					}
-				});
-			});
+                // Clear results of previous search
+                $('li', this).removeClass('searchMatchTag');
+                $('h1', this).removeClass('searchMatchTitle');
 
-			if ($('.workshopentry[style*="block"]').length === 0) {
-				noResults.show();
-			}
+                // Check the title
+                $('h1', this).each(function () {
+                    if ($(this).text().match(searchPattern)) {
+                        $(this).addClass('searchMatchTitle');
+                        $(this).closest('.workshopentry').show();
+                    }
+                });
 
-			entries.fadeIn();
-		});
-	}
+                // Check the tags
+                $('li', this).each(function () {
+                    if ($(this).text().match(searchPattern)) {
+                        $(this).addClass('searchMatchTag');
+                        $(this).closest('.workshopentry').show();
+                    }
+                });
+            });
 
-	function reset() {
-		entries.fadeOut(300, function () {
-			$('header ul li').removeClass('searchMatchTag');
-			$('header h1', this).removeClass('searchMatchTitle');
-			$('.workshopentry', this).show();
-			noResults.hide();
-			entries.fadeIn();
-		});
-	}
+            if ($('.workshopentry[style*="block"]').length === 0) {
+                noResults.show();
+            }
 
-	$('article.workshopentry header ul li').click(function () {
-		filter($(this).text());
-	});
+            entries.fadeIn(150);
+        });
+    }
 
-	searchBox.bind('keyup', function () {
-		clearTimeout(searchTimout);
-		if ($(this).val().length) {
-			searchTimout = setTimeout(function () {
-				filter(searchBox.val());
-			}, 500);
-		}
+    function reset() {
+        entries.fadeOut(150, function () {
+            loc.pathname = '/workshop/';           // This seems a terrible way to do this but it is working for now so im not complaining
+            $('header ul li', this).removeClass('searchMatchTag');
+            $('header h1', this).removeClass('searchMatchTitle');
+            $('.workshopentry', this).show();
+            noResults.hide();
+            entries.fadeIn(150);
+        });
+    }
 
-		if ($(this).val().length === 0) {
-			searchTimout = setTimeout(function () {
-				reset();
-			}, 500);
-		}
-	});
+    $('article.workshopentry header ul li').click(function () {
+        hist.pushState(null, null, $(this).text());
+        filter($(this).text());
+    });
 
-	$('#reset').click(function () {
-		searchBox.val('');
-		reset();
-	});
+    searchBox.bind('keyup', function () {
+        clearTimeout(searchTimeout);
+        if ($(this).val().length) {
+            searchTimeout = setTimeout(function () {
+                var searchVal = searchBox.val();
+                hist.pushState(null, null, searchVal);
+                filter(searchVal);
+            }, 500);
+        }
+
+        if ($(this).val().length === 0) {
+            searchTimeout = setTimeout(function () {
+                reset();
+            }, 500);
+        }
+    });
+
+    $('#reset').click(function () {
+        searchBox.val('');
+        reset();
+    });
+
+    function handlePathChange() {
+        var address = loc.pathname.split('/');
+        if (address[2] !== "") {
+            filter(address[2]);
+        } else {
+            if (!firstRun) {
+                clearFilter();
+            }
+        }
+    }
+
+    win.addEventListener("popstate", function () {
+        handlePathChange();
+    });
+
+    noResults.hide();
+
+    if (firstRun) {
+        handlePathChange();
+        firstRun = false;
+    }
+
 });
