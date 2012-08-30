@@ -1,4 +1,5 @@
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<%@ include file="/WEB-INF/jspf/headertop.jspf" %>
+<%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 <div id="main">
     <jsp:useBean id="workshopProcessBean" class="com.themetacity.beans.WorkshopProcessBean">
         <jsp:setProperty name="workshopProcessBean" property="id" value="${param.id}"/>

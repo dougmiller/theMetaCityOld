@@ -1,7 +1,5 @@
 <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
-<script type="text/javascript" src="/media/js/searcher.js"></script>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
-
 <div id="main">
     <jsp:useBean id="workshopProcessBean" class="com.themetacity.beans.WorkshopProcessBean"/>
     <c:set var="workshopEntryList" value="${workshopProcessBean.workshopBlurbs}"/>

@@ -75,12 +75,12 @@ $(document).ready(function () {
         });
     }
 
-    $('article.workshopentry header ul li').click(function () {
+    $('article.workshopentry header ul li').on('click', function () {
         hist.pushState(null, null, $(this).text());
         filter($(this).text());
     });
 
-    searchBox.bind('keyup', function () {
+    searchBox.on('keyup', function () {
         clearTimeout(searchTimeout);
         if ($(this).val().length) {
             searchTimeout = setTimeout(function () {
@@ -97,14 +97,14 @@ $(document).ready(function () {
         }
     });
 
-    $('#reset').click(function () {
+    $('#reset').on('click', function () {
         searchBox.val('');
         reset();
     });
 
     function handlePathChange() {
-        var address = loc.pathname.split('/');
-        if (address[2] !== "") {
+        var address = loc.pathname.split('/'), searchString = address[2];
+        if (searchString !== "") {
             filter(address[2]);
         } else {
             if (!firstRun) {
