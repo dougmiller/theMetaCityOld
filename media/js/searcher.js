@@ -3,7 +3,7 @@ $(document).ready(function () {
     var noResults, searchBox, entries, searchTimeout, firstRun, loc, hist, win;
     noResults = $('#noresults');
     searchBox = $('#searchinput');
-    entries = $('#entries');
+    entries = $('#workshopBlurbEntries');
     searchTimeout = null;
     firstRun = true;
     loc = location;
@@ -75,9 +75,10 @@ $(document).ready(function () {
         });
     }
 
-    $('article.workshopentry header ul li').on('click', function () {
+    $('header ul li a', entries).on('click', function () {
         hist.pushState(null, null, $(this).text());
         filter($(this).text());
+        return false;
     });
 
     searchBox.on('keyup', function () {

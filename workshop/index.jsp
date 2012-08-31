@@ -7,7 +7,7 @@
 		<input type="text" id="searchinput" placeholder="Type to search the workshop"/>
 		<button id="reset">Reset</button>
 		<br />
-	<div id="entries">
+	<div id="workshopBlurbEntries">
 	<c:choose>
         <c:when test="${empty workshopEntryList}">
             <h2 id="noentries">No projects at the moment. Come back again soon.</h2>
