@@ -124,5 +124,4 @@ $(document).ready(function () {
         handlePathChange();
         firstRun = false;
     }
-
 });
