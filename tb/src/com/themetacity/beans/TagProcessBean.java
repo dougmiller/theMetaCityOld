@@ -16,58 +16,11 @@ import org.apache.log4j.Logger;
 public class TagProcessBean {
     DatabaseBean dbaBean = new DatabaseBean();
 
-    private String user = "";
     private String id = "";
 
     static Logger logger = Logger.getLogger(TagProcessBean.class);
 
     public TagProcessBean() {
-    }
-
-    /**
-     * Get all the tags the the author has posted under
-     *
-     * @return a linked list of <TagBean> that belong to the given user
-     */
-    public LinkedList<TagBean> getAuthorTags() {
-        LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        DatabaseBean dbaBean = new DatabaseBean();
-        ResultSet result = null;
-
-        try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT tag, count(tag) as timesused " +
-                            "FROM articles, articletags " +
-                            "WHERE articles.author = ? " +
-                            "AND articles.id = articletags.id " +
-                            "GROUP BY tag;"));
-            dbaBean.getPrepStmt().setString(1, user);
-
-            result = dbaBean.executeQuery();
-
-            while (result.next()) {
-                TagBean tagBean = new TagBean();
-
-                tagBean.setTag(result.getString("tag"));
-                tagBean.setNumTimesTagUsed(result.getInt("timesused"));
-
-                listOfTags.add(tagBean);
-            }
-        } catch (SQLException SQLEx) {
-            logger.warn("You had an error in TagProcessBean()");
-            logger.warn(SQLEx);
-        } finally {
-            if (result != null) {
-                try {
-                    result.close();
-                } catch (SQLException SQLEx) {
-                    logger.warn("You had an error closing the ResultSet in TagProcessBean().getAuthorTags()");
-                    logger.warn(SQLEx);
-                }
-            }
-            dbaBean.close();
-        }
-        return listOfTags;
     }
 
     /**
@@ -159,7 +112,6 @@ public class TagProcessBean {
         return listOfTags;
     }
 
-    //todo check this out for names and purpose etc
     /**
      * Get all the tags (useful for the admin)
      *
@@ -247,14 +199,6 @@ public class TagProcessBean {
             dbaBean.close();
         }
         return listOfTags;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public String getId() {

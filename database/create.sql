@@ -25,7 +25,7 @@ DROP USER tmcselector;
 -- GRANT ALL ON themetacitycom.* TO "tmcRoot"@"%" IDENTIFIED BY PASSWORD "*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F";
 
 -- A user for selecting data only. Extra safety net.
-CREATE USER tmcSelector;
+CREATE USER tmcselector;
 -- A user for updating and inserting records.
 -- CREATE USER tmcAdmin;
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON themetacitycom.* TO "tmcAdmin"@"localhost" IDENTIFIED BY PASSWORD "*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F";
@@ -37,7 +37,6 @@ CREATE USER tmcSelector;
 CREATE SEQUENCE article_id_seq;
 CREATE TABLE articles (
   id int UNIQUE NOT NULL DEFAULT nextval('article_id_seq'),
-  author varchar(30) NOT NULL,
   title varchar(100) NOT NULL,
   url varchar(100) NOT NULL,
   article_text text NOT NULL,
@@ -53,19 +52,6 @@ CREATE TABLE articletags (
   id int NOT NULL,
   tag varchar(20) NOT NULL,
   PRIMARY KEY (id, tag)
-);
-
--- 
--- Table structure for table "users"
--- 
-
-CREATE TABLE users (
-  username varchar(30) UNIQUE NOT NULL,
-  password varchar(128) NOT NULL,
-  pseudonym varchar(25) NOT NULL,
-  contact varchar(40) NOT NULL,
-  about text NOT NULL,
-  PRIMARY KEY (username)
 );
 
 -- 
@@ -86,7 +72,6 @@ CREATE TABLE importantnotices (
 CREATE SEQUENCE workshop_id_seq;
 CREATE TABLE workshop (
   id int UNIQUE NOT NULL DEFAULT nextval('workshop_id_seq'),
-  author varchar(30) NOT NULL,
   title varchar(100) NOT NULL,
   blurb text NOT NULL,
   article_text text NOT NULL,
@@ -105,23 +90,12 @@ CREATE TABLE workshoptags (
 );
 
 -- These foreign keys come last to make sure that all tables exist before making references to them.
--- 
--- Constraints for table "articles"
--- 
-ALTER TABLE articles
-  ADD CONSTRAINT "articles_fk" FOREIGN KEY ("author") REFERENCES "users" ("username") ON DELETE CASCADE ON UPDATE CASCADE;
-
+--
 -- 
 -- Constraints for table "articleTags"
 -- 
 ALTER TABLE articletags
   ADD CONSTRAINT "articletags_fk" FOREIGN KEY ("id") REFERENCES "articles" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- 
--- Constraints for table "workshop"
--- 
-ALTER TABLE workshop
-  ADD CONSTRAINT "workshop_fk" FOREIGN KEY ("author") REFERENCES "users" ("username") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- 
 -- Constraints for table "workshoptags"

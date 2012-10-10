@@ -12,7 +12,6 @@ public class ArticleBean {
     private String title;                // The title of the article
     private String URL;                  // The URL for this article
     private String articleText;          // The actual meat of the article
-    private String author;               // Who wrote the article
     private String email;                // Contacting the author
     private Date createdDate;               // The date the article was published
     private Date modifiedDate;              // The date the article was modified
@@ -63,14 +62,6 @@ public class ArticleBean {
 
     public void setArticleText(String articleText) {
         this.articleText = articleText;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getEmail() {

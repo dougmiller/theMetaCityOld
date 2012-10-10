@@ -12,7 +12,6 @@ public class WorkshopBean {
     private String title;                // The title of the article
     private String blurb;                // The blurb/short description for the workshop index;
     private String content;              // The actual meat of the article
-    private String author;               // Who wrote the article
     private String email;                // Contacting the author
     private Date createdDate;            // The date the article was published
     private Date modifiedDate;              // The date the article was modified
@@ -48,14 +47,6 @@ public class WorkshopBean {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getEmail() {

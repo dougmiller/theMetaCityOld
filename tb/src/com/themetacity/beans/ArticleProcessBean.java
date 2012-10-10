@@ -27,7 +27,6 @@ public class ArticleProcessBean {
     private String month;
     private String day;
 
-    private String author = "";
     private String articleText = "";
     private String[] articleTags;           // The tag checkboxes
     private String articleOtherTags;        // The text box for other tags
@@ -72,7 +71,6 @@ public class ArticleProcessBean {
                 ArticleBean articleBean = new ArticleBean();
 
                 articleBean.setArticleID(result.getString("id"));
-                articleBean.setAuthor(result.getString("author"));
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
@@ -139,7 +137,6 @@ public class ArticleProcessBean {
                 ArticleBean articleBean = new ArticleBean();
 
                 articleBean.setArticleID(result.getString("id"));
-                articleBean.setAuthor(result.getString("author"));
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
@@ -375,12 +372,11 @@ public class ArticleProcessBean {
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "INSERT INTO articles " +
-                            "(author, title, url, article_text, date_created) " +
-                            "VALUES (?, ?, ?, ?, now());"));
-            dbaBean.getPrepStmt().setString(1, author);
-            dbaBean.getPrepStmt().setString(2, title);
-            dbaBean.getPrepStmt().setString(3, articleBean.buildURL(title));
-            dbaBean.getPrepStmt().setString(4, articleText);
+                            "(title, url, article_text, date_created) " +
+                            "VALUES (?, ?, ?, now());"));
+            dbaBean.getPrepStmt().setString(1, title);
+            dbaBean.getPrepStmt().setString(2, articleBean.buildURL(title));
+            dbaBean.getPrepStmt().setString(3, articleText);
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         }
@@ -859,14 +855,6 @@ public class ArticleProcessBean {
         if (!day.equals("")) {
             this.day = day;
         }
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getArticleText() {

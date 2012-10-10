@@ -17,7 +17,6 @@ public class ImportantNoticeProcessBean {
     DatabaseBean dbaBean = new DatabaseBean();
 
     private String messageID = "";
-    private String author = "";
     private String message = "";
     private String dateTo = "";
     private String dateFrom = "";
@@ -163,11 +162,12 @@ public class ImportantNoticeProcessBean {
      */
     public int getAddMessage() {
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("INSERT INTO importantnotices (username, message, date_to, date_from) VALUES (?, ?, ?, ?);"));
-            dbaBean.getPrepStmt().setString(1, author);
-            dbaBean.getPrepStmt().setString(2, message);
-            dbaBean.getPrepStmt().setString(3, dateTo);
-            dbaBean.getPrepStmt().setString(4, dateFrom);
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "INSERT INTO importantnotices (message, date_to, date_from) " +
+                    "VALUES (?, ?, ?);"));
+            dbaBean.getPrepStmt().setString(1, message);
+            dbaBean.getPrepStmt().setString(2, dateTo);
+            dbaBean.getPrepStmt().setString(3, dateFrom);
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         }
@@ -188,12 +188,12 @@ public class ImportantNoticeProcessBean {
     public int getUpdateMessage() {
 
         try {
-            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE importantnotices SET username = ?, message = ?, date_to = ?, date_from = ? WHERE id = ?;"));
-            dbaBean.getPrepStmt().setString(1, author);
-            dbaBean.getPrepStmt().setString(2, message);
-            dbaBean.getPrepStmt().setString(3, dateTo);
-            dbaBean.getPrepStmt().setString(4, dateFrom);
-            dbaBean.getPrepStmt().setString(5, messageID);
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "UPDATE importantnotices SET message = ?, date_to = ?, date_from = ? WHERE id = ?;"));
+            dbaBean.getPrepStmt().setString(1, message);
+            dbaBean.getPrepStmt().setString(2, dateTo);
+            dbaBean.getPrepStmt().setString(3, dateFrom);
+            dbaBean.getPrepStmt().setString(4, messageID);
         } catch (SQLException SQLEx) {
             logger.fatal(SQLEx);
         }
@@ -206,14 +206,6 @@ public class ImportantNoticeProcessBean {
 
     public void setMessageID(String messageID) {
         this.messageID = messageID;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getMessage() {
