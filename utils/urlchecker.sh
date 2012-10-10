@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 from urllib.error import HTTPError
 import urllib.request
+import time
 
 baseURL = 'http://localcity'
 
@@ -12,7 +13,6 @@ excludedURLs = ['/github/', '/twitter/']   # These pages lead to different domai
 errorURLs = []
 
 def checkURL(URLToCheck):
-
     if URLToCheck[0:4] == "http":
         return   
 
@@ -23,6 +23,7 @@ def checkURL(URLToCheck):
         return
 
     if URLToCheck not in checkedURLs:
+        print('Checking:' + URLToCheck)
         checkedURLs.append(URLToCheck)
         try:
             fullURL = baseURL + URLToCheck
@@ -31,9 +32,11 @@ def checkURL(URLToCheck):
 
             for link in soup.find_all('a'):
                 url = link.get('href')
+                time.sleep(0.1)
                 checkURL(url)
 
-        except urllib.error.HTTPError:
+        except urllib.error.HTTPError as error:
+            print(error)
             errorURLs.append(URLToCheck)
 
 
@@ -44,7 +47,7 @@ for fineURL in checkedURLs:
     print(fineURL)  
 
 if not errorURLs:
-    print('All pages retuned 200.')
+    print('All pages returned 200.')
 
 if errorURLs:
     print('The following URLs returned an error:')
