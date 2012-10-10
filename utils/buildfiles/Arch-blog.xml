@@ -12,7 +12,7 @@
         <ant antfile="../utils/buildfiles/Arch-common.xml" target="development"/>
     </target>
 
-    <target name="production" depends="clean">
+    <target name="production">
         <ant antfile="../utils/buildfiles/Arch-common.xml" target="production"/>
     </target>
 </project>
