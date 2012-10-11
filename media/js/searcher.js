@@ -27,7 +27,7 @@ $(document).ready(function () {
     }
 
     function filter(searchTerm) {
-        var searchPattern = new RegExp(searchTerm, 'ig');
+        var searchPattern = new RegExp('(' + searchTerm + ')', 'ig');
 
         entries.fadeOut(150, function () {
             noResults.hide();
@@ -41,8 +41,10 @@ $(document).ready(function () {
 
                 // Check the title
                 $('h1', this).each(function () {
-                    if ($(this).text().match(searchPattern)) {
-                        $(this).addClass('searchMatchTitle');
+                    var textToCheck = $(this).text();
+                    if (textToCheck.match(searchPattern)) {
+                        textToCheck = textToCheck.replace(searchPattern, '<span class="searchMatchTitle">$1</span>');
+                        $(this).html(textToCheck);
                         $(this).closest('.workshopentry').show();
                     }
                 });
