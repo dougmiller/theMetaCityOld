@@ -84,7 +84,7 @@ CREATE TABLE workshop (
 --
 CREATE TABLE workshoptags (
   id int NOT NULL,
-  tag char(20) NOT NULL,
+  tag varchar(20) NOT NULL,
   PRIMARY KEY  (id, tag)
 );
 
