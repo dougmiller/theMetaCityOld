@@ -27,7 +27,7 @@ $(document).ready(function () {
     }
 
     function filter(searchTerm) {
-        var searchPattern = new RegExp('(' + searchTerm + ')', 'ig');
+        var searchPattern = new RegExp('(' + searchTerm + ')', 'ig');  // The brackets add a capture group
 
         entries.fadeOut(150, function () {
             noResults.hide();
@@ -43,7 +43,7 @@ $(document).ready(function () {
                 $('h1', this).each(function () {
                     var textToCheck = $(this).text();
                     if (textToCheck.match(searchPattern)) {
-                        textToCheck = textToCheck.replace(searchPattern, '<span class="searchMatchTitle">$1</span>');
+                        textToCheck = textToCheck.replace(searchPattern, '<span class="searchMatchTitle">$1</span>');  //capture group ($1) used so that the replacement matches the case and you don't get weird capitolisations
                         $(this).html(textToCheck);
                         $(this).closest('.workshopentry').show();
                     }
