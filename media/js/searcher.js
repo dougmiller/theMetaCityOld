@@ -37,7 +37,6 @@ $(document).ready(function () {
 
                 // Clear results of previous search
                 $('li', this).removeClass('searchMatchTag');
-                $('h1', this).removeClass('searchMatchTitle');
 
                 // Check the title
                 $('h1', this).each(function () {

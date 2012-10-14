@@ -32,8 +32,7 @@ CREATE USER tmcselector;
 
 -- 
 -- Table structure for table "articles"
--- 
-
+--
 CREATE SEQUENCE article_id_seq;
 CREATE TABLE articles (
   id int UNIQUE NOT NULL DEFAULT nextval('article_id_seq'),
@@ -104,16 +103,8 @@ ALTER TABLE workshoptags
   ADD CONSTRAINT "workshoptags_fk" FOREIGN KEY ("id") REFERENCES "workshop" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table "importantNotices"
---
-ALTER TABLE importantnotices
-  ADD CONSTRAINT "users_fk" FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE ON UPDATE CASCADE;
-  
-
---
 -- Automatically update the modified date on update (all tables that use the modified date)
 --
-
 CREATE FUNCTION update_modified_date_to_now()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -133,5 +124,5 @@ ON workshop FOR EACH ROW EXECUTE PROCEDURE
 update_modified_date_to_now();
 
 -- Give users their permissions
-GRANT SELECT ON articles, articletags, workshop, workshoptags, importantnotices, users  TO tmcselector;
+GRANT SELECT ON articles, articletags, workshop, workshoptags, importantnotices TO tmcselector;
 ALTER USER tmcselector WITH CONNECTION LIMIT 10;

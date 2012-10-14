@@ -13,8 +13,7 @@ DROP DATABASE IF EXISTS  "themetacitycom";
 -- DROP TABLE workshop;
 -- DROP TABLE articletags;
 -- DROP TABLE articles;
--- DROP TABLE users;
 
 -- DROP USER tmcRoot;
-DROP USER tmcSelector;
+-- DROP USER tmcSelector;
 -- DROP USER tmcAdmin;
