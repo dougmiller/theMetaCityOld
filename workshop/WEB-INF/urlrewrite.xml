@@ -14,11 +14,11 @@
         <to>/index.jsp</to>
     </rule>
     <rule match-type="regex">
-        <from>^/([A-Za-z0-9]+)/?$</from>
-        <to>/index.jsp?term=$1</to>
-    </rule>
-    <rule match-type="regex">
         <from>^/([0-9]*)/?$</from>
         <to>/project.jsp?id=$1</to>
+    </rule>
+    <rule match-type="regex">
+        <from>^/([A-Za-z0-9]+)/?$</from>
+        <to>/index.jsp?term=$1</to>
     </rule>
 </urlrewrite>
