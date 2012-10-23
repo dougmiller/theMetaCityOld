@@ -1,0 +1,26 @@
+@charset "utf-8";
+
+video {
+    padding: 10px;
+    border: 1px solid #DEDEDE;
+}
+
+.videoControls {
+    width: 100px;
+    height: 100px;
+    visibility:visible;
+}
+
+.startContainer {
+    width: 100px;
+    height: 100px;
+    visibility:visible;
+}
+
+.playPauseButton {
+
+}
+
+.muteButton {
+
+}
