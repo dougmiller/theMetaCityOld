@@ -68,7 +68,7 @@
 }
 
 .workshopentry header ul {
-    font-size: 0.8em;
+    font-size: 1.1em;
     line-height: 1.1em;
     list-style: none outside none;
 }
@@ -76,6 +76,7 @@
 .workshopentry header li {
     text-decoration: underline;
     cursor: pointer;
+    font-family: Inconsolata, monospace;
 }
 
 .workshopentry header p {

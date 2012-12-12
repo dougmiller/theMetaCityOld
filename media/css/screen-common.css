@@ -11,7 +11,8 @@ h1 {
 }
 
 h2, h3, h4, h5 {
-	font-family: Inconsolata;
+	font-family: Inconsolata, monospace;
+    font-size: 1em;
 }
 
 p {
@@ -53,21 +54,24 @@ a:visited {
     clear: both;
 }
 
+pre {
+    margin: 0;
+}
+
 code {
     display: block;
     color: green;
-    padding: 5px;
+    padding-top: 2px;
     font-family: "Inconsolata", sans-serif;
-	font-size: 14px;
+	font-size: 1em;
+    background: url("/media/site-images/linenumbers.svg") no-repeat left top;
 }
 
-video {
-	padding: 10px;
-	border: 1px solid #DEDEDE;
-}
+
 
 footer {
     clear: both;
-	font-size: 9px;
+	font-size: 0.8em;
+    text-align: center;
 }
 

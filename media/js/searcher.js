@@ -19,7 +19,6 @@ $(document).ready(function () {
 
                 // Clear results of previous search
                 $('li', this).removeClass('searchMatchTag');
-                $('h1', this).removeClass('searchMatchTitle');
                 $(this).closest('.workshopentry').show();
             });
             entries.fadeIn(150);
@@ -27,7 +26,8 @@ $(document).ready(function () {
     }
 
     function filter(searchTerm) {
-        var searchPattern = new RegExp('(' + searchTerm + ')', 'ig');  // The brackets add a capture group
+        var rePattern = searchTerm.replace(/[.?*+^$\[\]\\(){}|]/g, "\\$&");
+        var searchPattern = new RegExp('(' + rePattern + ')', 'ig');  // The brackets add a capture group
 
         entries.fadeOut(150, function () {
             noResults.hide();
@@ -40,11 +40,13 @@ $(document).ready(function () {
 
                 // Check the title
                 $('h1', this).each(function () {
-                    var textToCheck = $(this).text();
+                    var textToCheck = $('a', this).text();
                     if (textToCheck.match(searchPattern)) {
                         textToCheck = textToCheck.replace(searchPattern, '<span class="searchMatchTitle">$1</span>');  //capture group ($1) used so that the replacement matches the case and you don't get weird capitolisations
-                        $(this).html(textToCheck);
+                        $('a', this).html(textToCheck);
                         $(this).closest('.workshopentry').show();
+                    } else {
+                        $('a', this).html(textToCheck);
                     }
                 });
 
@@ -68,8 +70,8 @@ $(document).ready(function () {
     function reset() {
         entries.fadeOut(150, function () {
             loc.pathname = '/workshop/';           // This seems a terrible way to do this but it is working for now so im not complaining
-            $('header ul li', this).removeClass('searchMatchTag');
-            $('header h1', this).removeClass('searchMatchTitle');
+            $('header li', this).removeClass('searchMatchTag');
+            $('header h1', this).removeClass('searchMatchTitle');  // The span remains but it is destroyed when filtering using the text() function
             $('.workshopentry', this).show();
             noResults.hide();
             entries.fadeIn(150);
@@ -78,8 +80,9 @@ $(document).ready(function () {
 
     $('header ul li a', entries).on('click', function () {
         hist.pushState(null, null, $(this).text());
+        searchBox.val('');
         filter($(this).text());
-        return false;
+        return false;  // Using the history API so no page reloads/changes
     });
 
     searchBox.on('keyup', function () {

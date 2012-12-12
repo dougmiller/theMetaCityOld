@@ -5,7 +5,7 @@
         version="3.0">
 
     <display-name>media</display-name>
-    <description>Media storage for TMC. Videos, pictures etc</description>
+    <description>Media storage for TMC. CSS, JS, etc</description>
 	
     <servlet>
         <servlet-name>media</servlet-name>

@@ -7,6 +7,7 @@ cd media/js
 
 echo 'Combining all JavaScript files'
 cat searcher.js > tmcscripts.js
+cat tmcvideo.js > tmcscripts.js
 
 echo 'Removing unessary characters'
 
