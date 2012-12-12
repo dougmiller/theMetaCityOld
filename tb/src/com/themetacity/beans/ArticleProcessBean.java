@@ -60,7 +60,7 @@ public class ArticleProcessBean {
 
         try {
             articlesDBBean.setPrepStmt(articlesDBBean.getConn().prepareStatement(
-                    "SELECT id, title, url, author, date_created, article_text " +
+                    "SELECT id, title, url, date_created, article_text " +
                             "FROM articles " +
                             "ORDER BY id DESC " +
                             "LIMIT 5;"));
@@ -112,7 +112,7 @@ public class ArticleProcessBean {
         ResultSet result = null;
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
-                    "SELECT id, author, title, url, article_text, date_created " +
+                    "SELECT id, title, url, article_text, date_created " +
                             "FROM articles WHERE " +
                             "(TO_CHAR(DATE_PART('YEAR', date_created), '99') = ? OR ? IS NULL) " +
                             "AND (TO_CHAR(DATE_PART('MONTH', date_created), '99') = ? OR ? IS NULL) " +
