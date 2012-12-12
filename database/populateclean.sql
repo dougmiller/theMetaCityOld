@@ -1,5 +1,7 @@
 \c 'themetacitycom';
 
+set standard_conforming_strings = on;
+
 -- Users 
 INSERT INTO articles (title, URL, article_text) VALUES ('First Blog Post', 'First-Blog-Post', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae velit ac massa tincidunt porttitor eu vel est. Integer a mauris nec massa gravida mattis. Sed scelerisque tincidunt urna sit amet ultricies. Donec posuere adipiscing lectus, placerat sagittis metus adipiscing eu. Nulla sagittis convallis placerat. Aliquam erat volutpat. Vestibulum suscipit, risus nec pretium venenatis, lacus arcu cursus ligula, quis eleifend ipsum velit non tortor. Phasellus pulvinar ullamcorper interdum. Donec velit nibh, scelerisque quis suscipit a, imperdiet sit amet libero. Nunc facilisis lectus a est fringilla quis dignissim magna suscipit. Phasellus nec lectus dolor. Cras sed lorem magna, in eleifend nulla. Donec molestie scelerisque diam, id rutrum nunc commodo eget.</p>
 
@@ -284,4 +286,80 @@ INSERT INTO workshoptags (id, tag) VALUES (2, 'Lorium');
 INSERT INTO workshoptags (id, tag) VALUES (2, 'Ipsum');
 INSERT INTO workshoptags (id, tag) VALUES (2, 'venenatis');
 INSERT INTO workshoptags (id, tag) VALUES (2, 'nulla');
+
+
+INSERT INTO workshop (title, blurb, article_text) VALUES ('Video and video controls test', '<p>Test of video controls, layouts etc.</p>',
+
+'<p>Inital test of videos that shouldnt make it out of testing.</p>
+<div class="videoContainer">
+    <video controls>
+        <source src="/assets/video/2011BristoGoldcoastsmall.ogg" type="video/ogg">
+    </video>
+</div>
+
+<div class="videoContainer">
+    <video controls>
+        <source src="/assets/video/2011BristoGoldcoastsmall.webm" type="video/webm">
+    </video>
+</div>
+
+<div class="videoContainer">
+    <video controls poster="/assets/video/cityposter.svg">
+        <source src="/assets/video/citysmall.ogv" type="video/ogg">
+        <source src="/assets/video/citysmall.webm" type="video/webm">
+    </video>
+</div>
+');
+
+INSERT INTO workshoptags (id, tag) VALUES (3, 'Video');
+INSERT INTO workshoptags (id, tag) VALUES (3, 'HTML5');
+INSERT INTO workshoptags (id, tag) VALUES (3, 'Test');
+
+INSERT INTO workshop (title, blurb, article_text) VALUES ('Code test', '<p>Test of code styles and looks etc</p>', E'<p>Some code to get you through the day</p>
+<pre><code>    for (i = 0; i < videos.length; i += 1) {
+        vid = videos[i];
+        vid.controls = false;
+
+        vid.addEventListener(''click'', function () {
+            playPause(this);
+        }, false);
+
+        // Controls box to display while video is playing
+        controlsBox = document.createElement(''div'');
+        controlsBox.setAttribute("class", ''videoControls'');
+
+        play = document.createElement(''button'');
+        play.type = "Button";
+        play.setAttribute("class", ''playButton'');
+        play.innerHTML = "Play";
+
+        play.addEventListener(''click'', function () {
+            playPause(vid);
+        }(), false);
+
+        controlsBox.appendChild(play);
+
+        mute = document.createElement(''button'');
+        mute.type = "Button";
+        mute.setAttribute("class", ''muteButton'');
+        mute.innerHTML = "Mute";
+
+        mute.addEventListener(''click'', function () {
+            vid.volume = 0;
+        }(), false);
+
+        controlsBox.appendChild(mute);
+
+        myAppend(vid, controlsBox);
+        \\/\\/Finished with controls box
+    }
+</code></pre>
+
+<p>End of the test</p>
+
+');
+
+INSERT INTO workshoptags (id, tag) VALUES (4, 'styling');
+INSERT INTO workshoptags (id, tag) VALUES (4, 'code');
+INSERT INTO workshoptags (id, tag) VALUES (4, 'Test');
 
