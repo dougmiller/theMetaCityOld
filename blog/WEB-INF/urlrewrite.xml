@@ -21,6 +21,12 @@
         <to>/tags.jsp</to>
     </rule>
 
+    <!-- Random article -->
+    <rule match-type="regex">
+        <from>^/random/?$</from>
+        <to>/random.jsp</to>
+    </rule>
+
     <!-- Archive rules-->
     <!-- Date criteia -->
     <rule match-type="regex">

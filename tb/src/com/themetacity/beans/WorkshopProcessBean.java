@@ -50,7 +50,7 @@ public class WorkshopProcessBean {
 
                 // Process this workshops tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setId("" + result.getInt("id"));
+                tagProcessBean.setId(result.getInt("id"));
                 workshopBean.setTags(tagProcessBean.getWorkshopTags());
 
                 listOfBeans.add(workshopBean);
@@ -147,7 +147,7 @@ public class WorkshopProcessBean {
 
                 // Process this workshops tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setId("" + result.getInt("id"));
+                tagProcessBean.setId(result.getInt("id"));
                 workshopBean.setTags(tagProcessBean.getWorkshopTags());
 
                 listOfBeans.add(workshopBean);

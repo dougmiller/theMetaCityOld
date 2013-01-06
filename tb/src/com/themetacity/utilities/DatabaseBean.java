@@ -50,6 +50,7 @@ public class DatabaseBean {
 
     public ResultSet executeQuery() {
         ResultSet result = null;
+
         try {
             result = prepStmt.executeQuery();
             logger.debug(prepStmt.toString());

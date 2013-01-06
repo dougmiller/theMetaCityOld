@@ -15,7 +15,6 @@ import org.apache.log4j.Logger;
  */
 public class Article extends SimpleTagSupport {
 
-    // Variables
     private ArticleBean article = new ArticleBean();
 
     private static final Logger logger = Logger.getLogger(Article.class);
@@ -25,7 +24,6 @@ public class Article extends SimpleTagSupport {
         // * Initialise the context here as will not be valid in the container previously. *
         // The writer gives access to the page context so its possible to write output
         JspWriter out = getJspContext().getOut();
-        //logger.debug("This is a test to send over a custom socket");
         try {
             out.println("<article class=\"newsarticle\">");
             out.println("   <h1><a href=\"/blog/" + article.getURL() + "\">" + article.getTitle() + "</a></h1>");
@@ -44,7 +42,6 @@ public class Article extends SimpleTagSupport {
         }
     }
 
-    // Free the Article used
     public void release() {
         article = null;
     }

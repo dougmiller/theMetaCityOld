@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 public class TagProcessBean {
     DatabaseBean dbaBean = new DatabaseBean();
 
-    private String id = "";
+    private int id = 0;
 
     static Logger logger = Logger.getLogger(TagProcessBean.class);
 
@@ -30,17 +30,17 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getArticleTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        DatabaseBean dbaBean = new DatabaseBean();
+        dbaBean = new DatabaseBean();
         ResultSet result = null;
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT tag, count(tag) as timesused " +
                             "FROM articles, articletags " +
-                            "WHERE TO_CHAR(articles.id, '99' ) = ? " +
+                            "WHERE articles.id = ? " +
                             "AND articles.id = articletags.id " +
                             "GROUP BY tag;"));
-            dbaBean.getPrepStmt().setString(1, id);
+            dbaBean.getPrepStmt().setInt(1, id);
 
             result = dbaBean.executeQuery();
 
@@ -76,7 +76,7 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getAllTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        DatabaseBean dbaBean = new DatabaseBean();
+        dbaBean = new DatabaseBean();
         ResultSet result = null;
 
         try {
@@ -119,7 +119,7 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getSitemapTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        DatabaseBean dbaBean = new DatabaseBean();
+        dbaBean = new DatabaseBean();
         ResultSet result = null;
 
         try {
@@ -163,7 +163,7 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getWorkshopTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        DatabaseBean dbaBean = new DatabaseBean();
+        dbaBean = new DatabaseBean();
         ResultSet result = null;
 
         try {
@@ -173,7 +173,7 @@ public class TagProcessBean {
                             "WHERE workshop.id = TO_NUMBER(?, '999') " +
                             "AND workshop.id = workshoptags.id " +
                             "GROUP BY tag;"));
-            dbaBean.getPrepStmt().setString(1, id);
+            dbaBean.getPrepStmt().setInt(1, id);
 
             result = dbaBean.executeQuery();
 
@@ -201,11 +201,11 @@ public class TagProcessBean {
         return listOfTags;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

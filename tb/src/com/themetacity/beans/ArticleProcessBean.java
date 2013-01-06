@@ -70,7 +70,7 @@ public class ArticleProcessBean {
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
 
-                articleBean.setArticleID(result.getString("id"));
+                articleBean.setArticleID(result.getInt("id"));
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
@@ -78,7 +78,7 @@ public class ArticleProcessBean {
 
                 // Process this articles tags
                 TagProcessBean tagProcessBean = new TagProcessBean();
-                tagProcessBean.setId("" + result.getInt("id"));
+                tagProcessBean.setId(result.getInt("id"));
                 articleBean.setTags(tagProcessBean.getArticleTags());
 
                 listOfBeans.add(articleBean);
@@ -129,14 +129,12 @@ public class ArticleProcessBean {
             dbaBean.getPrepStmt().setString(7, URL);
             dbaBean.getPrepStmt().setString(8, URL);
 
-            System.out.println(dbaBean.getPrepStmt().toString());
-
             result = dbaBean.executeQuery();
 
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
 
-                articleBean.setArticleID(result.getString("id"));
+                articleBean.setArticleID(result.getInt("id"));
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
@@ -145,7 +143,7 @@ public class ArticleProcessBean {
                 // Process this articles tags
                 try {
                     TagProcessBean tagProcessBean = new TagProcessBean();
-                    tagProcessBean.setId("" + result.getInt("id"));
+                    tagProcessBean.setId(result.getInt("id"));
                     articleBean.setTags(tagProcessBean.getArticleTags());
                 } catch (SQLException SQLEx) {
                     logger.warn(SQLEx);
@@ -192,7 +190,7 @@ public class ArticleProcessBean {
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
 
-                articleBean.setArticleID(result.getString("id"));
+                articleBean.setArticleID(result.getInt("id"));
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setArticleText(result.getString("article_text"));
@@ -215,6 +213,58 @@ public class ArticleProcessBean {
         }
 
         return listOfBeans;
+    }
+
+
+    /**
+     * Get a random article
+     * *
+     *
+     * @return an ArticleBean() containing 1 random article
+     */
+    public ArticleBean getRandomArticle() {
+        DatabaseBean dbaBean = new DatabaseBean();
+        ResultSet result = null;
+        ArticleBean returnedArticle = new ArticleBean();
+
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT id, title, url, article_text, date_created " +
+                            "FROM articles " +
+                            "ORDER BY RANDOM() " +
+                            "LIMIT 1;"));
+
+            result = dbaBean.executeQuery();
+
+            while (result.next()) {
+                returnedArticle.setArticleID(result.getInt("id"));
+                returnedArticle.setTitle(result.getString("title"));
+                returnedArticle.setURL(result.getString("url"));
+                returnedArticle.setArticleText(result.getString("article_text"));
+                returnedArticle.setCreatedDate(result.getDate("date_created"));
+
+                // Process this articles tags
+                TagProcessBean articleTagsGetter = new TagProcessBean();
+                articleTagsGetter.setId(result.getInt("id"));
+                returnedArticle.setTags(articleTagsGetter.getArticleTags());
+            }
+
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error mapping objects in ArticleProcessBean.getRandomArticle()");
+            logger.warn(SQLEx);
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getRandomArticle()");
+                    logger.warn(SQLEx);
+                }
+            }
+            dbaBean.close();
+        }
+
+        return returnedArticle;
     }
 
     /**
@@ -546,7 +596,7 @@ public class ArticleProcessBean {
             while (result.next()) {
                 ArticleBean articleBean = new ArticleBean();
 
-                articleBean.setArticleID(result.getString("id"));
+                articleBean.setArticleID(result.getInt("id"));
                 articleBean.setTitle(result.getString("title"));
                 articleBean.setURL(result.getString("url"));
                 articleBean.setCreatedDate(result.getDate("date_created"));
@@ -556,8 +606,7 @@ public class ArticleProcessBean {
         } catch (SQLException SQLEx) {
             logger.warn("You had an error mapping objects in ArticleProcessBean.getAllAdminArticles()");
             logger.warn(SQLEx);
-        }
-        finally {
+        } finally {
             dbaBean.close();
         }
 
@@ -690,6 +739,7 @@ public class ArticleProcessBean {
 
     /**
      * Gets the date of the last updated article. Used in the sitemap to show when the articles section has been updated.
+     *
      * @return a Date object.
      */
     public Date getLastUpdateDate() {
@@ -722,7 +772,7 @@ public class ArticleProcessBean {
             }
             articlesDBBean.close();
         }
-        
+
         return lastModified;
     }
 

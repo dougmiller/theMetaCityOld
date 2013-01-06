@@ -8,7 +8,7 @@ import java.util.LinkedList;
  */
 public class ArticleBean {
 
-    private String articleID;            // The id of the article
+    private int articleID;            // The id of the article
     private String title;                // The title of the article
     private String URL;                  // The URL for this article
     private String articleText;          // The actual meat of the article
@@ -32,11 +32,11 @@ public class ArticleBean {
         return toBuild;
     }
 
-    public String getArticleID() {
+    public int getArticleID() {
         return articleID;
     }
 
-    public void setArticleID(String articleID) {
+    public void setArticleID(int articleID) {
         this.articleID = articleID;
     }
 
