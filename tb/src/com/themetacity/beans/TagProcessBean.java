@@ -170,7 +170,7 @@ public class TagProcessBean {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT tag " +
                             "FROM workshop, workshoptags " +
-                            "WHERE workshop.id = TO_NUMBER(?, '999') " +
+                            "WHERE workshop.id = ? " +
                             "AND workshop.id = workshoptags.id " +
                             "GROUP BY tag;"));
             dbaBean.getPrepStmt().setInt(1, id);
