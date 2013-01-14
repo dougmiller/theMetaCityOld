@@ -33,11 +33,11 @@ public class ArchiveEntry extends SimpleTagSupport {
 
         Calendar oldDate = new GregorianCalendar();
 
-        // The first time thisis called from the loop in the jsp page the oldDate is null. (there is no previous date)
-        try {
+        // The first time this is called from the loop in the jsp page the oldDate is null. (there is no previous date)
+        if (previousDate == null){
+            oldDate.setTime(new Date(0));
+        } else {
             oldDate.setTime(previousDate);
-        } catch (NullPointerException npEx) {
-            oldDate.setTime(new Date(0));    // initialise to epoch sothat the first article will generate the years and months
         }
 
         try {

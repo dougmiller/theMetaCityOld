@@ -10,14 +10,15 @@
 
 <%@ include file="/WEB-INF/jspf/header.jspf" %>
 
-<c:set var="articleResultList" value="${ArticleProcessBean.filteredArticles}"/>
+<c:set var="articleResultList" value="${ArticleProcessBean.filteredArchiveArticles}"/>
+<c:set var="previousEntryDate" value="${null}"/>
 
 <c:choose>
     <c:when test="${not empty articleResultList}">
         <c:set var="previousEntry" value="${null}"/>
         <c:forEach var="archiveEntry" items="${articleResultList}">
-            <tmc:archive articleBean="${archiveEntry}" previousDate="${previousEntry}"/>
-            <c:set var="previousEntry" value="${archiveEntry.modifiedDate}"/>
+            <tmc:archive articleBean="${archiveEntry}" previousDate="${previousEntryDate}"/>
+            <c:set var="previousEntryDate" value="${archiveEntry.createdDate}"/>
         </c:forEach>
     </c:when>
     <c:otherwise>

@@ -168,6 +168,63 @@ public class ArticleProcessBean {
         return listOfBeans;
     }
 
+
+    /**
+     * Filter the articles according to date or title or both for the archive
+     *
+     * @return a linked list of filtered archive articles
+     */
+    public LinkedList<ArticleBean> getFilteredArchiveArticles() {
+
+        DatabaseBean dbaBean = new DatabaseBean();
+        LinkedList<ArticleBean> listOfBeans = new LinkedList<ArticleBean>();
+        ResultSet result = null;
+        try {
+            dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
+                    "SELECT title, url, date_created " +
+                            "FROM articles WHERE " +
+                            "(TO_CHAR(DATE_PART('YEAR', date_created), '99') = ? OR ? IS NULL) " +
+                            "AND (TO_CHAR(DATE_PART('MONTH', date_created), '99') = ? OR ? IS NULL) " +
+                            "AND (url = ? OR ? IS NULL) " +
+                            "ORDER BY date_created DESC;"));
+
+            dbaBean.getPrepStmt().setString(1, year);
+            dbaBean.getPrepStmt().setString(2, year);
+            dbaBean.getPrepStmt().setString(3, month);
+            dbaBean.getPrepStmt().setString(4, month);
+            dbaBean.getPrepStmt().setString(5, URL);
+            dbaBean.getPrepStmt().setString(6, URL);
+
+            result = dbaBean.executeQuery();
+
+            while (result.next()) {
+                ArticleBean articleBean = new ArticleBean();
+
+                articleBean.setTitle(result.getString("title"));
+                articleBean.setURL(result.getString("url"));
+                articleBean.setCreatedDate(result.getDate("date_created"));
+
+                listOfBeans.add(articleBean);
+            }
+        } catch (SQLException SQLEx) {
+            logger.warn("You had an error mapping objects in ArticleProcessBean.getFilteredArticles()");
+            logger.warn(SQLEx);
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException SQLEx) {
+                    logger.warn("You had an error closing the ResultSet in ArticleProcessBean.getFilteredArticles()");
+                    logger.warn(SQLEx);
+                }
+            }
+            dbaBean.close();
+        }
+        return listOfBeans;
+    }
+
+
+
     /**
      * Get an article by the ID
      *
