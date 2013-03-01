@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<project name="SQL" default="production" basedir="../../database">
+    <property name="deploy.dir" value="../utils/remote"/>
+    
+    <target name="clean">
+        <delete>
+            <fileset dir="${deploy.dir}">
+                <include name="*"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="production" depends="clean">
+        <echo message="${deploy.dir}"/>
+        <echo message="${basedir}"/>
+        <copy todir="${deploy.dir}">
+            <fileset dir="${basedir}"/>
+        </copy>
+    </target>
+</project>
