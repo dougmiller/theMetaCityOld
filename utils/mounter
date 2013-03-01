@@ -11,11 +11,17 @@ declare -A mountInfo
 
 # Add mounts as needed
 case $2 in
-  "tmc")
+  "deploy")
     mountInfo=( [name]="the MetaCity"
                           [ref]="tmc"
                           [mountCommand]="sshfs doug@enc:/srv/http/tmc /media/tmc"
                           [unmountCommand]="sudo umount /media/tmc");;
+
+  "admin")
+    mountInfo=( [name]="the MetaCity Admin"
+                          [ref]="admin"
+                          [mountCommand]="sshfs doug@enc:/home/doug/tmcadmin /home/doug/Code/theMetaCity/utils/remote"
+                          [unmountCommand]="sudo umount /home/doug/Code/theMetaCity/utils/remote");;
   *) 
     echo "Unknown mount. Please provide a known mount."
     exit 2;;
