@@ -1,4 +1,0 @@
-<%-- This is a simple wrapper around joining the top half of the header tothe bottom half.
-     Use this file when you do not need access to the <head> --%>
-<%@ include file="/WEB-INF/jspf/headertop.jspf" %>
-<%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
