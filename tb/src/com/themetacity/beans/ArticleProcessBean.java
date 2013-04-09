@@ -114,10 +114,10 @@ public class ArticleProcessBean {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id, title, url, article_text, date_created " +
                             "FROM articles WHERE " +
-                            "(TO_CHAR(DATE_PART('YEAR', date_created), '99') = ? OR ? IS NULL) " +
-                            "AND (TO_CHAR(DATE_PART('MONTH', date_created), '99') = ? OR ? IS NULL) " +
-                            "AND (TO_CHAR(DATE_PART('DAY', date_created), '99') = ? OR ? IS NULL) AND " +
-                            "(url = ? OR ? IS NULL) " +
+                            "(DATE_PART('YEAR', date_created) = ?::SMALLINT OR ? IS NULL) " +
+                            "AND (DATE_PART('MONTH', date_created) = ?::SMALLINT OR ? IS NULL) " +
+                            "AND (DATE_PART('DAY', date_created) = ?::SMALLINT OR ? IS NULL) " +
+                            "AND (url = ? OR ? IS NULL) " +
                             "ORDER BY date_created DESC;"));
 
             dbaBean.getPrepStmt().setString(1, year);
@@ -183,8 +183,8 @@ public class ArticleProcessBean {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT title, url, date_created " +
                             "FROM articles WHERE " +
-                            "(TO_CHAR(DATE_PART('YEAR', date_created), '99') = ? OR ? IS NULL) " +
-                            "AND (TO_CHAR(DATE_PART('MONTH', date_created), '99') = ? OR ? IS NULL) " +
+                            "(DATE_PART('YEAR', date_created) = ?::SMALLINT OR ? IS NULL) " +
+                            "AND (DATE_PART('MONTH', date_created) = ?::SMALLINT OR ? IS NULL) " +
                             "AND (url = ? OR ? IS NULL) " +
                             "ORDER BY date_created DESC;"));
 

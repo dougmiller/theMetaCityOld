@@ -52,12 +52,13 @@ public class DatabaseBean {
         ResultSet result = null;
 
         try {
-            result = prepStmt.executeQuery();
             logger.debug(prepStmt.toString());
+            result = prepStmt.executeQuery();
         }
         catch (SQLException SQLEx) {
             logger.fatal("There was an error running a query:");
             logger.fatal(SQLEx);
+            logger.fatal(prepStmt.toString());
             logger.info(SQLEx.getCause());
         }
         return result;
