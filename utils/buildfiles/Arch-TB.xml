@@ -16,7 +16,7 @@
     </target>
 
     <target name="compile" depends="clean">
-		<javac srcdir="${src.dir}" destdir="${compile.dir}" target="1.6"
+		<javac srcdir="${src.dir}" destdir="${compile.dir}" target="1.6" source="1.6"
                classpath="${classpath.dir}/log4j.jar;
                           ${classpath.dir}/jsp-api.jar;
                           ${classpath.dir}/junit.jar;"/>
