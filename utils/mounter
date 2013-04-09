@@ -2,8 +2,8 @@
 
 if [[ $# -ne 2 || ( $1 != "mount" && $1 != "unmount" ) ]]; then
   echo "Usage:"
-  echo "encmount.sh mount remotepoint       # mount the remote file system"
-  echo "encmount.sh unmount remotepoint   # unmount the remote file system"
+  echo "mounter mount   remotepoint   # mount the remote file system"
+  echo "mounter unmount remotepoint   # unmount the remote file system"
   exit -1
 fi
 
@@ -24,6 +24,7 @@ case $2 in
                           [unmountCommand]="sudo umount /home/doug/Code/theMetaCity/utils/remote");;
   *) 
     echo "Unknown mount. Please provide a known mount."
+    echo "Known mounts are: 'deploy', 'admin'"
     exit 2;;
 esac
 
