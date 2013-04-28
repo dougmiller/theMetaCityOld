@@ -4,13 +4,40 @@
     float: left;
     width: 250px;
 }
-
 #left ul {
-    font-family: "Droid Sans",sans-serif;
+    font-family: Inconsolata, monospace;
+    font-size: 1.2em;
     list-style-type: none;
     padding: 0;
+    margin-top: 0;
 }
+
+#left h3 {
+    font-size: 1.2em;
+    margin-bottom: 0;
+}
+
 
 #right {
     margin-left: 260px;
+}
+
+
+@media screen and (max-width: 360px) {
+
+    #left {
+        width: 360px;
+    }
+
+    #left ul li {
+        display: inline;
+    }
+
+    #right {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 598px) and (orientation: landscape) {
+
 }

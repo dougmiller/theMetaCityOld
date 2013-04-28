@@ -1,7 +1,7 @@
     </head>
 
     <body>
-        <h1 id="heading">theMetaCity<span id="headerhighlight">Blog</span></h1>
+        <h1 id="heading">theMetaCity<wbr><span id="headerhighlight">Blog</span></h1>
         <h3 id="subheading">News, events and exposition.</h3>
         <nav id="left">
             <!-- Search -->
@@ -12,11 +12,18 @@
                 </div>
             </form>
 
+            <h3>See the whole site:</h3>
             <ul>
                 <li><a href="/">/home</a></li>
                 <li><a href="/blog/">/blog</a></li>
+                <li><a href="/workshop">workshop</a></li>
+            </ul>
+
+            <h3>Check out the blog:</h3>
+            <ul>
                 <li><a href="/blog/tags">tags</a></li>
                 <li><a href="/blog/archive">archive</a></li>
+                <li><a href="/blog/random">random</a></li>
             </ul>
 
         </nav>

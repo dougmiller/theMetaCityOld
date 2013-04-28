@@ -9,4 +9,6 @@
 
 <tmc:article article="${randomArticle}"/>
 
+<p>Want more? <a href="/blog/random">Get a new random article here</a> and <a href="/blog/archive">check out the archive here.</a></p>
+
 <jsp:include page="/WEB-INF/jspf/footer.jspf"/>
