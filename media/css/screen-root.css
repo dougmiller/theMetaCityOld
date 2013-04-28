@@ -28,11 +28,13 @@
     #centeredcontainer h1 {
         display: block;
         font-size: 3.5em;
+        margin: 0;
     }
 
     #centeredcontainer h2 {
         display: block;
         font-size: 2em;
+        margin: 0;
     }
 }
 
