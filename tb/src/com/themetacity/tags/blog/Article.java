@@ -33,6 +33,7 @@ public class Article extends SimpleTagSupport {
             out.println("        Posted on: <time datetime=\"" + article.getCreatedDate() +"\">" + article.getCreatedDate() + "</time>;");
             out.println("        Posted under: " + formatTags(article.getTags()));
             out.println("        </p>");
+            out.println("        <nav><h5><a href=\"#top\">Back to top</a></h5></nav>");
             out.println("    </footer>");
             out.println("</article>");
 
