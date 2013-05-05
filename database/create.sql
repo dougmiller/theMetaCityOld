@@ -2,30 +2,32 @@
 -- Database: "themetacitycom"
 -- 
 
-DROP DATABASE IF EXISTS  "themetacitycom";
+-- Create only. Clean is in another file (clean.sql).
 
-CREATE DATABASE "themetacitycom";
-DROP USER tmcselector;
+-- CREATE DATABASE "themetacitycom";
+
 --  Connect to the newly created database
 \c "themetacitycom";
 
--- --------------------------------------------------------
+-- -------------------------
+-- -------------------------
 
 --
 -- Create users with specific privileges.
--- The create user line is not necessary but is there for completness
+-- The create user line is not necessary but is there for completeness
 --
 
 -- A pseudoroot for special needs
 -- GRANT is not included in ALL for security reasons. -> You cant grant yourself as ROOT
 -- If you do not have permission on the security table then you will need to log in manually to set the password
 
--- Dont really need him for now
+-- Don't really need him for now
 -- CREATE USER tmcRoot;
 -- GRANT ALL ON themetacitycom.* TO "tmcRoot"@"%" IDENTIFIED BY PASSWORD "*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F";
 
 -- A user for selecting data only. Extra safety net.
 CREATE USER tmcselector;
+
 -- A user for updating and inserting records.
 -- CREATE USER tmcAdmin;
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON themetacitycom.* TO "tmcAdmin"@"localhost" IDENTIFIED BY PASSWORD "*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F";
@@ -68,12 +70,14 @@ CREATE TABLE importantnotices (
 --
 -- An entry in the workshop, both the small and large view
 --
+CREATE TYPE projectstatus AS ENUM ('started', 'updating', 'complete');
 CREATE SEQUENCE workshop_id_seq;
 CREATE TABLE workshop (
   id int UNIQUE NOT NULL DEFAULT nextval('workshop_id_seq'),
   title varchar(100) NOT NULL,
   blurb text NOT NULL,
   article_text text NOT NULL,
+  status projectstatus NOT NULL DEFAULT 'started',
   date_created date NOT NULL DEFAULT current_date,
   date_modified date NOT NULL DEFAULT current_date,
   PRIMARY KEY (id)
@@ -108,18 +112,18 @@ ALTER TABLE workshoptags
 CREATE FUNCTION update_modified_date_to_now()
 RETURNS TRIGGER AS $$
 BEGIN
-   NEW.changedate = current_date;
+   NEW.date_modified = current_date;
    RETURN NEW;
 END;
 $$ language 'plpgsql';
 
 -- Articles table
-CREATE TRIGGER update_articles_modified_date_to_now BEFORE UPDATE
+CREATE TRIGGER update_articles_modified_date_to_now AFTER UPDATE
 ON articles FOR EACH ROW EXECUTE PROCEDURE 
 update_modified_date_to_now();
 
 -- Workshop table
-CREATE TRIGGER update_workshop_modified_date_to_now BEFORE UPDATE
+CREATE TRIGGER update_workshop_modified_date_to_now AFTER UPDATE
 ON workshop FOR EACH ROW EXECUTE PROCEDURE 
 update_modified_date_to_now();
 

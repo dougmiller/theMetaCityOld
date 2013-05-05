@@ -56,7 +56,7 @@ INSERT INTO articletags (id, tag) VALUES (2, 'nulla');
 
 
 
-INSERT INTO workshop (title, blurb, article_text) VALUES ('Tomcat application development: table of contents', '<p>The table of contents for the piecemeal guide to developing Tomcat (JSP) applications. It is updated as each section is written and published in my blog.</p>',
+INSERT INTO workshop (title, blurb, status, article_text) VALUES ('Tomcat application development: table of contents', '<p>The table of contents for the piecemeal guide to developing Tomcat (JSP) applications. It is updated as each section is written and published in my blog.</p>', 'started',
 '<p>This is a rough guide to setting up and deploying a non-trivial web application on Apache Tomcat using Java. I am doing this because I believe almost all of the current examples on the Internet suck. They are trivial, for the most part outdated and often wrong.</p>
 
 <p>The application that we will be making is the very one that you are using at the moment: a blog-thingy. It not only covers the code of how make the site work, it also covers associated aspects of working with code and managing a growing project.</p>
@@ -262,7 +262,9 @@ INSERT INTO workshoptags (id, tag) VALUES (1, 'Tomcat');
 INSERT INTO workshoptags (id, tag) VALUES (1, 'Postgresql');
 
 
-INSERT INTO workshop (title, blurb, article_text) VALUES ('Second workshop project. Begin title.', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta rhoncus ante at bibendum. Donec viverra mattis nisi, et ullamcorper dui imperdiet a. Aenean accumsan sollicitudin tellus ac posuere. Nullam ante sem, mollis eget auctor quis, aliquam vel dui. Curabitur sed lacus risus. Nam a justo non augue sodales aliquet. Donec faucibus lectus vehicula velit vulputate eleifend. Duis ultricies felis ac eros molestie rutrum. Praesent volutpat mi id mauris dapibus quis varius lacus cursus.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae velit ac massa tincidunt porttitor eu vel est. Integer a mauris nec massa gravida mattis. Sed scelerisque tincidunt urna sit amet ultricies. Donec posuere adipiscing lectus, placerat sagittis metus adipiscing eu. Nulla sagittis convallis placerat. Aliquam erat volutpat. Vestibulum suscipit, risus nec pretium venenatis, lacus arcu cursus ligula, quis eleifend ipsum velit non tortor. Phasellus pulvinar ullamcorper interdum. Donec velit nibh, scelerisque quis suscipit a, imperdiet sit amet libero. Nunc facilisis lectus a est fringilla quis dignissim magna suscipit. Phasellus nec lectus dolor. Cras sed lorem magna, in eleifend nulla. Donec molestie scelerisque diam, id rutrum nunc commodo eget.</p>
+INSERT INTO workshop (title, blurb, status, article_text) VALUES ('Second workshop project. Begin title.', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta rhoncus ante at bibendum. Donec viverra mattis nisi, et ullamcorper dui imperdiet a. Aenean accumsan sollicitudin tellus ac posuere. Nullam ante sem, mollis eget auctor quis, aliquam vel dui. Curabitur sed lacus risus. Nam a justo non augue sodales aliquet. Donec faucibus lectus vehicula velit vulputate eleifend. Duis ultricies felis ac eros molestie rutrum. Praesent volutpat mi id mauris dapibus quis varius lacus cursus.</p>', 'updating',
+
+'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae velit ac massa tincidunt porttitor eu vel est. Integer a mauris nec massa gravida mattis. Sed scelerisque tincidunt urna sit amet ultricies. Donec posuere adipiscing lectus, placerat sagittis metus adipiscing eu. Nulla sagittis convallis placerat. Aliquam erat volutpat. Vestibulum suscipit, risus nec pretium venenatis, lacus arcu cursus ligula, quis eleifend ipsum velit non tortor. Phasellus pulvinar ullamcorper interdum. Donec velit nibh, scelerisque quis suscipit a, imperdiet sit amet libero. Nunc facilisis lectus a est fringilla quis dignissim magna suscipit. Phasellus nec lectus dolor. Cras sed lorem magna, in eleifend nulla. Donec molestie scelerisque diam, id rutrum nunc commodo eget.</p>
 
 <p>In sodales, elit quis suscipit volutpat, lorem risus ultrices felis, ac mattis odio dui sit amet nulla. Aenean consectetur, ipsum vitae vehicula mollis, nulla turpis faucibus nisl, id scelerisque nisl leo ut ipsum. Vivamus congue nibh vitae dolor eleifend sagittis rhoncus diam laoreet. Donec euismod elit eget arcu porttitor vitae dapibus leo suscipit. Vivamus non libero non ligula venenatis tempus vitae non elit. Nam nibh magna, euismod vitae malesuada vel, aliquam eu nisi. Mauris urna dolor, laoreet ut posuere et, dictum mattis turpis. Morbi eros dui, fringilla vitae scelerisque ut, consectetur et turpis. Morbi vel felis nunc. Maecenas congue augue vitae ligula malesuada et molestie diam egestas.</p>
 
@@ -288,7 +290,7 @@ INSERT INTO workshoptags (id, tag) VALUES (2, 'venenatis');
 INSERT INTO workshoptags (id, tag) VALUES (2, 'nulla');
 
 
-INSERT INTO workshop (title, blurb, article_text) VALUES ('Video and video controls test', '<p>Test of video controls, layouts etc.</p>',
+INSERT INTO workshop (title, blurb, status, article_text) VALUES ('Video and video controls test', '<p>Test of video controls, layouts etc.</p>', 'complete',
 
 '<p>Inital test of videos that shouldnt make it out of testing.</p>
 <div class="videoContainer">
