@@ -7,7 +7,7 @@
 -- CREATE DATABASE "themetacitycom";
 
 --  Connect to the newly created database
-\c "themetacitycom";
+-- \c "themetacitycom";
 
 -- -------------------------
 -- -------------------------
@@ -70,14 +70,13 @@ CREATE TABLE importantnotices (
 --
 -- An entry in the workshop, both the small and large view
 --
-CREATE TYPE projectstatus AS ENUM ('started', 'updating', 'complete');
 CREATE SEQUENCE workshop_id_seq;
 CREATE TABLE workshop (
   id int UNIQUE NOT NULL DEFAULT nextval('workshop_id_seq'),
   title varchar(100) NOT NULL,
   blurb text NOT NULL,
   article_text text NOT NULL,
-  status projectstatus NOT NULL DEFAULT 'started',
+  complete BOOLEAN NULL DEFAULT FALSE,
   date_created date NOT NULL DEFAULT current_date,
   date_modified date NOT NULL DEFAULT current_date,
   PRIMARY KEY (id)
@@ -110,22 +109,22 @@ ALTER TABLE workshoptags
 -- Automatically update the modified date on update (all tables that use the modified date)
 --
 CREATE FUNCTION update_modified_date_to_now()
-RETURNS TRIGGER AS $$
+  RETURNS TRIGGER AS $$
 BEGIN
-   NEW.date_modified = current_date;
-   RETURN NEW;
+  NEW.date_modified := current_date;
+  RETURN NEW;
 END;
 $$ language 'plpgsql';
 
 -- Articles table
 CREATE TRIGGER update_articles_modified_date_to_now AFTER UPDATE
 ON articles FOR EACH ROW EXECUTE PROCEDURE 
-update_modified_date_to_now();
+  update_modified_date_to_now();
 
 -- Workshop table
 CREATE TRIGGER update_workshop_modified_date_to_now AFTER UPDATE
 ON workshop FOR EACH ROW EXECUTE PROCEDURE 
-update_modified_date_to_now();
+  update_modified_date_to_now();
 
 -- Give users their permissions
 GRANT SELECT ON articles, articletags, workshop, workshoptags, importantnotices TO tmcselector;
