@@ -13,14 +13,14 @@
 	<defs>
 	</defs>
 
-	<text class="number" x="0.5em" y="1em">1</text>
-	<text class="number" x="0.5em" y="2em">2</text>
-	<text class="number" x="0.5em" y="3em">3</text>
-	<text class="number" x="0.5em" y="4em">5</text>
-	<text class="number" x="0.5em" y="5em">6</text>
-	<text class="number" x="0.5em" y="6em">7</text>
-	<text class="number" x="0.5em" y="7em">8</text>
-	<text class="number" x="0.5em" y="8em">9</text>
+	<text class="number" x="0.5em" y="1em">01</text>
+	<text class="number" x="0.5em" y="2em">02</text>
+	<text class="number" x="0.5em" y="3em">03</text>
+	<text class="number" x="0.5em" y="4em">05</text>
+	<text class="number" x="0.5em" y="5em">06</text>
+	<text class="number" x="0.5em" y="6em">07</text>
+	<text class="number" x="0.5em" y="7em">08</text>
+	<text class="number" x="0.5em" y="8em">09</text>
 	<text class="number" x="0.5em" y="9em">10</text>
 	<text class="number" x="0.5em" y="10em">11</text>
 	<text class="number" x="0.5em" y="11em">12</text>
