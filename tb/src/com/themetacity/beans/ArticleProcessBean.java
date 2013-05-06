@@ -2,7 +2,8 @@ package com.themetacity.beans;
 
 import com.themetacity.typebeans.ArticleBean;
 import com.themetacity.utilities.DatabaseBean;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +36,7 @@ public class ArticleProcessBean {
 
     private String searchString = "";       // The inputbox search value
 
-    private static final Logger logger = Logger.getLogger(ArticleProcessBean.class);
+    private static final Logger logger = LogManager.getLogger(ArticleProcessBean.class);
 
     public ArticleProcessBean() {
     }

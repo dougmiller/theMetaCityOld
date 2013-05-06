@@ -10,7 +10,8 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ArchiveEntry extends SimpleTagSupport {
 
@@ -18,7 +19,7 @@ public class ArchiveEntry extends SimpleTagSupport {
     private ArticleBean articleBean = new ArticleBean();
     private Date previousDate;
 
-    private static final Logger logger = Logger.getLogger(ArchiveEntry.class);
+    private static final Logger logger = LogManager.getLogger(ArchiveEntry.class);
 
     /**
      * Take the archive entry and output a link to the article. This function also handles the

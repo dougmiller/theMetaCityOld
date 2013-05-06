@@ -1,6 +1,7 @@
 package com.themetacity.utilities;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -11,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class SecurityBean {
 
-    static Logger logger = Logger.getLogger(SecurityBean.class);
+    static Logger logger = LogManager.getLogger(SecurityBean.class);
 
     /**
      * @param toHash is the string that needs to be hashed (eg the password)

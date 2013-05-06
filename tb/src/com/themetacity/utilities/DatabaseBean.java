@@ -1,6 +1,7 @@
 package com.themetacity.utilities;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -13,7 +14,7 @@ import java.sql.*;
  */
 public class DatabaseBean {
 
-    private static final Logger logger = Logger.getLogger(DatabaseBean.class);
+    private static final Logger logger = LogManager.getLogger(DatabaseBean.class);
 
     private Connection conn;
     private PreparedStatement prepStmt;

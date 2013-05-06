@@ -7,7 +7,8 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This is the custom tag that formats a ArticleBean tags in to sitemap entries. It is called in JSP pages.
@@ -16,7 +17,7 @@ public class ArticleTags extends SimpleTagSupport {
 
     private TagBean tag = new TagBean();
 
-    private static final Logger logger = Logger.getLogger(Article.class);
+    private static final Logger logger = LogManager.getLogger(Article.class);
 
     java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
 

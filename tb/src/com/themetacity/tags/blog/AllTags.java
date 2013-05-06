@@ -8,7 +8,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Displays all the tags in a nice formatted way
@@ -19,7 +20,7 @@ public class AllTags extends SimpleTagSupport {
     // This makes formatting much easier.
     private LinkedList<TagBean> tagsList;
 
-    private static final Logger logger = Logger.getLogger(AllTags.class);
+    private static final Logger logger = LogManager.getLogger(AllTags.class);
 
     public void doTag() throws JspException, IOException {
         JspWriter out = getJspContext().getOut();

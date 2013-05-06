@@ -1,6 +1,7 @@
 package com.themetacity.beans;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.themetacity.utilities.DatabaseBean;
 import com.themetacity.typebeans.WorkshopBean;
 
@@ -15,7 +16,7 @@ import java.sql.SQLException;
  */
 public class WorkshopProcessBean {
 
-    static Logger logger = Logger.getLogger(WorkshopProcessBean.class);
+    static Logger logger = LogManager.getLogger(WorkshopProcessBean.class);
 
     private String id = "";
 
@@ -31,7 +32,7 @@ public class WorkshopProcessBean {
 
         try {
             workshopDBBean.setPrepStmt(workshopDBBean.getConn().prepareStatement(
-                    "SELECT id, title, article_text, date_created, date_modified " +
+                    "SELECT id, title, article_text, complete, date_created, date_modified " +
                             "FROM workshop " +
                             "WHERE id = ? " +
                             "ORDER BY id desc;"));
@@ -45,6 +46,7 @@ public class WorkshopProcessBean {
                 workshopBean.setId(result.getInt("id"));
                 workshopBean.setTitle(result.getString("title"));
                 workshopBean.setContent(result.getString("article_text"));
+                workshopBean.setComplete(result.getBoolean("complete"));
                 workshopBean.setCreatedDate(result.getDate("date_created"));
                 workshopBean.setModifiedDate(result.getDate("date_modified"));
 
@@ -131,7 +133,7 @@ public class WorkshopProcessBean {
 
         try {
             workshopDBBean.setPrepStmt(workshopDBBean.getConn().prepareStatement(
-                    "SELECT id, title, blurb, date_created, date_modified " +
+                    "SELECT id, title, blurb, complete, date_created, date_modified " +
                     "FROM workshop " +
                     "ORDER BY id desc;"));
 
@@ -142,6 +144,7 @@ public class WorkshopProcessBean {
                 workshopBean.setId(result.getInt("id"));
                 workshopBean.setTitle(result.getString("title"));
                 workshopBean.setBlurb(result.getString("blurb"));
+                workshopBean.setComplete(result.getBoolean("complete"));
                 workshopBean.setCreatedDate(result.getDate("date_created"));
                 workshopBean.setModifiedDate(result.getDate("date_modified"));
 

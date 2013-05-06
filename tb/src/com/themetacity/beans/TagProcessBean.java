@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This class processes tags for articles and profiles. It is not the search.
@@ -18,7 +19,7 @@ public class TagProcessBean {
 
     private int id = 0;
 
-    static Logger logger = Logger.getLogger(TagProcessBean.class);
+    static Logger logger = LogManager.getLogger(TagProcessBean.class);
 
     public TagProcessBean() {
     }

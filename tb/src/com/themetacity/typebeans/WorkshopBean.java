@@ -12,9 +12,9 @@ public class WorkshopBean {
     private String title;                // The title of the article
     private String blurb;                // The blurb/short description for the workshop index;
     private String content;              // The actual meat of the article
-    private String email;                // Contacting the author
+    private Boolean complete;               // Whether the project is complete or not
     private Date createdDate;            // The date the article was published
-    private Date modifiedDate;              // The date the article was modified
+    private Date modifiedDate;           // The date the article was modified
     private LinkedList<TagBean> tags;    // A list of the tags that this article was published under
 
     public int getId() {
@@ -49,12 +49,12 @@ public class WorkshopBean {
         this.content = content;
     }
 
-    public String getEmail() {
-        return email;
+    public Boolean getComplete() {
+        return complete;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setComplete(Boolean complete) {
+        this.complete = complete;
     }
 
     public Date getCreatedDate() {

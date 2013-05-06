@@ -6,7 +6,8 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This is the custom tag that formats a ArticleBean into sitemap entries.
@@ -15,7 +16,7 @@ public class Workshop extends SimpleTagSupport {
 
     private WorkshopBean workshop = new WorkshopBean();
 
-    private static final Logger logger = Logger.getLogger(Workshop.class);
+    private static final Logger logger = LogManager.getLogger(Workshop.class);
 
     java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
 

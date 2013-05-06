@@ -6,7 +6,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspWriter;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -14,7 +15,7 @@ public class AdminArticle extends SimpleTagSupport {
 
     private ArticleBean articleBean = new ArticleBean();
     
-    private static Logger logger = Logger.getLogger(AdminArticle.class);
+    private static Logger logger = LogManager.getLogger(AdminArticle.class);
 
     public void doTag() {
         JspContext jspContext = getJspContext();

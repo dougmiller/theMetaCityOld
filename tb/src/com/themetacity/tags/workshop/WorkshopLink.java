@@ -1,6 +1,7 @@
 package com.themetacity.tags.workshop;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import javax.servlet.jsp.JspWriter;
@@ -13,7 +14,7 @@ import com.themetacity.typebeans.WorkshopBean;
  */
 public class WorkshopLink extends SimpleTagSupport {
 
-    private static final Logger logger = Logger.getLogger(WorkshopLink.class);
+    private static final Logger logger = LogManager.getLogger(WorkshopLink.class);
 
     private WorkshopBean workshopLinkBean = new WorkshopBean();
 

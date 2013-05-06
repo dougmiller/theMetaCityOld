@@ -8,7 +8,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This is the custom tag that formats a ArticleBean into readable format. It is called in JSP pages.
@@ -17,7 +18,7 @@ public class Article extends SimpleTagSupport {
 
     private ArticleBean article = new ArticleBean();
 
-    private static final Logger logger = Logger.getLogger(Article.class);
+    private static final Logger logger = LogManager.getLogger(Article.class);
 
     // Start processing
     public void doTag() {
