@@ -14,12 +14,15 @@ errorURLs = []
 
 def checkURL(URLToCheck):
     if URLToCheck[0:4] == "http":
-        return   
+        return
 
     if URLToCheck[0:6] == "mailto":
-        return    
+        return
 
     if URLToCheck in excludedURLs:
+        return
+
+    if URLToCheck[0:1] == "#":
         return
 
     if URLToCheck not in checkedURLs:
@@ -32,8 +35,9 @@ def checkURL(URLToCheck):
 
             for link in soup.find_all('a'):
                 url = link.get('href')
-                time.sleep(0.1)
-                checkURL(url)
+                if url != None:
+                    time.sleep(0.5)
+                    checkURL(url)
 
         except urllib.error.HTTPError as error:
             print(error)

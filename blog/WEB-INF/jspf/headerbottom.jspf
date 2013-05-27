@@ -5,18 +5,24 @@
         <h3 id="subheading">News, events and exposition.</h3>
         <nav id="left">
             <!-- Search -->
-            <form action="/blog/search.jsp">
+            <form action="http://www.google.com/search">
                 <div class="searchdiv">
-                    <input type="text" size="14" name="searchString"/>
-                    <button type="submit" name="submit" value="search" class="submitbutton">Search!</button>
+                    <input type="text" size="14" name="q" id="q"/>
+                    <button type="submit" name="submit" value="search" class="submitbutton">Search!</button><br />
+                    <label for="blog">blog</label>
+                    <input type="radio" name="sitesearch" value="themetacity.com/blog" id="blog"/>
+                    <label for="workshop">workshop</label>
+                    <input type="radio" name="sitesearch" value="themetacity.com/workshop" id="workshop"/>
+                    <label for="everything">everything</label>
+                    <input type="radio" name="sitesearch" value="themetacity.com/" id="everything"/>
                 </div>
             </form>
 
             <h3>See the whole site:</h3>
             <ul class="navlist">
                 <li><a href="/">/home</a></li>
-                <li><a href="/blog/">/blog</a></li>
-                <li><a href="/workshop">workshop</a></li>
+                <li><a href="/blog">/blog</a></li>
+                <li><a href="/workshop">/workshop</a></li>
             </ul>
 
             <h3>Check out the blog:</h3>

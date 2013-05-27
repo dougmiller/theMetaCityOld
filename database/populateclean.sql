@@ -56,7 +56,7 @@ INSERT INTO articletags (id, tag) VALUES (2, 'nulla');
 
 
 
-INSERT INTO workshop (title, blurb, article_text) VALUES ('Tomcat application development: table of contents', '<p>The table of contents for the piecemeal guide to developing Tomcat (JSP) applications. It is updated as each section is written and published in my blog.</p>',
+INSERT INTO workshop (title, blurb, date_created, date_modified, article_text) VALUES ('Tomcat application development: table of contents', '<p>The table of contents for the piecemeal guide to developing Tomcat (JSP) applications. It is updated as each section is written and published in my blog.</p>', current_date -3, current_date,
 '<p>This is a rough guide to setting up and deploying a non-trivial web application on Apache Tomcat using Java. I am doing this because I believe almost all of the current examples on the Internet suck. They are trivial, for the most part outdated and often wrong.</p>
 
 <p>The application that we will be making is the very one that you are using at the moment: a blog-thingy. It not only covers the code of how make the site work, it also covers associated aspects of working with code and managing a growing project.</p>
@@ -290,7 +290,7 @@ INSERT INTO workshoptags (id, tag) VALUES (2, 'venenatis');
 INSERT INTO workshoptags (id, tag) VALUES (2, 'nulla');
 
 
-INSERT INTO workshop (title, blurb, complete, article_text) VALUES ('Video and video controls test', '<p>Test of video controls, layouts etc.</p>', FALSE,
+INSERT INTO workshop (title, blurb, complete, date_created, date_modified, article_text) VALUES ('Video and video controls test', '<p>Test of video controls, layouts etc.</p>', TRUE, current_date -13, current_date -5,
 
 '<p>Inital test of videos that shouldnt make it out of testing.</p>
 <div class="videoContainer">

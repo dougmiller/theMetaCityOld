@@ -7,7 +7,7 @@ html {
 }
 
 h1 {
-	font-family: Orbitron;
+	font-family: Orbitron, sans-serif;
 }
 
 h2, h3, h4, h5 {
@@ -30,6 +30,11 @@ p {
 
 #subheading {
     margin: 0 0 20px 50px;
+}
+
+.searchdiv {
+    font-family: "Droid Sans", sans-serif;
+    font-size: 0.8em;
 }
 
 a {
@@ -62,12 +67,11 @@ code {
     display: block;
     color: green;
     padding-top: 2px;
+    padding-left: 2em;
     font-family: "Inconsolata", sans-serif;
 	font-size: 1.2em;
     background: url("/media/site-images/linenumbers.svg") no-repeat left top;
 }
-
-
 
 footer {
     clear: both;
