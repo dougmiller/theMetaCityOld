@@ -60,7 +60,7 @@ $(document).ready(function () {
 
             controlsBox.appendChild(muteButton);
 
-            // When hte video is hovered over, show the controls
+            // When the video is hovered over, show the controls
             vidBox.addEventListener('mouseover', (function (controlsBox) {
                 return function () {
                     $(controlsBox).fadeIn();
