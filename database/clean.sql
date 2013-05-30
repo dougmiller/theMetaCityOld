@@ -6,7 +6,7 @@
 --
 
 
--- \c "themetacitycom";
+\c "themetacitycom";
 
 DROP TRIGGER IF EXISTS update_articles_modified_date_to_now ON articles;
 DROP TRIGGER IF EXISTS update_workshop_modified_date_to_now ON workshop;

@@ -7,7 +7,7 @@
 -- CREATE DATABASE "themetacitycom";
 
 --  Connect to the newly created database
--- \c "themetacitycom";
+\c "themetacitycom";
 
 -- -------------------------
 -- -------------------------
