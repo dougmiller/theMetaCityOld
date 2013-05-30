@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" height="49em" width="2em">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" height="50em" width="2em">
 
-    <style>
+    <style type="text/css">
     .number {
         font-size: 1em;
         fill: grey;
@@ -16,52 +16,52 @@
 	<text class="number" x="0.5em" y="1em">01</text>
 	<text class="number" x="0.5em" y="2em">02</text>
 	<text class="number" x="0.5em" y="3em">03</text>
-	<text class="number" x="0.5em" y="4em">05</text>
-	<text class="number" x="0.5em" y="5em">06</text>
-	<text class="number" x="0.5em" y="6em">07</text>
-	<text class="number" x="0.5em" y="7em">08</text>
-	<text class="number" x="0.5em" y="8em">09</text>
-	<text class="number" x="0.5em" y="9em">10</text>
-	<text class="number" x="0.5em" y="10em">11</text>
-	<text class="number" x="0.5em" y="11em">12</text>
-	<text class="number" x="0.5em" y="12em">13</text>
-	<text class="number" x="0.5em" y="13em">14</text>
-	<text class="number" x="0.5em" y="14em">15</text>
-	<text class="number" x="0.5em" y="15em">16</text>
-	<text class="number" x="0.5em" y="16em">17</text>
-	<text class="number" x="0.5em" y="17em">18</text>
-	<text class="number" x="0.5em" y="18em">19</text>
-	<text class="number" x="0.5em" y="19em">20</text>
-	<text class="number" x="0.5em" y="20em">21</text>
-	<text class="number" x="0.5em" y="21em">22</text>
-	<text class="number" x="0.5em" y="22em">23</text>
-	<text class="number" x="0.5em" y="23em">24</text>
-	<text class="number" x="0.5em" y="24em">25</text>
-	<text class="number" x="0.5em" y="25em">26</text>
-	<text class="number" x="0.5em" y="26em">27</text>
-	<text class="number" x="0.5em" y="27em">28</text>
-	<text class="number" x="0.5em" y="28em">29</text>
-	<text class="number" x="0.5em" y="29em">30</text>
-	<text class="number" x="0.5em" y="30em">31</text>
-	<text class="number" x="0.5em" y="31em">32</text>
-	<text class="number" x="0.5em" y="32em">33</text>
-	<text class="number" x="0.5em" y="33em">34</text>
-	<text class="number" x="0.5em" y="34em">35</text>
-	<text class="number" x="0.5em" y="35em">36</text>
-	<text class="number" x="0.5em" y="36em">37</text>
-	<text class="number" x="0.5em" y="37em">38</text>
-	<text class="number" x="0.5em" y="38em">39</text>
-	<text class="number" x="0.5em" y="39em">40</text>
-	<text class="number" x="0.5em" y="40em">41</text>
-	<text class="number" x="0.5em" y="41em">42</text>
-	<text class="number" x="0.5em" y="42em">43</text>
-	<text class="number" x="0.5em" y="43em">44</text>
-	<text class="number" x="0.5em" y="44em">45</text>
-	<text class="number" x="0.5em" y="45em">46</text>
-	<text class="number" x="0.5em" y="46em">47</text>
-	<text class="number" x="0.5em" y="47em">48</text>
-	<text class="number" x="0.5em" y="48em">49</text>
-	<text class="number" x="0.5em" y="49em">50</text>
-	<text class="number" x="0.5em" y="50em">err</text>
+	<text class="number" x="0.5em" y="4em">04</text>
+	<text class="number" x="0.5em" y="5em">05</text>
+	<text class="number" x="0.5em" y="6em">06</text>
+	<text class="number" x="0.5em" y="7em">07</text>
+	<text class="number" x="0.5em" y="8em">08</text>
+	<text class="number" x="0.5em" y="9em">09</text>
+	<text class="number" x="0.5em" y="10em">10</text>
+	<text class="number" x="0.5em" y="11em">11</text>
+	<text class="number" x="0.5em" y="12em">12</text>
+	<text class="number" x="0.5em" y="13em">13</text>
+	<text class="number" x="0.5em" y="14em">14</text>
+	<text class="number" x="0.5em" y="15em">15</text>
+	<text class="number" x="0.5em" y="16em">16</text>
+	<text class="number" x="0.5em" y="17em">17</text>
+	<text class="number" x="0.5em" y="18em">18</text>
+	<text class="number" x="0.5em" y="19em">19</text>
+	<text class="number" x="0.5em" y="20em">20</text>
+	<text class="number" x="0.5em" y="21em">21</text>
+	<text class="number" x="0.5em" y="22em">22</text>
+	<text class="number" x="0.5em" y="23em">23</text>
+	<text class="number" x="0.5em" y="24em">24</text>
+	<text class="number" x="0.5em" y="25em">25</text>
+	<text class="number" x="0.5em" y="26em">26</text>
+	<text class="number" x="0.5em" y="27em">27</text>
+	<text class="number" x="0.5em" y="28em">28</text>
+	<text class="number" x="0.5em" y="29em">29</text>
+	<text class="number" x="0.5em" y="30em">30</text>
+	<text class="number" x="0.5em" y="31em">31</text>
+	<text class="number" x="0.5em" y="32em">32</text>
+	<text class="number" x="0.5em" y="33em">33</text>
+	<text class="number" x="0.5em" y="34em">34</text>
+	<text class="number" x="0.5em" y="35em">35</text>
+	<text class="number" x="0.5em" y="36em">36</text>
+	<text class="number" x="0.5em" y="37em">37</text>
+	<text class="number" x="0.5em" y="38em">38</text>
+	<text class="number" x="0.5em" y="39em">39</text>
+	<text class="number" x="0.5em" y="40em">40</text>
+	<text class="number" x="0.5em" y="41em">41</text>
+	<text class="number" x="0.5em" y="42em">42</text>
+	<text class="number" x="0.5em" y="43em">43</text>
+	<text class="number" x="0.5em" y="44em">44</text>
+	<text class="number" x="0.5em" y="45em">45</text>
+	<text class="number" x="0.5em" y="46em">46</text>
+	<text class="number" x="0.5em" y="47em">47</text>
+	<text class="number" x="0.5em" y="48em">48</text>
+	<text class="number" x="0.5em" y="49em">49</text>
+	<text class="number" x="0.5em" y="50em">50</text>
 </svg>
 
