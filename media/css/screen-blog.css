@@ -18,12 +18,20 @@
     margin-bottom: 0;
 }
 
+#footernav {
+    text-align: center;
+}
+
 #footernav ul li {
     display: inline;
 }
 
 #right {
     margin-left: 260px;
+}
+
+main {
+    display: block;
 }
 
 @media screen and (max-width: 360px) {

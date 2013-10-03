@@ -5,7 +5,7 @@
         <jsp:setProperty name="workshopProcessBean" property="id" value="${param.id}"/>
     </jsp:useBean>
     <c:set var="workshopEntryList" value="${workshopProcessBean.workshopEntry}"/>
-
+    <main>
     <c:choose>
         <c:when test="${empty workshopEntryList}">
 			<p class="ancillaryright">Nothing to be found here.</p>
@@ -16,6 +16,7 @@
             </c:forEach>
 		</c:otherwise>
 	</c:choose>
-	<p class="ancillaryright"><a href="/workshop/">Back to the workshop.</a></p>
+    </main>
+	<p class="ancillaryright"><a href="/workshop">Back to the workshop.</a></p>
 </div>
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>

@@ -2,6 +2,7 @@
 <%@ page contentType="text/xml" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="d" %>
+<%@ taglib uri="http://com.themetacity" prefix="tmc" %>
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <jsp:useBean id="WorkshopProcessBean" scope="page" class="com.themetacity.beans.WorkshopProcessBean"/>

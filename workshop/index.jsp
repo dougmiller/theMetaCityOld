@@ -7,7 +7,7 @@
 		<input type="text" id="searchinput" placeholder="Type to search the workshop"/>
 		<button id="reset">Reset</button>
 		<br />
-	<div id="workshopBlurbEntries">
+	<main id="workshopBlurbEntries">
 	<c:choose>
         <c:when test="${empty workshopEntryList}">
             <h2 id="noentries">No projects at the moment. Come back again soon.</h2>
@@ -20,6 +20,6 @@
     		<h2 id="noresults">No matches. Please try again.</h2>
         </c:otherwise>
     </c:choose>
-	</div>
+	</main>
 </div>
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>

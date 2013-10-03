@@ -1,13 +1,14 @@
-<!-- This is the footer consistent across all pages -->
-<nav id="footernav">
-    <p>Navigate: <a href="/workshop">workshop</a> <a href="/blog">blog</a> <a href="/blog/tags">tags</a> <a href="/blog/archive">archive</a> <a href="/blog/random">random</a></p>
-</nav>
-<footer>
-    <p class="copyright">Unless otherwise specified, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/au/">Creative Commons Attribution 3.0 Australia License</a>.</p>
-</footer>
-<!-- The end of the right div -->
-</div>
-<!--End of body-->
-</body>
+            </main>
+            <!-- This is the footer consistent across all pages -->
+            <nav id="footernav">
+                <p>Navigate: <a href="/workshop">workshop</a> <a href="/blog">blog</a> <a href="/blog/tags">tags</a> <a href="/blog/archive">archive</a> <a href="/blog/random">random</a></p>
+            </nav>
+            <footer>
+                <p class="copyright">Unless otherwise specified, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/au/">Creative Commons Attribution 3.0 Australia License</a>.</p>
+            </footer>
+        <!-- The end of the right div -->
+        </div>
+    <!--End of body-->
+    </body>
 <!--End of page-->
 </html>

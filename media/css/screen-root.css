@@ -4,6 +4,7 @@
     margin: 50px auto auto;
     text-align: center;
     width: 720px;
+    display: block;
 }
 
 #centeredcontainer h1 {
@@ -16,6 +17,11 @@
     font-size: 2em;
     display: inline;
     font-family: "Orbitron";
+}
+
+#centeredcontainer img{
+    height: auto;
+    width: 100%;
 }
 
 @media screen and (max-width: 360px) {

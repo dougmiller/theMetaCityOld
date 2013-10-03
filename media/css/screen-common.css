@@ -63,14 +63,23 @@ pre {
     margin: 0;
 }
 
+li {
+    font-family: "Droid Sans", sans-serif;
+    line-height: 1.3em;
+}
+
 code {
-    display: block;
     color: green;
+    font-family: "Inconsolata", sans-serif;
+    font-size: 1.25em;
+}
+
+code.codeblock {
+    display: block;
     padding-top: 2px;
     padding-left: 2em;
-    font-family: "Inconsolata", sans-serif;
-	font-size: 1.25em;
     background: url("/media/site-images/linenumbers.svg") no-repeat left top;
+    background-size: auto 50em;
 }
 
 footer {
@@ -78,4 +87,3 @@ footer {
 	font-size: 0.8em;
     text-align: center;
 }
-
