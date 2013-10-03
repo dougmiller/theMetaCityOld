@@ -2,8 +2,8 @@
 
 if [[ $# -ne 2 || ( $1 != "mount" && $1 != "unmount" ) ]]; then
   echo "Usage:"
-  echo "mounter mount   remotepoint   # mount the remote file system"
-  echo "mounter unmount remotepoint   # unmount the remote file system"
+  echo "mounter mount   destination   # mount the remote destination"
+  echo "mounter unmount destination   # unmount the remote destination"
   exit -1
 fi
 
@@ -11,20 +11,20 @@ declare -A mountInfo
 
 # Add mounts as needed
 case $2 in
-  "deploy")
-    mountInfo=( [name]="the MetaCity"
-                          [ref]="tmc"
+  "production")
+    mountInfo=( [name]="the MetaCity production deploy"
+                          [ref]="production"
                           [mountCommand]="sshfs doug@enc:/srv/http/tmc /media/tmc"
                           [unmountCommand]="sudo umount /media/tmc");;
 
   "admin")
-    mountInfo=( [name]="the MetaCity Admin"
+    mountInfo=( [name]="the MetaCity admin"
                           [ref]="admin"
                           [mountCommand]="sshfs doug@enc:/home/doug/tmcadmin /home/doug/Code/theMetaCity/utils/remote"
                           [unmountCommand]="sudo umount /home/doug/Code/theMetaCity/utils/remote");;
   *) 
     echo "Unknown mount. Please provide a known mount."
-    echo "Known mounts are: 'deploy', 'admin'"
+    echo "Known mounts are: 'production', 'admin'"  # Have to update these manually as bash does not have nested mounts
     exit 2;;
 esac
 
