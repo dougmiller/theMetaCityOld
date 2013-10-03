@@ -23,5 +23,5 @@ DROP SEQUENCE IF EXISTS workshop_id_seq;
 
 DROP FUNCTION IF EXISTS update_modified_date_to_now();
 -- DROP USER tmcRoot;
-DROP USER IF EXISTS tmcSelector;
--- DROP USER tmcAdmin;
+DROP USER IF EXISTS tmcselector;
+DROP USER IF EXISTS tmcadmin;

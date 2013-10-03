@@ -6,33 +6,12 @@
 
 -- CREATE DATABASE "themetacitycom";
 
---  Connect to the newly created database
+--  Connect to the newly database
 \c "themetacitycom";
 
 -- -------------------------
 -- -------------------------
-
 --
--- Create users with specific privileges.
--- The create user line is not necessary but is there for completeness
---
-
--- A pseudoroot for special needs
--- GRANT is not included in ALL for security reasons. -> You cant grant yourself as ROOT
--- If you do not have permission on the security table then you will need to log in manually to set the password
-
--- Don't really need him for now
--- CREATE USER tmcRoot;
--- GRANT ALL ON themetacitycom.* TO "tmcRoot"@"%" IDENTIFIED BY PASSWORD "*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F";
-
--- A user for selecting data only. Extra safety net.
-CREATE USER tmcselector;
-
--- A user for updating and inserting records.
--- CREATE USER tmcAdmin;
--- GRANT SELECT, INSERT, UPDATE, DELETE ON themetacitycom.* TO "tmcAdmin"@"localhost" IDENTIFIED BY PASSWORD "*AABD2FA4187FD3CE56D5592E116CA3A39BE3D86F";
-
--- 
 -- Table structure for table "articles"
 --
 CREATE SEQUENCE article_id_seq;
@@ -117,15 +96,32 @@ END;
 $$ language 'plpgsql';
 
 -- Articles table
-CREATE TRIGGER update_articles_modified_date_to_now AFTER UPDATE
+CREATE TRIGGER update_articles_modified_date_to_now BEFORE UPDATE
 ON articles FOR EACH ROW EXECUTE PROCEDURE 
   update_modified_date_to_now();
 
 -- Workshop table
-CREATE TRIGGER update_workshop_modified_date_to_now AFTER UPDATE
+CREATE TRIGGER update_workshop_modified_date_to_now BEFORE UPDATE
 ON workshop FOR EACH ROW EXECUTE PROCEDURE 
   update_modified_date_to_now();
+
+
+-- A user for selecting data only. Extra safety net.
+CREATE USER tmcselector;
+
+-- A user for updating and inserting records.
+CREATE USER tmcadmin;
+
+-- Have to manually add in passwords afterwards b/c it is a bad idea to have actual pwds in here
+-- Use 'ALTER ROLE foo WITH PASSWORD 'md5hashofpasswordandusername';
+-- or  'ALTER ROLE foo WITH PASSWORD 'plaintextwhichgetsdigestedtomd5';
 
 -- Give users their permissions
 GRANT SELECT ON articles, articletags, workshop, workshoptags, importantnotices TO tmcselector;
 ALTER USER tmcselector WITH CONNECTION LIMIT 10;
+
+GRANT SELECT, UPDATE, INSERT, DELETE ON articles, articletags, workshop, workshoptags, importantnotices TO tmcadmin;  -- explicit better than implicit
+GRANT USAGE, SELECT ON SEQUENCE article_id_seq TO tmcadmin;
+GRANT USAGE, SELECT ON SEQUENCE workshop_id_seq TO tmcadmin;
+ALTER USER tmcadmin WITH CONNECTION LIMIT 2;
+
