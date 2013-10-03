@@ -26,8 +26,7 @@ $(document).ready(function () {
     }
 
     function filter(searchTerm) {
-        var rePattern = searchTerm.replace(/[.?*+^$\[\]\\(){}|]/g, "\\$&");
-        var searchPattern = new RegExp('(' + rePattern + ')', 'ig');  // The brackets add a capture group
+        var rePattern = searchTerm.replace(/[.?*+^$\[\]\\(){}|]/g, "\\$&"), searchPattern = new RegExp('(' + rePattern + ')', 'ig');  // The brackets add a capture group
 
         entries.fadeOut(150, function () {
             noResults.hide();

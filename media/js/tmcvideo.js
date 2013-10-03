@@ -50,7 +50,7 @@ $(document).ready(function () {
                 return function () {
                     if (vid.muted === true) {
                         vid.muted = false;
-                        muteButton  .src = "/media/site-images/mute.svg";
+                        muteButton .src = "/media/site-images/mute.svg";
                     } else {
                         vid.muted = true;
                         muteButton.src = "/media/site-images/unmute.svg";
