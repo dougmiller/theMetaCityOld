@@ -114,55 +114,6 @@
         </attribute>
     </tag>
 
-    <!-- Admin tags
-
-    <tag>
-        <name>adminArticles</name>
-        <tag-class>com.themetacity.tags.blog.AdminArticleicle</tag-class>
-        <body-content>scriptless</body-content>
-
-        <attribute>
-            <name>articleBean</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.ArticleBean</type>
-        </attribute>
-    </tag>
-
-    <tag>
-        <name>adminNotices</name>
-        <tag-class>com.themetacity.tags.AdminImportantNoticeotice</tag-class>
-        <body-content>scriptless</body-content>
-
-        <attribute>
-            <name>noticeBean</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>com.themetacity.typebeans.ImportantNoticeBean</type>
-        </attribute>
-    </tag>
-
-    <tag>
-        <name>adminTags</name>
-        <tag-class>com.themetacity.tags.blog.AdminArticleTags</tag-class>
-        <body-content>scriptless</body-content>
-
-        <attribute>
-            <name>tagsList</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.util.LinkedList</type>
-        </attribute>
-
-        <attribute>
-            <name>usedTagsList</name>
-            <required>false</required>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.util.LinkedList</type>
-        </attribute>
-    </tag>
-    -->
-
     <!-- Sitemap Article tag -->
     <tag>
         <name>sitemapArticle</name>
