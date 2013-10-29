@@ -12,7 +12,7 @@ cat searcher.js > tmcscripts.js
 echo 'Removing unessary characters'
 
 sed -i 's/\/\/.*//g' tmcscripts.js                # Dont need comments (and they become greedy when everything is on a single line)
-sed -i 's/ #\*.*$//'g tmcscripts.js              # Dont need comments (and they become greedy when everything is on a single line)
+sed -i 's/ #\*.*$//'g tmcscripts.js               # Dont need comments (and they become greedy when everything is on a single line)
 sed -i '/console.*/'d tmcscripts.js               # Debug statements
 sed -i 's/^[ ^t]*//' tmcscripts.js                # Leading whitespace and tabs N.B in theory there shouldnt need to be tabs anywhere but I am sure there will be
 sed -i 's/[ ^t]*$//' tmcscripts.js                # Trailing whitespace and tabs
