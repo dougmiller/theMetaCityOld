@@ -1,4 +1,5 @@
 #!/bin/bash
+set +e
 
 # Combine and minify all the js files into one file to save on requests and bytes
 

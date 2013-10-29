@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="media" default="development" basedir="../../">   <!-- We take care of the specific dir to copy below -->
+<project name="media" default="development" basedir="../../">   <!-- We take care of the specific dir to copy below ** -->
     <property name="app.name" value="media"/>
     <property name="deploy.dir" value="/srv/http/localcity"/>
     <property name="production.dir" value="/media/tmc/"/>
@@ -11,32 +11,38 @@
     </target>
 
     <target name="development" depends="clean">
-        <copy todir="${deploy.dir}/${app.name}/css">			<!-- here -->
+        <exec executable="utils/cssdevelopmentprocessor" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
+
+        <copy todir="${deploy.dir}/${app.name}/css">			<!-- **here* -->
 			<fileset dir="${app.name}/css">
                 <include name="**/*.css"/>
 			</fileset>
 		</copy>
 
-        <copy todir="${deploy.dir}/${app.name}/js">			<!-- here -->
-			<fileset dir="${app.name}/js">
-  				<include name="**/*.js"/>
-			</fileset>
+        <delete>
+            <fileset dir="media/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
+        </delete>
+
+        <copy todir="${deploy.dir}/${app.name}/js">			<!-- *here* -->
+			<fileset dir="${app.name}/js" includes="*.js" />
 		</copy>
     </target>
 
     <target name="production" depends="clean">
-        <exec executable="utils/csscombiner.sh" />                  <!-- Smash the files together to optimise requests -->
-        <copy todir="${production.dir}/${app.name}/css">			<!-- here -->
+        <exec executable="utils/cssproductionprocessor" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
+        <copy todir="${production.dir}/${app.name}/css">			<!-- *here* -->
 			<fileset dir="${app.name}/css">
   				<include name="screen.css"/>
-  				<include name="mobile.css"/>
 			</fileset>
         </copy>
-        <delete file="${app.name}/css/screen.css"/>                 <!-- We dont need them here anymore sice the app is deployed -->
-        <delete file="${app.name}/css/mobile.css"/>
 
-        <exec executable="utils/jscombiner.sh" />                  <!-- Smash the files together to optimise requests -->
-        <copy todir="${production.dir}/${app.name}/js">			   <!-- here -->
+        <delete>
+            <fileset dir="media/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
+        </delete>
+
+
+        <exec executable="utils/jscombiner" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
+        <copy todir="${production.dir}/${app.name}/js">			   <!-- *here* -->
 			<fileset dir="${app.name}/js">
   				<include name="tmcscripts.js"/>
 			</fileset>

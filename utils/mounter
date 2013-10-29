@@ -1,4 +1,5 @@
 #!/bin/bash
+set +e
 
 if [[ $# -ne 2 || ( $1 != "mount" && $1 != "unmount" ) ]]; then
   echo "Usage:"
