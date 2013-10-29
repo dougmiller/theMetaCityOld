@@ -37,8 +37,8 @@ $(document).ready(function () {
             playPauseButton.addEventListener('click', (function (vid, playPauseButton) {
                 return function () {
                     playPause(vid, playPauseButton);
-                }
-            })(vid, playPauseButton));
+                };
+            }(vid, playPauseButton)));
 
             controlsBox.appendChild(playPauseButton);
 
@@ -55,8 +55,8 @@ $(document).ready(function () {
                         vid.muted = true;
                         muteButton.src = "/media/site-images/unmute.svg";
                     }
-                }
-            })(vid));
+                };
+            }(vid)));
 
             controlsBox.appendChild(muteButton);
 
@@ -64,23 +64,24 @@ $(document).ready(function () {
             vidBox.addEventListener('mouseover', (function (controlsBox) {
                 return function () {
                     $(controlsBox).fadeIn();
-                }
-            })(controlsBox));
+                };
+            }(controlsBox)));
 
             // When the hover leaves, hide the controls
             vidBox.addEventListener('mouseout', (function (controlsBox) {
                 return function () {
                     $(controlsBox).fadeOut();
-                }
-            })(controlsBox));
+                };
+            }(controlsBox)));
 
             // If the video itself is clicked
             vid.addEventListener('click', (function (vid, playPauseButton) {
                 return function () {
-                    if (isVideoPlaying(vid))
+                    if (isVideoPlaying(vid)) {
                     playPause(vid, playPauseButton);
-                }
-            })(vid, playPauseButton));
+                    }
+                };
+            }(vid, playPauseButton)));
 
             // Add whe whole lot onto the page
             if (vid.nextSibling) {
