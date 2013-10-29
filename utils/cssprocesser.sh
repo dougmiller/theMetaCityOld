@@ -7,7 +7,7 @@
 cd ..
 cd media/css
 
-lessc screen-common.less
-lessc screen-root.less
-lessc screen-workshop.less
-lessc screen-blog.less
+lessc -x screen-common.less
+lessc -x screen-root.less
+lessc -x screen-workshop.less
+lessc -x  screen-blog.less
