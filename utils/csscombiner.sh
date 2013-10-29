@@ -6,7 +6,7 @@
 cd media/css
 
 echo 'Combining all screen css files'
-cat screen-common.css > screen.css
-tail screen-root.css -n +2 >> screen.css
-tail screen-blog.css -n +2 >> screen.css
-tail screen-workshop.css -n +2 >> screen.css
+cat common.css > screen.css
+tail root.css -n +2 >> screen.css
+tail blog.css -n +2 >> screen.css
+tail workshop.css -n +2 >> screen.css
