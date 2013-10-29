@@ -2,15 +2,8 @@
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 
-<link href="/media/css/screen-common.css" rel="stylesheet" media="screen"/>
-<link href="/media/css/screen-root.css" rel="stylesheet" media="screen"/>
-<link href="/media/css/screen-blog.css" rel="stylesheet" media="screen"/>
-<link href="/media/css/screen-workshop.css" rel="stylesheet" media="screen"/>
+<link href="/media/css/common.css" rel="stylesheet" media="screen"/>
+<link href="/media/css/root.css" rel="stylesheet" media="screen"/>
+<link href="/media/css/blog.css" rel="stylesheet" media="screen"/>
+<link href="/media/css/workshop.css" rel="stylesheet" media="screen"/>
 <link href="/media/css/video.css" rel="stylesheet" media="screen"/>
-
-<!--
-<link href="/media/css/mobile-common.css" rel="stylesheet" media="handheld"/>
-<link href="/media/css/mobile-root.css" rel="stylesheet" media="handheld"/>
-<link href="/media/css/mobile-blog.css" rel="stylesheet" media="handheld"/>
-<link href="/media/css/mobile-workshop.css" rel="stylesheet" media="handheld"/>
--->

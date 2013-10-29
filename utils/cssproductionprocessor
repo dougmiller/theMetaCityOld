@@ -1,0 +1,14 @@
+#!/bin/bash
+set +e
+
+# This is  a LESS processer instructions file
+
+# Awesomely LESS has a minifier built in, so we'll use that
+
+cd media/css
+
+lessc -x common.less > screen.css
+lessc -x root.less >> screen.css
+lessc -x workshop.less >> screen.css
+lessc -x blog.less >> screen.css
+lessc -x video.less >> screen.css
