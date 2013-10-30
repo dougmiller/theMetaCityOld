@@ -23,7 +23,12 @@ sed -i 's/searchPattern\b/p/g' temp
 sed -i 's/address\b/o/g' temp
 sed -i 's/searchString\b/n/g' temp
 
-cat temp
+# Function names
+sed -i 's/clearFilter(/m(/g' temp
+sed -i 's/filter(/l(/g' temp
+sed -i 's/reset(/k(/g' temp
+sed -i 's/handlePathChange(/j(/g' temp
+
 cat temp > tmcscripts.js
 rm temp
 #cat tmcvideo.js >> tmcscripts.js
