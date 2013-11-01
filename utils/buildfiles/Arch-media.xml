@@ -10,6 +10,11 @@
 		<delete dir="${deploy.dir}/${app.name}/js"/>
     </target>
 
+    <target name="prodclean">
+        <delete dir="${production.dir}/${app.name}/css"/>
+		<delete dir="${production.dir}/${app.name}/js"/>
+    </target>
+
     <target name="development" depends="clean">
         <exec executable="utils/cssdevelopmentprocessor" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
 
@@ -20,15 +25,20 @@
 		</copy>
 
         <delete>
-            <fileset dir="media/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
+            <fileset dir="${app.name}/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
         </delete>
 
         <copy todir="${deploy.dir}/${app.name}/js">			<!-- *here* -->
-			<fileset dir="${app.name}/js" includes="*.js" />
-		</copy>
+            <fileset dir="${app.name}/js" includes="*.js" />
+        </copy>
+
+        <copy todir="${deploy.dir}/${app.name}/site-images">			<!-- *here* -->
+            <fileset dir="${app.name}/site-images" includes="*.*" />
+        </copy>
     </target>
 
-    <target name="production" depends="clean">
+    <target name="production" depends="prodclean">
+        <!-- CSS time -->
         <exec executable="utils/cssproductionprocessor" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
         <copy todir="${production.dir}/${app.name}/css">			<!-- *here* -->
 			<fileset dir="${app.name}/css">
@@ -37,10 +47,10 @@
         </copy>
 
         <delete>
-            <fileset dir="media/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
+            <fileset dir="${deploy.dir}/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
         </delete>
 
-
+        <!-- JS time -->
         <exec executable="utils/jscombiner" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
         <copy todir="${production.dir}/${app.name}/js">			   <!-- *here* -->
 			<fileset dir="${app.name}/js">
@@ -48,5 +58,10 @@
 			</fileset>
 		</copy>
         <delete file="${app.name}/js/tmcscripts.js"/>           <!-- We dont need this here anymore sice the app is deployed -->
+
+        <!-- Site images time -->
+        <copy todir="${production.dir}/${app.name}/site-images">			<!-- *here* -->
+            <fileset dir="${app.name}/site-images" includes="*.*" />
+        </copy>
     </target>
 </project>

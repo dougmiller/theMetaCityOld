@@ -9,27 +9,15 @@ video {
   border: 1px solid #DEDEDE;
 }
 
-.startContainer {
-  width: 100px;
-  height: 100px;
-  visibility:visible;
-}
-
-.videoControls{
-  width: 80px;
-  height: 40px;
-  border: 1px solid #DEDEDE;
-  border-bottom: 0;
-  border-radius: 10px 10px 0 0;
-  background: rgba(0, 0, 0, 0.6);
+.videoControls {
+  height: 24px;
   position: absolute;
-  /* Positions are dynamically set in the JS file */
-}
-
-.playPauseButton {
-
-}
-
-.muteButton {
-
+  padding: 0 2px;
+  /* Actual pixel positions are dynamically set in the JS file */
+  progress {
+  width: ~"calc(100% - 24px)";  /* LESS chokes unless this is escaped */
+  float: right;
+  color: #0063a6;
+  background: #fff;
+  }
 }
