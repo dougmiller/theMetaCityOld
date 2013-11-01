@@ -47,7 +47,7 @@
         </copy>
 
         <delete>
-            <fileset dir="${deploy.dir}/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
+            <fileset dir="${app.name}/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
         </delete>
 
         <!-- JS time -->

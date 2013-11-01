@@ -8,7 +8,7 @@ cd media/js
 echo 'Begin smooshing searcher.js'
 
 #  Minify the variable names.
-#  Each script is put in its own function scope so other scripts should (in theroy) have no problems with this
+#  Each script is put in its own function scope so other scripts should (in theory) have no problems with this
 cat searcher.js > temp
 sed -i 's/noResults\b/z/g' temp
 sed -i 's/searchBox\b/y/g' temp
@@ -16,7 +16,7 @@ sed -i 's/entries\b/x/g' temp
 sed -i 's/searchTimeout\b/w/g' temp
 sed -i 's/firstRun\b/v/g' temp
 sed -i 's/loc\b/u/g' temp
-sed -i 's/hist\b/s/g' temp     // Strange bug where if you use 't' it doest get inserted and you end up inserting `nothing`
+sed -i 's/hist\b/s/g' temp     # Strange bug where if you use 't' it doest get inserted and you end up inserting `nothing`
 sed -i 's/win\b/r/g' temp
 sed -i 's/textToCheck\b/q/g' temp
 sed -i 's/searchPattern\b/p/g' temp
@@ -37,6 +37,16 @@ cat video.js > temp
 
 sed -i 's/videos\b/z/g' temp
 sed -i 's/video\b/y/g' temp
+sed -i 's/"y"/"video"/1' temp  # Undo the first (and only) "video" instance
+sed -i 's/playPauseButton/x/g' temp
+sed -i 's/vidIndex/w/g' temp
+sed -i 's/vidBox/v/g' temp
+sed -i 's/controlsBox/u/g' temp
+sed -i 's/vidOffset/t/g' temp
+sed -i 's/progressBar/r/g' temp
+sed -i 's/heightsTogether/s/g' temp
+sed -i 's/isVideoPlaying/r/g' temp
+sed -i 's/playPause/q/g' temp
 
 cat temp > ~/vid.js
 
