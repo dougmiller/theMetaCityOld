@@ -9,3 +9,4 @@ lessc root.less > root.css
 lessc workshop.less > workshop.css
 lessc blog.less > blog.css
 lessc video.less > video.css
+lessc print.less > print.css

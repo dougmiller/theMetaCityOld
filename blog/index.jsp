@@ -48,6 +48,6 @@
 </c:choose>
 
 
-<p>Want more? <a href="/blog/archive">check out the archive here.</a></p>
+<p id="archivelink">Want more? <a href="/blog/archive">check out the archive here.</a></p>
 
 <jsp:include page="/WEB-INF/jspf/footer.jspf"/>

@@ -1,12 +1,12 @@
 <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
-<div id="main">
+
     <jsp:useBean id="workshopProcessBean" class="com.themetacity.beans.WorkshopProcessBean"/>
     <c:set var="workshopEntryList" value="${workshopProcessBean.workshopBlurbs}"/>
-
+    <div id="workshopsearch">
 		<input type="text" id="searchinput" placeholder="Type to search the workshop"/>
 		<button id="reset">Reset</button>
-		<br />
+    </div>
 	<main id="workshopBlurbEntries">
 	<c:choose>
         <c:when test="${empty workshopEntryList}">
@@ -21,5 +21,4 @@
         </c:otherwise>
     </c:choose>
 	</main>
-</div>
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>
