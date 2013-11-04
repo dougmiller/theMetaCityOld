@@ -17,10 +17,8 @@ $(document).ready(function () {
     }
 
     $(videos).each(function () {
-        var vidBox = this.parentNode, controlsBox, vidOffset, playPauseButton, progressBar, heightsTogether;
+        var vidBox = this.parentNode, controlsBox, playPauseButton, progressBar, heightsTogether;
         this.controls = false;
-
-        vidOffset = $(vidBox).offset();
 
         controlsBox = document.createElement('div');
         controlsBox.setAttribute("class", 'videoControls');
@@ -73,9 +71,9 @@ $(document).ready(function () {
 
         $(this).on("reposition", (function (vidBox, controlsBox) {
             return function () {
-                //todo doublecheck this maths
+                var vidOffset = $(vidBox).offset();
                 heightsTogether = Math.floor(vidOffset.top + vidBox.height() - 4 - controlsBox.height());
-                controlsBox.offset({top: heightsTogether});
+                controlsBox.offset({top: heightsTogether, left: vidOffset.left});
                 controlsBox.width(vidBox.width() - 2);
             };
         }($(vidBox), $(controlsBox))));
