@@ -16,30 +16,45 @@ $(document).ready(function () {
         }
     }
 
+    function detatchOnEnterListener(vidBox) {
+        $(vidBox).off('mouseenter');
+    }
+
     $(videos).each(function () {
-        var vidBox = this.parentNode, controlsBox, playPauseButton, progressBar, fullscreenButton, customPoster, poster, playedYet = false;
+        var videoContainer;
+        var video = $(this);
+        var controlsBox;
+        var playPauseButton;
+        var progressBar;
+        var fullscreenButton;
+        var customPoster;
+
         this.controls = false;
 
-        // Setup controls for the videos
+        // Setup the div container for the video
+        videoContainer = document.createElement('div');
+        videoContainer.setAttribute("class", 'videoContainer');
+        $(this).wrap(videoContainer);
+
+        // Setup controls box for the videos
         controlsBox = document.createElement('div');
         controlsBox.setAttribute("class", 'videoControls');
         $(controlsBox).css({opacity: 0});   // Start invisible, better here than CSS
 
+        // Setup play/pause button
         playPauseButton = document.createElement('img');
         playPauseButton.src = "/media/site-images/smallplay.svg";
         playPauseButton.setAttribute("class", 'playPauseButton');
 
         $(playPauseButton).on('click', (function (vid, playPauseButton) {
             return function () {
-                if (!playedYet) {
-                    playedYet = true;
-                }
                 playPause(vid, playPauseButton);
             };
         }(this, playPauseButton)));
 
         controlsBox.appendChild(playPauseButton);
 
+        // Setup the progress display
         progressBar = document.createElement("progress");
         progressBar.max = 1;  // Without these values the progress bar gets put into 'indeterminate mode
         progressBar.value = 0;  //And that breaks things so we put them in even though they are redundant
@@ -52,7 +67,7 @@ $(document).ready(function () {
 
         controlsBox.appendChild(progressBar);
 
-        // Button that adds full screen functionality
+        // Setup full screen button
         fullscreenButton = document.createElement('img');
         fullscreenButton.src = "/media/site-images/fullscreen.svg";
         fullscreenButton.setAttribute("class", 'fullscreenButton');
@@ -71,18 +86,15 @@ $(document).ready(function () {
 
         controlsBox.appendChild(fullscreenButton);
 
-        // When the video is hovered over, show the controls
-        $(vidBox).on('mouseenter', (function (controlsBox) {
+        $(videoContainer).on('mouseenter', (function (controlsBox) {
             return function () {
-                if (playedYet){
-                    $(controlsBox).fadeTo(400, 1);
-                    $(controlsBox).clearQueue();
-                }
+                $(controlsBox).fadeTo(400, 1);
+                $(controlsBox).clearQueue();
             };
         }(controlsBox)));
 
         // When the hover leaves, hide the controls
-        $(vidBox).on('mouseleave', (function (controlsBox) {
+        $(videoContainer).on('mouseleave', (function (controlsBox) {
             return function () {
                 $(controlsBox).fadeTo(400, 0);
                 $(controlsBox).clearQueue();
@@ -92,43 +104,47 @@ $(document).ready(function () {
         // If the video itself is clicked, play/pause the video
         $(this).on('click', (function (vid, playPauseButton) {
             return function () {
-                if (!playedYet) {
-                    playedYet = true;
-                }
                 playPause(vid, playPauseButton);
             };
         }(this, playPauseButton)));
-
+        /*
         // Posters to show before the user plays the video
         customPoster = this.dataset.poster;
-        if (customPoster) {
-            var vidOffsettt = $(this).offset();
-            poster = document.createElement('img');
-            poster.setAttribute("src",customPoster);
-            $(poster).addClass("poster");
-            $(poster).height = $(this).height();
-            $(poster).width = $(this).width();
-            $(poster).offset({top: vidOffsettt.top, left: vidOffsettt.left});
-
-            $(poster).on('click', (function (vid, playPauseButton) {
-                return function () {
-                    vid.parentNode.removeChild(poster);
-                    playedYet = true;
-                    playPause(vid, playPauseButton);
-                };
-            }(this, playPauseButton)));
-
-            this.parentNode.appendChild(poster);
+        if (!customPoster) {
+            customPoster = "/media/site-images/genericposter.svg";  // If none supplied, use our own, generic one
         }
 
-        $(this).on("reposition", (function (vidBox, controlsBox, poster) {
+        // Get the poster and make it inline
+        $.get(customPoster, function (svg) {
+            var poster = document.importNode(svg.documentElement, true);
+
+            $(poster).attr("class", "poster");
+            $(poster).attr("height",  video.height());
+            $(poster).attr("width",  video.width());
+
+            $(poster).on('click', (function (video, playPauseButton, controlsBox) {
+                return function () {
+                    $(this).remove(); // done with poster forever
+                    playPause(video, playPauseButton);
+                };
+            }(video, playPauseButton, controlsBox)));
+
+            videoContainer.appendChild(poster);
+        });
+         */
+        $(".videoContainer").on("reposition", (function () {
             return function () {
-                var vidBoxOffset = $(vidBox).offset(), vidOffset = $(this).offset(), heightsTogether = Math.floor(vidBoxOffset.top + vidBox.height() - 4 - controlsBox.height());
-                controlsBox.offset({top: heightsTogether, left: vidBoxOffset.left});
-                controlsBox.width(vidBox.width() - 2);
-                poster.offset({top: vidOffset.top, left: vidOffset.left});
+                var videoContainer = $(this);
+                var videoContainerOffset = $(this).offset();
+                var videoOffset = $("video", this).offset();
+                var heightsTogether = Math.floor(videoContainerOffset.top + videoContainer.height - 4 - controlsBox.height);
+                var poster = $("svg", this);
+
+                $(controlsBox).offset({top: heightsTogether, left: videoContainerOffset.left});
+                $(controlsBox).width(videoContainer.width - 2);
+                $(poster).offset({top: videoOffset.top, left: videoOffset.left});
             };
-        }($(vidBox), $(controlsBox), $(poster))));
+        }()));
 
         $(this).on('timeupdate', (function (video) {
             return function () {
@@ -142,11 +158,11 @@ $(document).ready(function () {
         } else {
             this.parentNode.appendChild(controlsBox);
         }
-        $(this).trigger("reposition"); //Get its position right.
+        $(".videoContainer").trigger("reposition"); // Set initial positions
     });
 
     $(window).on("resize", function () {
-        $(videos).each(function () {
+        $(".videoContainer").each(function () {
             $(this).trigger("reposition");  // Draw everything on for the first time
         });
     });
