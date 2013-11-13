@@ -1,6 +1,5 @@
 $(document).ready(function () {
     "use strict";
-    var c = console.log;
     var videos = $("video");
 
     function isVideoPlaying(video) {
@@ -20,13 +19,7 @@ $(document).ready(function () {
     }
 
     $(videos).each(function () {
-        var $video = $(this);
-        var $videoContainer;
-        var $controlsBox;
-        var $playPauseButton;
-        var $progressBar;
-        var $poster;
-        var customPoster;
+        var $video = $(this), $videoContainer, $controlsBox, $playPauseButton, $progressBar, $poster, customPoster;
 
         this.controls = false;
 
@@ -42,21 +35,22 @@ $(document).ready(function () {
             $('<div></div>', {
                 class: 'videoContainer'
             }).on("mouseenter",function () {
-                    c($poster.parent().length);
-                    $controlsBox.fadeTo(400, 1);
-                    $controlsBox.clearQueue();
+                    if (!$poster.parent().length) {
+                        $controlsBox.fadeTo(400, 1);
+                        $controlsBox.clearQueue();
+                    }
                 }).on("mouseleave",function () {
                     $controlsBox.fadeTo(400, 0);
                     $controlsBox.clearQueue();
                 }).on("reposition", function () {
                     // Move posters and controls back into position after video position updated
-                    var videoContainerOffset = $videoContainer.offset();
-                    var heightsTogether = Math.floor($controlsBox.offset().top + $videoContainer.height - 4 - $controlsBox.height);
-                    var videoOffset = $video.offset();
+                    var videoContainerOffset = $videoContainer.offset(), videoContainerWidth = $videoContainer.width(), heightsTogether = Math.floor(videoContainerOffset.top + $videoContainer.height() - $controlsBox.height());
+
+                    $($poster, this).offset({top: videoContainerOffset.top, left: videoContainerOffset.left});
 
                     $controlsBox.offset({top: heightsTogether, left: videoContainerOffset.left});
-                    $controlsBox.width($videoContainer.width - 2); //2 is for borders
-                    //$poster.offset({top: videoOffset.top, left: videoOffset.left});
+                    $controlsBox.width(videoContainerWidth - 2); //2 is for borders
+
                 })).parent(); // Return the newly created wrapper div (brand new parent of the video)
 
         $controlsBox = $("<div></div>", {
@@ -116,24 +110,23 @@ $(document).ready(function () {
             $poster.attr("height", $video.height());
             $poster.attr("width", $video.width());
 
-            $poster.offset({top: $video.offset().top, left: $video.offset().left});
-
             $(".playButton", $poster).on("click", function () {
-                        playPause($video, $playPauseButton);
-                        $poster.remove(); // done with poster forever
+                playPause($video, $playPauseButton);
+                $poster.remove(); // done with poster forever
             });
             $videoContainer.append($poster);
+            $($videoContainer).trigger("reposition");
         });
 
         // Add whe whole lot onto the page
         $videoContainer.append($controlsBox);
 
-        $(this).trigger("reposition"); //Get its position right.
+        $($videoContainer).trigger("reposition"); //Get its position right.
     });
 
     $(window).on("resize", function () {
         $(videos).each(function () {
-            $(this).trigger("reposition");
+            $(this).parent().trigger("reposition");
         });
     });
 });
