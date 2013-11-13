@@ -1,83 +1,64 @@
 $(document).ready(function () {
     "use strict";
-    var c = console;
+    var c = console.log;
     var videos = $("video");
 
     function isVideoPlaying(video) {
-        return (video.paused || video.ended || video.seeking || video.readyState < video.HAVE_FUTURE_DATA);
+        return !(video.paused || video.ended || video.seeking || video.readyState < video.HAVE_FUTURE_DATA);
     }
 
+    // Pass in Jquery objects of the video to play/pause and the control box associated with it
     function playPause(video, playPauseButton) {
-        if (!isVideoPlaying(video)) {
-            video.pause();
+        var vid = video[0];
+        if (isVideoPlaying(vid)) {
+            vid.pause();
             playPauseButton[0].src = "/media/site-images/smallplay.svg";
         } else {
-            video.play();
+            vid.play();
             playPauseButton[0].src = "/media/site-images/smallpause.svg";
         }
     }
 
-    function detatchOnEnterListener(vidBox) {
-        $(vidBox).off("mouseenter");
-    }
-
     $(videos).each(function () {
-        var $video = this;
+        var $video = $(this);
         var $videoContainer;
         var $controlsBox;
         var $playPauseButton;
         var $progressBar;
+        var $poster;
         var customPoster;
 
         this.controls = false;
 
-        $($video, {
-            on: {
-                timeupdate: function () {
-                    $progressBar[0].value = $video.currentTime / $video.duration;
-                },
-                click: function () {
-                    playPause($video, $playPauseButton);
-                }
-            }
-        });
+        $video.on("timeupdate",function () {
+            var video = $video[0], progressBar = $progressBar[0];
+            progressBar.value = video.currentTime / video.duration;
+        }).on("click", function () {
+                playPause($video, $playPauseButton);
+            });
 
         // Setup the div container for the video, controls and poster
-        $videoContainer = $($video).wrap(
+        $videoContainer = $video.wrap(
             $('<div></div>', {
-                class: 'videoContainer',
-                on: {
-                    click: function () {
-                        c.log(this);
-                        c.log($progressBar[0].value);
-                        c.log($video.currentTime);
-                        c.log($video.duration);
-                        c.log($video.currentTime / $video.duration);
-                        playPause($video, $playPauseButton);
-                    },
-                    mouseenter: function () {
-                        $controlsBox.fadeTo(400, 1);
-                        $controlsBox.clearQueue();
-                    },
-                    mouseleave: function () {
-                        $controlsBox.fadeTo(400, 0);
-                        $controlsBox.clearQueue();
-                    },
-                    reposition: function () {
-                        var $videoContainer = $(this);
-                        var videoContainerOffset = $(this).offset();
-                        console.log($(this).offset());
-                        //var videoOffset = $("video", this).offset();
-                        var heightsTogether = Math.floor($controlsBox.offset().top + $videoContainer.height - 4 - $controlsBox.height);
-                        //var poster = $("svg", this);
+                class: 'videoContainer'
+            }).on("mouseenter",function () {
+                    c($poster.parent().length);
+                    $controlsBox.fadeTo(400, 1);
+                    $controlsBox.clearQueue();
+                }).on("mouseleave",function () {
+                    $controlsBox.fadeTo(400, 0);
+                    $controlsBox.clearQueue();
+                }).on("reposition", function () {
+                    c("triggered");
+                    // Move posters and controls back into position after video position updated
+                    var videoContainerOffset = $videoContainer.offset();
+                    var heightsTogether = Math.floor($controlsBox.offset().top + $videoContainer.height - 4 - $controlsBox.height);
+                    var videoOffset = $video.offset();
 
-                        $controlsBox.offset({top: heightsTogether, left: videoContainerOffset.left});
-                        $controlsBox.width(videoContainer.width - 2);
-                        //$(poster).offset({top: videoOffset.top, left: videoOffset.left});
-                    }
-                }
-            })
-        ).parent(); // Return the newly created wrapper div (brand new parent of the video)
+                    $controlsBox.offset({top: heightsTogether, left: videoContainerOffset.left});
+                    $controlsBox.width($videoContainer.width - 2); //2 is for borders
+                    $poster.offset({top: videoOffset.top, left: videoOffset.left});
+                })).parent(); // Return the newly created wrapper div (brand new parent of the video)
 
         $controlsBox = $("<div></div>", {
                 class: "videoControls",
@@ -90,13 +71,10 @@ $(document).ready(function () {
         // Setup play/pause button
         $playPauseButton = $("<img />", {
             class: "playPauseButton",
-            src: "/media/site-images/smallplay.svg",
-            on: {
-                click: function () {
-                    playPause($video, $playPauseButton);
-                }
-            }
-        }).appendTo($controlsBox);
+            src: "/media/site-images/smallplay.svg"
+        }).on("click",function () {
+                playPause($video, $playPauseButton);
+            }).appendTo($controlsBox);
 
 
         // Setup play/pause button
@@ -110,67 +88,54 @@ $(document).ready(function () {
         // Full screen
         $("<img />", {
             class: "fullscreenButton",
-            src: "/media/site-images/fullscreen.svg",
-            on: {
-                click: function () {
-                    if ($video.requestFullScreen) {
-                        $video.requestFullScreen();
-                    } else if ($video.webkitRequestFullScreen) {
-                        $video.webkitRequestFullScreen();
-                    } else if ($video.mozRequestFullScreen) {
-                        $video.mozRequestFullScreen();
-                    }
+            src: "/media/site-images/fullscreen.svg"
+        }).on("click",function () {
+                var video = $video.get(0);
+                if (video.requestFullScreen) {
+                    video.requestFullScreen();
+                } else if (video.webkitRequestFullScreen) {
+                    video.webkitRequestFullScreen();
+                } else if (video.mozRequestFullScreen) {
+                    video.mozRequestFullScreen();
                 }
-            }
-        }).appendTo($controlsBox);
+            }).appendTo($controlsBox);
 
 
-         // Posters to show before the user plays the video
-         customPoster = this.dataset.poster;
-         if (!customPoster) {
+        // Posters to show before the user plays the video
+        customPoster = this.dataset.poster;
+        if (!customPoster) {
             customPoster = "/media/site-images/genericposter.svg";  // If none supplied, use our own, generic one
-         }
-
-         // Get the poster and make it inline
+        }
+        // Get the poster and make it inline
         // File is SVG so usual jQuery rules may not apply
-         $.get(customPoster, function (svg) {
-             var poster = document.importNode(svg.documentElement, true);
+        // File needs to have at least one element with "playButton" as class
+        $.get(customPoster, function (svg) {
+            $poster = document.importNode(svg.documentElement, true);
+            $poster = $($poster);
 
-             $(poster).attr("class", "poster");
-             $(poster).attr("height",  $video.height);
-             $(poster).attr("width",  $video.width);
+            $poster.attr("class", "poster");
+            $poster.attr("height", $video.height());
+            $poster.attr("width", $video.width());
 
-             $(poster).on("click", (function (video, playPauseButton, controlsBox) {
-             return function () {
-             $(this).remove(); // done with poster forever
-             playPause(video, playPauseButton);
-             };
-             }($video, $playPauseButton, $controlsBox)));
+            $poster.offset({top: $video.offset().top, left: $video.offset().left});
 
-             $videoContainer.append(poster);
-         });
-        /**/
+            $(".playButton", $poster).on("click", function () {
+                        playPause($video, $playPauseButton);
+                        $poster.remove(); // done with poster forever
+            });
+            $videoContainer.append($poster);
+        });
 
-        /*
-        $(this).on("timeupdate", (function (video) {
-            return function () {
-                progressBar.value = video.currentTime / video.duration;
-            };
-        }(this)));
-
-        */
         // Add whe whole lot onto the page
         $videoContainer.append($controlsBox);
 
     });
 
-    $(window, {
-        on: {
-            resize: function () {
-                $().trigger("reposition");  // Draw everything on for the first time
-            }
-        }
+    $(window).on("resize", function () {
+        c("trig");
+        $().trigger("reposition");  // Draw everything on for the first time
     });
 
     $().trigger("reposition"); // Set initial positions
-});
+})
+;
