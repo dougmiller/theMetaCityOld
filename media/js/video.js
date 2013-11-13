@@ -49,7 +49,6 @@ $(document).ready(function () {
                     $controlsBox.fadeTo(400, 0);
                     $controlsBox.clearQueue();
                 }).on("reposition", function () {
-                    c("triggered");
                     // Move posters and controls back into position after video position updated
                     var videoContainerOffset = $videoContainer.offset();
                     var heightsTogether = Math.floor($controlsBox.offset().top + $videoContainer.height - 4 - $controlsBox.height);
@@ -57,7 +56,7 @@ $(document).ready(function () {
 
                     $controlsBox.offset({top: heightsTogether, left: videoContainerOffset.left});
                     $controlsBox.width($videoContainer.width - 2); //2 is for borders
-                    $poster.offset({top: videoOffset.top, left: videoOffset.left});
+                    //$poster.offset({top: videoOffset.top, left: videoOffset.left});
                 })).parent(); // Return the newly created wrapper div (brand new parent of the video)
 
         $controlsBox = $("<div></div>", {
@@ -129,13 +128,12 @@ $(document).ready(function () {
         // Add whe whole lot onto the page
         $videoContainer.append($controlsBox);
 
+        $(this).trigger("reposition"); //Get its position right.
     });
 
     $(window).on("resize", function () {
-        c("trig");
-        $().trigger("reposition");  // Draw everything on for the first time
+        $(videos).each(function () {
+            $(this).trigger("reposition");
+        });
     });
-
-    $().trigger("reposition"); // Set initial positions
-})
-;
+});
