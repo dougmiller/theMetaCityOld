@@ -8,11 +8,13 @@
     <target name="clean">
         <delete dir="${deploy.dir}/${app.name}/css"/>
 		<delete dir="${deploy.dir}/${app.name}/js"/>
+		<delete dir="${deploy.dir}/${app.name}/site-images"/>
     </target>
 
     <target name="prodclean">
         <delete dir="${production.dir}/${app.name}/css"/>
 		<delete dir="${production.dir}/${app.name}/js"/>
+		<delete dir="${production.dir}/${app.name}/site-images"/>
     </target>
 
     <target name="development" depends="clean">

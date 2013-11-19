@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="tmcendofmovie">
+
+
+    <defs>
+        <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css' />
+    </defs>
+
+    <rect width="100%" height="100%" x="0" y="0" style="fill:#000000; opacity:0.5"/>
+
+    <!-- TSCu_Times -->
+    <text x="50%" y="50%" font-family="Cookie" fill="white" font-size="72pt" text-anchor="middle">fin</text>
+
+    <circle class="playButton" cx="50%" cy="80%" r="30px" fill="black" stroke="white" stroke-width="2px"/>
+
+    <svg x="50%" y="80%" overflow="visible" >
+        <path class="replay" d="M2,-20 l 5 15 M2,-20 a20,20 1 1 1 -5,0" fill="none" stroke="white" stroke-width="2px">
+
+        <animateTransform
+                attributeType="XML"
+                attributeName="transform"
+                type="rotate"
+                from="0 0 0" to="-360 0 0"
+                begin="0" dur="5s"
+                repeatCount="indefinite"
+                additive="sum"/>
+
+        </path>
+    </svg>
+</svg>
