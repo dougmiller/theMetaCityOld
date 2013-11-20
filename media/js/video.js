@@ -127,7 +127,8 @@ $(document).ready(function () {
                 video.mozRequestFullScreen();
             }
 
-                video.dataset.originalsource = video.src;
+                video.dataset.originalsource = video.currentSrc;
+                console.log(video.currentSrc);
                 $("source",$video).each(function (){
                     console.log(this);
                 });
