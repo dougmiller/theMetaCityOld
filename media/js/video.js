@@ -117,7 +117,8 @@ $(document).ready(function () {
             class: "fullscreenButton",
             src: "/media/site-images/fullscreen.svg"
         }).on("click", function () {
-            var video = $video[0];
+                var video = $video[0];
+                var videoTime = video.currentTime;
             if (video.requestFullScreen) {
                 video.requestFullScreen();
             } else if (video.webkitRequestFullScreen) {
@@ -125,7 +126,25 @@ $(document).ready(function () {
             } else if (video.mozRequestFullScreen) {
                 video.mozRequestFullScreen();
             }
-        }).appendTo($controlsBox);
+
+                video.dataset.originalsource = video.src;
+                $("source",$video).each(function (){
+                    console.log(this);
+                });
+                //video.dataset.originalsource = "123123";
+
+                //video.src = video.dataset.fullscreensource;
+                video.src = "/assets/video/citysmall.ogv";
+
+                $video.on("loadedmetadata", function() {
+                    console.log("mereta");
+                    console.log(video.src);
+                    console.log(video.dataset.originalsource);
+
+                    video.currentTime = videoTime;
+                    playPause($video, $playPauseButton);
+                });
+            }).appendTo($controlsBox);
 
 
         // Posters to show before the user plays the video
