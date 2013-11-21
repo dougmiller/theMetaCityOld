@@ -127,21 +127,23 @@ $(document).ready(function () {
                 video.mozRequestFullScreen();
             }
 
-                video.dataset.originalsource = video.currentSrc;
-                console.log(video.currentSrc);
-                $("source",$video).each(function (){
-                    console.log(this);
-                });
-                //video.dataset.originalsource = "123123";
+                $("source", $video).each(function (){
+                    var $this0 = $(this)[0];
 
-                //video.src = video.dataset.fullscreensource;
-                video.src = "/assets/video/citysmall.ogv";
+                    // .dataset.fullscreen is is treated a boolean, but it is just truthy string
+                    // Thsi function uses a standard format of names of full screen appropriate vids as shown below:
+                    // original: originalvid.xyz            full screen: originalvid.fullscreen.xyz
+                    // N.B. Can not have period (".") in original file same except for filetype
+                    if ($this0.dataset.fullscreen) {
+                        var splitSrc = $this0.src.split(".");
+                        console.log($this0.src);
+                        $this0.src = splitSrc[0] + ".fullscreen." + splitSrc[1];
+                        console.log($this0.src);
+                    }
+                    video.load();
+                });
 
                 $video.on("loadedmetadata", function() {
-                    console.log("mereta");
-                    console.log(video.src);
-                    console.log(video.dataset.originalsource);
-
                     video.currentTime = videoTime;
                     playPause($video, $playPauseButton);
                 });
@@ -182,6 +184,17 @@ $(document).ready(function () {
         var isFullScreen = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
         if (!isFullScreen){
             $(videos).each(function () {
+                $("source", this).each(function (){
+                    var $this0 = $(this)[0];
+
+                    // Remove the full screen and go back to the original file
+                    if ($this0.dataset.fullscreen) {
+                        var splitSrc = $this0.src.split(".");
+                        $this0.src = splitSrc[0] + "." + splitSrc[splitSrc.length-1];
+                        console.log($this0.src);
+                    }
+                });
+                $(this)[0].load();
                 $(this).parent().trigger("reposition");
             });
         }
