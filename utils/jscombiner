@@ -16,12 +16,12 @@ sed -i 's/entries\b/x/g' temp
 sed -i 's/searchTimeout\b/w/g' temp
 sed -i 's/firstRun\b/v/g' temp
 sed -i 's/loc\b/u/g' temp
-sed -i 's/hist\b/s/g' temp     # Strange bug where if you use 't' it doest get inserted and you end up inserting `nothing`
-sed -i 's/win\b/r/g' temp
-sed -i 's/textToCheck\b/q/g' temp
-sed -i 's/searchPattern\b/p/g' temp
-sed -i 's/address\b/o/g' temp
-sed -i 's/searchString\b/n/g' temp
+sed -i 's/hist\b/t/g' temp
+sed -i 's/win\b/s/g' temp
+sed -i 's/textToCheck\b/r/g' temp
+sed -i 's/searchPattern\b/q/g' temp
+sed -i 's/address\b/p/g' temp
+sed -i 's/searchString\b/o/g' temp
 
 # Function names
 sed -i 's/clearFilter(/m(/g' temp
@@ -58,11 +58,11 @@ rm temp
 echo 'Finished with home brew scripts'
 echo 'Begin general minification'
 
-sed -i 's/\/\/.*//g' tmcscripts.js                # Dont need comments (and they become greedy when everything is on a single line)
+sed -i 's/[^:]\/\/.*//g' tmcscripts.js            # Dont need comments (and they become greedy when everything is on a single line). [:] is for urls (which have //)
 sed -i 's/ #\*.*$//'g tmcscripts.js               # Dont need comments (and they become greedy when everything is on a single line)
 sed -i '/console.*/'d tmcscripts.js               # Debug statements
-sed -i 's/^[ ^t]*//' tmcscripts.js                # Leading whitespace and tabs N.B in theory there shouldnt need to be tabs anywhere but I am sure there will be
-sed -i 's/[ ^t]*$//' tmcscripts.js                # Trailing whitespace and tabs
+sed -i 's/^[ \t]*//' tmcscripts.js                # Leading whitespace and tabs N.B in theory there shouldnt need to be tabs anywhere but I am sure there will be
+sed -i 's/[ \t]*$//' tmcscripts.js                # Trailing whitespace and tabs
 sed -i 's/ () /()/g' tmcscripts.js                # Spaces in 'function () {'
 sed -i 's/ + /+/g' tmcscripts.js                  # Spaces in ' + '
 sed -i 's/ || /||/g' tmcscripts.js                # Spaces in ' || '
