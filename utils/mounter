@@ -13,19 +13,19 @@ declare -A mountInfo
 # Add mounts as needed
 case $2 in
   "production")
-    mountInfo=( [name]="the MetaCity production deploy"
+    mountInfo=( [name]="the MetaCity production"
                           [ref]="production"
                           [mountCommand]="sshfs doug@enc:/srv/http/tmc /media/tmc"
                           [unmountCommand]="sudo umount /media/tmc");;
 
-  "admin")
-    mountInfo=( [name]="the MetaCity admin"
-                          [ref]="admin"
-                          [mountCommand]="sshfs doug@enc:/home/doug/tmcadmin /home/doug/Code/theMetaCity/utils/remote"
-                          [unmountCommand]="sudo umount /home/doug/Code/theMetaCity/utils/remote");;
+  "assets")
+    mountInfo=( [name]="the MetaCity assets"
+                          [ref]="assets"
+                          [mountCommand]="sshfs doug@enc:/srv/http/tmcassets /media/tmcassets"
+                          [unmountCommand]="sudo umount /media/tmcassets");;
   *) 
     echo "Unknown mount. Please provide a known mount."
-    echo "Known mounts are: 'production', 'admin'"  # Have to update these manually as bash does not have nested mounts
+    echo "Known mounts are: 'production', 'assets'"  # Have to update these manually as bash does not have nested mounts
     exit 2;;
 esac
 
