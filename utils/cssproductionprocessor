@@ -7,7 +7,7 @@ set +e
 
 cd media/css
 
-# All files ahve charset in them as we want to have them as stand alone sheets
+# All files have charset in them as we want to have them as stand alone sheets
 # When combining them, put the put the first one in and strip the rest (hence the tail -n +2)
 
 cat common.less | lessc -x - screen.css
@@ -15,3 +15,6 @@ tail root.less -n +2 | lessc -x - >> screen.css
 tail workshop.less -n +2 | lessc -x - >> screen.css
 tail blog.less -n +2 | lessc -x - >> screen.css
 tail video.less -n +2 | lessc -x - >> screen.css
+
+# Print style sheet is in it's own file
+cat print.less | lessc -x - print.css

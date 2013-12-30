@@ -18,16 +18,13 @@
     </target>
 
     <target name="development" depends="clean">
-        <exec executable="utils/cssdevelopmentprocessor" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
+        <exec executable="utils/cssdevelopmentprocessor" failonerror="true" osfamily="unix"/>                  <!-- Process the files through the LESS preprocessor -->
 
-        <copy todir="${deploy.dir}/${app.name}/css">			<!-- **here* -->
-			<fileset dir="${app.name}/css">
-                <include name="**/*.css"/>
-			</fileset>
-		</copy>
-
-        <delete>
-            <fileset dir="${app.name}/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
+        <copy todir="${deploy.dir}/${app.name}/css">			<!-- *here* -->
+            <fileset dir="${app.name}/css" includes="*.css" />
+        </copy>
+        <delete>			<!-- Remove unused (sopied across already) files -->
+            <fileset dir="${app.name}/css" includes="*.css" />
         </delete>
 
         <copy todir="${deploy.dir}/${app.name}/js">			<!-- *here* -->
@@ -41,10 +38,11 @@
 
     <target name="production" depends="prodclean">
         <!-- CSS time -->
-        <exec executable="utils/cssproductionprocessor" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
+        <exec executable="utils/cssproductionprocessor" failonerror="true" osfamily="unix"/>                  <!-- Process the files through the LESS preprocessor and smush them togeather for fewer requests-->
         <copy todir="${production.dir}/${app.name}/css">			<!-- *here* -->
 			<fileset dir="${app.name}/css">
   				<include name="screen.css"/>
+  				<include name="print.css"/>
 			</fileset>
         </copy>
 
