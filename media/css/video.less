@@ -10,19 +10,19 @@ video, .poster {
 }
 
 video:fullscreen {
-  border: none;
-  padding: none;
-  margin: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
 video:-webkit-full-screen {
-  border: none;
-  padding: none;
-  margin: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
 video:-moz-full-screen {
-  border: none;
-  padding: none;
-  margin: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .poster {
@@ -34,11 +34,18 @@ video:-moz-full-screen {
   position: absolute;
   padding: 0 2px;
   /* Actual pixel positions are dynamically set in the JS file */
-  progress {
-    width: ~"calc(100% - 46px)";  /* LESS chokes unless this is escaped */
-    float: right;
+  input[type=range] {
+    width: ~"calc(100% - 152px)";  /* LESS chokes unless this is escaped */
     color: #0063a6;
-    background: #fff;
-    margin-right: 2px;
+    /*background: #fff;*/
+  }
+  .fullscreenButton {
+  }
+
+  .timespan {
+    font-size: 1em;
+  }
+
+  .currenttimespan {
   }
 }
