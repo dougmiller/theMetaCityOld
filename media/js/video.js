@@ -1,7 +1,18 @@
 $(document).ready(function () {
     "use strict";
     var videos = $("video");
-    var c = console.log;
+
+
+    Number.prototype.leftZeroPad = function (numZeros) {
+        var n = Math.abs(this);
+        var zeros = Math.max(0, numZeros - Math.floor(n).toString().length);
+        var zeroString = Math.pow(10, zeros).toString().substr(1);
+        if (this < 0) {
+            zeroString = '-' + zeroString;
+        }
+
+        return zeroString + n;
+    };
 
     function isVideoPlaying(video) {
         return !(video.paused || video.ended || video.seeking || video.readyState < video.HAVE_FUTURE_DATA);
@@ -19,8 +30,27 @@ $(document).ready(function () {
         }
     }
 
+    function rawTimeToFormattedTime(rawTime) {
+        var chomped, seconds, minutes;
+        chomped = Math.floor(rawTime);
+        seconds = chomped % 60;
+        minutes = Math.floor(chomped / 60);
+        return minutes.leftZeroPad(2) + ":" + seconds.leftZeroPad(2);
+    }
+
     $(videos).each(function () {
-        var $video = $(this), $videoContainer, $controlsBox, $playPauseButton, $progressBar, $poster, customPoster, $endPoster, customEndPoster, $errorPoster;
+        var $video = $(this),
+            $videoContainer,
+            $controlsBox,
+            $playPauseButton,
+            $progressBar,
+            $poster,
+            customPoster,
+            $endPoster,
+            customEndPoster,
+            $errorPoster,
+            $currentTimeSpan,
+            $durationTimeSpan;
 
         if (this.controls) {
             this.controls = false;
@@ -28,7 +58,8 @@ $(document).ready(function () {
 
         $video.on("timeupdate",function () {
             var video = $video[0], progressBar = $progressBar[0];
-            progressBar.value = video.currentTime / video.duration;
+            progressBar.value = (video.currentTime / video.duration) * 1000;
+            $currentTimeSpan.text(rawTimeToFormattedTime(video.currentTime));
         }).on("click",function () {
                 playPause($video, $playPauseButton);
             }).on("ended",function () {
@@ -76,9 +107,9 @@ $(document).ready(function () {
                         $errorPoster.attr("width", $video.width());
 
                         $("source", $video).each(function () {
-                            var newText = document.createElementNS("http://www.w3.org/2000/svg","tspan");
+                            var newText = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
                             var textNode = document.createTextNode(this.src);
-                            var link = document.createElementNS("http://www.w3.org/2000/svg","a");
+                            var link = document.createElementNS("http://www.w3.org/2000/svg", "a");
                             newText.setAttributeNS(null, "x", "50%");
                             newText.setAttributeNS(null, "dy", "1.2em");
                             link.setAttributeNS("http://www.w3.org/1999/xlink", "href", this.src);
@@ -91,6 +122,9 @@ $(document).ready(function () {
                         $videoContainer.append($errorPoster);
                         $($videoContainer).trigger("reposition");
                     });
+                } else {
+                    $($currentTimeSpan).text(rawTimeToFormattedTime(this.currentTime));
+                    $($durationTimeSpan).text(rawTimeToFormattedTime(this.duration));
                 }
             });
 
@@ -101,9 +135,12 @@ $(document).ready(function () {
             }).on("mouseenter",function () {
                     $endPoster = $(".endposter", this); // This is NOT added to the whole script scope so have to rescope it here
                     $errorPoster = $(".errorposter", this); // This is NOT added to the whole script scope so have to rescope it here
-                    //   Not played yet              Finished playing
-                    if (!($poster.parent().length || $endPoster.parent().length || $errorPoster.parent().length)) {
+                    //   Not played yet              Finished playing              Cant play format
+                    if ($poster.parent().length || $endPoster.parent().length || $errorPoster.parent().length) {
                         $controlsBox.css({'opacity': 0});
+                    } else {
+                        $controlsBox.fadeTo(400, 1);
+                        $controlsBox.clearQueue();
                     }
                 }).on("mouseleave",function () {
                     $controlsBox.fadeTo(400, 0);
@@ -143,11 +180,27 @@ $(document).ready(function () {
             }).appendTo($controlsBox);
 
 
+
+        $durationTimeSpan = $("<span></span>", {
+            class: "timespan"
+        }).appendTo($controlsBox);
+
         // Setup progress bar
-        $progressBar = $("<progress />", {
+        $progressBar = $("<input />", {
+            type: "range",
             min: 0,
-            max: 1,
+            max: 1000,
             value: 0
+        }).on("change",function () {
+                $video[0].currentTime = $video[0].duration * (this.value / 1000);
+            }).on("mousedown",function () {
+                $video[0].pause();
+            }).on("mouseup",function () {
+                $video[0].play();
+            }).appendTo($controlsBox);
+
+        $currentTimeSpan = $("<span></span>", {
+            class: "timespan currenttimespan"
         }).appendTo($controlsBox);
 
         // Full screen
@@ -155,8 +208,7 @@ $(document).ready(function () {
             class: "fullscreenButton",
             src: "/media/site-images/fullscreen.svg"
         }).on("click",function () {
-                var video = $video[0];
-                var videoTime = video.currentTime;
+                var video = $video[0], videoTime = video.currentTime;
                 if (video.requestFullScreen) {
                     video.requestFullScreen();
                 } else if (video.webkitRequestFullScreen) {
@@ -169,7 +221,7 @@ $(document).ready(function () {
                     var $this0 = $(this)[0];
 
                     // .dataset.fullscreen is is treated a boolean, but it is just truthy string
-                    // Thsi function uses a standard format of names of full screen appropriate vids as shown below:
+                    // This function uses a standard format of names of full screen appropriate vids as shown below:
                     // original: originalvid.xyz            full screen: originalvid.fullscreen.xyz
                     // N.B. Can not have period (".") in original file same except for filetype
                     if ($this0.dataset.fullscreen) {
@@ -184,7 +236,6 @@ $(document).ready(function () {
                     playPause($video, $playPauseButton);
                 });
             }).appendTo($controlsBox);
-
 
         // Posters to show before the user plays the video
         customPoster = this.dataset.poster;
