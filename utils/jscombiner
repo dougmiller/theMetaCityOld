@@ -47,6 +47,9 @@ sed -i 's/progressBar/r/g' temp
 sed -i 's/heightsTogether/s/g' temp
 sed -i 's/isVideoPlaying/r/g' temp
 sed -i 's/playPause/q/g' temp
+#sed -i 's/videoContainer/p/g' temp
+#sed -i 's/[^."]poster[^");]/o/g' temp
+#sed -i 's/o/poster,/1' temp
 
 cat temp > ~/vid.js
 
