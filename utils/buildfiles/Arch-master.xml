@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="Arch Master Builder" default="development" basedir=".">
 
-    <target name="clean" description="Remvoe everyting via each app's own clean method">
+    <target name="clean" description="Remove everything via each app's own clean method">
         <ant antfile="Arch-media.xml" target="clean" inheritAll="false" />
         <ant antfile="Arch-TB.xml" target="clean"  inheritAll="false" />
         <ant antfile="Arch-blog.xml" target="clean" inheritAll="false" />
@@ -21,7 +21,7 @@
         <ant antfile="Arch-workshop.xml" target="development" inheritAll="false" />
     </target>
 
-    <target name="production" depends="clean" description="Build all the development apps from scratch">
+    <target name="production" depends="clean" description="Build all the production apps from scratch">
         <ant antfile="Arch-TB.xml" target="package" inheritAll="false" />
         <ant antfile="Arch-media.xml" target="production" inheritAll="false" />
         <ant antfile="Arch-blog.xml" target="production" inheritAll="false" />

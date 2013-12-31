@@ -14,6 +14,8 @@
         <jar destfile="${deploy.dir}/${app.name}.war" basedir="${basedir}"/>
         <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
         <delete file="${basedir}/WEB-INF/jspf/js.jspf"/>
+        <delete file="${basedir}/WEB-INF/jspf/404.jsp"/>
+        <delete file="${basedir}/WEB-INF/jspf/500.jsp"/>
     </target>
 
     <target name="production">
@@ -25,5 +27,7 @@
         <jar destfile="${production.dir}/${app.name}.war" basedir="${basedir}"/>
         <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
         <delete file="${basedir}/WEB-INF/jspf/js.jspf"/>
+        <delete file="${basedir}/WEB-INF/jspf/404.jsp"/>
+        <delete file="${basedir}/WEB-INF/jspf/500.jsp"/>
     </target>
 </project>
