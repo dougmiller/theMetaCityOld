@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
+    <title>theMetaCity.com Workshop</title>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 
     <jsp:useBean id="workshopProcessBean" class="com.themetacity.beans.WorkshopProcessBean"/>
