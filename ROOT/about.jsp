@@ -1,4 +1,7 @@
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<%@ include file="/WEB-INF/jspf/headertop.jspf" %>
+    <title>theMetaCity.com - About</title>
+<%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
+
 <div id="centeredcontainer" itemscope itemtype="http://data-vocabulary.org/Person">
     <h1>About</h1>
     <p>My name is <span itemprop="name">Doug Miller</span>. I am currently living and working in <span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address"><span itemprop="locality">Brisbane</span>, <span itemprop="country-name">Australia</span>.</span></p>
