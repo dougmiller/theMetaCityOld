@@ -5,7 +5,9 @@
 
 <c:set var="randomArticle" value="${ArticleProcessBean.randomArticle}"/>
 
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<%@ include file="/WEB-INF/jspf/headertop.jspf" %>
+    <title>theMetaCity.com Blog - Random</title>
+<%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 
 <tmc:article article="${randomArticle}"/>
 

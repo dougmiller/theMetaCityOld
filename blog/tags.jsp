@@ -2,7 +2,13 @@
 <%@ taglib uri="http://com.themetacity" prefix="tmc" %>
 
 
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<%@ include file="/WEB-INF/jspf/headertop.jspf" %>
+<%@ include file="/WEB-INF/jspf/headertop.jspf" %>   <%-- Clunky as hell --%>
+<title>theMetaCity.com Blog Tags
+    <c:out value="${param.tag}" />
+</title>
+<%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
+
 <jsp:useBean id="TagProcessBean" scope="page" class="com.themetacity.beans.TagProcessBean"/>
 
 <c:choose>
@@ -35,6 +41,7 @@
                 </c:choose>
             </c:otherwise>
         </c:choose>
+        <p><a href="/blog/tags">Back to tags.</a></p>
     </c:when>
     <c:otherwise>
         <!-- Display all the tags used on the site -->

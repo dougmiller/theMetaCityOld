@@ -8,7 +8,13 @@
     <jsp:setProperty name="ArticleProcessBean" property="title" value="${param.title}"/>
 </jsp:useBean>
 
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<%@ include file="/WEB-INF/jspf/headertop.jspf" %>   <%-- Clunky as hell --%>
+<title>theMetaCity.com Archive
+    <c:out value="${param.year}" />
+    <c:out value="${param.month}" />
+    <c:out value="${param.day}" />
+</title>
+<%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 
 <c:set var="articleResultList" value="${ArticleProcessBean.filteredArchiveArticles}"/>
 <c:set var="previousEntryDate" value="${null}"/>

@@ -5,7 +5,10 @@
     <jsp:setProperty name="ArticleProcessBean" property="searchString" value="${param.searchString}"/>
 </jsp:useBean>
 
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
+<%@ include file="/WEB-INF/jspf/headertop.jspf" %>   <%-- Clunky as hell --%>
+<title>theMetaCity.com Search
+    <c:out value="${param.searchString}" />
+</title>
 
 <form action="search.jsp">
     <input type="text" size="50" name="searchString" value="${param.searchString}"/>

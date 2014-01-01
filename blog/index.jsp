@@ -12,14 +12,24 @@
     <c:when test="${empty param.year and empty param.url}">
         <c:set var="articleResultList" value="${ArticleProcessBean.frontpageArticles}"/>
         <c:set var="showNotices" value="false"/>
+        <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
+            <title>theMetaCity.com Blog</title>
+        <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
     </c:when>
     <c:otherwise>
         <c:set var="articleResultList" value="${ArticleProcessBean.filteredArticles}"/>
         <c:set var="showNotices" value="false"/>
+        <%@ include file="/WEB-INF/jspf/headertop.jspf" %>   <%-- Clunky as hell --%>
+        <title>theMetaCity.com Blog
+            <c:out value="${param.year}" />
+            <c:out value="${param.month}" />
+            <c:out value="${param.day}" />
+            <c:out value="${param.url}" />
+         </title>
+        <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
     </c:otherwise>
 </c:choose>
 
-<%@ include file="/WEB-INF/jspf/header.jspf" %>
 
 <c:if test="${showNotices == true}">
     <jsp:useBean id="ImportantNoticeBean" scope="page" class="com.themetacity.beans.ImportantNoticeProcessBean"/>
