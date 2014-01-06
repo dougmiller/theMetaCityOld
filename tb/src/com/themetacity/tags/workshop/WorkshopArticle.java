@@ -41,7 +41,7 @@ public class WorkshopArticle extends SimpleTagSupport {
             if (workshop.getTags().size() > 0) {
                 out.println("            <ul>");
                 for (TagBean tag : workshop.getTags()) {
-                    out.println("               <li><a href=\"/workshop/" + tag.getTag() + "\">" + tag.getTag() + "</a></li>");        // need an actual link that actually goes somewhere
+                    out.println("               <li><a href=\"/workshop/tag/" + tag.getTag() + "\">" + tag.getTag() + "</a></li>");        // need an actual link that actually goes somewhere
                 }
                 out.println("            </ul>");
             } else {
