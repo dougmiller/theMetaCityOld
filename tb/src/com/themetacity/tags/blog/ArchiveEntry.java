@@ -29,27 +29,25 @@ public class ArchiveEntry extends SimpleTagSupport {
         JspContext jspContext = getJspContext();
         JspWriter out = jspContext.getOut();
 
-        Calendar currentDate = new GregorianCalendar();
-        currentDate.setTime(articleBean.getCreatedDate());
+        Calendar articleCreatedDate = new GregorianCalendar();
+        articleCreatedDate.setTime(articleBean.getCreatedDate());
 
         Calendar oldDate = new GregorianCalendar();
 
         // The first time this is called from the loop in the jsp page the oldDate is null. (there is no previous date)
-        if (previousDate == null){
-            oldDate.setTime(new Date(0));
-        } else {
+        if (previousDate != null){
             oldDate.setTime(previousDate);
-        }
+        } // If it is null, this is the first entry and that is handled below with the ||
 
         try {
-            if (currentDate.get(Calendar.YEAR) != oldDate.get(Calendar.YEAR)) {
-                out.println("<h2>" + currentDate.get(Calendar.YEAR) + "</h2>");
+            if ((articleCreatedDate.get(Calendar.YEAR) != oldDate.get(Calendar.YEAR)) || previousDate == null) {
+                out.println("<h2>" + articleCreatedDate.get(Calendar.YEAR) + "</h2>");
             }
 
-            if (currentDate.get(Calendar.MONTH) != oldDate.get(Calendar.MONTH)) {
-                out.println("<h3>" + (currentDate.get(Calendar.MONTH) + 1) + "</h3>");   // months are indexed at 0
+            if ((articleCreatedDate.get(Calendar.MONTH) != oldDate.get(Calendar.MONTH)) || previousDate == null) {
+                out.println("<h3>" + (articleCreatedDate.get(Calendar.MONTH) + 1) + "</h3>");   // months are indexed at 0
             }
-            // Dont bother with day granularity
+            // Don't bother with day granularity
         }
         catch (IOException IOEx) {
             logger.warn("There was an error with the archive rendering");
