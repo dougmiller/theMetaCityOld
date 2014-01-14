@@ -9,52 +9,71 @@ echo 'Begin smooshing searcher.js'
 
 #  Minify the variable names.
 #  Each script is put in its own function scope so other scripts should (in theory) have no problems with this
-cat searcher.js > temp
-sed -i 's/noResults\b/z/g' temp
-sed -i 's/searchBox\b/y/g' temp
-sed -i 's/entries\b/x/g' temp
-sed -i 's/searchTimeout\b/w/g' temp
-sed -i 's/firstRun\b/v/g' temp
-sed -i 's/loc\b/u/g' temp
-sed -i 's/hist\b/t/g' temp
-sed -i 's/win\b/s/g' temp
-sed -i 's/textToCheck\b/r/g' temp
-sed -i 's/searchPattern\b/q/g' temp
-sed -i 's/address\b/p/g' temp
-sed -i 's/searchString\b/o/g' temp
+cat searcher.js > temp.js
+grasp -i '#$noResults' -R z temp.js
+grasp -i '#$searchBox' -R y temp.js
+grasp -i '#$entries' -R x temp.js
+grasp -i '#searchTimeout' -R w temp.js
+grasp -i '#firstRun' -R v temp.js
+grasp -i '#loc' -R u temp.js
+grasp -i '#hist' -R t temp.js
+grasp -i '#win' -R s temp.js
+grasp -i '#searchTerm' -R r temp.js
+grasp -i '#rePattern' -R q temp.js
+grasp -i '#searchPattern' -R p temp.js
+grasp -i '#textToCheck' -R o temp.js
+sed -i 's/searchVal\b/n/g' temp.js  # current bug with grasp where it cant parse 3 or more variables on the same line
 
 # Function names
-sed -i 's/clearFilter(/m(/g' temp
-sed -i 's/filter(/l(/g' temp
-sed -i 's/reset(/k(/g' temp
-sed -i 's/handlePathChange(/j(/g' temp
+grasp -i '#filter' -R m temp.js
+grasp -i '#reset' -R l temp.js
 
-cat temp > tmcscripts.js
-rm temp
+cat temp.js > tmcscripts.js
+rm temp.js
+
+echo 'Begin smooshing video.js'
 
 # Begin the smooshing of video.js
-cat video.js > temp
+cat video.js > temp.js
 
-sed -i 's/videos\b/z/g' temp
-sed -i 's/video\b/y/g' temp
-sed -i 's/"y"/"video"/1' temp  # Undo the first (and only) "video" instance
-sed -i 's/playPauseButton/x/g' temp
-sed -i 's/vidIndex/w/g' temp
-sed -i 's/vidBox/v/g' temp
-sed -i 's/controlsBox/u/g' temp
-sed -i 's/vidOffset/t/g' temp
-sed -i 's/progressBar/r/g' temp
-sed -i 's/heightsTogether/s/g' temp
-sed -i 's/isVideoPlaying/r/g' temp
-sed -i 's/playPause/q/g' temp
-#sed -i 's/videoContainer/p/g' temp
-#sed -i 's/[^."]poster[^");]/o/g' temp
-#sed -i 's/o/poster,/1' temp
+grasp -i '#videos' -R z temp.js
+grasp -i '#leftZeroPad' -R y temp.js
+grasp -i '#numZeros' -R x temp.js
+grasp -i '#zeros' -R w temp.js
+grasp -i '#zeroString' -R v temp.js
+grasp -i '#isVideoPlaying' -R u temp.js
+#grasp -i '#video' -R t temp.js         # Three on a a line bug
+grasp -i '#playPause' -R s temp.js
+grasp -i '#vid' -R r temp.js
+grasp -i '#playPauseButton' -R q temp.js
+grasp -i '#rawTimeToFormattedTime' -R p temp.js
+grasp -i '#rawTime' -R o temp.js
+grasp -i '#chomped' -R n temp.js
+grasp -i '#seconds' -R m temp.js
+grasp -i '#minutes' -R l temp.js
+grasp -i '#$video' -R k temp.js
+#grasp -i '#$videoContainer' -R j temp.js    # Again has the three on a line bug
+grasp -i '#$controlsBox' -R i temp.js
+grasp -i '#$playPauseButton' -R h temp.js
+grasp -i '#$progressBar' -R g temp.js
+grasp -i '#$poster' -R f temp.js
+grasp -i '#customPoster' -R e temp.js
+grasp -i '#$endPoster' -R d temp.js
+grasp -i '#customEndPoster' -R c temp.js
+grasp -i '#$errorPoster' -R b temp.js
+grasp -i '#$currentTimeSpan' -R a temp.js
+grasp -i '#$durationTimeSpan' -R zz temp.js
+grasp -i '#svg' -R zy temp.js
+grasp -i '#canPlayVid' -R zx temp.js
+grasp -i '#newText' -R zw temp.js
+grasp -i '#link' -R zv temp.js
+grasp -i '#videoContainerOffset' -R zu temp.js
+grasp -i '#videoContainerWidth' -R zt temp.js
+grasp -i '#heightsTogether' -R zs temp.js
+grasp -i '#doc' -R zr temp.js
 
-cat temp > ~/vid.js
-
-cat temp >> tmcscripts.js
-rm temp
+cat temp.js >> tmcscripts.js
+rm temp.js
 
 # Finished with video.js
 
@@ -67,13 +86,12 @@ sed -i '/console.*/'d tmcscripts.js               # Debug statements
 sed -i 's/^[ \t]*//' tmcscripts.js                # Leading whitespace and tabs N.B in theory there shouldnt need to be tabs anywhere but I am sure there will be
 sed -i 's/[ \t]*$//' tmcscripts.js                # Trailing whitespace and tabs
 sed -i 's/ () /()/g' tmcscripts.js                # Spaces in 'function () {'
-sed -i 's/ + /+/g' tmcscripts.js                  # Spaces in ' + '
-sed -i 's/ || /||/g' tmcscripts.js                # Spaces in ' || '
-sed -i 's/ += /+=/g' tmcscripts.js                # Spaces in ' += '
-sed -i 's/for (/for(/g' tmcscripts.js             # Spaces in 'for ( ' Usually in a for loop
+sed -i 's/ + /+/g' tmcscripts.js                  # Spaces in 'x + y'
+sed -i 's/ || /||/g' tmcscripts.js                # Spaces in 'x || y'
+sed -i 's/for (/for(/g' tmcscripts.js             # Spaces in 'for (' Usually in a for loop
 sed -i 's/; /;/g' tmcscripts.js                   # Spaces in '; ' Usually in a for loop
-sed -i 's/ \(<\|<=\|>\|>=\) /\1/g' tmcscripts.js  # Spaces in ' < | > | <= | >= ' Usually in a for loop
-sed -i 's/ \(+=\|-=\) /\1/g' tmcscripts.js        # Spaces in ' += | -= '
+sed -i 's/ \(<\|<=\|>\|>=\) /\1/g' tmcscripts.js  # Spaces in 'x < y|x > y|x <= y|x >= y' Usually in a for loop
+sed -i 's/ \(+=\|-=\) /\1/g' tmcscripts.js        # Spaces in 'x += y|x -= y'
 sed -i 's/ \(=\+\) /\1/g' tmcscripts.js           # Spaces in 'x = y', 'x == y', 'x === y'
 sed -i 's/) {/){/g' tmcscripts.js                 # End of parameter list and opening curly brace
 sed -i 's/if (/if(/g' tmcscripts.js               # End of if and opening round bracket
@@ -85,5 +103,6 @@ echo 'Finished  general minification'
 echo 'Adding in GA (unmolested)'
 # GS is already optimised and mucking with it furthur seems to break things so just append it at the end
 cat ga.js >> tmcscripts.js
+
 echo 'Finished with GA'
 echo 'Finished combining all JavaScript files'
