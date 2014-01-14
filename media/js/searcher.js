@@ -10,9 +10,8 @@ $(document).ready(function () {
     hist = history;
     win = window;
 
-
     function reset() {
-        if (hist.state.tag !== undefined) {  // Avoid inifinite loops
+        if (hist.state.tag !== undefined) {  // Avoid infinite loops
             hist.pushState({"tag": undefined}, "theMetaCity - Workshop", "/workshop/");
         }
         $noResults.hide();
@@ -109,11 +108,11 @@ $(document).ready(function () {
 
     $noResults.hide();
 
-    if (firstRun) {                                                        // 0    1     2        3       4 (if present)
-        var address = loc.pathname.split('/'), searchString = address[3];  // '/workshop/tag/searchString/
+    if (firstRun) {                                     // 0     1     2        3      4 (if present)
+        var searchString = loc.pathname.split('/')[3];  // '/workshop/tag/searchString/
         if (searchString !== undefined) {    // Check for direct link to tag (i.e. if something in [3] search for it)
             filter(searchString);
-        } // Else is root /workshop/ and no filtering is necessary, so do nothing
+        } // Else is root (/workshop/) and no filtering is necessary, so do nothing
         firstRun = false;
     }
 });

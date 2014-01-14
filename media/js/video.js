@@ -1,7 +1,6 @@
 $(document).ready(function () {
     "use strict";
-    var videos = $("video");
-
+    var videos = $("video"), doc = document;
 
     Number.prototype.leftZeroPad = function (numZeros) {
         var n = Math.abs(this);
@@ -10,7 +9,6 @@ $(document).ready(function () {
         if (this < 0) {
             zeroString = '-' + zeroString;
         }
-
         return zeroString + n;
     };
 
@@ -39,27 +37,15 @@ $(document).ready(function () {
     }
 
     $(videos).each(function () {
-        var $video = $(this),
-            $videoContainer,
-            $controlsBox,
-            $playPauseButton,
-            $progressBar,
-            $poster,
-            customPoster,
-            $endPoster,
-            customEndPoster,
-            $errorPoster,
-            $currentTimeSpan,
-            $durationTimeSpan;
+        var $video = $(this), $videoContainer, $controlsBox, $playPauseButton, $progressBar, $poster, customPoster, $endPoster, customEndPoster, $errorPoster, $currentTimeSpan, $durationTimeSpan;
 
         if (this.controls) {
             this.controls = false;
         }
 
         $video.on("timeupdate",function () {
-            var video = $video[0], progressBar = $progressBar[0];
-            progressBar.value = (video.currentTime / video.duration) * 1000;
-            $currentTimeSpan.text(rawTimeToFormattedTime(video.currentTime));
+            $progressBar[0].value = ($video[0].currentTime / $video[0].duration) * 1000;
+            $currentTimeSpan.text(rawTimeToFormattedTime($video[0].currentTime));
         }).on("click",function () {
                 playPause($video, $playPauseButton);
             }).on("ended",function () {
@@ -75,7 +61,7 @@ $(document).ready(function () {
                 // File is SVG so usual jQuery rules may not apply
                 // File needs to have at least one element with "playButton" as class
                 $.get(customEndPoster, function (svg) {
-                    $endPoster = document.importNode(svg.documentElement, true);
+                    $endPoster = doc.importNode(svg.docElement, true);
                     $endPoster = $($endPoster);
 
                     $endPoster.attr("class", "poster endposter");
@@ -99,7 +85,7 @@ $(document).ready(function () {
                 if (!canPlayVid) {
                     $errorPoster = "/media/site-images/movieerror.svg";
                     $.get($errorPoster, function (svg) {
-                        $errorPoster = document.importNode(svg.documentElement, true);
+                        $errorPoster = doc.importNode(svg.docElement, true);
                         $errorPoster = $($errorPoster);
 
                         $errorPoster.attr("class", "poster errorposter");
@@ -107,13 +93,12 @@ $(document).ready(function () {
                         $errorPoster.attr("width", $video.width());
 
                         $("source", $video).each(function () {
-                            var newText = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-                            var textNode = document.createTextNode(this.src);
-                            var link = document.createElementNS("http://www.w3.org/2000/svg", "a");
+                            var newText = doc.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                            var link = doc.createElementNS("http://www.w3.org/2000/svg", "a");
                             newText.setAttributeNS(null, "x", "50%");
                             newText.setAttributeNS(null, "dy", "1.2em");
                             link.setAttributeNS("http://www.w3.org/1999/xlink", "href", this.src);
-                            link.appendChild(textNode);
+                            link.appendChild(doc.createTextNode(this.src));
                             newText.appendChild(link);
 
                             $("#sorrytext", $errorPoster).append(newText);
@@ -232,7 +217,7 @@ $(document).ready(function () {
                 });
 
                 $video.on("loadedmetadata", function () {
-                    video.currentTime = videoTime;
+                    video.currentTime = videoTime;  // Skip to the time before we went full screen
                     playPause($video, $playPauseButton);
                 });
             }).appendTo($controlsBox);
@@ -246,7 +231,7 @@ $(document).ready(function () {
         // File is SVG so usual jQuery rules may not apply
         // File needs to have at least one element with "playButton" as class
         $.get(customPoster, function (svg) {
-            $poster = document.importNode(svg.documentElement, true);
+            $poster = doc.importNode(svg.documentElement, true);
             $poster = $($poster);
 
             $poster.attr("class", "poster");
@@ -267,8 +252,8 @@ $(document).ready(function () {
         $($videoContainer).trigger("reposition"); //Get its position right.
     });
 
-    $(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange", function () {
-        var isFullScreen = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+    $(doc).on("webkitfullscreenchange mozfullscreenchange fullscreenchange", function () {
+        var isFullScreen = doc.fullScreen || doc.mozFullScreen || doc.webkitIsFullScreen;
         if (!isFullScreen) {
             $(videos).each(function () {
                 $("source", this).each(function () {
