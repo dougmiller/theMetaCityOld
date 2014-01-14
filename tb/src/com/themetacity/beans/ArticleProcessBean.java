@@ -647,7 +647,8 @@ public class ArticleProcessBean {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "SELECT id, title, url, date_created " +
                             "FROM articles " +
-                            "GROUP BY id ASC;"));
+                            "GROUP BY id " +
+                            "ORDER BY id ASC;"));
 
             ResultSet result = dbaBean.executeQuery();
 
