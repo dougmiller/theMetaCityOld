@@ -22,7 +22,7 @@ grasp -i '#searchTerm' -R r temp.js
 grasp -i '#rePattern' -R q temp.js
 grasp -i '#searchPattern' -R p temp.js
 grasp -i '#textToCheck' -R o temp.js
-sed -i 's/searchVal\b/n/g' temp.js  # current bug with grasp where it cant parse 3 or more variables on the same line
+grasp -i '#searchVal' -R n temp.js
 
 # Function names
 grasp -i '#filter' -R m temp.js
@@ -42,7 +42,7 @@ grasp -i '#numZeros' -R x temp.js
 grasp -i '#zeros' -R w temp.js
 grasp -i '#zeroString' -R v temp.js
 grasp -i '#isVideoPlaying' -R u temp.js
-#grasp -i '#video' -R t temp.js         # Three on a a line bug
+grasp -i '#video' -R t temp.js
 grasp -i '#playPause' -R s temp.js
 grasp -i '#vid' -R r temp.js
 grasp -i '#playPauseButton' -R q temp.js
@@ -52,7 +52,7 @@ grasp -i '#chomped' -R n temp.js
 grasp -i '#seconds' -R m temp.js
 grasp -i '#minutes' -R l temp.js
 grasp -i '#$video' -R k temp.js
-#grasp -i '#$videoContainer' -R j temp.js    # Again has the three on a line bug
+grasp -i '#$videoContainer' -R j temp.js
 grasp -i '#$controlsBox' -R i temp.js
 grasp -i '#$playPauseButton' -R h temp.js
 grasp -i '#$progressBar' -R g temp.js
