@@ -1,3 +1,3 @@
-<script defer="defer" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script defer="defer" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script defer="defer" src="/media/js/searcher.js"></script>
 <script defer="defer" src="/media/js/video.js"></script>
