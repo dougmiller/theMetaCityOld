@@ -61,7 +61,7 @@ $(document).ready(function () {
                 // File is SVG so usual jQuery rules may not apply
                 // File needs to have at least one element with "playButton" as class
                 $.get(customEndPoster, function (svg) {
-                    $endPoster = doc.importNode(svg.docElement, true);
+                    $endPoster = doc.importNode(svg.documentElement, true);
                     $endPoster = $($endPoster);
 
                     $endPoster.attr("class", "poster endposter");
@@ -85,7 +85,7 @@ $(document).ready(function () {
                 if (!canPlayVid) {
                     $errorPoster = "/media/site-images/movieerror.svg";
                     $.get($errorPoster, function (svg) {
-                        $errorPoster = doc.importNode(svg.docElement, true);
+                        $errorPoster = doc.importNode(svg.documentElement, true);
                         $errorPoster = $($errorPoster);
 
                         $errorPoster.attr("class", "poster errorposter");
