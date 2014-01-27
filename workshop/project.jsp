@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
 
 <jsp:useBean id="workshopProcessBean" class="com.themetacity.beans.WorkshopProcessBean">

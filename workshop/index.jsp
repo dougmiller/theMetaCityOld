@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
     <title>theMetaCity.com Workshop</title>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>

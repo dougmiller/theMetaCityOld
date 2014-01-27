@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<%@ page contentType="text/xml" %>
+<%@ page contentType="text/xml; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="d" %>
 <%@ taglib uri="http://com.themetacity" prefix="tmc" %>
