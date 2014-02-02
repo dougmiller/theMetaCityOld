@@ -11,7 +11,7 @@ $(document).ready(function () {
     win = window;
 
     function reset() {
-        if (hist.state.tag !== undefined) {  // Avoid infinite loops
+        if (hist.state !== undefined) {  // Avoid infinite loops
             hist.pushState({"tag": undefined}, "theMetaCity - Workshop", "/workshop/");
         }
         $noResults.hide();
