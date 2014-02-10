@@ -60,7 +60,7 @@ grasp -i '#$poster' -R f temp.js
 grasp -i '#customPoster' -R e temp.js
 grasp -i '#$endPoster' -R d temp.js
 grasp -i '#customEndPoster' -R c temp.js
-grasp -i '#$errorPoster' -R b temp.js
+grasp -i '#errorPoster' -R b temp.js
 grasp -i '#$currentTimeSpan' -R a temp.js
 grasp -i '#$durationTimeSpan' -R zz temp.js
 grasp -i '#svg' -R zy temp.js
@@ -71,6 +71,9 @@ grasp -i '#videoContainerOffset' -R zu temp.js
 grasp -i '#videoContainerWidth' -R zt temp.js
 grasp -i '#heightsTogether' -R zs temp.js
 grasp -i '#doc' -R zr temp.js
+grasp -i '#fsElement' -R zq temp.js
+grasp -i '#isFullScreen' -R zp temp.js
+grasp -i '#splitSrc' -R zo temp.js
 
 cat temp.js >> tmcscripts.js
 rm temp.js
