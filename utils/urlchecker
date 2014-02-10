@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-baseURL = 'http://www.themetacity.com'
+baseURL = 'http://localcity'
 
 checkedURLs = []
 excludedURLs = ['/github/', '/twitter/']   # These pages lead to different domains.
