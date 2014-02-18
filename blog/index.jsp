@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="f" %>
 <%@ taglib uri="http://com.themetacity" prefix="tmc" %>
 
 <jsp:useBean id="ArticleProcessBean" scope="page" class="com.themetacity.beans.ArticleProcessBean">
@@ -26,7 +26,7 @@
             <c:out value="${param.year}" />
             <c:out value="${param.month}" />
             <c:out value="${param.day}" />
-            <c:out value="${param.url}" />
+            <c:out value="${f:replace(param.url,'-',' ')}" />
          </title>
         <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
     </c:otherwise>
