@@ -25,7 +25,7 @@ public class ImportantNoticeProcessBean {
     public ImportantNoticeProcessBean() {
     }
 
-    // Perforn the update commands
+    // Perform the update commands
     private int processUpdate() {
         int result = dbaBean.executeUpdate();
         dbaBean.close();
@@ -40,7 +40,8 @@ public class ImportantNoticeProcessBean {
         try {
             noticesDBBean.setPrepStmt(noticesDBBean.getConn().prepareStatement("SELECT message, date_to, date_from " +
                     "FROM importantnotices " +
-                    "AND NOW() >= date_from AND NOW() <= date_to;"));
+                    "WHERE NOW() >= date_from " +
+                    "AND NOW() <= date_to;"));
 
             result = noticesDBBean.executeQuery();
 
@@ -78,7 +79,7 @@ public class ImportantNoticeProcessBean {
 
         try {
             PreparedStatement preStmt = noticesDBBean.getConn().prepareStatement(
-                    "SELECT id, username, message, date_to, date_from " +
+                    "SELECT id, message, date_to, date_from " +
                             "FROM importantnotices;");
 
             noticesDBBean.setPrepStmt(preStmt);

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <%@ taglib uri="http://com.themetacity" prefix="tmc" %>
 
 <jsp:useBean id="ArticleProcessBean" scope="page" class="com.themetacity.beans.ArticleProcessBean">
@@ -12,7 +13,7 @@
 <c:choose>
     <c:when test="${empty param.year and empty param.url}">
         <c:set var="articleResultList" value="${ArticleProcessBean.frontpageArticles}"/>
-        <c:set var="showNotices" value="false"/>
+        <c:set var="showNotices" value="true"/>
         <%@ include file="/WEB-INF/jspf/headertop.jspf" %>
             <title>theMetaCity.com Blog</title>
         <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>

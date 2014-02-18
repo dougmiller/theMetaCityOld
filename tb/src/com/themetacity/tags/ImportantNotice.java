@@ -21,7 +21,7 @@ public class ImportantNotice extends SimpleTagSupport {
         try {
             out.println("<aside class=\"importantNotice\">");
             out.println("   <p>" + importantNotice.getMessage() + "</p>");
-            out.println("   <p class=\"importantNoticeFooter\">Posted: " + importantNotice.getDateFrom() + " End: " + importantNotice.getDateTo() + "</p>");
+            out.println("   <p class=\"importantNoticeFooter\">Starting: " + importantNotice.getDateFrom() + " Finishing: " + importantNotice.getDateTo() + "</p>");
             out.println("</aside>");
         } catch (IOException IOEx) {
             logger.warn("There was an error in ImportantNotices tag.");
