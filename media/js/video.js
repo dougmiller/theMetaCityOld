@@ -46,36 +46,8 @@ $(document).ready(function () {
         $(video).on("timeupdate",function () {
             $progressBar[0].value = (video.currentTime / video.duration) * 1000;
             $currentTimeSpan.text(rawTimeToFormattedTime(video.currentTime));
-        }).on("click",function () {
-                playPause(video);
-            }).on("ended",function () {
-                $controlsBox.css({'opacity': 0});
 
-                // Poster to show at end of movie
-                if (video.dataset.endposter) {
-                    customEndPoster = video.dataset.endposter;
-                } else {
-                    customEndPoster = "/media/site-images/endofmovie.svg";  // If none supplied, use our own, generic one
-                }
-                // Get the poster and make it inline
-                // File is SVG so usual jQuery rules may not apply
-                // File needs to have at least one element with "playButton" as class
-                $.get(customEndPoster, function (svg) {
-                    $endPoster = doc.importNode(svg.documentElement, true);
-                    $endPoster = $($endPoster);
-
-                    $endPoster.attr("class", "poster endposter");
-                    $endPoster.attr("height", $(video).height());
-                    $endPoster.attr("width", $(video).width());
-
-                    $(".playButton", $endPoster).on("click", function () {
-                        playPause(video);
-                        $endPoster.remove(); // done with poster forever
-                    });
-                    $videoContainer.append($endPoster);
-                    $($videoContainer).trigger("reposition");
-                });
-            }).on("play", function () {
+        }).on("loadedmetadata",function () {
                 var canPlayVid = false;
                 $("source", $(video)).each(function () {
                     if (video.canPlayType($(this).attr("type"))) {
@@ -110,6 +82,38 @@ $(document).ready(function () {
                     $($currentTimeSpan).text(rawTimeToFormattedTime(this.currentTime));
                     $($durationTimeSpan).text(rawTimeToFormattedTime(this.duration));
                 }
+
+            }).on("click",function () {
+                playPause(video);
+            }).on("ended",function () {
+                $controlsBox.css({'opacity': 0});
+
+                // Poster to show at end of movie
+                if (video.dataset.endposter) {
+                    customEndPoster = video.dataset.endposter;
+                } else {
+                    customEndPoster = "/media/site-images/endofmovie.svg";  // If none supplied, use our own, generic one
+                }
+                // Get the poster and make it inline
+                // File is SVG so usual jQuery rules may not apply
+                // File needs to have at least one element with "playButton" as class
+                $.get(customEndPoster, function (svg) {
+                    $endPoster = doc.importNode(svg.documentElement, true);
+                    $endPoster = $($endPoster);
+
+                    $endPoster.attr("class", "poster endposter");
+                    $endPoster.attr("height", $(video).height());
+                    $endPoster.attr("width", $(video).width());
+
+                    $(".playButton", $endPoster).on("click", function () {
+                        playPause(video);
+                        $endPoster.remove(); // done with poster forever
+                    });
+                    $videoContainer.append($endPoster);
+                    $($videoContainer).trigger("reposition");
+                });
+            }).on("play", function () {
+
             });
 
         // Setup the div container for the video, controls and poster
@@ -165,7 +169,6 @@ $(document).ready(function () {
                 playPause(video);
             }).appendTo($controlsBox);
 
-
         $durationTimeSpan = $("<span></span>", {
             class: "timespan"
         }).appendTo($controlsBox);
@@ -220,6 +223,7 @@ $(document).ready(function () {
             $poster.attr("width", $(video).width());
 
             $(".playButton", $poster).on("click", function () {
+                video.load();   // Initial data and metadata load events may have fired before they can be captured so manually fire them
                 playPause(video);
                 $poster.remove(); // done with poster forever
             });
@@ -253,12 +257,11 @@ $(document).ready(function () {
                 });
             } else {  // Have left fullscreen and need to return to lower res video
                 $("source", video).each(function () {
-                        // Remove the full screen and go back to the original file
-                        if (this.dataset.fullscreen) {
-                            var splitSrc = this.src.split(".");
-                            console.log(splitSrc);
-                            this.src = splitSrc[0] + "." + splitSrc[1] + "." + splitSrc[2] + "." + splitSrc[4];
-                        } // Nothing was changed if data-fullscreen is false so no need to do anything
+                    // Remove the full screen and go back to the original file
+                    if (this.dataset.fullscreen) {
+                        var splitSrc = this.src.split(".");
+                        this.src = splitSrc[0] + "." + splitSrc[1] + "." + splitSrc[2] + "." + splitSrc[4];
+                    } // Nothing was changed if data-fullscreen is false so no need to do anything
 
                     $(this).parent().load();  // The video
                     $(this).parent().trigger("reposition");  // The video container box
