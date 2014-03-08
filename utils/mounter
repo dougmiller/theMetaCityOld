@@ -23,6 +23,12 @@ case $2 in
                           [ref]="assets"
                           [mountCommand]="sshfs doug@enc:/srv/http/tmcassets /media/tmcassets"
                           [unmountCommand]="sudo umount /media/tmcassets");;
+
+  "media")
+    mountInfo=( [name]="the MetaCity media"
+                          [ref]="media"
+                          [mountCommand]="sshfs doug@enc:/srv/http/tmcmedia /media/tmcmedia"
+                          [unmountCommand]="sudo umount /media/tmcmedia");;
   *) 
     echo "Unknown mount. Please provide a known mount."
     echo "Known mounts are: 'production', 'assets'"  # Have to update these manually as bash does not have nested mounts
