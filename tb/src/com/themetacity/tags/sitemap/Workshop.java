@@ -24,7 +24,7 @@ public class Workshop extends SimpleTagSupport {
         JspWriter out = getJspContext().getOut();
         try {
             out.println("    <url>");
-            out.println("        <loc>http://www.themetacity.com/workshop/" + workshop.getId() + "</loc>");
+            out.println("        <loc>https://www.themetacity.com/workshop/" + workshop.getId() + "</loc>");
             out.println("        <lastmod>" + formatter.format(workshop.getModifiedDate()) + "</lastmod>");
             out.println("        <changefreq>monthly</changefreq>");
             out.println("        <priority>0.8</priority>");

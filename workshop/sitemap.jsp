@@ -12,7 +12,7 @@
     <c:set var="workshopUpdateDate" value="${WorkshopLatestUpdateProcessBean.lastUpdateDate}"/>
 
     <url>
-        <loc>http://www.themetacity.com/workshop</loc>
+        <loc>https://www.themetacity.com/workshop</loc>
         <lastmod><d:formatDate value="${workshopUpdateDate}" pattern="yyyy-MM-dd"/></lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>

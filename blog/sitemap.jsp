@@ -15,7 +15,7 @@
     <c:set var="sitemapArticleTags" value="${TagProcessBean.sitemapTags}"/>
 
     <url>
-        <loc>http://www.themetacity.com/blog</loc>
+        <loc>https://www.themetacity.com/blog</loc>
         <lastmod><d:formatDate value="${articleUpdateDate}" pattern="yyyy-MM-dd"/></lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>
@@ -24,13 +24,13 @@
         <tmc:sitemapArticle article="${sitemapArticleEntry}"/>
     </c:forEach>
     <url>
-        <loc>http://www.themetacity.com/blog/archive</loc>
+        <loc>https://www.themetacity.com/blog/archive</loc>
         <lastmod><d:formatDate value="${articleUpdateDate}" pattern="yyyy-MM-dd"/></lastmod>
         <changefreq>weekly</changefreq>
         <priority>.5</priority>
     </url>
     <url>
-        <loc>http://www.themetacity.com/blog/tags</loc>
+        <loc>https://www.themetacity.com/blog/tags</loc>
         <lastmod><d:formatDate value="${articleUpdateDate}" pattern="yyyy-MM-dd"/></lastmod>
         <changefreq>weekly</changefreq>
         <priority>.6</priority>

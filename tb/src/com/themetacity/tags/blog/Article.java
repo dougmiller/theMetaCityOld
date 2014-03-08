@@ -52,7 +52,7 @@ public class Article extends SimpleTagSupport {
         StringBuilder outputString = new StringBuilder();
 
         for (TagBean tag : tagList) {
-            outputString.append("<a href=\"/blog/tags/").append(tag.getTag()).append("\">");
+            outputString.append("<a rel=\"tag\" href=\"/blog/tags/").append(tag.getTag()).append("\">");
             outputString.append(tag.getTag());
             outputString.append("</a> ");
         }

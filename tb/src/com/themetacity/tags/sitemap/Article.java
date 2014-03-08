@@ -25,7 +25,7 @@ public class Article extends SimpleTagSupport {
         JspWriter out = getJspContext().getOut();
         try {
             out.println("    <url>");
-            out.println("        <loc>http://www.themetacity.com/blog/" + article.getURL() + "</loc>");
+            out.println("        <loc>https://www.themetacity.com/blog/" + article.getURL() + "</loc>");
             out.println("        <lastmod>" + formatter.format(article.getModifiedDate()) + "</lastmod>");
             out.println("        <changefreq>monthly</changefreq>");
             out.println("        <priority>0.8</priority>");

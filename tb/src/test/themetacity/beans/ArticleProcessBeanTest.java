@@ -43,22 +43,22 @@ public class ArticleProcessBeanTest {
         articleProcessBean.setYear("");
         articleProcessBean.setMonth("");
         articleProcessBean.setDay("");
-        assertEquals("Link with year etc not set", "http://www.themetacity.com/", articleProcessBean.getRSSFeedLink());
+        assertEquals("Link with year etc not set", "http://wwws.themetacity.com/", articleProcessBean.getRSSFeedLink());
 
         articleProcessBean.setYear("2008");
         articleProcessBean.setMonth("");
         articleProcessBean.setDay("");
-        assertEquals("Link with year set", "http://www.themetacity.com/2008/", articleProcessBean.getRSSFeedLink());
+        assertEquals("Link with year set", "http://wwws.themetacity.com/2008/", articleProcessBean.getRSSFeedLink());
 
         articleProcessBean.setYear("2008");
         articleProcessBean.setMonth("11");
         articleProcessBean.setDay("");
-        assertEquals("Link with year and month", "http://www.themetacity.com/2008/11/", articleProcessBean.getRSSFeedLink());
+        assertEquals("Link with year and month", "https://www.themetacity.com/2008/11/", articleProcessBean.getRSSFeedLink());
 
         articleProcessBean.setYear("2008");
         articleProcessBean.setMonth("11");
         articleProcessBean.setDay("16");
-        assertEquals("Link with  year , month and day", "http://www.themetacity.com/2008/11/16/", articleProcessBean.getRSSFeedLink());
+        assertEquals("Link with  year , month and day", "https://www.themetacity.com/2008/11/16/", articleProcessBean.getRSSFeedLink());
     }
 
      /**
@@ -76,6 +76,6 @@ public class ArticleProcessBeanTest {
     @Test
     public void rssTagLinkConstructorTest() {
         articleProcessBean.setSearchTag("test");
-        assertEquals("Link with year etc not set", "http://www.themetacity.com/tags/test/", articleProcessBean.getRSSFeedTagLink());
+        assertEquals("Link with year etc not set", "https://www.themetacity.com/tags/test/", articleProcessBean.getRSSFeedTagLink());
     }
 }

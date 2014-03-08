@@ -11,7 +11,7 @@
         <h3 id="subheading">News, events and exposition.</h3>
         <nav id="left">
             <!-- Search -->
-            <form action="http://www.google.com/search">
+            <form action="https://www.google.com/search">
                 <div class="searchdiv">
                     <input type="text" size="14" name="q" id="q"/>
                     <button type="submit" name="submit" value="search" class="submitbutton">Search!</button><br />

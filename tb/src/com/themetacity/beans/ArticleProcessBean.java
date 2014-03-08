@@ -863,7 +863,7 @@ public class ArticleProcessBean {
      * @return the constructed string
      */
     public String getRSSFeedLink() {
-        String feedLink = "http://www.themetacity.com/";
+        String feedLink = "https://www.themetacity.com/";
 
         if ((year != null) && (!year.equals(""))) {
             feedLink += (year + "/");
@@ -901,7 +901,7 @@ public class ArticleProcessBean {
      * @return the constructed string
      */
     public String getRSSFeedTagLink() {
-        String feedLink = "http://www.themetacity.com/tags/";
+        String feedLink = "https://www.themetacity.com/blog/tags/";
 
         if ((searchTag != null) && (!searchTag.equals(""))) {
             feedLink += (searchTag + "/");

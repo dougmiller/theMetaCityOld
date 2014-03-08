@@ -28,6 +28,11 @@
             <c:out value="${param.day}" />
             <c:out value="${f:replace(param.url,'-',' ')}" />
          </title>
+
+        <c:if test="${not empty param.year and not empty param.url}">
+            <link rel="canonical" href="/blog/<c:out value="${param.url}" />"/>
+        </c:if>
+
         <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
     </c:otherwise>
 </c:choose>
