@@ -20,4 +20,8 @@
         <from>^/github/?$</from>
         <to>/github.jsp</to>
     </rule>
+    <rule match-type="regex">
+        <from>^/licence/?$</from>
+        <to>/licence.jsp</to>
+    </rule>
 </urlrewrite>
