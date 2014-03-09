@@ -15,8 +15,6 @@ import org.apache.logging.log4j.Logger;
  * It makes requests to the database and returns a linkedlist of the results.
  */
 public class TagProcessBean {
-    DatabaseBean dbaBean = new DatabaseBean();
-
     private int id = 0;
 
     static Logger logger = LogManager.getLogger(TagProcessBean.class);
@@ -31,7 +29,7 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getArticleTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        dbaBean = new DatabaseBean();
+        DatabaseBean dbaBean = new DatabaseBean();
         ResultSet result = null;
 
         try {
@@ -77,7 +75,7 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getAllTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        dbaBean = new DatabaseBean();
+        DatabaseBean dbaBean = new DatabaseBean();
         ResultSet result = null;
 
         try {
@@ -120,7 +118,7 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getSitemapTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        dbaBean = new DatabaseBean();
+        DatabaseBean dbaBean = new DatabaseBean();
         ResultSet result = null;
 
         try {
@@ -164,7 +162,7 @@ public class TagProcessBean {
      */
     public LinkedList<TagBean> getWorkshopTags() {
         LinkedList<TagBean> listOfTags = new LinkedList<TagBean>();
-        dbaBean = new DatabaseBean();
+        DatabaseBean dbaBean = new DatabaseBean();
         ResultSet result = null;
 
         try {

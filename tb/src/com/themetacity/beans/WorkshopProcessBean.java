@@ -82,7 +82,6 @@ public class WorkshopProcessBean {
      * @return a linked list of WorkshopBeans, mapped to the databased relations
      */
     public LinkedList<WorkshopBean> getWorkshopLinks() {
-
         DatabaseBean workshopDBBean = new DatabaseBean();
         LinkedList<WorkshopBean> listOfBeans = new LinkedList<WorkshopBean>();
         ResultSet result = null;

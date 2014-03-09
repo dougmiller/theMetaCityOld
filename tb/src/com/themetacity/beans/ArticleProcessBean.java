@@ -15,11 +15,6 @@ import java.util.Date;
  * This is the bean that process the articles from the database into ArticleBeans and then presents them for the tag.
  */
 public class ArticleProcessBean {
-
-    private DatabaseBean dbaBean = new DatabaseBean();
-
-    // Selectors for the the article
-
     private String articleID = "";
 
     private String title;
@@ -44,6 +39,7 @@ public class ArticleProcessBean {
     // Perform the update commands where you just want things to be closed and finished.
     // Otherwise call the database manually and do it that way
     private int processUpdate() {
+        DatabaseBean dbaBean = new DatabaseBean();
         int result = dbaBean.executeUpdate();
         dbaBean.close();
         return result;
@@ -97,6 +93,7 @@ public class ArticleProcessBean {
                 }
             }
             articlesDBBean.close();
+            articlesDBBean = null;
         }
         return listOfBeans;
     }
@@ -513,6 +510,8 @@ public class ArticleProcessBean {
      * @return True from successfully adding a new article or false for not adding it
      */
     public int getUpdateArticle() {
+        DatabaseBean dbaBean = new DatabaseBean();
+
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("UPDATE articles SET title = ?, article_text = ? WHERE id = ?;"));
             dbaBean.getPrepStmt().setString(1, title);
@@ -621,6 +620,7 @@ public class ArticleProcessBean {
      * @return and integer showing the number of rows affected
      */
     public int getDeleteArticle() {
+        DatabaseBean dbaBean = new DatabaseBean();
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("DELETE FROM articles WHERE id = ?;"));
             dbaBean.getPrepStmt().setString(1, articleID);

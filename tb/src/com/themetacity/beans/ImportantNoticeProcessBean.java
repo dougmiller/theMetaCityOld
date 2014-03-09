@@ -15,8 +15,6 @@ public class ImportantNoticeProcessBean {
 
     private static final Logger logger = LogManager.getLogger(ImportantNoticeProcessBean.class);
 
-    DatabaseBean dbaBean = new DatabaseBean();
-
     private String messageID = "";
     private String message = "";
     private String dateTo = "";
@@ -27,6 +25,7 @@ public class ImportantNoticeProcessBean {
 
     // Perform the update commands
     private int processUpdate() {
+        DatabaseBean dbaBean = new DatabaseBean();
         int result = dbaBean.executeUpdate();
         dbaBean.close();
         return result;
@@ -163,6 +162,8 @@ public class ImportantNoticeProcessBean {
      * @return True from succesfully adding a new article or fasle for not adding it
      */
     public int getAddMessage() {
+        DatabaseBean dbaBean = new DatabaseBean();
+
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
                     "INSERT INTO importantnotices (message, date_to, date_from) " +
@@ -177,6 +178,7 @@ public class ImportantNoticeProcessBean {
     }
 
     public int getDeleteMessage() {
+        DatabaseBean dbaBean = new DatabaseBean();
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement("DELETE FROM importantnotices WHERE id = ?;"));
@@ -188,6 +190,7 @@ public class ImportantNoticeProcessBean {
     }
 
     public int getUpdateMessage() {
+        DatabaseBean dbaBean = new DatabaseBean();
 
         try {
             dbaBean.setPrepStmt(dbaBean.getConn().prepareStatement(
