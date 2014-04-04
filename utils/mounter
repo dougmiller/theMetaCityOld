@@ -15,23 +15,23 @@ case $2 in
   "production")
     mountInfo=( [name]="the MetaCity production"
                           [ref]="production"
-                          [mountCommand]="sshfs doug@enc:/srv/http/tmc /media/tmc"
+                          [mountCommand]="sshfs -o allow_other doug@enc:/srv/http/tmc /media/tmc"
                           [unmountCommand]="sudo umount /media/tmc");;
 
   "assets")
     mountInfo=( [name]="the MetaCity assets"
                           [ref]="assets"
-                          [mountCommand]="sshfs doug@enc:/srv/http/tmcassets /media/tmcassets"
+                          [mountCommand]="sshfs -o allow_other doug@enc:/srv/http/tmcassets /media/tmcassets"
                           [unmountCommand]="sudo umount /media/tmcassets");;
 
   "media")
     mountInfo=( [name]="the MetaCity media"
                           [ref]="media"
-                          [mountCommand]="sshfs doug@enc:/srv/http/tmcmedia /media/tmcmedia"
+                          [mountCommand]="sshfs -o allow_other doug@enc:/srv/http/tmcmedia /media/tmcmedia"
                           [unmountCommand]="sudo umount /media/tmcmedia");;
   *) 
     echo "Unknown mount. Please provide a known mount."
-    echo "Known mounts are: 'production', 'assets'"  # Have to update these manually as bash does not have nested mounts
+    echo "Known mounts are: 'production', 'assets', 'media'"  # Have to update these manually as bash does not have nested mounts
     exit 2;;
 esac
 
