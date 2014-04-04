@@ -12,7 +12,9 @@
         <ant antfile="../utils/buildfiles/Arch-common.xml" target="development"/>
     </target>
 
-    <target name="production">
-        <ant antfile="../utils/buildfiles/Arch-common.xml" target="production"/>
+    <target name="production" depends="clean">
+        <ant antfile="../utils/buildfiles/Arch-common.xml" target="production">
+            <property name="jsbuild" value="blog"/>
+        </ant>
     </target>
 </project>

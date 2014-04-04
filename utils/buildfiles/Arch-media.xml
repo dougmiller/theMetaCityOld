@@ -54,10 +54,13 @@
         <exec executable="utils/jscombiner" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
         <copy todir="${production.dir}/${app.name}/js">			   <!-- *here* -->
 			<fileset dir="${app.name}/js">
-  				<include name="tmcscripts.js"/>
+  				<include name="tmcsearcher.js"/>
+  				<include name="tmcvideo.js"/>
+  				<include name="ga.js"/>
 			</fileset>
 		</copy>
-        <delete file="${app.name}/js/tmcscripts.js"/>           <!-- We dont need this here anymore sice the app is deployed -->
+        <delete file="${app.name}/js/tmcsearcher.js"/>           <!-- We dont need this here anymore sice the app is deployed -->
+        <delete file="${app.name}/js/tmcvideo.js"/>              <!-- We dont need this here anymore sice the app is deployed -->
 
         <!-- Site images time -->
         <copy todir="${production.dir}/${app.name}/site-images">			<!-- *here* -->

@@ -23,7 +23,7 @@
 		<copy file="../utils/includes/404.jsp" todir="${basedir}/WEB-INF/jspf"/>
 		<copy file="../utils/includes/500.jsp" todir="${basedir}/WEB-INF/jspf"/>
 		<copy file="../utils/includes/css-production.jspf" tofile="${basedir}/WEB-INF/jspf/css.jspf"/>
-		<copy file="../utils/includes/js-production.jspf" tofile="${basedir}/WEB-INF/jspf/js.jspf"/>
+		<copy file="../utils/includes/js-production-${jsbuild}.jspf" tofile="${basedir}/WEB-INF/jspf/js.jspf"/>
         <jar destfile="${production.dir}/${app.name}.war" basedir="${basedir}"/>
         <delete file="${basedir}/WEB-INF/jspf/css.jspf"/>
         <delete file="${basedir}/WEB-INF/jspf/js.jspf"/>

@@ -23,12 +23,13 @@ grasp -i '#rePattern' -R q temp.js
 grasp -i '#searchPattern' -R p temp.js
 grasp -i '#textToCheck' -R o temp.js
 grasp -i '#searchVal' -R n temp.js
+grasp -i '#searchString' -R m temp.js
 
 # Function names
-grasp -i '#filter' -R m temp.js
-grasp -i '#reset' -R l temp.js
+grasp -i '#filter' -R l temp.js
+grasp -i '#reset' -R k temp.js
 
-cat temp.js > tmcscripts.js
+cat temp.js > tmcsearcher.js
 rm temp.js
 
 echo 'Begin smooshing video.js'
@@ -75,7 +76,7 @@ grasp -i '#fsElement' -R zq temp.js
 grasp -i '#isFullScreen' -R zp temp.js
 grasp -i '#splitSrc' -R zo temp.js
 
-cat temp.js >> tmcscripts.js
+cat temp.js >> tmcvideo.js
 rm temp.js
 
 # Finished with video.js
@@ -83,29 +84,25 @@ rm temp.js
 echo 'Finished with home brew scripts'
 echo 'Begin general minification'
 
-sed -i 's/[^:]\/\/.*//g' tmcscripts.js            # Dont need comments (and they become greedy when everything is on a single line). [:] is for urls (which have //)
-sed -i 's/ #\*.*$//'g tmcscripts.js               # Dont need comments (and they become greedy when everything is on a single line)
-sed -i '/console.*/'d tmcscripts.js               # Debug statements
-sed -i 's/^[ \t]*//' tmcscripts.js                # Leading whitespace and tabs N.B in theory there shouldnt need to be tabs anywhere but I am sure there will be
-sed -i 's/[ \t]*$//' tmcscripts.js                # Trailing whitespace and tabs
-sed -i 's/ () /()/g' tmcscripts.js                # Spaces in 'function () {'
-sed -i 's/ + /+/g' tmcscripts.js                  # Spaces in 'x + y'
-sed -i 's/ || /||/g' tmcscripts.js                # Spaces in 'x || y'
-sed -i 's/for (/for(/g' tmcscripts.js             # Spaces in 'for (' Usually in a for loop
-sed -i 's/; /;/g' tmcscripts.js                   # Spaces in '; ' Usually in a for loop
-sed -i 's/ \(<\|<=\|>\|>=\) /\1/g' tmcscripts.js  # Spaces in 'x < y|x > y|x <= y|x >= y' Usually in a for loop
-sed -i 's/ \(+=\|-=\) /\1/g' tmcscripts.js        # Spaces in 'x += y|x -= y'
-sed -i 's/ \(=\+\) /\1/g' tmcscripts.js           # Spaces in 'x = y', 'x == y', 'x === y'
-sed -i 's/) {/){/g' tmcscripts.js                 # End of parameter list and opening curly brace
-sed -i 's/if (/if(/g' tmcscripts.js               # End of if and opening round bracket
-sed -i 's/, \(.\)/,\1/g' tmcscripts.js            # Comma space anything
-sed -i ':a;N;$!ba;s/\n//g' tmcscripts.js          # New lines N.B. Put this at the end otherwise other operation (like get rid of leading white space) get confused
+sed -i 's/[^:]\/\/.*//g' tmcsearcher.js tmcvideo.js            # Dont need comments (and they become greedy when everything is on a single line). [:] is for urls (which have //)
+sed -i 's/ #\*.*$//'g  tmcsearcher.js tmcvideo.js              # Dont need comments (and they become greedy when everything is on a single line)
+sed -i '/console.*/'d tmcsearcher.js tmcvideo.js               # Debug statements
+sed -i 's/^[ \t]*//' tmcsearcher.js tmcvideo.js                # Leading whitespace and tabs N.B in theory there shouldnt need to be tabs anywhere but I am sure there will be
+sed -i 's/[ \t]*$//' tmcsearcher.js tmcvideo.js                # Trailing whitespace and tabs
+sed -i 's/ () /()/g' tmcsearcher.js tmcvideo.js                # Spaces in 'function () {'
+sed -i 's/ + /+/g' tmcsearcher.js tmcvideo.js                  # Spaces in 'x + y'
+sed -i 's/ || /||/g' tmcsearcher.js tmcvideo.js                # Spaces in 'x || y'
+sed -i 's/for (/for(/g' tmcsearcher.js tmcvideo.js             # Spaces in 'for (' Usually in a for loop
+sed -i 's/; /;/g' tmcsearcher.js tmcvideo.js                   # Spaces in '; ' Usually in a for loop
+sed -i 's/ \(<\|<=\|>\|>=\) /\1/g' tmcsearcher.js tmcvideo.js  # Spaces in 'x < y|x > y|x <= y|x >= y' Usually in a for loop
+sed -i 's/ \(+=\|-=\) /\1/g' tmcsearcher.js tmcvideo.js        # Spaces in 'x += y|x -= y'
+sed -i 's/ \(=\+\) /\1/g' tmcsearcher.js tmcvideo.js           # Spaces in 'x = y', 'x == y', 'x === y'
+sed -i 's/) {/){/g' tmcsearcher.js tmcvideo.js                 # End of parameter list and opening curly brace
+sed -i 's/if (/if(/g' tmcsearcher.js tmcvideo.js               # End of if and opening round bracket
+sed -i 's/, \(.\)/,\1/g' tmcsearcher.js tmcvideo.js            # Comma space anything
+sed -i ':a;N;$!ba;s/\n//g' tmcsearcher.js tmcvideo.js          # New lines N.B. Put this at the end otherwise other operation (like get rid of leading white space) get confused
 
 echo 'Finished  general minification'
-
-echo 'Adding in GA (unmolested)'
-# GS is already optimised and mucking with it furthur seems to break things so just append it at the end
-cat ga.js >> tmcscripts.js
 
 echo 'Finished with GA'
 echo 'Finished combining all JavaScript files'

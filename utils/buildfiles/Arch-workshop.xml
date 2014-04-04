@@ -13,6 +13,7 @@
     </target>
 
     <target name="production" depends="clean">
-        <ant antfile="../utils/buildfiles/Arch-common.xml" target="production"/>
-    </target>
+        <ant antfile="../utils/buildfiles/Arch-common.xml" target="production">
+            <property name="jsbuild" value="workshop"/>
+        </ant>    </target>
 </project>
