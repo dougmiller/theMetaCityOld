@@ -5,7 +5,6 @@
         <ant antfile="Arch-media.xml" target="clean" inheritAll="false" />
         <ant antfile="Arch-TB.xml" target="clean"  inheritAll="false" />
         <ant antfile="Arch-blog.xml" target="clean" inheritAll="false" />
-        <ant antfile="Arch-OpenID.xml" target="clean" inheritAll="false" />
         <ant antfile="Arch-root.xml" target="clean" inheritAll="false" />
         <ant antfile="Arch-RSS.xml" target="clean" inheritAll="false" />
         <ant antfile="Arch-workshop.xml" target="clean" inheritAll="false" />
@@ -15,7 +14,6 @@
         <ant antfile="Arch-TB.xml" target="package" inheritAll="false" />
         <ant antfile="Arch-media.xml" target="development" inheritAll="false" />
         <ant antfile="Arch-blog.xml" target="development" inheritAll="false" />
-        <ant antfile="Arch-OpenID.xml" target="development" inheritAll="false" />
         <ant antfile="Arch-root.xml" target="development" inheritAll="false" />
         <ant antfile="Arch-RSS.xml" target="development" inheritAll="false" />
         <ant antfile="Arch-workshop.xml" target="development" inheritAll="false" />
@@ -25,7 +23,6 @@
         <ant antfile="Arch-TB.xml" target="package" inheritAll="false" />
         <ant antfile="Arch-media.xml" target="production" inheritAll="false" />
         <ant antfile="Arch-blog.xml" target="production" inheritAll="false" />
-        <ant antfile="Arch-OpenID.xml" target="production" inheritAll="false" />
         <ant antfile="Arch-root.xml" target="production" inheritAll="false" />
         <ant antfile="Arch-RSS.xml" target="production" inheritAll="false" />
         <ant antfile="Arch-workshop.xml" target="production" inheritAll="false" />
