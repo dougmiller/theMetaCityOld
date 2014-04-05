@@ -9,75 +9,69 @@ echo 'Begin smooshing searcher.js'
 
 #  Minify the variable names.
 #  Each script is put in its own function scope so other scripts should (in theory) have no problems with this
-cat searcher.js > temp.js
-grasp -i '#$noResults' -R z temp.js
-grasp -i '#$searchBox' -R y temp.js
-grasp -i '#$entries' -R x temp.js
-grasp -i '#searchTimeout' -R w temp.js
-grasp -i '#firstRun' -R v temp.js
-grasp -i '#loc' -R u temp.js
-grasp -i '#hist' -R t temp.js
-grasp -i '#win' -R s temp.js
-grasp -i '#searchTerm' -R r temp.js
-grasp -i '#rePattern' -R q temp.js
-grasp -i '#searchPattern' -R p temp.js
-grasp -i '#textToCheck' -R o temp.js
-grasp -i '#searchVal' -R n temp.js
-grasp -i '#searchString' -R m temp.js
+cat searcher.js > tmcsearcher.js
+grasp -i '#$noResults' -R z tmcsearcher.js
+grasp -i '#$searchBox' -R y tmcsearcher.js
+grasp -i '#$entries' -R x tmcsearcher.js
+grasp -i '#searchTimeout' -R w tmcsearcher.js
+grasp -i '#firstRun' -R v tmcsearcher.js
+grasp -i '#loc' -R u tmcsearcher.js
+grasp -i '#hist' -R t tmcsearcher.js
+grasp -i '#win' -R s tmcsearcher.js
+grasp -i '#searchTerm' -R r tmcsearcher.js
+grasp -i '#rePattern' -R q tmcsearcher.js
+grasp -i '#searchPattern' -R p tmcsearcher.js
+grasp -i '#textToCheck' -R o tmcsearcher.js
+grasp -i '#searchVal' -R n tmcsearcher.js
+grasp -i '#searchString' -R m tmcsearcher.js
 
 # Function names
-grasp -i '#filter' -R l temp.js
-grasp -i '#reset' -R k temp.js
-
-cat temp.js > tmcsearcher.js
-rm temp.js
+grasp -i '#filter' -R l tmcsearcher.js
+grasp -i '#reset' -R k tmcsearcher.js
 
 echo 'Begin smooshing video.js'
 
 # Begin the smooshing of video.js
-cat video.js > temp.js
+cat video.js > tmcvideo.js
 
-grasp -i '#videos' -R z temp.js
-grasp -i '#leftZeroPad' -R y temp.js
-grasp -i '#numZeros' -R x temp.js
-grasp -i '#zeros' -R w temp.js
-grasp -i '#zeroString' -R v temp.js
-grasp -i '#isVideoPlaying' -R u temp.js
-grasp -i '#video' -R t temp.js
-grasp -i '#playPause' -R s temp.js
-grasp -i '#vid' -R r temp.js
-grasp -i '#playPauseButton' -R q temp.js
-grasp -i '#rawTimeToFormattedTime' -R p temp.js
-grasp -i '#rawTime' -R o temp.js
-grasp -i '#chomped' -R n temp.js
-grasp -i '#seconds' -R m temp.js
-grasp -i '#minutes' -R l temp.js
-grasp -i '#$video' -R k temp.js
-grasp -i '#$videoContainer' -R j temp.js
-grasp -i '#$controlsBox' -R i temp.js
-grasp -i '#$playPauseButton' -R h temp.js
-grasp -i '#$progressBar' -R g temp.js
-grasp -i '#$poster' -R f temp.js
-grasp -i '#customPoster' -R e temp.js
-grasp -i '#$endPoster' -R d temp.js
-grasp -i '#customEndPoster' -R c temp.js
-grasp -i '#errorPoster' -R b temp.js
-grasp -i '#$currentTimeSpan' -R a temp.js
-grasp -i '#$durationTimeSpan' -R zz temp.js
-grasp -i '#svg' -R zy temp.js
-grasp -i '#canPlayVid' -R zx temp.js
-grasp -i '#newText' -R zw temp.js
-grasp -i '#link' -R zv temp.js
-grasp -i '#videoContainerOffset' -R zu temp.js
-grasp -i '#videoContainerWidth' -R zt temp.js
-grasp -i '#heightsTogether' -R zs temp.js
-grasp -i '#doc' -R zr temp.js
-grasp -i '#fsElement' -R zq temp.js
-grasp -i '#isFullScreen' -R zp temp.js
-grasp -i '#splitSrc' -R zo temp.js
-
-cat temp.js >> tmcvideo.js
-rm temp.js
+grasp -i '#videos' -R z tmcvideo.js
+grasp -i '#leftZeroPad' -R y tmcvideo.js
+grasp -i '#numZeros' -R x tmcvideo.js
+grasp -i '#zeros' -R w tmcvideo.js
+grasp -i '#zeroString' -R v tmcvideo.js
+grasp -i '#isVideoPlaying' -R u tmcvideo.js
+grasp -i '#video' -R t tmcvideo.js
+grasp -i '#playPause' -R s tmcvideo.js
+grasp -i '#vid' -R r tmcvideo.js
+grasp -i '#playPauseButton' -R q tmcvideo.js
+grasp -i '#rawTimeToFormattedTime' -R p tmcvideo.js
+grasp -i '#rawTime' -R o tmcvideo.js
+grasp -i '#chomped' -R n tmcvideo.js
+grasp -i '#seconds' -R m tmcvideo.js
+grasp -i '#minutes' -R l tmcvideo.js
+grasp -i '#$video' -R k tmcvideo.js
+grasp -i '#$videoContainer' -R j tmcvideo.js
+grasp -i '#$controlsBox' -R i tmcvideo.js
+grasp -i '#$playPauseButton' -R h tmcvideo.js
+grasp -i '#$progressBar' -R g tmcvideo.js
+grasp -i '#$poster' -R f tmcvideo.js
+grasp -i '#customPoster' -R e tmcvideo.js
+grasp -i '#$endPoster' -R d tmcvideo.js
+grasp -i '#customEndPoster' -R c tmcvideo.js
+grasp -i '#errorPoster' -R b tmcvideo.js
+grasp -i '#$currentTimeSpan' -R a tmcvideo.js
+grasp -i '#$durationTimeSpan' -R zz tmcvideo.js
+grasp -i '#svg' -R zy tmcvideo.js
+grasp -i '#canPlayVid' -R zx tmcvideo.js
+grasp -i '#newText' -R zw tmcvideo.js
+grasp -i '#link' -R zv tmcvideo.js
+grasp -i '#videoContainerOffset' -R zu tmcvideo.js
+grasp -i '#videoContainerWidth' -R zt tmcvideo.js
+grasp -i '#heightsTogether' -R zs tmcvideo.js
+grasp -i '#doc' -R zr tmcvideo.js
+grasp -i '#fsElement' -R zq tmcvideo.js
+grasp -i '#isFullScreen' -R zp tmcvideo.js
+grasp -i '#splitSrc' -R zo tmcvideo.js
 
 # Finished with video.js
 
