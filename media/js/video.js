@@ -105,7 +105,7 @@ $(document).ready(function () {
                     $endPoster.attr("height", $(video).height());
                     $endPoster.attr("width", $(video).width());
 
-                    $(".playButton", $endPoster).on("click", function () {
+                    $("#playButton", $endPoster).on("click", function () {
                         playPause(video);
                         $endPoster.remove(); // done with poster forever
                     });
@@ -222,7 +222,7 @@ $(document).ready(function () {
             $poster.attr("height", $(video).height());
             $poster.attr("width", $(video).width());
 
-            $(".playButton", $poster).on("click", function () {
+            $("#playButton", $poster).on("click", function () {
                 video.load();   // Initial data and metadata load events may have fired before they can be captured so manually fire them
                 playPause(video);
                 $poster.remove(); // done with poster forever
