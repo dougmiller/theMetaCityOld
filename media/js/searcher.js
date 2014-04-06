@@ -72,7 +72,7 @@ $(document).ready(function () {
         hist.pushState({"tag": $(this).text()}, "theMetaCity - Workshop - " + $(this).text(), "/workshop/tag/" + $(this).text());
         $searchBox.val('');
         filter($(this).text());
-        event.preventDefault();  // Using the history API so no page reloads/changes
+        return false;  // Using the history API so no page reloads/changes
     });
 
     $searchBox.on('keyup', function () {
@@ -108,11 +108,15 @@ $(document).ready(function () {
 
     $noResults.hide();
 
-    if (firstRun) {                                     // 0     1     2        3      4 (if present)
+    if (firstRun) {                                     // 0     1     2        3      4 (if / present)
         var searchString = loc.pathname.split('/')[3];  // '/workshop/tag/searchString/
         if (searchString !== undefined) {    // Check for direct link to tag (i.e. if something in [3] search for it)
+            hist.pushState({"tag": searchString}, "theMetaCity - Workshop - " + searchString, "/workshop/tag/" + searchString);
             filter(searchString);
-        } // Else is root (/workshop/) and no filtering is necessary, so do nothing
+        } else {              // Else is root (/workshop/) and no filtering is necessary
+            hist.pushState({"tag": undefined}, "theMetaCity - Workshop", "/workshop/");
+        }
         firstRun = false;
+        // Save state on first page load
     }
 });
