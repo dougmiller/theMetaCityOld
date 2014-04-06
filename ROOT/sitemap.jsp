@@ -12,12 +12,12 @@
 
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <sitemap>
-       <loc>http://www.themetacity.com/blog/sitemap.xml</loc>
+       <loc>https://www.themetacity.com/blog/sitemap.xml</loc>
        <lastmod><d:formatDate value="${blogUpdateDate}" pattern="yyyy-MM-dd"/></lastmod>
     </sitemap>
 
     <sitemap>
-       <loc>http://www.themetacity.com/workshop/sitemap.xml</loc>
+       <loc>https://www.themetacity.com/workshop/sitemap.xml</loc>
        <lastmod><d:formatDate value="${workshopUpdateDate}" pattern="yyyy-MM-dd"/></lastmod>
     </sitemap>
 </sitemapindex>
