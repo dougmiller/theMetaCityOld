@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" id="tmcsmallpause" width="20px" height="20px">
-      <polygon points="2,2 9,2 9,19 2,19" style="fill:lime;stroke:orange;stroke-width:1"/>
-      <polygon points="11,2 19,2 19,19 11,19" style="fill:lime;stroke:orange;stroke-width:1"/>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" id="tmcsmallpause" width="20px" height="20px" viewBox="0 0 20 20">
+    <title>theMetaCity Pause Icon</title>
+    <desc>The icon showing that the video can be paused</desc>
+
+    <rect x="1" y="1" height="18" width="7" fill="none" stroke="white" stroke-width="2" />
+      <rect x="12" y="1" height="18" width="7" fill="none" stroke="white" stroke-width="2" />
 </svg>

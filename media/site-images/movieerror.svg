@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" id="tmcmovieerror">
+    <title>theMetaCity Movie Error</title>
+    <desc>The poster to show when the video has a error (no codec etc)</desc>
+
     <style>
         tspan: text-font: "Droid Sans";
     </style>

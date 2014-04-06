@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" id="tmcendofmovie">
+    <title>theMetaCity End of Movie</title>
+    <desc>The generic poster to show when videos are finished playing</desc>
+
     <defs>
         <style type="text/css">@import url(https://fonts.googleapis.com/css?family=Dancing+Script);</style>
     </defs>
@@ -8,7 +11,7 @@
 
     <text x="50%" y="50%" font-family="'Dancing Script', script" fill="white" font-size="72pt" text-anchor="middle">fin</text>
 
-    <circle class="playButton" cx="50%" cy="80%" r="30px" fill="black" stroke="white" stroke-width="2px"/>
+    <circle id="playButton" cx="50%" cy="80%" r="30px" fill="black" stroke="white" stroke-width="2px"/>
 
     <svg x="50%" y="80%" overflow="visible" >
         <path class="replay" d="M2,-20 l 5 15 M2,-20 a20,20 1 1 1 -5,0" fill="none" stroke="white" stroke-width="2px">
