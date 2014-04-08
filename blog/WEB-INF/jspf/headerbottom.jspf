@@ -7,37 +7,21 @@
     </head>
 
     <body>
-        <h1 id="heading"><a id="top">theMetaCity</a><wbr><span id="headerhighlight">Blog</span></h1>
+        <h1 id="heading"><a id="top"></a><a href="/">theMetaCity</a><wbr><span id="headerhighlight"><a href="/blog">Blog</a></span></h1>
         <h3 id="subheading">News, events and exposition.</h3>
         <nav id="left">
-            <!-- Search -->
-            <form action="https://www.google.com/search">
-                <div class="searchdiv">
-                    <input type="text" size="14" name="q" id="q"/>
-                    <button type="submit" name="submit" value="search" class="submitbutton">Search!</button><br />
-                    <label for="blog">blog</label>
-                    <input type="radio" name="sitesearch" value="themetacity.com/blog" id="blog" checked/>
-                    <label for="workshop">workshop</label>
-                    <input type="radio" name="sitesearch" value="themetacity.com/workshop" id="workshop"/>
-                    <label for="everything">everything</label>
-                    <input type="radio" name="sitesearch" value="themetacity.com/" id="everything"/>
-                </div>
-            </form>
+            <div class="navlist">
+                <a href="/blog/tags"><img src="/media/site-images/navmenu/tags.svg" alt="Blog tags" title="See the tags used on the blog"/></a>
+                <a href="/blog/archive"><img src="/media/site-images/navmenu/archive.svg" alt="Blog archive" title="See the blog archive"/></a>
+                <a href="/blog/random"><img src="/media/site-images/navmenu/random.svg" alt="Random page" title="See a random page on the blog"/></a>
+            </div>
 
-            <h3>Check out the blog:</h3>
-            <ul class="navlist">
-                <li><a href="/blog/tags">tags</a></li>
-                <li><a href="/blog/archive">archive</a></li>
-                <li><a href="/blog/random">random</a></li>
-            </ul>
-
-            <h3>See the whole site:</h3>
-            <ul class="navlist">
-                <li><a href="/">/home</a></li>
-                <li><a href="/blog">/blog</a></li>
-                <li><a href="/workshop">/workshop</a></li>
-            </ul>
-
+            <div class="navlist">
+                <a href="/"><img src="/media/site-images/navmenu/home.svg" alt="Home link" title="Go back to the main welcome page"/></a>
+                <a href="/blog"><img src="/media/site-images/navmenu/blog.svg" alt="Blog link" title="The blog; full of rambling"/></a>
+                <a href="/workshop"><img src="/media/site-images/navmenu/workshop.svg" alt="Workshop link" title="Visit the workshop to see the latest projects"/></a>
+                <a href="/search"><img src="/media/site-images/navmenu/search.svg" alt="Search link" title="Search the MetaCity"/></a>
+            </div >
         </nav>
         <!-- The main content div -->
         <div id="right">

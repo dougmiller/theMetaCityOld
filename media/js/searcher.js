@@ -98,24 +98,28 @@ $(document).ready(function () {
     });
 
     win.addEventListener("popstate", function (event) {
+        console.info(hist.state);
         if (event.state === null) { // Start of history chain on this page, direct entry to page handled by firstRun)
             reset();
         } else {
-            $searchBox.val(event.state.tag);
-            filter(event.state.tag);
+            if (event.state.tag !== undefined) {
+                $searchBox.val(event.state.tag);
+                filter(event.state.tag);
+            }
         }
     });
 
     $noResults.hide();
 
-    if (firstRun) {                                     // 0     1     2        3      4 (if / present)
-        var searchString = loc.pathname.split('/')[3];  // '/workshop/tag/searchString/
-        if (searchString !== undefined) {    // Check for direct link to tag (i.e. if something in [3] search for it)
-            hist.pushState({"tag": searchString}, "theMetaCity - Workshop - " + searchString, "/workshop/tag/" + searchString);
-            filter(searchString);
-        } else {              // Else is root (/workshop/) and no filtering is necessary
-            hist.pushState({"tag": undefined}, "theMetaCity - Workshop", "/workshop/");
-        }
+    if (firstRun) {                               // 0     1     2        3      4 (if / present)
+        var locArray = loc.pathname.split('/');   // '/workshop/tag/searchString/
+        if (locArray[2] === 'tag' && locArray[3] !== undefined) {    // Check for direct link to tag (i.e. if something in [3] search for it)
+            hist.pushState({"tag": locArray[3]}, "theMetaCity - Workshop - " + locArray[3], "/workshop/tag/" + locArray[3]);
+            filter(locArray[3]);
+        } else if (locArray[2] === '') {   // Root page and really shouldn't do anything
+            //hist.pushState({"tag": undefined}, "theMetaCity - Workshop", "/workshop/");
+        }   // locArray[2] === somepagenum is an actual page and what should be allowed to happen by itself
+
         firstRun = false;
         // Save state on first page load
     }

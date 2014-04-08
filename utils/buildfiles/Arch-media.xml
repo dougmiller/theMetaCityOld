@@ -32,7 +32,7 @@
         </copy>
 
         <copy todir="${deploy.dir}/${app.name}/site-images">			<!-- *here* -->
-            <fileset dir="${app.name}/site-images" includes="*.*" />
+            <fileset dir="${app.name}/site-images" includes="**/*.*" />
         </copy>
     </target>
 

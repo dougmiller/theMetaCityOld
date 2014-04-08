@@ -2,20 +2,19 @@
 
 #left {
   float: left;
-  width: 250px;
+  position: fixed;
+  width: 60px;
+}
+
+#left div:last-child {
+  margin-top: 15px;
 }
 
 .navlist {
   font-family: Inconsolata, monospace;
   font-size: 1.2em;
-  list-style-type: none;
   padding: 0;
   margin-top: 0;
-}
-
-#left h3 {
-  font-size: 1.2em;
-  margin-bottom: 0;
 }
 
 #footernav {
@@ -27,7 +26,7 @@
 }
 
 #right {
-  margin-left: 260px;
+  margin-left: 90px;
 }
 
 main {
@@ -38,10 +37,11 @@ main {
 
   #left {
     width: 360px;
+    position: inherit;
   }
 
-  #left ul li {
-    display: inline;
+  #left div:last-child {
+    margin-bottom: 15px;
   }
 
   #right {

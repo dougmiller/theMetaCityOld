@@ -1,5 +1,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" type="image/png" href="/media/site-images/favicon.png"/>
     <%@ include file="/WEB-INF/jspf/css.jspf" %>
     <%@ include file="/WEB-INF/jspf/js.jspf" %>
 </head>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" baseProfile="tiny" height="60px" width="60px" id="tmcerrorposter">
+    <title>theMetaCity Big Error Poster</title>
+    <desc>The poster to show then the site has an error (403 etc)</desc>
+
+    <rect x="0" y="0" height="100%" width="100%" fill="white" stroke="orange" stroke-width="3px"/>
+</svg>
