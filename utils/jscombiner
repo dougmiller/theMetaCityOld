@@ -34,6 +34,10 @@ echo 'Begin smooshing video.js'
 # Begin the smooshing of video.js
 cat video.js > tmcvideo.js
 
+# Chage dev strings to prod strings
+sed -i 's/http:\/\/assets.localcity.com/https:\/\/assets.themetacity.com/g' video.js
+
+# Optimise variable names
 grasp -i '#videos' -R z tmcvideo.js
 grasp -i '#leftZeroPad' -R y tmcvideo.js
 grasp -i '#numZeros' -R x tmcvideo.js

@@ -21,10 +21,10 @@ $(document).ready(function () {
         var playPauseButton = $(".playPauseButton", video.parent)[0];
         if (isVideoPlaying(video)) {
             video.pause();
-            playPauseButton.src = "/media/site-images/smallplay.svg";
+            playPauseButton.src = "/media/site-images/videoicons/smallplay.svg";
         } else {
             video.play();
-            playPauseButton.src = "/media/site-images/smallpause.svg";
+            playPauseButton.src = "/media/site-images/videoicons/smallpause.svg";
         }
     }
 
@@ -37,7 +37,7 @@ $(document).ready(function () {
     }
 
     $(videos).each(function () {
-        var video = this, $videoContainer, $controlsBox, $playPauseButton, $progressBar, $poster, customPoster, $endPoster, customEndPoster, errorPoster, $currentTimeSpan, $durationTimeSpan;
+        var video = this, $videoContainer, $controlsBox, $playPauseButton, $progressBar, $startPoster, startPoster, $endPoster, customEndPoster, errorPoster, $currentTimeSpan, $durationTimeSpan;
 
         if (this.controls) {
             this.controls = false;
@@ -124,7 +124,7 @@ $(document).ready(function () {
                     $endPoster = $(".endposter", this); // This is NOT added to the whole script scope so have to rescope it here
                     errorPoster = $(".errorposter", this); // This is NOT added to the whole script scope so have to rescope it here
                     //   Not played yet              Finished playing              Cant play format
-                    if ($poster.parent().length || $endPoster.parent().length || errorPoster.parent().length) {
+                    if ($startPoster.parent().length || $endPoster.parent().length || errorPoster.parent().length) {
                         $controlsBox.css({'opacity': 0});
                     } else {
                         $controlsBox.fadeTo(400, 1);
@@ -141,7 +141,7 @@ $(document).ready(function () {
                         $endPoster = $(".endposter", this),
                         $errorPoster = $(".errorposter", this);
 
-                    $($poster, this).offset({top: videoContainerOffset.top, left: videoContainerOffset.left});
+                    $($startPoster, this).offset({top: videoContainerOffset.top, left: videoContainerOffset.left});
 
                     $endPoster.offset({top: videoContainerOffset.top, left: videoContainerOffset.left});
                     $endPoster.attr("height", $(video).height());
@@ -164,7 +164,7 @@ $(document).ready(function () {
         // Setup play/pause button
         $playPauseButton = $("<img />", {
             class: "playPauseButton",
-            src: "/media/site-images/smallplay.svg"
+            src: "/media/site-images/videoicons/smallplay.svg"
         }).on("click",function () {
                 playPause(video);
             }).appendTo($controlsBox);
@@ -194,7 +194,7 @@ $(document).ready(function () {
         // Full screen
         $("<img />", {
             class: "fullscreenButton",
-            src: "/media/site-images/fullscreen.svg"
+            src: "/media/site-images/videoicons/fullscreen.svg"
         }).on("click",function () {
                 fsElement = video;
                 if (video.requestFullScreen) {
@@ -207,27 +207,27 @@ $(document).ready(function () {
             }).appendTo($controlsBox);
 
         // Posters to show before the user plays the video
-        customPoster = this.dataset.poster;
-        if (!customPoster) {
-            customPoster = "/media/site-images/genericposter.svg";  // If none supplied, use our own, generic one
+        startPoster = this.dataset.startposter;
+        if (!startPoster) {
+            startPoster = "generic";  // If none supplied, use our own, generic one
         }
         // Get the poster and make it inline
         // File is SVG so usual jQuery rules may not apply
         // File needs to have at least one element with "playButton" as class
-        $.get(customPoster, function (svg) {
-            $poster = doc.importNode(svg.documentElement, true);
-            $poster = $($poster);
+        $.get("http://assets.localcity.com/video/" + startPoster + ".startposter.svg", function (svg) {
+            $startPoster = doc.importNode(svg.documentElement, true);
+            $startPoster = $($startPoster);
 
-            $poster.attr("class", "poster");
-            $poster.attr("height", $(video).height());
-            $poster.attr("width", $(video).width());
+            $startPoster.attr("class", "poster");
+            $startPoster.attr("height", $(video).height());
+            $startPoster.attr("width", $(video).width());
 
-            $("#playButton", $poster).on("click", function () {
+            $("#playButton", $startPoster).on("click", function () {
                 video.load();   // Initial data and metadata load events may have fired before they can be captured so manually fire them
                 playPause(video);
-                $poster.remove(); // done with poster forever
+                $startPoster.remove(); // done with poster forever
             });
-            $videoContainer.append($poster);
+            $videoContainer.append($startPoster);
             $($videoContainer).trigger("reposition");
         });
 
