@@ -4,11 +4,15 @@
     <desc>The icon used for the article archive page</desc>
 
     <def>
+
+        <mask id="inside-pencil-mask">
+            <rect x="0" y="0" height="100%" width="100%" fill="white"/>
+            <path d="M25,35 L25,40 L30,45 L35,40 L35,35 z" fill="black" stroke-width="1" stroke="black" stroke-linecap="round"/>
+        </mask>
+
         <mask id="clip-mask">
             <rect x="0" y="0" height="100%" width="100%" fill="white"/>
-            <path d="M10,40 L10,45 L30,50 L50,45 L50,40" fill="none" stroke-width="7" stroke="black" stroke-linecap="round"/>
-            <path d="M10,27 L10,32 L30,37 L50,32 L50,27" fill="none" stroke-width="7" stroke="black" stroke-linecap="round"/>
-            <path d="M10,10 L10,19 L30,24 L50,19 L50,10" fill="none" stroke-width="7" stroke="black" stroke-linecap="round"/>
+            <path d="M20,0 L20,40 L30,50 L40,40 L40,0 z" fill="black" stroke-width="1" stroke="black" stroke-linecap="round"  mask="url(#inside-pencil-mask)"/>
         </mask>
     </def>
 

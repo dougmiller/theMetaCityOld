@@ -4,11 +4,24 @@
     <desc>The icon used for the article archive page</desc>
 
     <def>
+
+        <rect id="cog-tooth" x="0" y="0" width="10" height="10" fill="black" stroke="none" />
+        <rect id="cog-tooth-rotate" x="0" y="0" width="10" height="10" fill="black" stroke="none" transform="rotate(45 5 5)"/>
+
         <mask id="clip-mask">
             <rect x="0" y="0" height="100%" width="100%" fill="white"/>
-            <path d="M10,40 L10,45 L30,50 L50,45 L50,40" fill="none" stroke-width="7" stroke="black" stroke-linecap="round"/>
-            <path d="M10,27 L10,32 L30,37 L50,32 L50,27" fill="none" stroke-width="7" stroke="black" stroke-linecap="round"/>
-            <path d="M10,10 L10,19 L30,24 L50,19 L50,10" fill="none" stroke-width="7" stroke="black" stroke-linecap="round"/>
+            <g transform="rotate(15 30 30)">
+            <circle cx="30" cy="30" r="16" fill="none" stroke-width="7" stroke="black" />
+            <use xlink:href="#cog-tooth" x="25" y="5"/>
+            <use xlink:href="#cog-tooth" x="25" y="45"/>
+            <use xlink:href="#cog-tooth" x="5" y="25"/>
+            <use xlink:href="#cog-tooth" x="45" y="25"/>
+            <use xlink:href="#cog-tooth" x="45" y="25"/>
+            <use xlink:href="#cog-tooth-rotate" x="11" y="11"/>
+            <use xlink:href="#cog-tooth-rotate" x="40" y="11"/>
+            <use xlink:href="#cog-tooth-rotate" x="11" y="39"/>
+            <use xlink:href="#cog-tooth-rotate" x="40" y="39"/>
+            </g>
         </mask>
     </def>
 
