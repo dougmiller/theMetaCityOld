@@ -33,6 +33,27 @@ main {
   display: block;
 }
 
+.searchdiv {
+  text-align: center;
+  font-size: 3em;
+}
+
+.searchdiv input[type=text] {
+  font-size: 1em;
+}
+
+.searchdiv input[type=submit] {
+  font-size: 1em;
+}
+
+.searchdiv label {
+  font-size: 1em;
+}
+
+.searchdiv div {
+  display: inline;
+}
+
 @media screen and (max-width: 360px) {
 
   #left {
@@ -46,5 +67,19 @@ main {
 
   #right {
     margin-left: 0;
+  }
+
+  .searchdiv {
+    text-align: left;
+  }
+
+  .searchdiv input[type=text] {
+    width: 330px;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 598px) {
+  .searchdiv input[type=text] {
+    width: 450px;
   }
 }

@@ -20,7 +20,7 @@
                 <a href="/"><img src="/media/site-images/navmenu/home.svg" alt="Home link" title="Go back to the main welcome page"/></a>
                 <a href="/blog"><img src="/media/site-images/navmenu/blog.svg" alt="Blog link" title="The blog; full of rambling"/></a>
                 <a href="/workshop"><img src="/media/site-images/navmenu/workshop.svg" alt="Workshop link" title="Visit the workshop to see the latest projects"/></a>
-                <a href="/search"><img src="/media/site-images/navmenu/search.svg" alt="Search link" title="Search the MetaCity"/></a>
+                <a href="/blog/search"><img src="/media/site-images/navmenu/search.svg" alt="Search link" title="Search the MetaCity"/></a>
             </div >
         </nav>
         <!-- The main content div -->
