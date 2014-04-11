@@ -27,6 +27,12 @@
         <to>/random.jsp</to>
     </rule>
 
+    <!-- Search articles -->
+    <rule match-type="regex">
+        <from>^/search/?$</from>
+        <to>/search.jsp</to>
+    </rule>
+
     <!-- Archive rules-->
     <!-- Date criteia -->
     <rule match-type="regex">

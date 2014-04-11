@@ -214,7 +214,7 @@ $(document).ready(function () {
         // Get the poster and make it inline
         // File is SVG so usual jQuery rules may not apply
         // File needs to have at least one element with "playButton" as class
-        $.get("http://assets.localcity.com/video/" + startPoster + ".startposter.svg", function (svg) {
+        $.get("https://assets.themetacity.com/video/" + startPoster + ".startposter.svg", function (svg) {
             $startPoster = doc.importNode(svg.documentElement, true);
             $startPoster = $($startPoster);
 

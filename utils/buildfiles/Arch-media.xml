@@ -64,7 +64,7 @@
 
         <!-- Site images time -->
         <copy todir="${production.dir}/${app.name}/site-images">			<!-- *here* -->
-            <fileset dir="${app.name}/site-images" includes="*.*" />
+            <fileset dir="${app.name}/site-images" includes="**/*.*" />
         </copy>
     </target>
 </project>
