@@ -10,6 +10,8 @@
 </title>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 
+<h1>Tags</h1>
+
 <jsp:useBean id="TagProcessBean" scope="page" class="com.themetacity.beans.TagProcessBean"/>
 
 <c:choose>

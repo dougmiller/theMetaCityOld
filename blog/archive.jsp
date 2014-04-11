@@ -17,6 +17,8 @@
 </title>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 
+<h1>Archive</h1>
+
 <c:set var="articleResultList" value="${ArticleProcessBean.filteredArchiveArticles}"/>
 <c:set var="previousEntryDate" value="${null}"/>
 
