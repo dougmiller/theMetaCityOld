@@ -4,7 +4,7 @@
                 <p>Navigate: <a href="/workshop">workshop</a> <a href="/blog">blog</a> <a href="/blog/tags">tags</a> <a href="/blog/archive">archive</a> <a href="/blog/random">random</a></p>
             </nav>
             <footer>
-                <p>This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://www.themetacity.com" property="cc:attributionName" rel="cc:attributionURL">Douglas Miller</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+                <p>This work by <a href="https://www.themetacity.com">Douglas Miller</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
             </footer>
         <!-- The end of the right div -->
         </div>
