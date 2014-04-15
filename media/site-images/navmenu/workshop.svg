@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" baseProfile="tiny" height="60px" width="60px" id="tmcerrorposter">
-    <title>theMetaCity Article Archive Icon</title>
-    <desc>The icon used for the article archive page</desc>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" baseProfile="tiny" height="60px" width="60px" id="tmcmenuworkshopicon">
+    <title>theMetaCity Menu Workshop Icon</title>
+    <desc>The icon used for the workshop page</desc>
 
-    <def>
-
+    <defs>
         <rect id="cog-tooth" x="0" y="0" width="10" height="10" fill="black" stroke="none" />
         <rect id="cog-tooth-rotate" x="0" y="0" width="10" height="10" fill="black" stroke="none" transform="rotate(45 5 5)"/>
 
@@ -23,7 +22,7 @@
             <use xlink:href="#cog-tooth-rotate" x="40" y="39"/>
             </g>
         </mask>
-    </def>
+    </defs>
 
     <rect x="0" y="0" width="100%" height="100%" fill="#ff4b20" rx="5" ry="5" mask="url(#clip-mask)"/>
     <rect x="0" y="0" width="10" height="100%" fill="#cd3d20" />
