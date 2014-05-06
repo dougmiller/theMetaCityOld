@@ -35,6 +35,7 @@ public class ArchiveEntry extends SimpleTagSupport {
         Calendar oldDate = new GregorianCalendar();
 
         // The first time this is called from the loop in the jsp page the oldDate is null. (there is no previous date)
+        System.out.println(previousDate);
         if (previousDate != null){
             oldDate.setTime(previousDate);
         } // If it is null, this is the first entry and that is handled below with the ||
@@ -56,7 +57,7 @@ public class ArchiveEntry extends SimpleTagSupport {
 
         // now  the actual links to articles
         try {
-            out.println("<p class=\"archiveEntryTitle\">" + buildTitleLink(articleBean.getTitle()) + "</p>");
+            out.println("<h4 class=\"archiveEntryTitle\">" + buildTitleLink(articleBean.getTitle()) + "</h4>");
         } catch (IOException IOEx) {
             logger.warn("There was an error with the archive link rendering");
             logger.warn(IOEx);
