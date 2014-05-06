@@ -9,6 +9,7 @@
 			<br />
 			<h2><a href="/github/">Github</a></h2>&nbsp;
 			<h2><a href="/twitter/">Twitter</a></h2>&nbsp;
-			<h2><a href="/about">About</a></h2>
+			<h2><a href="/about">About</a></h2>&nbsp;
+			<h2><a href="https://media.themetacity.com">Media</a></h2>
 		</main>
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>
