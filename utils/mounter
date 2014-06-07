@@ -15,18 +15,21 @@ case $2 in
   "production")
     mountInfo=( [name]="the MetaCity production"
                           [ref]="production"
+                          [mountDir]="/media/tmc"
                           [mountCommand]="sshfs -o allow_other doug@enc:/srv/http/tmc /media/tmc"
                           [unmountCommand]="sudo umount /media/tmc");;
 
   "assets")
     mountInfo=( [name]="the MetaCity assets"
                           [ref]="assets"
+                          [mountDir]="/media/tmcassets"
                           [mountCommand]="sshfs -o allow_other doug@enc:/srv/http/tmcassets /media/tmcassets"
                           [unmountCommand]="sudo umount /media/tmcassets");;
 
   "media")
     mountInfo=( [name]="the MetaCity media"
                           [ref]="media"
+                          [mountDir]="/media/tmcmedia"
                           [mountCommand]="sshfs -o allow_other doug@enc:/srv/http/tmcmedia /media/tmcmedia"
                           [unmountCommand]="sudo umount /media/tmcmedia");;
   *) 
@@ -39,17 +42,25 @@ esac
 echo "I am going to: "$1 ${mountInfo[name]}
 
 if [ $1 == "mount" ]; then
-  ${mountInfo[mountCommand]}
-  if [[ $? -ne 0 ]]; then
-    echo "Something went wrong with mounting. See errors above."
+  if ! mountpoint -q ${mountInfo[mountDir]} ; then
+      ${mountInfo[mountCommand]}
+      if [[ $? -ne 0 ]]; then
+        echo "Something went wrong with mounting. See errors above."
+      else
+        echo "Mounted successfully."
+      fi
   else
-    echo "Mounted successfully."
+    echo ${mountInfo[name]} "is already mounted. Exiting."
   fi
 elif  [ $1 == "unmount" ]; then
-  ${mountInfo[unmountCommand]}
-  if [[ $? -ne 0 ]]; then
-    echo "Something went wrong with unmounting. See errors above."
-  else
-    echo "Unmounted successfully."
-  fi
+    if mountpoint -q ${mountInfo[mountDir]} ; then
+      ${mountInfo[unmountCommand]}
+      if [[ $? -ne 0 ]]; then
+        echo "Something went wrong with unmounting. See errors above."
+      else
+        echo "Unmounted successfully."
+      fi
+    else
+      echo ${mountInfo[name]} "is not mounted. Exiting."
+    fi
 fi
