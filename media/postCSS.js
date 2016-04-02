@@ -29,7 +29,7 @@ postcss([
     ])
     .process(css, options)
     .then(function (result) {
-        fs.writeFileSync('theMetaCityMedia/static/css/style.css', result.css);
+        fs.writeFileSync('css/tmc-style.css', result.css);
     });
 
 console.log("CSS processed");

@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "jshint js/*.js",
     "css": "node postCSS.js",
-    "watch": "watch 'npm run css' css/"
+    "watch-css": "watch 'npm run css' css/"
   },
   "dependencies": {
     "autoprefixer": "^6.3.3",

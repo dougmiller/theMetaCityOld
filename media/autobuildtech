@@ -1,0 +1,5 @@
+#!/bin/bash
+while true ; do \
+  inotifywait css/tmc-style.css \
+  && ( mv css/tmc-style.css /srv/http/localcity/media/css/style.css ) \
+done

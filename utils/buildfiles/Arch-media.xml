@@ -18,14 +18,14 @@
     </target>
 
     <target name="development" depends="clean">
-        <exec executable="utils/cssdevelopmentprocessor" failonerror="true" osfamily="unix"/>                  <!-- Process the files through the LESS preprocessor -->
+        <exec dir="${basedir}/media/" executable="npm" failonerror="true" osfamily="unix"> <!-- Process the files through the PostCSS processor -->
+            <arg value="run"/>
+            <arg value="css"/>
+        </exec>
 
-        <copy todir="${deploy.dir}/${app.name}/css">			<!-- *here* -->
-            <fileset dir="${app.name}/css" includes="*.css" />
-        </copy>
-        <delete>			<!-- Remove unused (sopied across already) files -->
-            <fileset dir="${app.name}/css" includes="*.css" />
-        </delete>
+        <copy file="${app.name}/css/tmc-style.css" todir="${deploy.dir}/${app.name}/css/style.css" />
+
+        <delete file="${app.name}/css/tmc-style.css" />			<!-- Remove unused (copied across already) files -->
 
         <copy todir="${deploy.dir}/${app.name}/js">			<!-- *here* -->
             <fileset dir="${app.name}/js" includes="*.js" />
@@ -38,7 +38,7 @@
 
     <target name="production" depends="prodclean">
         <!-- CSS time -->
-        <exec executable="utils/cssproductionprocessor" failonerror="true" osfamily="unix"/>                  <!-- Process the files through the LESS preprocessor and smush them togeather for fewer requests-->
+        <exec executable="utils/cssproductionprocessor" failonerror="true" osfamily="unix"/>                  <!-- Process the files through the PostCss processor and smush them togeather for fewer requests-->
         <copy todir="${production.dir}/${app.name}/css">			<!-- *here* -->
 			<fileset dir="${app.name}/css">
   				<include name="screen.css"/>
