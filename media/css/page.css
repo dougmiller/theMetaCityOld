@@ -1,0 +1,13 @@
+@import "page/base.css";
+
+@media (max-width: var(--small-upper-bound)) {
+    @import "page/small/base.css";
+}
+
+@media (min-width: var(--medium-lower-bound)) and (max-width: var(--medium-upper-bound)) {
+    @import "page/medium/base.css";
+}
+
+@media (min-width: var(--large-lower-bound)) {
+    @import "page/large/base.css";
+}

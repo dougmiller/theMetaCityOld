@@ -1,0 +1,6 @@
+@media (orientation: portrait) {
+    @import "portrait.css";
+}
+@media (orientation: landscape) {
+    @import "landscape.css";
+}

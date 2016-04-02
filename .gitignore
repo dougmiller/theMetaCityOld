@@ -1,5 +1,4 @@
 assets
-remote
 blog/WEB-INF/jspf/404.jsp
 blog/WEB-INF/jspf/500.jsp
 workshop/WEB-INF/jspf/404.jsp
@@ -11,5 +10,6 @@ OpenID/WEB-INF/jspf/500.jsp
 rss/WEB-INF/jspf/404.jsp
 rss/WEB-INF/jspf/500.jsp
 tb/classes
+media/node_modules
 *.jar
 *.ids

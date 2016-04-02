@@ -1,0 +1,8 @@
+@media (orientation: portrait) {
+    display: none;
+    @import "portrait.css";
+}
+@media (orientation: landscape) {
+    display: none;
+    @import "landscape.css";
+}

@@ -1,0 +1,23 @@
+{
+  "name": "theMetaCity",
+  "version": "0.0.1",
+  "description": "Build for the MetaCity site",
+  "private": true,
+  "author": "Douglas Miller",
+  "scripts": {
+    "lint": "jshint js/*.js",
+    "css": "node postCSS.js",
+    "watch": "watch 'npm run css' css/"
+  },
+  "dependencies": {
+    "autoprefixer": "^6.3.3",
+    "fs": "0.0.2",
+    "jshint": "latest",
+    "postcss": "^5.0.19",
+    "postcss-css-variables": "^0.5.1",
+    "postcss-discard-comments": "^2.0.4",
+    "postcss-media-variables": "^2.0.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-partial-import": "^1.3.0"
+  }
+}
