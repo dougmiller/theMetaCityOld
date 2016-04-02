@@ -2,11 +2,9 @@
     <meta name="viewport" content="width=device-width">
     <%@ include file="/WEB-INF/jspf/css.jspf" %>
     <%@ include file="/WEB-INF/jspf/js.jspf" %>
-
-
     </head>
 
-    <body>
+    <body id="blog">
         <h1 id="heading"><a id="top"></a><a href="/">theMetaCity</a><wbr><span id="headerhighlight"><a href="/blog">Blog</a></span></h1>
         <h3 id="subheading">News, events and exposition.</h3>
         <nav id="left">

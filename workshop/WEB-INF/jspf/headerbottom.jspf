@@ -4,7 +4,7 @@
     <%@ include file="/WEB-INF/jspf/css.jspf" %>
     <%@ include file="/WEB-INF/jspf/js.jspf" %>
 </head>
-<body>
+<body id="workshop">
 	<header>
 		<h1 id="heading"><a id="top"></a><a href="/">theMetaCity</a><wbr><span id="headerhighlight"><a href="/workshop">Workshop</a></span></h1>
     	<h3 id="subheading" >Documentation, explanation and showcase for projects.</h3>

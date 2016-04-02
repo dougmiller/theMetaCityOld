@@ -14,7 +14,7 @@
     <circle id="playButton" cx="50%" cy="80%" r="30px" fill="black" stroke="white" stroke-width="2px"/>
 
     <svg x="50%" y="80%" overflow="visible" >
-        <path class="replay" d="M2,-20 l 5 15 M2,-20 a20,20 1 1 1 -5,0" fill="none" stroke="white" stroke-width="2px">
+        <path class="replay" d="M2,-20 l 5 16 M2,-20 a20,20 1 1 1 -5,0" fill="none" stroke="white" stroke-width="2px">
 
         <animateTransform
                 attributeType="XML"
