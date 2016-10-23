@@ -16,20 +16,29 @@ var options = {
     map: { inline: true }
 };
 
-var css = fs.readFileSync("css/style.css", "utf8");
+var actions = [
+    postcss_partial_import,
+    postcss_media_variables,
+    postcss_css_variables,
+    postcss_media_variables,
+    postcss_nested,
+    postcss_discard_comments,
+    postcss_autoprefixer
+];
 
-postcss([
-        postcss_partial_import,
-        postcss_media_variables,
-        postcss_css_variables,
-        postcss_media_variables,
-        postcss_nested,
-        postcss_discard_comments,
-        postcss_autoprefixer
-    ])
-    .process(css, options)
+var pageCSS = fs.readFileSync("css/page-master.css", "utf8");
+var rootCSS = fs.readFileSync("css/root-master.css", "utf8");
+
+postcss(actions)
+    .process(pageCSS, options)
     .then(function (result) {
-        fs.writeFileSync('css/tmc-style.css', result.css);
+        fs.writeFileSync('css/tmc-page.css', result.css);
+    });
+
+postcss(actions)
+    .process(rootCSS, options)
+    .then(function (result) {
+        fs.writeFileSync('css/tmc-root.css', result.css);
     });
 
 console.log("CSS processed");

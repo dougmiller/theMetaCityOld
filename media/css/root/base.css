@@ -1,0 +1,91 @@
+h1 {
+    font-family: "Orbitron", sans-serif;
+}
+
+h2 {
+    font-family: "Inconsolata", sans-serif;
+}
+
+.rootBlock {
+    background: var(--colour-whisp);
+    border: 1px solid var(--colour-deep);
+
+    h1 {
+        margin: 1em;
+        font-size: 1em;
+
+        a:link {
+            text-decoration: none;
+            color: var(--colour-giveup);
+        }
+        a:visited {
+            color: var(--colour-grind);
+        }
+        a:hover {
+            color: var(--colour-work);
+        }
+    }
+
+    h2 {
+        margin: 1em;
+        font-size: 1em;
+
+        a:link {
+            text-decoration: none;
+            color: var(--colour-giveup);
+        }
+        a:visited {
+            color: var(--colour-grind);
+        }
+        a:hover {
+            color: var(--colour-work);
+        }
+    }
+}
+
+nav {
+    margin-top: 10em;
+    border-right: 0;
+    float: right;
+    width: 400px;
+    img {
+        float: left;
+    }
+}
+
+#about {
+    width: 50%;
+    margin-left: 1em;
+    margin-top: 3em;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+footer {
+    background: var(--colour-whisp);
+    position: fixed;
+    bottom: 0;
+    margin-left: 8px;
+    display: flex;
+
+    h2 {
+        flex: 1 1 0;
+        padding: 0;
+        display: inline-block;
+        font-size: 1em;
+        margin: 1em 0;
+        a {
+            padding: 1em;
+        }
+        a:link {
+            text-decoration: none;
+            color: var(--colour-giveup);
+        }
+        a:visited {
+            color: var(--colour-grind);
+        }
+        a:hover {
+            color: var(--colour-work);
+        }
+    }
+}

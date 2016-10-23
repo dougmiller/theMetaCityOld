@@ -5,9 +5,11 @@
     </head>
 
     <body id="blog">
-        <h1 id="heading"><a id="top"></a><a href="/">theMetaCity</a><wbr><span id="headerhighlight"><a href="/blog">Blog</a></span></h1>
-        <h3 id="subheading">News, events and exposition.</h3>
-        <nav id="left">
+        <header>
+            <h1 id="heading"><a id="top"></a><a href="/">theMetaCity</a><wbr><span id="headerhighlight"><a href="/blog">Blog</a></span></h1>
+            <h2 id="subheading">News, events and exposition.</h2>
+        </header>
+        <nav id="blog-nav">
             <div class="navlist">
                 <a href="/blog/tags"><img src="/media/site-images/navmenu/tags.svg" alt="Blog tags" title="See the tags used on the blog"/></a>
                 <a href="/blog/archive"><img src="/media/site-images/navmenu/archive.svg" alt="Blog archive" title="See the blog archive"/></a>
@@ -22,6 +24,4 @@
                 <a href="https://media.themetacity.com"><img src="/media/site-images/navmenu/media.svg" alt="Media link" title="See the media used in theMetaCity"/></a>
             </div >
         </nav>
-        <!-- The main content div -->
-        <div id="right">
-            <main>
+        <main>

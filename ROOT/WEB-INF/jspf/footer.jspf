@@ -1,2 +1,8 @@
+    <footer>
+        <h2><a href="/github/">Github</a></h2>
+        <h2><a href="/twitter/">Twitter</a></h2>
+        <h2><a href="/about">About</a></h2>
+        <h2><a href="https://media.themetacity.com">Media</a></h2>
+    </footer>
     </body>
 </html>

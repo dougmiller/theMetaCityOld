@@ -1,13 +1,17 @@
-@import "page/base.css";
-s
+@import "root/base.css";
+
 @media (max-width: var(--small-upper-bound)) {
-    @import "page/small/base.css";
+@import "root/small/base.css";
 }
 
 @media (min-width: var(--medium-lower-bound)) and (max-width: var(--medium-upper-bound)) {
-    @import "page/medium/base.css";
+@import "root/medium/base.css";
 }
 
 @media (min-width: var(--large-lower-bound)) {
-    @import "page/large/base.css";
+@import "root/large/base.css";
+}
+
+body {
+    margin: 0;
 }

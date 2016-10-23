@@ -3,14 +3,41 @@
     <title>theMetaCity.com - About</title>
 <%@ include file="/WEB-INF/jspf/headerbottom.jspf" %>
 
-<div id="centeredcontainer" itemscope itemtype="http://data-vocabulary.org/Person">
-    <h1>About</h1>
-    <p>My name is <span itemprop="name">Doug Miller</span>. I am currently living and working in <span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address"><span itemprop="locality">Brisbane</span>, <span itemprop="country-name">Australia</span>.</span></p>
-    <p>I specialise in helping people and small businesses manage their digital presence, marketing and presence. This means designing and developing websites, strategic review of resources, branding and positioning as well as producing marketing material.</p>
-    <p>You can <a href="mailto:dougmiller@themetacity.com" itemprop="url">contact me via email</a>, <a href="https://twitter.com/dougmillertmc" itemprop="url">hit me up on twitter</a> or <a href="https://github.com/dougmiller" itemprop="url">see what I have been upto on GitHub</a>.</p>
-    <p>I like people and I like technology. In fact I like them both so much that <a href="https://en.wikipedia.org/wiki/Interaction_design">I did an entire degree in them.</a> I am, however, currently working as a sleep technologist (long story don't ask).  I also help people manage their digital presence on occasion.</p>
-    <p>What I really like the most however is learning. I use this site to explore new (to me) technologies that help people collaborate, comprehend, explore and engage with the world around them.</p>
-    <p>I use a whole different bunch of tools to help me do this: from straight up building in Python, Java, PostgresQL, bash et. al. to to mocking and designing in pencil and paper, kerning and CMYK. I love prototyping with demo and proof of concepts in both digital and physical artifacts often using arduino but branching out into my own designs and etches.</p>
-    <p>I really do feel that information wants to be open and free and so pretty much everything on this site is published under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License.</a> However the MIT Expat Licence is <a href="/licence">used for code specifically</a>.</p>
-</div>
+<main itemscope itemtype="http://data-vocabulary.org/Person">
+    <nav class="rootBlock">
+        <img alt="The MetaCity Logo" src="/media/site-images/fp-logo.svg"/>
+        <h1>Douglas Miller</h1>
+        <h1><a href="/blog">Blog</a></h1>
+        <h1><a href="/workshop">Workshop</a></h1>
+    </nav>
+
+    <div id="about" class="rootBlock">
+        <h1>About</h1>
+        <div>
+            <h2>Im <span itemprop="name">Doug Miller</span>. I fight for the users.</h2>
+            <p>I'm mad keen on technology, people and design.</p>
+            <p>You can <a href="mailto:dougmiller@themetacity.com" itemprop="url">contact me via email</a>, <a href="https://twitter.com/dougmillertmc" itemprop="url">hit me up on twitter</a>.</p>
+        </div>
+        <div>
+            <h2>What</h2>
+            <p>Im a programmer, UX type, terrible musician, artist and scientist.</p>
+        </div>
+        <div>
+        <h2>Why</h2>
+            <p>I love telling stories.</p>
+        </div>
+        <div>
+        <h2>Where</h2>
+            <p>The Internet. Which is anywhere. Offline you can find me in <span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address"><span itemprop="locality">Brisbane</span>, <span itemprop="country-name">Australia</span></span> and surrounds.</p>
+        </div>
+        <div>
+        <h2>How</h2>
+            <p>I completed a bachelors degree in Interaction Design from the University of Queensland in the mid 2000's. Since then I have worked as an independent designer, developer and </p>
+            <p></p>
+        </div>
+    </div>
+</main>
 <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+
+
+

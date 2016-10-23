@@ -1,13 +1,11 @@
-            </main>
-            <!-- This is the footer consistent across all pages -->
-            <nav id="footernav">
-                <p>Navigate: <a href="/workshop">workshop</a> <a href="/blog">blog</a> <a href="/blog/tags">tags</a> <a href="/blog/archive">archive</a> <a href="/blog/random">random</a></p>
-            </nav>
-            <footer>
-                <p>This work by <a href="https://www.themetacity.com">Douglas Miller</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
-            </footer>
-        <!-- The end of the right div -->
-        </div>
+        </main>
+        <!-- This is the footer consistent across all pages -->
+        <nav id="footernav">
+            <p>Navigate: <a href="/workshop">workshop</a> <a href="/blog">blog</a> <a href="/blog/tags">tags</a> <a href="/blog/archive">archive</a> <a href="/blog/random">random</a></p>
+        </nav>
+        <footer>
+            <p>This work by <a href="https://www.themetacity.com">Douglas Miller</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+        </footer>
     <!--End of body-->
     </body>
 <!--End of page-->

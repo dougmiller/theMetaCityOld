@@ -1,7 +1,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <link rel="shortcut icon" type="image/png" href="/media/site-images/favicon.png"/>
-        <%@ include file="/WEB-INF/jspf/css.jspf" %>
-        <%@ include file="/WEB-INF/jspf/js.jspf" %>
+        <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/media/css/root.css"/>
+        <style>
+            html {
+                background: url("/media/site-images/backgrounds/<%= (int) (Math.random() * 16) + 1 %>.jpg") no-repeat center center fixed;
+                background-size: cover;
+            }
+        </style>
         </head>
     <body>

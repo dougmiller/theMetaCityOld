@@ -18,14 +18,17 @@
     </target>
 
     <target name="development" depends="clean">
-        <exec dir="${basedir}/media/" executable="npm" failonerror="true" osfamily="unix"> <!-- Process the files through the PostCSS processor -->
+        <!-- Process the files through the PostCSS processor -->
+        <exec dir="${basedir}/media/" executable="npm" failonerror="true" osfamily="unix">
             <arg value="run"/>
             <arg value="css"/>
         </exec>
 
-        <copy file="${app.name}/css/tmc-style.css" todir="${deploy.dir}/${app.name}/css/style.css" />
+        <copy file="${app.name}/css/tmc-page.css" tofile="${deploy.dir}/${app.name}/css/style.css" />
+        <copy file="${app.name}/css/tmc-root.css" tofile="${deploy.dir}/${app.name}/css/root.css" />
 
-        <delete file="${app.name}/css/tmc-style.css" />			<!-- Remove unused (copied across already) files -->
+        <delete file="${app.name}/css/tmc-page.css" />
+        <delete file="${app.name}/css/tmc-root.css" />
 
         <copy todir="${deploy.dir}/${app.name}/js">			<!-- *here* -->
             <fileset dir="${app.name}/js" includes="*.js" />
@@ -36,33 +39,23 @@
         </copy>
     </target>
 
-    <target name="production" depends="prodclean">
-        <!-- CSS time -->
-        <exec executable="utils/cssproductionprocessor" failonerror="true" osfamily="unix"/>                  <!-- Process the files through the PostCss processor and smush them togeather for fewer requests-->
-        <copy todir="${production.dir}/${app.name}/css">			<!-- *here* -->
-			<fileset dir="${app.name}/css">
-  				<include name="screen.css"/>
-  				<include name="print.css"/>
-			</fileset>
+    <target name="production" depends="prodclean, development" >
+        <!-- Process the files through the PostCSS processor -->
+        <exec dir="${basedir}/media/" executable="npm" failonerror="true" osfamily="unix">
+            <arg value="run"/>
+            <arg value="css"/>
+        </exec>
+
+        <copy file="${app.name}/css/tmc-page.css" tofile="${production.dir}/${app.name}/css/style.css" />
+        <copy file="${app.name}/css/tmc-root.css" tofile="${production.dir}/${app.name}/css/root.css" />
+
+        <delete file="${app.name}/css/tmc-page.css" />
+        <delete file="${app.name}/css/tmc-root.css" />
+
+        <copy todir="${production.dir}/${app.name}/js">			<!-- *here* -->
+            <fileset dir="${app.name}/js" includes="*.js" />
         </copy>
 
-        <delete>
-            <fileset dir="${app.name}/css/" includes="*.css"/>         <!-- We dont need them here anymore sice the app is deployed -->
-        </delete>
-
-        <!-- JS time -->
-        <exec executable="utils/jscombiner" failonerror="true" osfamily="unix"/>                  <!-- Smash the files together to optimise requests -->
-        <copy todir="${production.dir}/${app.name}/js">			   <!-- *here* -->
-			<fileset dir="${app.name}/js">
-  				<include name="tmcsearcher.js"/>
-  				<include name="tmcvideo.js"/>
-  				<include name="ga.js"/>
-			</fileset>
-		</copy>
-        <delete file="${app.name}/js/tmcsearcher.js"/>           <!-- We dont need this here anymore sice the app is deployed -->
-        <delete file="${app.name}/js/tmcvideo.js"/>              <!-- We dont need this here anymore sice the app is deployed -->
-
-        <!-- Site images time -->
         <copy todir="${production.dir}/${app.name}/site-images">			<!-- *here* -->
             <fileset dir="${app.name}/site-images" includes="**/*.*" />
         </copy>

@@ -13,3 +13,4 @@ tb/classes
 media/node_modules
 *.jar
 *.ids
+npm-debug.log

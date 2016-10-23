@@ -1,9 +1,8 @@
 @import "variables.css";
 @import "ui-toolkit.css";
-@import "page.css";
+@import "root.css";
 
 /* Global styles*/
 
 html {
-    background-color: var(--colour-explore);
 }

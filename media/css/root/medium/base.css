@@ -4,9 +4,3 @@
 @media (orientation: landscape) {
     @import "landscape.css";
 }
-
-body {
-    max-width: var(--large-lower-bound);
-    margin-left: auto;
-    margin-right: auto;
-}

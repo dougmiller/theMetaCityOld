@@ -3,9 +3,4 @@
 <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=News+Cycle' rel='stylesheet' type='text/css'>
 
-<link href="/media/css/common.css" rel="stylesheet" media="screen"/>
-<link href="/media/css/root.css" rel="stylesheet" media="screen"/>
-<link href="/media/css/blog.css" rel="stylesheet" media="screen"/>
-<link href="/media/css/workshop.css" rel="stylesheet" media="screen"/>
-<link href="/media/css/video.css" rel="stylesheet" media="screen"/>
-<link href="/media/css/print.css" rel="stylesheet" media="print"/>
+<link href="/media/css/style.css" rel="stylesheet" media="screen"/>
